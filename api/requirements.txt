@@ -2,3 +2,4 @@ fastapi
 uvicorn[standard]
 langgraph
 python-dotenv
+requests

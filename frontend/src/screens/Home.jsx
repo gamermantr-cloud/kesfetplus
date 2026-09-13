@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight,
   Bell,
@@ -8,6 +8,7 @@ import {
   MessageCircle,
   Plus,
   Search,
+  Sparkles,
   Star,
   Trees,
   User,
@@ -39,6 +40,16 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState(null)
+  const [toast, setToast] = useState(null)
+  const toastTimer = useRef(null)
+
+  function showComingSoon(label) {
+    setToast(`${label} yakında geliyor`)
+    clearTimeout(toastTimer.current)
+    toastTimer.current = setTimeout(() => setToast(null), 1800)
+  }
+
+  useEffect(() => () => clearTimeout(toastTimer.current), [])
 
   useEffect(() => {
     let cancelled = false
@@ -70,14 +81,25 @@ export default function Home() {
   }, [venues, activeCategory, query, featured])
 
   return (
-    <div className="min-h-screen bg-cream pb-28">
+    <div className="relative min-h-screen bg-cream pb-28">
       <header className="flex items-center justify-between px-5 pt-6">
         <span className="font-display text-xl text-espresso">Keşfet+</span>
         <div className="flex items-center gap-3">
-          <button aria-label="Bildirimler" className="text-espresso-soft">
+          <button
+            aria-label="Keşfet+ AI"
+            onClick={() => navigate('/ai')}
+            className="w-9 h-9 rounded-full bg-tan/20 flex items-center justify-center text-tan-dark"
+          >
+            <Sparkles size={18} />
+          </button>
+          <button aria-label="Bildirimler" onClick={() => showComingSoon('Bildirimler')} className="text-espresso-soft">
             <Bell size={22} />
           </button>
-          <button aria-label="Profil" className="w-9 h-9 rounded-full bg-sand-dark flex items-center justify-center text-espresso-soft">
+          <button
+            aria-label="Profil"
+            onClick={() => showComingSoon('Profil')}
+            className="w-9 h-9 rounded-full bg-sand-dark flex items-center justify-center text-espresso-soft"
+          >
             <User size={18} />
           </button>
         </div>
@@ -136,7 +158,9 @@ export default function Home() {
 
       <div className="flex items-center justify-between px-5 mt-7">
         <h3 className="font-display text-lg text-espresso">Sana Özel Seçimler</h3>
-        <button className="text-tan-dark text-sm font-medium">Tümünü Gör</button>
+        <button onClick={() => showComingSoon('Tüm liste')} className="text-tan-dark text-sm font-medium">
+          Tümünü Gör
+        </button>
       </div>
 
       <div className="grid grid-cols-2 gap-4 px-5 mt-3">
@@ -168,22 +192,32 @@ export default function Home() {
       </div>
 
       <nav className="fixed bottom-0 inset-x-0 mx-auto w-full max-w-[430px] bg-cream border-t border-cream-line px-6 py-3 flex items-center justify-between">
-        <button aria-label="Keşfet" className="text-tan-dark">
+        <button aria-label="Keşfet" onClick={() => navigate('/home')} className="text-tan-dark">
           <Compass size={24} />
         </button>
-        <button aria-label="Harita" className="text-taupe">
+        <button aria-label="Harita" onClick={() => showComingSoon('Harita')} className="text-taupe">
           <MapPin size={24} />
         </button>
-        <button aria-label="Ekle" className="w-12 h-12 -mt-6 rounded-full bg-tan flex items-center justify-center shadow-lg">
+        <button
+          aria-label="Ekle"
+          onClick={() => showComingSoon('Mekan ekleme')}
+          className="w-12 h-12 -mt-6 rounded-full bg-tan flex items-center justify-center shadow-lg"
+        >
           <Plus size={24} className="text-cream" />
         </button>
-        <button aria-label="Mesajlar" className="text-taupe">
+        <button aria-label="Mesajlar" onClick={() => showComingSoon('Mesajlar')} className="text-taupe">
           <MessageCircle size={24} />
         </button>
-        <button aria-label="Profil" className="text-taupe">
+        <button aria-label="Profil" onClick={() => showComingSoon('Profil')} className="text-taupe">
           <User size={24} />
         </button>
       </nav>
+
+      {toast && (
+        <div className="fixed bottom-24 inset-x-0 mx-auto w-fit max-w-[430px] z-10 rounded-full bg-espresso px-4 py-2 text-xs font-medium text-cream shadow-lg">
+          {toast}
+        </div>
+      )}
     </div>
   )
 }

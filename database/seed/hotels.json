@@ -1,0 +1,164 @@
+[
+  {
+    "id": "four-seasons-sultanahmet",
+    "name": "Four Seasons Hotel Istanbul at Sultanahmet",
+    "area": "Sultanahmet",
+    "address": "Tevkifhane Sok. No:1, Sultanahmet, 34110 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir hapishane binasından dönüştürülmüş, Sultanahmet Camii'ne yürüme mesafesinde tarihi bir lüks otel."
+  },
+  {
+    "id": "hotel-ibrahim-pasha",
+    "name": "Hotel Ibrahim Pasha",
+    "area": "Sultanahmet",
+    "address": "Terzihane Sok. No:7, Sultanahmet, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Hipodrom'a yakın, butik ölçekli ve tarihi dokuya sahip bir otel."
+  },
+  {
+    "id": "sirkeci-mansion",
+    "name": "Sirkeci Mansion",
+    "area": "Sirkeci (Sultanahmet yakını)",
+    "address": "Taya Hatun Sk. No:5, Sirkeci, 34110 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Osmanlı konağı tarzında inşa edilmiş, orta segment butik bir otel."
+  },
+  {
+    "id": "pera-palace-hotel",
+    "name": "Pera Palace Hotel",
+    "area": "Beyoğlu (Tepebaşı)",
+    "address": "Meşrutiyet Cd. No:52, 34430 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "1892'de Orient Express yolcuları için açılan, 2010'da restore edilmiş tarihi lüks otel."
+  },
+  {
+    "id": "vault-karakoy",
+    "name": "Vault Karaköy, The House Hotel",
+    "area": "Karaköy/Beyoğlu",
+    "address": "Bankalar Cd. No:5, Karaköy, 34421 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir banka binasında, Bankalar Caddesi üzerinde butik lüks otel."
+  },
+  {
+    "id": "georges-hotel-galata",
+    "name": "Georges Hotel Galata",
+    "area": "Galata/Beyoğlu",
+    "address": "Serdar-ı Ekrem Sk. No:24, Galata, 34425 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Galata Kulesi'ne yakın, tasarım odaklı butik bir otel."
+  },
+  {
+    "id": "marmara-taksim",
+    "name": "The Marmara Taksim",
+    "area": "Taksim/Beyoğlu",
+    "address": "Gümüşsuyu Mah., Taksim Meydanı No:3, 34437 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Taksim Meydanı'na cephesi olan, üst-orta segment şehir oteli."
+  },
+  {
+    "id": "cvk-park-bosphorus",
+    "name": "CVK Park Bosphorus Hotel Istanbul",
+    "area": "Taksim/Beyoğlu",
+    "address": "Gümüşsuyu Mah., İnönü Cd. No:8, 34437 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Taksim'de Boğaz manzaralı büyük ölçekli lüks otel."
+  },
+  {
+    "id": "ciragan-palace-kempinski",
+    "name": "Çırağan Palace Kempinski Istanbul",
+    "area": "Beşiktaş (Boğaz kıyısı)",
+    "address": "Çırağan Cd. No:32, 34349 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir Osmanlı sarayında konumlanan, Boğaz kıyısında ikonik lüks otel."
+  },
+  {
+    "id": "conrad-istanbul-bosphorus",
+    "name": "Conrad Istanbul Bosphorus",
+    "area": "Beşiktaş (Boğaz kıyısı)",
+    "address": "Cihannüma Mah., Saray Cd. No:5, 34353 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Yıldız Parkı yakınında, Boğaz manzaralı büyük ölçekli lüks otel."
+  },
+  {
+    "id": "shangri-la-bosphorus",
+    "name": "Shangri-La Bosphorus, Istanbul",
+    "area": "Beşiktaş (Boğaz kıyısı)",
+    "address": "Sinanpaşa Mah., Hayrettin İskelesi Sk. No:1, 34353 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir tütün deposundan dönüştürülmüş, Boğaz'a sıfır lüks otel."
+  },
+  {
+    "id": "wyndham-grand-kalamis",
+    "name": "Wyndham Grand Istanbul Kalamış Marina Hotel",
+    "area": "Kadıköy",
+    "address": "Fener Kalamış Cd. No:38, 34726 Kadıköy/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Kalamış Marina'ya bakan, Anadolu yakasında üst-orta segment bir otel."
+  },
+  {
+    "id": "st-regis-istanbul",
+    "name": "The St. Regis Istanbul",
+    "area": "Nişantaşı/Şişli",
+    "address": "Mim Kemal Öke Cd. No:35, Nişantaşı, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Nişantaşı'nın merkezinde, 24 saat butler hizmeti sunan lüks otel."
+  },
+  {
+    "id": "hilton-istanbul-bosphorus",
+    "name": "Hilton Istanbul Bosphorus",
+    "area": "Harbiye/Şişli (Boğaz manzaralı)",
+    "address": "Cumhuriyet Cd. No:50, Harbiye, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Dolmabahçe'ye yakın, geniş bahçeli ve Boğaz manzaralı köklü bir otel."
+  },
+  {
+    "id": "the-stay-nisantasi",
+    "name": "The Stay Nişantaşı",
+    "area": "Nişantaşı/Şişli",
+    "address": "Harbiye Mah., Abdi İpekçi Cd. No:30, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Autoban tasarımlı, minimalist butik bir otel; Prada mağazasının üst katında yer alıyor."
+  },
+  {
+    "id": "vakko-hotel-residence",
+    "name": "Vakko Hotel & Residence",
+    "area": "Nişantaşı/Şişli",
+    "address": "Abdi İpekçi Cd. No:43, Nişantaşı, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "2022'de açılan, sadece yetişkinlere hizmet veren 31 süitlik lüks butik otel."
+  },
+  {
+    "id": "ajia-hotel",
+    "name": "A'jia Hotel",
+    "area": "Kanlıca/Beykoz (Boğaz kıyısı, Anadolu yakası)",
+    "address": "Çubuklu Cd. No:27, Kanlıca, 34810 Beykoz/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "19. yüzyıl Osmanlı yalısından dönüştürülmüş, Boğaz'a sıfır butik lüks otel."
+  },
+  {
+    "id": "sumahan-on-the-water",
+    "name": "Sumahan on the Water",
+    "area": "Çengelköy/Üsküdar (Boğaz kıyısı, Anadolu yakası)",
+    "address": "Kuleli Cd. No:51, Çengelköy, 34684 Üsküdar/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir rakı damıtımhanesinden dönüştürülmüş, Boğaz'a sıfır tasarım butik otel."
+  }
+]

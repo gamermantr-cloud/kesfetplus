@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+/*
+  "Editorial" theme tokens - matches the shared Keşfet+ mockup:
+  warm cream/sand background, espresso-dark text, muted tan/gold accents.
+  Every screen must pull colors/fonts from these tokens, not hardcode hex.
+*/
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --color-cream: #f6f0e6;
+  --color-sand: #ece0cb;
+  --color-sand-dark: #ddccae;
+  --color-tan: #b99569;
+  --color-tan-dark: #8a6a45;
+  --color-espresso: #2b2018;
+  --color-espresso-soft: #55483a;
+  --color-taupe: #8d7f6c;
+  --color-gold: #c9a227;
+  --color-cream-line: rgba(43, 32, 24, 0.1);
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-espresso);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}

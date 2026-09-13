@@ -28,10 +28,10 @@ jobs:
         run: ruff format --check .
 
       - name: mypy
-        run: mypy api agents
+        run: mypy api agents database
 
       - name: Bandit security scan
-        run: bandit -c pyproject.toml -r api agents
+        run: bandit -c pyproject.toml -r api agents database
 
       - name: pip-audit
         run: pip-audit -r api/requirements.txt

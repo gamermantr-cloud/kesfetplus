@@ -29,3 +29,6 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Runtime data (real user submissions, not source)
+database/comments.json

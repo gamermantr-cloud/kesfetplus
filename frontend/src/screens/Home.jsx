@@ -14,6 +14,7 @@ import {
   Utensils,
   Wine,
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { getAllVenues } from '../lib/data.js'
 
 const CATEGORIES = [
@@ -33,6 +34,7 @@ const CARD_GRADIENTS = [
 ]
 
 export default function Home() {
+  const navigate = useNavigate()
   const [venues, setVenues] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
@@ -114,17 +116,21 @@ export default function Home() {
 
       <div className="px-5 mt-5">
         {featured && (
-          <div className={`relative h-48 rounded-3xl overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[0]} p-5 flex flex-col justify-end`}>
+          <button
+            type="button"
+            onClick={() => navigate(`/place/${featured.id}`)}
+            className={`relative h-48 w-full rounded-3xl overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[0]} p-5 flex flex-col justify-end text-left`}
+          >
             <span className="text-cream/80 text-xs font-medium uppercase tracking-wide">Bu hafta keşfet</span>
             <h2 className="font-display text-3xl text-cream mt-1 leading-tight">{featured.name}</h2>
             {featured.area && <p className="text-cream/70 text-sm mt-0.5">{featured.area}</p>}
-            <button
-              aria-label={`${featured.name} detayına git`}
+            <span
+              aria-hidden="true"
               className="absolute bottom-5 right-5 w-11 h-11 rounded-full bg-cream flex items-center justify-center shadow-md"
             >
               <ArrowRight size={20} className="text-espresso" />
-            </button>
-          </div>
+            </span>
+          </button>
         )}
       </div>
 
@@ -139,7 +145,12 @@ export default function Home() {
           <p className="col-span-2 text-taupe text-sm">Bu kritere uyan mekan bulunamadı.</p>
         )}
         {filtered.slice(0, 12).map((venue, i) => (
-          <div key={venue.id} className="bg-sand rounded-2xl overflow-hidden">
+          <button
+            type="button"
+            key={venue.id}
+            onClick={() => navigate(`/place/${venue.id}`)}
+            className="bg-sand rounded-2xl overflow-hidden text-left"
+          >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}>
               {venue.rating && (
                 <div className="absolute top-2 right-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-xs font-semibold text-espresso">
@@ -152,7 +163,7 @@ export default function Home() {
               <p className="text-sm font-medium text-espresso truncate">{venue.name}</p>
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}
             </div>
-          </div>
+          </button>
         ))}
       </div>
 

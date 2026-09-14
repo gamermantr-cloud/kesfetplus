@@ -92,12 +92,12 @@ export default function Home() {
           >
             <Sparkles size={18} />
           </button>
-          <button aria-label="Bildirimler" onClick={() => showComingSoon('Bildirimler')} className="text-espresso-soft">
+          <button aria-label="Bildirimler" onClick={() => navigate('/notifications')} className="text-espresso-soft">
             <Bell size={22} />
           </button>
           <button
             aria-label="Profil"
-            onClick={() => showComingSoon('Profil')}
+            onClick={() => navigate('/profile')}
             className="w-9 h-9 rounded-full bg-sand-dark flex items-center justify-center text-espresso-soft"
           >
             <User size={18} />
@@ -158,7 +158,7 @@ export default function Home() {
 
       <div className="flex items-center justify-between px-5 mt-7">
         <h3 className="font-display text-lg text-espresso">Sana Özel Seçimler</h3>
-        <button onClick={() => showComingSoon('Tüm liste')} className="text-tan-dark text-sm font-medium">
+        <button onClick={() => navigate('/explore')} className="text-tan-dark text-sm font-medium">
           Tümünü Gör
         </button>
       </div>
@@ -195,7 +195,7 @@ export default function Home() {
         <button aria-label="Keşfet" onClick={() => navigate('/home')} className="text-tan-dark">
           <Compass size={24} />
         </button>
-        <button aria-label="Harita" onClick={() => showComingSoon('Harita')} className="text-taupe">
+        <button aria-label="Harita" onClick={() => navigate('/map')} className="text-taupe">
           <MapPin size={24} />
         </button>
         <button
@@ -205,10 +205,10 @@ export default function Home() {
         >
           <Plus size={24} className="text-cream" />
         </button>
-        <button aria-label="Mesajlar" onClick={() => showComingSoon('Mesajlar')} className="text-taupe">
+        <button aria-label="Mesajlar" onClick={() => navigate('/messages')} className="text-taupe">
           <MessageCircle size={24} />
         </button>
-        <button aria-label="Profil" onClick={() => showComingSoon('Profil')} className="text-taupe">
+        <button aria-label="Profil" onClick={() => navigate('/profile')} className="text-taupe">
           <User size={24} />
         </button>
       </nav>

@@ -1,0 +1,41 @@
+queue_rules:
+  - name: default
+    merge_method: squash
+    merge_conditions:
+      - check-success=quality
+
+pull_request_rules:
+  - name: automatic merge for Dependabot PRs once CI passes
+    conditions:
+      - author=dependabot[bot]
+      - check-success=quality
+    actions:
+      queue:
+        name: default
+
+  - name: automatic merge for PRs labeled automerge once CI passes
+    conditions:
+      - label=automerge
+      - check-success=quality
+      - "-draft"
+    actions:
+      queue:
+        name: default
+
+  - name: flag conflicting PRs
+    conditions:
+      - conflict
+    actions:
+      comment:
+        message: This pull request has conflicts, please rebase or resolve them to continue.
+      label:
+        add:
+          - conflict
+
+  - name: remove conflict label once resolved
+    conditions:
+      - "-conflict"
+    actions:
+      label:
+        remove:
+          - conflict

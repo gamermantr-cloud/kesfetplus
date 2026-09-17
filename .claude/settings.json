@@ -16,6 +16,40 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe",
+            "args": [
+              "-NoProfile",
+              "-Command",
+              "$json = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$f = $json.tool_input.file_path\nif ($f -and $f -like 'C:\\AI-SYSTEM\\kesfetplus\\*') {\n  $name = Split-Path $f -Leaf\n  $lower = $name.ToLower()\n  $safe = @('.env.example','.env.sample','.env.template','.env.dist')\n  if (($lower -eq '.env' -or $lower -like '.env.*') -and ($safe -notcontains $lower)) {\n    $reason = 'Guvenlik: ' + $name + ' bir .env dosyasi olabilir ve gizli anahtar icerebilir. PreToolUse hook yazmayi/duzenlemeyi engelledi.'\n    $out = @{ hookSpecificOutput = @{ hookEventName = 'PreToolUse'; permissionDecision = 'deny'; permissionDecisionReason = $reason } }\n    $out | ConvertTo-Json -Compress -Depth 5\n    exit 2\n  }\n}\nexit 0"
+            ],
+            "statusMessage": "Ataturk: .env koruma kontrolu"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe",
+            "args": [
+              "-NoProfile",
+              "-Command",
+              "$proj = 'C:\\AI-SYSTEM\\kesfetplus'\n$lines = New-Object System.Collections.Generic.List[string]\ntry {\n  $branch = & git -C $proj rev-parse --abbrev-ref HEAD 2>$null\n  if ($branch) { $lines.Add('Git dal: ' + $branch) }\n  $hash = & git -C $proj log -1 --pretty=format:%h 2>$null\n  $subject = & git -C $proj log -1 --pretty=format:%s 2>$null\n  $rel = & git -C $proj log -1 --pretty=format:%cr 2>$null\n  if ($hash) { $lines.Add('Son commit: ' + $hash + ' - ' + $subject + ' (' + $rel + ')') }\n  $status = & git -C $proj status --porcelain 2>$null\n  if ($status) {\n    $count = ($status | Where-Object { $_ -ne '' }).Count\n    $lines.Add('Commit edilmemis degisiklik: ' + $count + ' dosya')\n  }\n} catch {}\n$ports = @{ 8000 = 'FastAPI backend'; 5173 = 'Vite frontend'; 3000 = 'Frontend' }\nforeach ($p in $ports.Keys) {\n  $conn = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue\n  if ($conn) { $lines.Add('Port ' + $p + ' acik (' + $ports[$p] + ' calisiyor olabilir)') }\n}\nif ($lines.Count -eq 0) { $lines.Add('kesfetplus: git/port bilgisi alinamadi.') }\n$ctx = [string]::Join([Environment]::NewLine, $lines)\n$out = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $ctx } }\n$out | ConvertTo-Json -Compress -Depth 5"
+            ],
+            "statusMessage": "Ataturk: proje durumu yukleniyor"
+          }
+        ]
+      }
     ]
   }
 }

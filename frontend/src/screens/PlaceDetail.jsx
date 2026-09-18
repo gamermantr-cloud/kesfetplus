@@ -3,7 +3,9 @@ import {
   ChevronLeft,
   Loader2,
   MapPin,
+  Navigation,
   Send,
+  ShieldQuestion,
   Sparkles,
   Star,
   Users,
@@ -11,10 +13,19 @@ import {
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getComments, postComment } from '../lib/api.js'
+import {
+  getCheckinCount,
+  getComments,
+  getStatusUpdates,
+  postCheckin,
+  postComment,
+  postStatusUpdate,
+} from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
+const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
+const DISPLAY_NAME_KEY = 'kesfetplus_display_name'
 
 function timeAgo(isoString) {
   const then = new Date(isoString).getTime()
@@ -53,6 +64,32 @@ export default function PlaceDetail() {
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
+  const [displayName, setDisplayName] = useState(() => {
+    try {
+      return localStorage.getItem(DISPLAY_NAME_KEY) || ''
+    } catch {
+      return ''
+    }
+  })
+  const [checkedIn, setCheckedIn] = useState(false)
+  const [checkinLoading, setCheckinLoading] = useState(false)
+  const [checkinNote, setCheckinNote] = useState(null)
+  const [checkinCount, setCheckinCount] = useState(null)
+  const [statusUpdates, setStatusUpdates] = useState([])
+  const [statusLoading, setStatusLoading] = useState(true)
+  const [statusError, setStatusError] = useState(null)
+  const [selectedTag, setSelectedTag] = useState(null)
+  const [statusText, setStatusText] = useState('')
+  const [statusSubmitting, setStatusSubmitting] = useState(false)
+
+  useEffect(() => {
+    try {
+      if (displayName.trim()) localStorage.setItem(DISPLAY_NAME_KEY, displayName.trim())
+    } catch {
+      // localStorage unavailable (private mode etc.) - not critical, skip silently
+    }
+  }, [displayName])
+
   useEffect(() => {
     let cancelled = false
     getAllVenues().then((venues) => {
@@ -84,12 +121,115 @@ export default function PlaceDetail() {
     loadComments()
   }, [loadComments])
 
+  const loadStatus = useMemo(
+    () => async () => {
+      setStatusLoading(true)
+      try {
+        const data = await getStatusUpdates(placeId)
+        setStatusUpdates(data)
+      } catch {
+        setStatusError('Anlık durumlar yüklenemedi. Backend çalışıyor mu kontrol edin.')
+      } finally {
+        setStatusLoading(false)
+      }
+    },
+    [placeId],
+  )
+
+  const loadCheckinCount = useMemo(
+    () => async () => {
+      try {
+        const data = await getCheckinCount(placeId)
+        setCheckinCount(data.count)
+      } catch {
+        setCheckinCount(null)
+      }
+    },
+    [placeId],
+  )
+
+  useEffect(() => {
+    loadStatus()
+    loadCheckinCount()
+  }, [loadStatus, loadCheckinCount])
+
+  async function handleCheckin() {
+    const name = displayName.trim()
+    if (!name) return
+    setCheckinLoading(true)
+    setCheckinNote(null)
+    setStatusError(null)
+
+    const submit = async (lat, lng, accuracy, note) => {
+      try {
+        await postCheckin(placeId, { author: name, lat, lng, accuracy })
+        setCheckedIn(true)
+        setCheckinNote(note)
+        await Promise.all([loadStatus(), loadCheckinCount()])
+      } catch {
+        setStatusError('Check-in gönderilemedi. Backend çalışıyor mu kontrol edin.')
+      } finally {
+        setCheckinLoading(false)
+      }
+    }
+
+    if (!navigator.geolocation) {
+      await submit(null, null, null, 'Bu tarayıcı konum servisini desteklemiyor, konum olmadan paylaşıldı.')
+      return
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        submit(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, null)
+      },
+      () => {
+        submit(null, null, null, 'Konum izni olmadan da durum paylaşabilirsin.')
+      },
+      { timeout: 8000, maximumAge: 60000 },
+    )
+  }
+
+  async function handleStatusSubmit() {
+    const name = displayName.trim()
+    if (!name || !selectedTag) return
+    setStatusSubmitting(true)
+    setStatusError(null)
+    try {
+      await postStatusUpdate(placeId, { author: name, tag: selectedTag, text: statusText.trim() })
+      setSelectedTag(null)
+      setStatusText('')
+      await loadStatus()
+    } catch {
+      setStatusError('Durum paylaşılamadı. Backend çalışıyor mu kontrol edin.')
+    } finally {
+      setStatusSubmitting(false)
+    }
+  }
+
+  function getCommentLocation() {
+    // Optional/rejectable, same pattern as check-in: declining location
+    // permission never blocks or penalizes the comment (see
+    // database/trust_scoring.py signal 2 - "neutral" without GPS).
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        resolve({ lat: null, lng: null, accuracy: null })
+        return
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude, accuracy: pos.coords.accuracy }),
+        () => resolve({ lat: null, lng: null, accuracy: null }),
+        { timeout: 8000, maximumAge: 60000 },
+      )
+    })
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     if (!author.trim() || !text.trim()) return
     setSubmitting(true)
     try {
-      await postComment(placeId, { author: author.trim(), text: text.trim() })
+      const { lat, lng, accuracy } = await getCommentLocation()
+      await postComment(placeId, { author: author.trim(), text: text.trim(), lat, lng, accuracy })
       setAuthor('')
       setText('')
       setShowForm(false)
@@ -103,7 +243,7 @@ export default function PlaceDetail() {
 
   function openMap() {
     const query = encodeURIComponent(`${venue.name} ${venue.address ?? venue.area ?? ''}`)
-    window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank')
+    window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank', 'noopener,noreferrer')
   }
 
   if (venue === undefined) {
@@ -214,17 +354,118 @@ export default function PlaceDetail() {
         )}
 
         {activeTab === 'Anlık Durum' && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <StatCard
               icon={<Users size={18} />}
-              label="Şu anki yoğunluk"
-              value={crowdLabel(venue)}
+              label="Son 2 saatte buradaydı"
+              value={checkinCount ? `${checkinCount} kişi` : 'Henüz veri yok'}
               wide
             />
-            <p className="text-sm text-taupe">
-              Anlık bilgi akışı, orada bulunan kullanıcıların paylaşımlarıyla zamanla
-              zenginleşecek. Şu an için elimizdeki tek anlık sinyal bu.
-            </p>
+
+            {statusError && <p className="text-sm text-tan-dark">{statusError}</p>}
+
+            {!displayName.trim() && (
+              <input
+                type="text"
+                placeholder="İsmin (paylaşımlarda görünür)"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
+              />
+            )}
+
+            {!checkedIn ? (
+              <button
+                type="button"
+                onClick={handleCheckin}
+                disabled={!displayName.trim() || checkinLoading}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
+              >
+                {checkinLoading ? (
+                  <Loader2 size={16} className="animate-spin" />
+                ) : (
+                  <Navigation size={16} />
+                )}
+                Buradayım
+              </button>
+            ) : (
+              <div className="space-y-3 rounded-2xl border border-cream-line bg-sand/50 p-4">
+                {checkinNote && <p className="text-xs text-taupe">{checkinNote}</p>}
+                <p className="text-sm font-medium text-espresso">
+                  İsteğe bağlı: buradaki durumu hızlıca paylaş
+                </p>
+                <div className="flex gap-2">
+                  {STATUS_TAGS.map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      onClick={() => setSelectedTag(tag)}
+                      className={`flex-1 rounded-full border px-3 py-2 text-xs font-medium transition-colors ${
+                        selectedTag === tag
+                          ? 'border-tan bg-tan text-cream'
+                          : 'border-cream-line text-espresso'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <textarea
+                  placeholder="Kısa bir not (opsiyonel)"
+                  value={statusText}
+                  onChange={(e) => setStatusText(e.target.value)}
+                  rows={2}
+                  className="w-full resize-none rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
+                />
+                <button
+                  type="button"
+                  onClick={handleStatusSubmit}
+                  disabled={!selectedTag || statusSubmitting}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-2 text-sm font-medium text-cream disabled:opacity-60"
+                >
+                  {statusSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                  Paylaş
+                </button>
+              </div>
+            )}
+
+            <div>
+              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-taupe">
+                Paylaşılan durumlar
+              </p>
+              {statusLoading ? (
+                <div className="flex justify-center py-6 text-taupe">
+                  <Loader2 className="animate-spin" size={18} />
+                </div>
+              ) : statusUpdates.length === 0 ? (
+                <p className="py-6 text-center text-sm text-taupe">
+                  Henüz kimse durum paylaşmadı. İlk paylaşan sen ol.
+                </p>
+              ) : (
+                <ul className="space-y-2">
+                  {statusUpdates
+                    .slice()
+                    .reverse()
+                    .map((s) => (
+                      <li
+                        key={s.id}
+                        className={`rounded-2xl border border-cream-line bg-sand/40 p-3 ${
+                          s.is_stale ? 'opacity-50' : ''
+                        }`}
+                      >
+                        <p className="text-sm text-espresso-soft">
+                          <span className="text-taupe">{timeAgo(s.created_at)}, </span>
+                          <span className="font-medium text-espresso">{s.author}</span>
+                          <span className="text-taupe"> paylaştı: </span>
+                          <span className="font-medium text-espresso">{s.tag}</span>
+                          {s.text ? ` — ${s.text}` : ''}
+                        </p>
+                        {s.is_stale && <p className="mt-0.5 text-xs text-taupe">Eski bilgi</p>}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
           </div>
         )}
 
@@ -290,6 +531,12 @@ export default function PlaceDetail() {
                       <span className="text-xs text-taupe">{timeAgo(c.created_at)}</span>
                     </div>
                     <p className="mt-1 text-sm text-espresso-soft">{c.text}</p>
+                    {c.review_status === 'pending_review' && (
+                      <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-1 text-xs font-medium text-tan-dark">
+                        <ShieldQuestion size={12} />
+                        Topluluk incelemesi bekliyor
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

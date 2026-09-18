@@ -1,5 +1,11 @@
 # KesfetPlus Mimarisi (Basit Anlatım)
 
+> **Not (2026-09-18):** Bu doküman projenin en erken iskelet aşamasını
+> anlatıyor, güncel değil — örneğin madde 5 "en son: frontend eklemek"
+> diyor ama frontend zaten var ve tam işlevsel (React 19 + Vite, 9 ekran).
+> Güncel mimari/durum için proje kökündeki `CLAUDE.md`'ye bak, bu dosya
+> sadece tarihsel/pedagojik referans olarak duruyor.
+
 Bu doküman, KesfetPlus projesinin şu anki temelini programlamaya yeni
 başlayanlar için basit bir dille anlatır.
 

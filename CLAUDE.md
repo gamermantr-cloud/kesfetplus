@@ -26,8 +26,11 @@ Türkiye pazar/teknik mimari) — bunlar proje vizyonunun kaynak dokümanlarıd�
   `/places/{id}/comments` (GET/POST) endpoint'leri var. Mekân/otel/restoran
   verisi backend üzerinden servis edilmiyor; frontend bu veriyi
   `frontend/src/lib/data.js` üzerinden doğrudan `database/seed/*.json`'dan okuyor.
-- **AI agent iskeleti**: `agents/scout_agent.py` — minimal bir LangGraph
-  "Scout Agent", henüz dış servise/internete bağlanmıyor.
+- **AI agent iskeleti**: `agents/scout_agent.py` — bir LangGraph "Scout Agent".
+  `GOOGLE_PLACES_API_KEY` set edilmişse Google Places API'ye (New) gerçek bir
+  Text Search çağrısı yapıyor (key yoksa `not_configured` döner). Hiçbir API
+  endpoint'ine bağlı değil, sadece `python -m agents.scout_agent` ile CLI
+  olarak çalıştırılabiliyor.
 - **Frontend**: React 19 + Vite 8 + Tailwind v4 (`frontend/`), mobil öncelikli
   ("Editorial" tema: kahve/bej/krem palet, Fraunces + Inter fontları). Renk
   token kuralı için bkz. `.claude/rules/frontend-colors.md`.

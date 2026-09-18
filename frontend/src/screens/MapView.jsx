@@ -12,7 +12,9 @@ const ISTANBUL_CENTER = [41.02, 28.965]
 // Custom pin so we don't need to bundle Leaflet's default marker images.
 const pinIcon = L.divIcon({
   className: '',
-  html: '<div style="width:14px;height:14px;border-radius:9999px;background:#b99569;border:2px solid #f6f0e6;box-shadow:0 1px 4px rgba(43,32,24,0.4)"></div>',
+  // rgba shadow mirrors --color-espresso (#2b2018); no token exists for an
+  // arbitrary alpha value, so it can't be expressed as var(--color-*).
+  html: '<div style="width:14px;height:14px;border-radius:9999px;background:var(--color-tan);border:2px solid var(--color-cream);box-shadow:0 1px 4px rgba(43,32,24,0.4)"></div>',
   iconSize: [14, 14],
   iconAnchor: [7, 7],
 })

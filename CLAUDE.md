@@ -10,8 +10,9 @@ Türkiye pazar/teknik mimari) — bunlar proje vizyonunun kaynak dokümanlarıd�
 
 ## Mevcut durum
 
-- Yerel geliştirme aşamasında, henüz canlıya alınmadı, henüz GitHub'a push
-  edilmedi (repo yerel).
+- Yerel geliştirme aşamasında, henüz canlıya alınmadı. Repo GitHub'da:
+  https://github.com/gamermantr-cloud/kesfetplus (public) — GitHub Actions CI,
+  Dependabot, CodeRabbit ve Mergify merge queue kurulu.
 - Gerçek 243 mekan/restoran/otel verisi var (`database/seed/`: places.json 132,
   gurme.json 93, hotels.json 18) — Google'dan derlenmiş + sahada doğrulanmış.
 - Yorum sistemi çalışıyor ama backend'i henüz dosya tabanlı
@@ -29,8 +30,7 @@ Türkiye pazar/teknik mimari) — bunlar proje vizyonunun kaynak dokümanlarıd�
   "Scout Agent", henüz dış servise/internete bağlanmıyor.
 - **Frontend**: React 19 + Vite 8 + Tailwind v4 (`frontend/`), mobil öncelikli
   ("Editorial" tema: kahve/bej/krem palet, Fraunces + Inter fontları). Renk
-  tokenleri `frontend/src/index.css` içinde `--color-*` değişkenleri olarak
-  tanımlı — **her ekran bu tokenlerden çekmeli, hex hardcode etmemeli.**
+  token kuralı için bkz. `.claude/rules/frontend-colors.md`.
   Ekranlar `frontend/src/screens/`, API istemcisi `frontend/src/lib/api.js`.
 - Dev sırasında Vite `/api` isteklerini `http://127.0.0.1:8000`'e proxy'liyor
   (bkz. `frontend/vite.config.js`).
@@ -57,6 +57,9 @@ npm run dev   # http://localhost:5173, /api -> :8000'e proxy
 
 ## Ekip / otomasyon bağlamı
 
-Bu proje 4 kişilik bir ajan ekibiyle (Koordinator, Ataturk, Baglayici, Hafiza)
-yürütülüyor; her birinin kendi görev alanı ve `.claude/agents/` altında tanımı
-var. Görev koordinasyonu takım içi mesajlaşma/task sistemi üzerinden yapılıyor.
+Bu proje 5 kişilik bir ajan ekibiyle (Koordinator, Ataturk, Baglayici, Hafiza,
+Mimar) yürütülüyor; her birinin kendi görev alanı ve `.claude/agents/` altında
+tanımı var. Koordinator ve Baglayici ayrıca gerçek `/schedule` cloud
+routine'leri olarak da çalışıyor (Pazartesi 09:00 / 17:00, bilgisayar kapalı
+olsa bile çalışır). Görev koordinasyonu takım içi mesajlaşma/task sistemi
+üzerinden yapılıyor.

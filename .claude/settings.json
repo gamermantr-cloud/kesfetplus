@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
     "PostToolUse": [
       {
@@ -13,6 +14,16 @@
               "$json = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$f = $json.tool_input.file_path\nif (-not $f) { $f = $json.tool_response.filePath }\nif ($f -and $f.ToLower().EndsWith('.py') -and ($f -like 'C:\\AI-SYSTEM\\kesfetplus\\*')) {\n  $ruff = 'C:\\AI-SYSTEM\\kesfetplus\\venv\\Scripts\\ruff.exe'\n  if (Test-Path $ruff) {\n    & $ruff check --fix $f 2>$null\n    & $ruff format $f 2>$null\n  }\n}"
             ],
             "statusMessage": "Hafiza: ruff check+format"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe",
+            "args": [
+              "-NoProfile",
+              "-Command",
+              "$json = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$f = $json.tool_input.file_path\nif (-not $f) { $f = $json.tool_response.filePath }\nif ($f -and ($f -like 'C:\\AI-SYSTEM\\kesfetplus\\frontend\\src\\*') -and ($f -match '\\.(js|jsx|ts|tsx)$')) {\n  $oxlint = 'C:\\AI-SYSTEM\\kesfetplus\\frontend\\node_modules\\.bin\\oxlint.cmd'\n  if (Test-Path $oxlint) {\n    & $oxlint --fix $f 2>$null\n  }\n}"
+            ],
+            "statusMessage": "Ataturk: oxlint --fix"
           }
         ]
       }

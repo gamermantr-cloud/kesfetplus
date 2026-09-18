@@ -6,6 +6,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
+    // Allows the Cloudflare quick tunnel (random *.trycloudflare.com host
+    // each run) so it isn't rejected by Vite's Host-header check.
+    allowedHosts: ['.trycloudflare.com'],
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8000',

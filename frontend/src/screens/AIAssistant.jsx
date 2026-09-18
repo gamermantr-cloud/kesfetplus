@@ -159,7 +159,8 @@ export default function AIAssistant() {
         {messages.map((message) => {
           const isUser = message.role === 'user'
           const content = message.content
-          const text = typeof content === 'string' ? content : content.text
+          const isStructured = typeof content !== 'string'
+          const text = isStructured ? content.text : content
           return (
             <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
               <div
@@ -170,7 +171,7 @@ export default function AIAssistant() {
                 }`}
               >
                 {text}
-                {!isUser && content.link && (
+                {!isUser && isStructured && content.link && (
                   <a
                     href={content.link}
                     target="_blank"
@@ -180,7 +181,7 @@ export default function AIAssistant() {
                     Yol tarifini aç →
                   </a>
                 )}
-                {!isUser && content.goTo && (
+                {!isUser && isStructured && content.goTo && (
                   <button
                     type="button"
                     onClick={() => navigate(`/place/${content.goTo}`)}

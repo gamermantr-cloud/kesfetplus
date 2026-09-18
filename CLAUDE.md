@@ -63,3 +63,26 @@ tanımı var. Koordinator ve Baglayici ayrıca gerçek `/schedule` cloud
 routine'leri olarak da çalışıyor (Pazartesi 09:00 / 17:00, bilgisayar kapalı
 olsa bile çalışır). Görev koordinasyonu takım içi mesajlaşma/task sistemi
 üzerinden yapılıyor.
+
+**Dikkat:** Bir routine'i hem `run_once_at` ile zamanlayıp hem de hemen
+`action:"run"` ile manuel tetiklemek, ikisi neredeyse aynı anda ateşlenirse
+paralel oturum ve duplicate GitHub Issue'ya yol açabiliyor (bir kere yaşandı,
+#8/#9). Bir routine'i test etmek için sadece `action:"run"` yeterli,
+`run_once_at` ile ayrıca yeniden zamanlamaya gerek yok.
+
+## Bilinen güvenlik bulguları (2026-09-18 security-review)
+
+`/security-review` skill'i sadece pending git diff (`origin/HEAD...`) üzerinde
+çalışıyor, tam repo taraması yapmıyor — diff yoksa hata verir, bu durumda
+manuel tam-kapsamlı taramaya (sub-agent'larla) düşülmeli.
+
+Son taramada bulunan, henüz düzeltilmemiş gerçek bulgular (detay ve durum için
+GitHub Issue #8'e bak):
+- ORTA: `POST /places/{id}/comments` kimlik doğrulaması yok (spam/kimlik
+  taklidi riski).
+- DÜŞÜK: yorum metni HTML'e karşı temizlenmeden saklanıyor (şu an frontend
+  güvenli JSX render ettiği için aktif XSS yok, gelecek risk).
+- DÜŞÜK: `frontend/src/screens/PlaceDetail.jsx:106` `window.open(..., '_blank')`
+  `noopener`/`noreferrer` eksik.
+- BİLGİ: CORS middleware yok (dev proxy'de sorun değil, prod'a çıkmadan önce
+  eklenmeli).

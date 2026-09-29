@@ -43,6 +43,24 @@ function answerRoute(venue) {
   }
 }
 
+// Fotoğraf karşılaştırma artık gerçek bir işlev: mekanın gerçek referans
+// fotoğrafı varsa (venue.photos), kullanıcıyı mekan sayfasındaki
+// perceptual-hash karşılaştırma baloncuğuna yönlendiriyoruz - burada bir
+// benzerlik yüzdesi UYDURMUYORUZ, gerçek hesaplama PlaceDetail.jsx +
+// api/main.py POST /compare-photo üzerinde yapılıyor.
+function answerCompare(venue) {
+  if (!venue) {
+    return 'Hangi mekanın fotoğrafını karşılaştırmak istiyorsun? Bir isim yazar mısın?'
+  }
+  if (!venue.photos || venue.photos.length === 0) {
+    return `${venue.name} için henüz referans fotoğrafımız yok, bu yüzden karşılaştırma yapamıyorum - uydurmak istemiyorum.`
+  }
+  return {
+    text: `${venue.name} için gerçek bir referans fotoğrafımız var. Kendi çektiğin fotoğrafı oradan yükleyip gerçekten hesaplanmış (perceptual hash) bir benzerlik sonucu görebilirsin.`,
+    goTo: venue.id,
+  }
+}
+
 export default function AIAssistant() {
   const navigate = useNavigate()
   const [messages, setMessages] = useState([])
@@ -71,10 +89,8 @@ export default function AIAssistant() {
     const data = await ensureVenues()
 
     if (activeAction === 'compare') {
-      pushMessage(
-        'assistant',
-        'Fotoğraf karşılaştırma özelliği için henüz gerçek bir görsel analiz sistemimiz yok — bunu uydurmak istemiyorum, şu an yalnızca mekan bilgisi ve rota konusunda yardımcı olabilirim.',
-      )
+      const venue = findVenue(data, text)
+      pushMessage('assistant', answerCompare(venue))
       return
     }
 
@@ -108,7 +124,7 @@ export default function AIAssistant() {
     if (actionId === 'compare') {
       pushMessage(
         'assistant',
-        'Fotoğraf karşılaştırma özelliği için henüz gerçek bir görsel analiz sistemimiz yok — uydurmak istemiyorum, bu özellik yakında eklenecek.',
+        'Hangi mekanın fotoğrafını karşılaştırmak istiyorsun? Bir mekan adı yazar mısın?',
       )
     } else {
       pushMessage('assistant', 'Bir mekan adı yazar mısın?')

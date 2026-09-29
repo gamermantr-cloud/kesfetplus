@@ -1,5 +1,7 @@
 import {
+  AlertTriangle,
   Bell,
+  Camera,
   ChevronLeft,
   Flag,
   Loader2,
@@ -11,11 +13,14 @@ import {
   Star,
   UserX,
   Users,
+  Video,
   Wallet,
+  X,
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
+  comparePhoto,
   getCheckinCount,
   getComments,
   getStatusUpdates,
@@ -89,6 +94,11 @@ export default function PlaceDetail() {
   const [statusText, setStatusText] = useState('')
   const [statusSubmitting, setStatusSubmitting] = useState(false)
   const [statusContentNotice, setStatusContentNotice] = useState(null)
+
+  const [comparePanelOpen, setComparePanelOpen] = useState(false)
+  const [compareLoading, setCompareLoading] = useState(false)
+  const [compareResult, setCompareResult] = useState(null)
+  const [compareError, setCompareError] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -254,6 +264,30 @@ export default function PlaceDetail() {
     } catch {
       setCommentsError('Kullanıcı engellenemedi.')
     }
+  }
+
+  async function handleComparePhoto(file) {
+    if (!file) return
+    setCompareLoading(true)
+    setCompareError(null)
+    setCompareResult(null)
+    try {
+      const result = await comparePhoto(placeId, file)
+      setCompareResult(result)
+    } catch (err) {
+      setCompareError(
+        err?.message ?? 'Karşılaştırma yapılamadı. Backend çalışıyor mu kontrol edin.',
+      )
+    } finally {
+      setCompareLoading(false)
+    }
+  }
+
+  function closeComparePanel() {
+    setComparePanelOpen(false)
+    setCompareLoading(false)
+    setCompareResult(null)
+    setCompareError(null)
   }
 
   function openMap() {
@@ -530,6 +564,69 @@ export default function PlaceDetail() {
                 <p className="text-sm text-taupe">Bu mekan için henüz fotoğraf yok.</p>
               </div>
             )}
+
+            {venue.embeds && venue.embeds.length > 0 && (
+              <div className="mt-6">
+                <p className="mb-3 text-xs font-medium uppercase tracking-wide text-taupe">
+                  Videolar
+                </p>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {venue.embeds.map((embed) => (
+                    <div
+                      key={embed.url}
+                      className="overflow-hidden rounded-2xl border border-cream-line bg-sand/30 p-2"
+                    >
+                      <div className="mb-2 flex items-center justify-between px-1">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-espresso px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
+                          <Video size={11} />
+                          {embed.platform === 'tiktok' ? 'TikTok' : embed.platform}
+                        </span>
+                        <a
+                          href={embed.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] text-taupe underline"
+                        >
+                          Orijinal gönderi
+                        </a>
+                      </div>
+                      <TikTokEmbed html={embed.oembed_html} />
+                      {embed.creator ? (
+                        <p className="px-1 pb-1 pt-2 text-[10px] text-taupe">@{embed.creator}</p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {venue.photos && venue.photos.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    navigate('/login', loginState)
+                    return
+                  }
+                  setComparePanelOpen(true)
+                }}
+                aria-label="Fotoğrafını karşılaştır"
+                className="fixed bottom-28 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-tan text-cream shadow-lg transition-transform hover:scale-105"
+              >
+                <Camera size={22} />
+              </button>
+            )}
+
+            {comparePanelOpen && (
+              <ComparePhotoPanel
+                venueName={venue.name}
+                loading={compareLoading}
+                result={compareResult}
+                error={compareError}
+                onFileSelected={handleComparePhoto}
+                onClose={closeComparePanel}
+              />
+            )}
           </div>
         )}
 
@@ -654,6 +751,35 @@ function StatCard({ icon, label, value, wide }) {
       </div>
     </div>
   )
+}
+
+/**
+ * Renders a TikTok oEmbed blockquote (fetched ahead of time from
+ * https://www.tiktok.com/oembed - a public endpoint, no account/API key
+ * needed, see database/seed/*.json `embeds[].oembed_html`). TikTok's own
+ * `embed.js` scans the page for `.tiktok-embed` blockquotes and replaces
+ * them with the real player; it's loaded once and re-invoked via
+ * `window.tiktokEmbed.lib.render()` for any embeds mounted afterwards
+ * (e.g. switching tabs), matching TikTok's documented embed pattern.
+ */
+function TikTokEmbed({ html }) {
+  useEffect(() => {
+    if (!html) return
+    const scriptId = 'tiktok-embed-script'
+    if (window.tiktokEmbed?.lib?.render) {
+      window.tiktokEmbed.lib.render()
+      return
+    }
+    if (document.getElementById(scriptId)) return
+    const script = document.createElement('script')
+    script.id = scriptId
+    script.src = 'https://www.tiktok.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+  }, [html])
+
+  if (!html) return null
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
 }
 
 /**
@@ -786,6 +912,142 @@ function ModerationRow({ item, targetType, placeId, currentUserId, isLoggedIn, o
           )}
         </>
       )}
+    </div>
+  )
+}
+
+const VERDICT_LABELS = {
+  muhtemelen_ayni_yer: 'Muhtemelen aynı yer',
+  belirsiz: 'Belirsiz',
+  farkli_gorunuyor: 'Farklı görünüyor',
+}
+
+/**
+ * Bottom-sheet panel for the real photo-comparison feature: lets the user
+ * take/upload a photo, uploads it to POST /places/{id}/compare-photo, and
+ * shows the REAL similarity_percent computed there via perceptual hashing
+ * (database/photo_compare.py) - never a made-up number. Loading and error
+ * states (no reference photo, backend/network failure) are shown honestly,
+ * matching this screen's other async flows (comments/status).
+ *
+ * Privacy: the chosen File is handed straight to comparePhoto() (a
+ * fetch/FormData upload) - it's never written anywhere by this component,
+ * only held in the browser's own file picker state until the request
+ * completes, same as any other file input.
+ */
+function ComparePhotoPanel({ venueName, loading, result, error, onFileSelected, onClose }) {
+  const [previewName, setPreviewName] = useState(null)
+
+  function handleChange(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setPreviewName(file.name)
+    onFileSelected(file)
+  }
+
+  return (
+    <div className="fixed inset-0 z-40 flex items-end justify-center bg-espresso/50 backdrop-blur-sm">
+      <div className="w-full max-w-[430px] rounded-t-3xl border-t border-cream-line bg-cream p-6 pb-8">
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-lg font-medium text-espresso">Fotoğraf Karşılaştır</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Kapat"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-sand text-espresso"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        <p className="mt-2 text-sm text-taupe">
+          Çektiğin fotoğrafı {venueName}'in referans fotoğrafıyla karşılaştıralım - gerçekten
+          hesaplanmış bir görsel benzerlik ölçümü (perceptual hash), tahmin değil.
+        </p>
+
+        <div className="mt-5">
+          {loading ? (
+            <div className="flex flex-col items-center gap-2 py-8 text-taupe">
+              <Loader2 className="animate-spin" size={22} />
+              <p className="text-sm">Karşılaştırılıyor…</p>
+            </div>
+          ) : result ? (
+            <div className="space-y-3 rounded-2xl border border-cream-line bg-sand/50 p-4">
+              <div className="flex items-baseline justify-between">
+                <span className="text-sm text-taupe">Benzerlik</span>
+                <span className="font-display text-3xl font-medium text-espresso">
+                  %{result.similarity_percent}
+                </span>
+              </div>
+              <p
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium ${
+                  result.verdict === 'muhtemelen_ayni_yer'
+                    ? 'bg-tan/15 text-tan-dark'
+                    : result.verdict === 'belirsiz'
+                      ? 'bg-gold/15 text-tan-dark'
+                      : 'bg-sand-dark text-espresso-soft'
+                }`}
+              >
+                {VERDICT_LABELS[result.verdict] ?? result.verdict}
+              </p>
+              <p className="text-xs text-taupe">
+                Hamming mesafesi: {result.hamming_distance} bit (64 bit üzerinden) - perceptual
+                hash (pHash) ile hesaplandı.
+              </p>
+              <label className="block">
+                <span className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-tan-dark px-4 py-2.5 text-sm font-medium text-espresso">
+                  <Camera size={16} />
+                  Tekrar dene
+                </span>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  capture="environment"
+                  onChange={handleChange}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          ) : error ? (
+            <div className="space-y-3 rounded-2xl border border-cream-line bg-sand/50 p-4">
+              <p className="flex items-start gap-2 text-sm text-espresso-soft">
+                <AlertTriangle size={16} className="mt-0.5 shrink-0 text-tan-dark" />
+                {error}
+              </p>
+              <label className="block">
+                <span className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-tan px-4 py-2.5 text-sm font-medium text-cream">
+                  <Camera size={16} />
+                  Tekrar dene
+                </span>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  capture="environment"
+                  onChange={handleChange}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          ) : (
+            <label className="block">
+              <span className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream">
+                <Camera size={18} />
+                Fotoğraf çek / yükle
+              </span>
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                capture="environment"
+                onChange={handleChange}
+                className="hidden"
+              />
+              {previewName && (
+                <p className="mt-2 text-center text-xs text-taupe">{previewName}</p>
+              )}
+            </label>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

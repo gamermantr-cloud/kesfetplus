@@ -288,7 +288,21 @@
     "verified": false,
     "source": "google",
     "crowdNow": "yüksek",
-    "note": "The Marmara Pera'nın çatı katında, boğaz manzaralı; gün batımı saatinde rezervasyon almak zorlaşıyor."
+    "note": "The Marmara Pera'nın çatı katında, boğaz manzaralı; gün batımı saatinde rezervasyon almak zorlaşıyor.",
+    "embeds": [
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@ivi5w/video/7001874578268065030",
+        "creator": "ivi5w",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@ivi5w/video/7001874578268065030\" data-video-id=\"7001874578268065030\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@ivi5w\" href=\"https://www.tiktok.com/@ivi5w?refer=embed\">@ivi5w</a> <p>I miss Istanbul <a title=\"turkey\" target=\"_blank\" href=\"https://www.tiktok.com/tag/turkey?refer=embed\">#turkey</a> <a title=\"tiktokturkey\" target=\"_blank\" href=\"https://www.tiktok.com/tag/tiktokturkey?refer=embed\">#tiktokturkey</a> <a title=\"istanbul\" target=\"_blank\" href=\"https://www.tiktok.com/tag/istanbul?refer=embed\">#istanbul</a> <a title=\"miklarestaurant\" target=\"_blank\" href=\"https://www.tiktok.com/tag/miklarestaurant?refer=embed\">#miklarestaurant</a> <a title=\"michelinguide\" target=\"_blank\" href=\"https://www.tiktok.com/tag/michelinguide?refer=embed\">#michelinguide</a> <a title=\"sgtiktok\" target=\"_blank\" href=\"https://www.tiktok.com/tag/sgtiktok?refer=embed\">#sgtiktok</a> <a title=\"tiktoktravel\" target=\"_blank\" href=\"https://www.tiktok.com/tag/tiktoktravel?refer=embed\">#tiktoktravel</a> <a title=\"poshrestaurant\" target=\"_blank\" href=\"https://www.tiktok.com/tag/poshrestaurant?refer=embed\">#poshrestaurant</a> <a title=\"travelholiday\" target=\"_blank\" href=\"https://www.tiktok.com/tag/travelholiday?refer=embed\">#travelholiday</a> <a title=\"finedining\" target=\"_blank\" href=\"https://www.tiktok.com/tag/finedining?refer=embed\">#finedining</a></p> <a target=\"_blank\" title=\"♬ One and Only.mp3 - Tri:al\" href=\"https://www.tiktok.com/music/One-and-Onlymp3-6808420640912050177?refer=embed\">♬ One and Only.mp3 - Tri:al</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@mbmarcobeteta/video/7120224578097384710",
+        "creator": "mbmarcobeteta",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@mbmarcobeteta/video/7120224578097384710\" data-video-id=\"7120224578097384710\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@mbmarcobeteta\" href=\"https://www.tiktok.com/@mbmarcobeteta?refer=embed\">@mbmarcobeteta</a> <p>📍Mikla, aunque un buen restaurante, dista mucho de que lo cataloguen entre los mejores del mundo. Para mí, no es más de un 8.🇹🇷 <a title=\"estambul\" target=\"_blank\" href=\"https://www.tiktok.com/tag/estambul?refer=embed\">#Estambul</a> <a title=\"restaurantes\" target=\"_blank\" href=\"https://www.tiktok.com/tag/restaurantes?refer=embed\">#Restaurantes</a> <a title=\"50bestrestaurants\" target=\"_blank\" href=\"https://www.tiktok.com/tag/50bestrestaurants?refer=embed\">#50bestrestaurants</a></p> <a target=\"_blank\" title=\"♬ All Around the World(La La La) - R3hab / A Touch of Class\" href=\"https://www.tiktok.com/music/All-Around-the-World-La-La-La-6730560466873125646?refer=embed\">♬ All Around the World(La La La) - R3hab / A Touch of Class</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      }
+    ]
   },
   {
     "id": "araka",
@@ -1119,7 +1133,14 @@
     "verified": false,
     "source": "google",
     "crowdNow": "orta",
-    "note": "Küçük ve samimi bir mekân; kalabalık gruplarda servis biraz yavaşlayabiliyor."
+    "note": "Küçük ve samimi bir mekân; kalabalık gruplarda servis biraz yavaşlayabiliyor.",
+    "photos": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Me%C5%9Fhur_Kire%C3%A7burnu_Midye_ve_Bal%C4%B1k_Evi.jpg/1280px-Me%C5%9Fhur_Kire%C3%A7burnu_Midye_ve_Bal%C4%B1k_Evi.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Me%C5%9Fhur_Kire%C3%A7burnu_Midye_ve_Bal%C4%B1k_Evi.jpg",
+        "attribution": "muammerokumus - Wikimedia Commons (CC BY-SA 2.0)"
+      }
+    ]
   },
   {
     "id": "hafiz-mustafa-hocapasa",
@@ -1183,7 +1204,27 @@
     "verified": false,
     "source": "google",
     "crowdNow": "yüksek",
-    "note": "İstanbul'un en köklü baklavacılarından; fıstıklı dondurma ile birlikte sipariş edilmesi öneriliyor."
+    "note": "İstanbul'un en köklü baklavacılarından; fıstıklı dondurma ile birlikte sipariş edilmesi öneriliyor.",
+    "embeds": [
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@mr.taster/video/6816259703752936709",
+        "creator": "mr.taster",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@mr.taster/video/6816259703752936709\" data-video-id=\"6816259703752936709\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@mr.taster\" href=\"https://www.tiktok.com/@mr.taster?refer=embed\">@mr.taster</a> <p>Karakoy Gulluoglu Baklava😋👌❤️ <a title=\"turkey\" target=\"_blank\" href=\"https://www.tiktok.com/tag/turkey?refer=embed\">#turkey</a> <a title=\"food\" target=\"_blank\" href=\"https://www.tiktok.com/tag/food?refer=embed\">#food</a> <a title=\"foodporn\" target=\"_blank\" href=\"https://www.tiktok.com/tag/foodporn?refer=embed\">#foodporn</a> <a title=\"baklava\" target=\"_blank\" href=\"https://www.tiktok.com/tag/baklava?refer=embed\">#baklava</a></p> <a target=\"_blank\" title=\"♬ Türkiye Marşı - Hasan Cihat Örter\" href=\"https://www.tiktok.com/music/Türkiye-Marşı-245413079830802432?refer=embed\">♬ Türkiye Marşı - Hasan Cihat Örter</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@munchingakhi/video/7309545784884743457",
+        "creator": "munchingakhi",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@munchingakhi/video/7309545784884743457\" data-video-id=\"7309545784884743457\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@munchingakhi\" href=\"https://www.tiktok.com/@munchingakhi?refer=embed\">@munchingakhi</a> <p>i found the BEST BAKLAVA in TURKEY 🇹🇷 <a title=\"baklava\" target=\"_blank\" href=\"https://www.tiktok.com/tag/baklava?refer=embed\">#baklava</a> <a title=\"turkey\" target=\"_blank\" href=\"https://www.tiktok.com/tag/turkey?refer=embed\">#turkey</a> <a title=\"istanbul\" target=\"_blank\" href=\"https://www.tiktok.com/tag/istanbul?refer=embed\">#istanbul</a> <a title=\"gulluoglu\" target=\"_blank\" href=\"https://www.tiktok.com/tag/gulluoglu?refer=embed\">#gulluoglu</a> <a title=\"dessert\" target=\"_blank\" href=\"https://www.tiktok.com/tag/dessert?refer=embed\">#dessert</a> <a title=\"dessertplaces\" target=\"_blank\" href=\"https://www.tiktok.com/tag/dessertplaces?refer=embed\">#dessertplaces</a> <a title=\"foodplaces\" target=\"_blank\" href=\"https://www.tiktok.com/tag/foodplaces?refer=embed\">#foodplaces</a> <a title=\"istanbulfood\" target=\"_blank\" href=\"https://www.tiktok.com/tag/istanbulfood?refer=embed\">#istanbulfood</a> <a title=\"munchingakhi\" target=\"_blank\" href=\"https://www.tiktok.com/tag/munchingakhi?refer=embed\">#munchingakhi</a> <a title=\"güllüoğlu\" target=\"_blank\" href=\"https://www.tiktok.com/tag/g%C3%BCll%C3%BCo%C4%9Flu?refer=embed\">#güllüoğlu</a> <a title=\"foodguide\" target=\"_blank\" href=\"https://www.tiktok.com/tag/foodguide?refer=embed\">#foodguide</a> <a title=\"karakoy\" target=\"_blank\" href=\"https://www.tiktok.com/tag/karakoy?refer=embed\">#karakoy</a> <a title=\"soğukbaklava\" target=\"_blank\" href=\"https://www.tiktok.com/tag/so%C4%9Fukbaklava?refer=embed\">#soğukbaklava</a>  Güllüoğlu, Istanbul 📍</p> <a target=\"_blank\" title=\"♬ La foule - Remastered - Édith Piaf\" href=\"https://www.tiktok.com/music/La-foule-Remastered-6985969145145722882?refer=embed\">♬ La foule - Remastered - Édith Piaf</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      },
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@sampepper/video/7219027444743867694",
+        "creator": "sampepper",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@sampepper/video/7219027444743867694\" data-video-id=\"7219027444743867694\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@sampepper\" href=\"https://www.tiktok.com/@sampepper?refer=embed\">@sampepper</a> <p>This is how the best baklava in the world is made at karakoy gulluoglu in istanbaul, turkey!</p> <a target=\"_blank\" title=\"♬ original sound - Sam Pepper\" href=\"https://www.tiktok.com/music/original-sound-7219027456991284011?refer=embed\">♬ original sound - Sam Pepper</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      }
+    ]
   },
   {
     "id": "tas-firin-evin",
@@ -2421,7 +2462,15 @@
     "category": "bar",
     "verified": false,
     "source": "websearch-editorial",
-    "crowdNow": "Veri yok"
+    "crowdNow": "Veri yok",
+    "embeds": [
+      {
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@lulua782/video/7315926236063124744",
+        "creator": "lulua782",
+        "oembed_html": "<blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@lulua782/video/7315926236063124744\" data-video-id=\"7315926236063124744\" data-embed-from=\"oembed\" style=\"max-width:605px; min-width:325px;\"> <section> <a target=\"_blank\" title=\"@lulua782\" href=\"https://www.tiktok.com/@lulua782?refer=embed\">@lulua782</a> <p>The House Cafe Ortaköyمطعم وكفي </p> <a target=\"_blank\" title=\"♬ الصوت الأصلي - ديالا| Diala .✨\" href=\"https://www.tiktok.com/music/الصوت-الأصلي-7264493742164314881?refer=embed\">♬ الصوت الأصلي - ديالا| Diala .✨</a> </section> </blockquote> <script async src=\"https://www.tiktok.com/embed.js\"></script>"
+      }
+    ]
   },
   {
     "id": "sortie-kurucesme",

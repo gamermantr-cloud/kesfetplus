@@ -147,3 +147,37 @@ export async function postStatusUpdate(placeId, { tag, text }) {
     body: { tag, text },
   })
 }
+
+// --- Places: photo comparison ----------------------------------------------
+
+/**
+ * Uploads a photo for real perceptual-hash comparison against the venue's
+ * reference photo (see database/photo_compare.py - no fabricated
+ * similarity, an actually-computed pHash Hamming distance).
+ *
+ * Multipart/form-data, so this can't go through request() above (that
+ * helper always JSON-encodes the body). The browser sets the multipart
+ * Content-Type boundary itself - never set it manually on a FormData body.
+ */
+export async function comparePhoto(placeId, file) {
+  const formData = new FormData()
+  formData.append('photo', file)
+  const res = await fetch(`${BASE}/places/${encodeURIComponent(placeId)}/compare-photo`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: formData,
+  })
+  if (!res.ok) {
+    let detail = `compare-photo failed: ${res.status}`
+    try {
+      const data = await res.json()
+      if (data?.detail) detail = data.detail
+    } catch {
+      // response body wasn't JSON - keep the generic message
+    }
+    const error = new Error(detail)
+    error.status = res.status
+    throw error
+  }
+  return res.json()
+}

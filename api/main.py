@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
@@ -10,6 +10,13 @@ from database.checkins_store import (
     list_status,
 )
 from database.comments_store import add_comment, list_comments
+from database.photo_compare import (
+    InvalidImageError,
+    PhotoCompareError,
+    ReferenceDownloadError,
+    compare_images,
+    get_reference_photo_url,
+)
 from database.reports_store import VALID_TARGET_TYPES, add_report, list_reports_by_user
 from database.users_store import (
     UserError,
@@ -271,3 +278,47 @@ def create_status(place_id: str, status: StatusCreate, user: dict = Depends(get_
 def get_status(place_id: str, user: dict | None = Depends(get_current_user_optional)):
     exclude = set(user["blocked_user_ids"]) if user else None
     return list_status(place_id, exclude_user_ids=exclude)
+
+
+# ---------------------------------------------------------------------------
+# Photo comparison - real perceptual-hash similarity (see
+# database/photo_compare.py), never a fabricated/guessed percentage. Auth
+# required (same "real identity" reasoning as comments/checkins/status).
+# The uploaded photo is only ever read into memory for this one request and
+# handed to compare_images() - it is never written to disk or stored
+# anywhere (privacy), and goes out of scope (garbage-collectable) as soon as
+# this function returns.
+# ---------------------------------------------------------------------------
+
+MAX_COMPARE_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB
+ALLOWED_COMPARE_CONTENT_TYPES = {"image/jpeg", "image/jpg", "image/png", "image/webp"}
+
+
+@app.post("/places/{place_id}/compare-photo")
+async def compare_photo(
+    place_id: str,
+    photo: UploadFile = File(...),
+    user: dict = Depends(get_current_user),
+):
+    if photo.content_type not in ALLOWED_COMPARE_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Desteklenmeyen dosya formatı. jpg, png veya webp yükle.",
+        )
+
+    reference_url = get_reference_photo_url(place_id)
+    if not reference_url:
+        raise HTTPException(status_code=404, detail="Bu mekan için referans fotoğraf yok.")
+
+    uploaded_bytes = await photo.read()
+    if len(uploaded_bytes) > MAX_COMPARE_UPLOAD_BYTES:
+        raise HTTPException(status_code=400, detail="Dosya çok büyük (maks. 10MB).")
+
+    try:
+        return compare_images(reference_url, uploaded_bytes)
+    except ReferenceDownloadError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
+    except InvalidImageError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    except PhotoCompareError as e:  # pragma: no cover - safety net
+        raise HTTPException(status_code=500, detail=str(e)) from e

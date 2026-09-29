@@ -10,7 +10,8 @@ const CATEGORIES = [
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
 ]
 
-// Card backgrounds cycle through design-token gradients since the seed data has no photos yet.
+// Card backgrounds cycle through design-token gradients; used as a placeholder/fallback
+// for venues that have no real photo (or whose photo fails to load).
 const CARD_GRADIENTS = [
   'from-tan to-sand-dark',
   'from-espresso-soft to-tan-dark',
@@ -109,6 +110,17 @@ export default function ExploreAll() {
             className="bg-sand rounded-2xl overflow-hidden text-left"
           >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}>
+              {venue.photos?.[0]?.url && (
+                <img
+                  src={venue.photos[0].url}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              )}
               {venue.rating && (
                 <div className="absolute top-2 right-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-xs font-semibold text-espresso">
                   <Star size={11} className="fill-gold text-gold" />

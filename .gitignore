@@ -35,3 +35,6 @@ htmlcov/
 database/comments.json
 database/checkins.json
 database/status.json
+database/users.json
+database/sessions.json
+database/reports.json

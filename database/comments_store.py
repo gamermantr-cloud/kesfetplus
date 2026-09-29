@@ -38,6 +38,7 @@ def add_comment(
     lat: float | None = None,
     lng: float | None = None,
     accuracy: float | None = None,
+    author_user_id: str | None = None,
 ) -> dict:
     """Store a new comment with a computed trust score.
 
@@ -45,6 +46,12 @@ def add_comment(
     penalized - see database/trust_scoring.py signal 2). Trust scoring is
     computed against the store's state *before* this comment is appended,
     so it can't compare/collide with itself.
+
+    author_user_id ties the comment to a real account (database/users_store.py)
+    for ownership/blocking. It's optional/None for comments written before
+    the account system existed - old records without it are simply never
+    matched by a blocked_user_ids filter, never crash on it (see
+    list_comments's exclude_user_ids).
     """
     escaped_author = html.escape(author)
     escaped_text = html.escape(text)
@@ -56,6 +63,7 @@ def add_comment(
             "id": str(uuid.uuid4()),
             "place_id": place_id,
             "author": escaped_author,
+            "author_user_id": author_user_id,
             "text": escaped_text,
             "lat": lat,
             "lng": lng,
@@ -68,10 +76,23 @@ def add_comment(
     return comment
 
 
-def list_comments(place_id: str, include_hidden: bool = False) -> list[dict]:
+def list_comments(
+    place_id: str,
+    include_hidden: bool = False,
+    exclude_user_ids: set[str] | None = None,
+) -> list[dict]:
+    """List comments for a place.
+
+    exclude_user_ids: when given (the requesting user's blocked_user_ids),
+    comments whose author_user_id is in that set are filtered out
+    server-side - hiding them only in the frontend is not enough (a blocked
+    author's content must not be served to the blocker at all).
+    """
     with _lock:
         data = _load()
     comments = data.get(place_id, [])
-    if include_hidden:
-        return comments
-    return [c for c in comments if c.get("review_status") != "hidden"]
+    if not include_hidden:
+        comments = [c for c in comments if c.get("review_status") != "hidden"]
+    if exclude_user_ids:
+        comments = [c for c in comments if c.get("author_user_id") not in exclude_user_ids]
+    return comments

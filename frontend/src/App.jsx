@@ -3,11 +3,13 @@ import PhoneFrame from './components/PhoneFrame.jsx'
 import AIAssistant from './screens/AIAssistant.jsx'
 import ExploreAll from './screens/ExploreAll.jsx'
 import Home from './screens/Home.jsx'
+import Login from './screens/Login.jsx'
 import MapView from './screens/MapView.jsx'
 import Messages from './screens/Messages.jsx'
 import Notifications from './screens/Notifications.jsx'
 import PlaceDetail from './screens/PlaceDetail.jsx'
 import Profile from './screens/Profile.jsx'
+import Register from './screens/Register.jsx'
 import Splash from './screens/Splash.jsx'
 
 export default function App() {
@@ -23,6 +25,8 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/explore" element={<ExploreAll />} />
         <Route path="/map" element={<MapView />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </PhoneFrame>
   )

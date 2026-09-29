@@ -8,6 +8,10 @@ ignore = []
 
 [tool.ruff.lint.per-file-ignores]
 "agents/scout_agent.py" = ["S113"]
+# B008 (function call in default arg) is a false positive for FastAPI's
+# Depends(...) pattern - the recommended, documented way to declare
+# dependencies is exactly `param: T = Depends(fn)`.
+"api/main.py" = ["B008"]
 
 [tool.mypy]
 python_version = "3.12"

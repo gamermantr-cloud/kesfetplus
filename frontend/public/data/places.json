@@ -19,7 +19,14 @@
     "shade": "yüksek",
     "crowdToday": "orta",
     "verified": true,
-    "note": "Bentler çevresi düz ve arabalı gezinti için uygun; iç patikalar tekerlekli sandalyeye elverişli değil."
+    "note": "Bentler çevresi düz ve arabalı gezinti için uygun; iç patikalar tekerlekli sandalyeye elverişli değil.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Belgrad_Forest_%281%29.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Belgrad_Forest_(1).jpg",
+        "attribution": "Fotoğraf: Mostafameraji — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "emirgan",
@@ -41,7 +48,14 @@
     "shade": "yüksek",
     "crowdToday": "yüksek",
     "verified": true,
-    "note": "Geniş çim alanları ve asfalt yollar bebek arabası için ideal. Hafta sonu öğleden sonra kalabalık olabiliyor."
+    "note": "Geniş çim alanları ve asfalt yollar bebek arabası için ideal. Hafta sonu öğleden sonra kalabalık olabiliyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Emirgan_Korusu.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Emirgan_Korusu.jpg",
+        "attribution": "Fotoğraf: Tarkan Karabel — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "fethipasa",
@@ -62,7 +76,14 @@
     "shade": "orta",
     "crowdToday": "düşük",
     "verified": true,
-    "note": "Yamaç eğimli; boğaz manzaralı gün batımı noktası çok güçlü ama otopark kısıtlı, toplu taşıma önerilir."
+    "note": "Yamaç eğimli; boğaz manzaralı gün batımı noktası çok güçlü ama otopark kısıtlı, toplu taşıma önerilir.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Fethipa%C5%9Fa_Korusu.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Fethipa%C5%9Fa_Korusu.jpg",
+        "attribution": "Fotoğraf: Salih Karayel — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "yildiz",
@@ -83,7 +104,14 @@
     "shade": "yüksek",
     "crowdToday": "orta",
     "verified": true,
-    "note": "Şehir içinde olmasına rağmen gölgeli ve sakin; küçük çocuklu aileler için ana giriş civarı en rahat bölge."
+    "note": "Şehir içinde olmasına rağmen gölgeli ve sakin; küçük çocuklu aileler için ana giriş civarı en rahat bölge.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Y%C4%B1ld%C4%B1z_park_in_2014_8179.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Y%C4%B1ld%C4%B1z_park_in_2014_8179.jpg",
+        "attribution": "Fotoğraf: Dosseman — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "aydos",
@@ -104,7 +132,14 @@
     "shade": "yüksek",
     "crowdToday": "düşük",
     "verified": true,
-    "note": "Doğal ve bakımsız patikalar; deneyimli yürüyüşçüler için güzel ama küçük çocuk veya bebek arabasıyla zor."
+    "note": "Doğal ve bakımsız patikalar; deneyimli yürüyüşçüler için güzel ama küçük çocuk veya bebek arabasıyla zor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Aydos_800x524.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Aydos_800x524.jpg",
+        "attribution": "Fotoğraf: The original uploader was Cemyildiz at English Wikipedia. — Wikimedia Commons (Public domain)"
+      }
+    ]
   },
   {
     "id": "polonezkoy",
@@ -126,7 +161,14 @@
     "shade": "yüksek",
     "crowdToday": "düşük",
     "verified": true,
-    "note": "Köpekler tasmasız gezebiliyor geniş alanlarda; mangal alanları ayrılmış ve işaretli."
+    "note": "Köpekler tasmasız gezebiliyor geniş alanlarda; mangal alanları ayrılmış ve işaretli.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Polonezk%C3%B6y_2015.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Polonezk%C3%B6y_2015.jpg",
+        "attribution": "Fotoğraf: Hamdigumus — Wikimedia Commons (CC0)"
+      }
+    ]
   },
   {
     "id": "camlica",
@@ -147,7 +189,14 @@
     "shade": "düşük",
     "crowdToday": "yüksek",
     "verified": true,
-    "note": "Tüm yollar asfalt ve düz; tekerlekli sandalye ve bebek arabası için şehirdeki en uygun manzara noktalarından biri."
+    "note": "Tüm yollar asfalt ve düz; tekerlekli sandalye ve bebek arabası için şehirdeki en uygun manzara noktalarından biri.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/B%C3%BCy%C3%BCk_%C3%87aml%C4%B1ca_Tepesi.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%BCy%C3%BCk_%C3%87aml%C4%B1ca_Tepesi.jpg",
+        "attribution": "Fotoğraf: Sezenkerem — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "sile",
@@ -169,7 +218,14 @@
     "shade": "orta",
     "crowdToday": "orta",
     "verified": true,
-    "note": "Sahil şeridi ve arkasındaki çamlık iç içe; çim ve otluk alanlarda vakit geçirecekler için mevsimsel kene farkındalığı öneririz."
+    "note": "Sahil şeridi ve arkasındaki çamlık iç içe; çim ve otluk alanlarda vakit geçirecekler için mevsimsel kene farkındalığı öneririz.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/%C5%9Eile_Feneri_view_from_Fener_Caddesi_05.2026.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:%C5%9Eile_Feneri_view_from_Fener_Caddesi_05.2026.jpg",
+        "attribution": "Fotoğraf: Zach1055 — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "arnavutkoy-bolluca",
@@ -233,7 +289,14 @@
     "shade": "düşük",
     "crowdToday": "yüksek",
     "verified": true,
-    "note": "Yaz aylarında oldukça kalabalık; plaj girişleri düz ve bebek arabasına uygun."
+    "note": "Yaz aylarında oldukça kalabalık; plaj girişleri düz ve bebek arabasına uygun.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Kilyos_Dalia_beach.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Kilyos_Dalia_beach.jpg",
+        "attribution": "Fotoğraf: Ozan Kilic — Wikimedia Commons (CC BY 2.0)"
+      }
+    ]
   },
   {
     "id": "florya-orman",
@@ -258,7 +321,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "Google yorumlarında tuvalet temizliği ve bebek arabası uygunluğu sık övülüyor; asırlık ağaçlar ve geniş çocuk oyun alanları var."
+    "note": "Google yorumlarında tuvalet temizliği ve bebek arabası uygunluğu sık övülüyor; asırlık ağaçlar ve geniş çocuk oyun alanları var.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Florya_ATATURK_Forest.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Florya_ATATURK_Forest.jpg",
+        "attribution": "Fotoğraf: Defnealamutt — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "gulhane",
@@ -282,7 +352,14 @@
     "crowdToday": "yüksek",
     "verified": false,
     "source": "google",
-    "note": "Şehir merkezinde geniş, düz yollarıyla dikkat çekiyor; ilkbahar lale sezonunda aşırı kalabalıklaşabiliyor."
+    "note": "Şehir merkezinde geniş, düz yollarıyla dikkat çekiyor; ilkbahar lale sezonunda aşırı kalabalıklaşabiliyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/G%C3%BClhane_Park%2C_Istanbul.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:G%C3%BClhane_Park,_Istanbul.jpg",
+        "attribution": "Fotoğraf: Maurice Flesier — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "bahcelievler-koru",
@@ -428,7 +505,14 @@
     "crowdToday": "düşük",
     "verified": false,
     "source": "google",
-    "note": "Hafta içi sakin; içeride restoran yok, yiyecek ve mangal malzemesini yanınızda götürmeniz gerekiyor."
+    "note": "Hafta içi sakin; içeride restoran yok, yiyecek ve mangal malzemesini yanınızda götürmeniz gerekiyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Kirazl%C4%B1bent_Nature_Park.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Kirazl%C4%B1bent_Nature_Park.jpg",
+        "attribution": "Fotoğraf: Mohammed — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "duatepe",
@@ -525,7 +609,14 @@
     "crowdToday": "yüksek",
     "verified": false,
     "source": "google",
-    "note": "İlkbaharda lale ve kiraz çiçekleriyle ünlü, çok düzenli ve bakımlı bir park."
+    "note": "İlkbaharda lale ve kiraz çiçekleriyle ünlü, çok düzenli ve bakımlı bir park.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/G%C3%B6ztepe_60._Y%C4%B1l_Park%C4%B1_%C3%87ocuk_Oyun_Alan%C4%B1_2024.05.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:G%C3%B6ztepe_60._Y%C4%B1l_Park%C4%B1_%C3%87ocuk_Oyun_Alan%C4%B1_2024.05.jpg",
+        "attribution": "Fotoğraf: YeditepeDogaBasak — Wikimedia Commons (CC BY 4.0)"
+      }
+    ]
   },
   {
     "id": "moda-sahil",
@@ -550,7 +641,14 @@
     "crowdToday": "yüksek",
     "verified": false,
     "source": "google",
-    "note": "Bisiklet yolu, çocuk oyun alanı ve açık spor alanları var; akşamları gün batımı için oldukça kalabalıklaşıyor."
+    "note": "Bisiklet yolu, çocuk oyun alanı ve açık spor alanları var; akşamları gün batımı için oldukça kalabalıklaşıyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Moda_Sahil.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Moda_Sahil.jpg",
+        "attribution": "Fotoğraf: Antoloji — Wikimedia Commons (CC BY-SA 3.0)"
+      }
+    ]
   },
   {
     "id": "caddebostan-sahil",
@@ -647,7 +745,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "Uzun bisiklet ve koşu parkurlarıyla biliniyor; adalar manzaralı gün batımı noktaları var."
+    "note": "Uzun bisiklet ve koşu parkurlarıyla biliniyor; adalar manzaralı gün batımı noktaları var.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Maltepe_Sahil_Park%C4%B1_Maltepe_%C4%B0stanbul.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Maltepe_Sahil_Park%C4%B1_Maltepe_%C4%B0stanbul.jpg",
+        "attribution": "Fotoğraf: Makalesta2 — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "umraniye-millet",
@@ -720,7 +825,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "Bebek arabası ve tekerlekli sandalye için rampalarla bağlı bölümleri var; çevre yollardan gelen trafik gürültüsü zaman zaman rahatsız edici olabiliyor."
+    "note": "Bebek arabası ve tekerlekli sandalye için rampalarla bağlı bölümleri var; çevre yollardan gelen trafik gürültüsü zaman zaman rahatsız edici olabiliyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Nezahat_G%C3%B6kyi%C4%9Fit_Botanik_Bah%C3%A7esi_%C4%B0%C3%A7i.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Nezahat_G%C3%B6kyi%C4%9Fit_Botanik_Bah%C3%A7esi_%C4%B0%C3%A7i.jpg",
+        "attribution": "Fotoğraf: Abdullah Can Aldanmaz — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "beykoz-korusu",
@@ -1458,7 +1570,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "Eski Atatürk Havalimanı arazisinde kurulan geniş bir millet bahçesi; el yapımı ürün satan zanaatkâr pazarı da var."
+    "note": "Eski Atatürk Havalimanı arazisinde kurulan geniş bir millet bahçesi; el yapımı ürün satan zanaatkâr pazarı da var.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Atat%C3%BCrk_Havaliman%C4%B1_Millet_Bah%C3%A7esi%2C_%C5%9Eubat_2025.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Atat%C3%BCrk_Havaliman%C4%B1_Millet_Bah%C3%A7esi,_%C5%9Eubat_2025.jpg",
+        "attribution": "Fotoğraf: Sefabaris — Wikimedia Commons (CC BY-SA 3.0)"
+      }
+    ]
   },
   {
     "id": "zeytinburnu-millet-bahcesi",
@@ -1606,7 +1725,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "Palmiye ağaçlarıyla süslenmiş güvenli bir sahil şeridi; spor ekipmanları ve adalar manzarası var, gece de güvenli bulunuyor."
+    "note": "Palmiye ağaçlarıyla süslenmiş güvenli bir sahil şeridi; spor ekipmanları ve adalar manzarası var, gece de güvenli bulunuyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Kartal_sahil.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Kartal_sahil.jpg",
+        "attribution": "Fotoğraf: Mirada — Wikimedia Commons (CC BY-SA 2.5)"
+      }
+    ]
   },
   {
     "id": "beach-park-maltepe",
@@ -1681,7 +1807,14 @@
     "crowdToday": "yüksek",
     "verified": false,
     "source": "google",
-    "note": "Zip line ve köprü manzarasıyla ünlü; dik yamaç üzerinde olduğu için tuvalete inip çıkmak yorucu olabiliyor, hafta sonu oldukça kalabalıklaşıyor."
+    "note": "Zip line ve köprü manzarasıyla ünlü; dik yamaç üzerinde olduğu için tuvalete inip çıkmak yorucu olabiliyor, hafta sonu oldukça kalabalıklaşıyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Nakkastepemilletbahcesi.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Nakkastepemilletbahcesi.jpg",
+        "attribution": "Fotoğraf: Mahmutaydo — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "umraniye-national-garden",
@@ -1757,7 +1890,14 @@
     "crowdToday": "düşük",
     "verified": false,
     "source": "google",
-    "note": "Şelaleleri ve çeşitli patikalarıyla dikkat çekiyor; oldukça tepelik olduğu için rahat yürüyüş ayakkabısı önerilir."
+    "note": "Şelaleleri ve çeşitli patikalarıyla dikkat çekiyor; oldukça tepelik olduğu için rahat yürüyüş ayakkabısı önerilir.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Y%C4%B1ld%C4%B1z_park_in_2014_8180.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Y%C4%B1ld%C4%B1z_park_in_2014_8180.jpg",
+        "attribution": "Fotoğraf: Dosseman — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "kortel-korusu",
@@ -1807,7 +1947,14 @@
     "crowdToday": "düşük",
     "verified": false,
     "source": "google",
-    "note": "Zeytin ağaçlarıyla kaplı sakin bir park; köpek sahipleri arasında popüler bir buluşma noktası."
+    "note": "Zeytin ağaçlarıyla kaplı sakin bir park; köpek sahipleri arasında popüler bir buluşma noktası.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/BESIKTAS_PEACE_PARK-BE%C5%9E%C4%B0KTA%C5%9E_BARI%C5%9E_PARKI--4.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:BESIKTAS_PEACE_PARK-BE%C5%9E%C4%B0KTA%C5%9E_BARI%C5%9E_PARKI--4.jpg",
+        "attribution": "Fotoğraf: Cevdetcabbar — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "abide-i-hurriyet-parki",
@@ -1959,7 +2106,14 @@
     "crowdToday": "yüksek",
     "verified": false,
     "source": "google",
-    "note": "Küçük bir hayvanat bahçesi ve zipline'ı olan geniş bir millet bahçesi; hafta sonu otopark bulmak zorlaşabiliyor."
+    "note": "Küçük bir hayvanat bahçesi ve zipline'ı olan geniş bir millet bahçesi; hafta sonu otopark bulmak zorlaşabiliyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/15_Temmuz_Millet_Bah%C3%A7esi.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:15_Temmuz_Millet_Bah%C3%A7esi.jpg",
+        "attribution": "Fotoğraf: Pamukova Haber — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "istanbul-karasulari-millet-bahcesi",
@@ -2329,7 +2483,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "İçinde kafe ve çay bahçesi olan büyük bir şehir parkı; çok sayıda kedi barınıyor."
+    "note": "İçinde kafe ve çay bahçesi olan büyük bir şehir parkı; çok sayıda kedi barınıyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/%C3%96zg%C3%BCrl%C3%BCk_Park%C4%B1_in_Kad%C4%B1k%C3%B6y_%C4%B0stanbul.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:%C3%96zg%C3%BCrl%C3%BCk_Park%C4%B1_in_Kad%C4%B1k%C3%B6y_%C4%B0stanbul.jpg",
+        "attribution": "Fotoğraf: Raicem — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "millet-parki-uskudar",
@@ -2478,7 +2639,14 @@
     "crowdToday": "düşük",
     "verified": false,
     "source": "google",
-    "note": "Boğaz kıyısında küçük ama gösterişli bir Japon bahçesi; Nisan ayında sakura çiçekleri tam açıyor."
+    "note": "Boğaz kıyısında küçük ama gösterişli bir Japon bahçesi; Nisan ayında sakura çiçekleri tam açıyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Baltaliman%C4%B1_Japon_Bah%C3%A7esi.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Baltaliman%C4%B1_Japon_Bah%C3%A7esi.jpg",
+        "attribution": "Fotoğraf: EArhan7 — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "kayasehir-millet-bahcesi",
@@ -3127,7 +3295,14 @@
     "crowdToday": "orta",
     "verified": false,
     "source": "google",
-    "note": "İskeleden yürüyüş güzel manzaralarla dolu; giriş ücreti kişiye göre değişebiliyor, rahat ayakkabı şart."
+    "note": "İskeleden yürüyüş güzel manzaralarla dolu; giriş ücreti kişiye göre değişebiliyor, rahat ayakkabı şart.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Dilburnu_B%C3%BCy%C3%BCkada.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Dilburnu_B%C3%BCy%C3%BCkada.jpg",
+        "attribution": "Fotoğraf: Kış sardunyasi — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "buyukada-tabiat-parki",
@@ -3152,7 +3327,14 @@
     "crowdToday": "düşük",
     "verified": false,
     "source": "google",
-    "note": "Adanın doğu kısmını kaplayan geniş bir doğal alan; ateş yakmak yasak, bazı dönemler bölümleri kapalı olabiliyor."
+    "note": "Adanın doğu kısmını kaplayan geniş bir doğal alan; ateş yakmak yasak, bazı dönemler bölümleri kapalı olabiliyor.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Tgcklc12345.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Tgcklc12345.jpg",
+        "attribution": "Fotoğraf: Tgcklc — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "ayazma-beach-sile",

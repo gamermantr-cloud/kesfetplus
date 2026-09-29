@@ -289,7 +289,15 @@ export default function PlaceDetail() {
     <div className="flex min-h-screen flex-col pb-28">
       {/* Photo header */}
       <div className="relative h-64 w-full shrink-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-tan via-tan-dark to-espresso" />
+        {venue.photos && venue.photos.length > 0 ? (
+          <img
+            src={venue.photos[0].url}
+            alt={`${venue.name} fotoğrafı`}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-tan via-tan-dark to-espresso" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-transparent" />
         <button
           type="button"
@@ -492,8 +500,36 @@ export default function PlaceDetail() {
         )}
 
         {activeTab === 'Fotoğraflar' && (
-          <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-cream-line py-14 text-center">
-            <p className="text-sm text-taupe">Henüz fotoğraf eklenmedi.</p>
+          <div>
+            {venue.photos && venue.photos.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3">
+                {venue.photos.map((photo, idx) => (
+                  <a
+                    key={photo.url ?? idx}
+                    href={photo.source ?? photo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block overflow-hidden rounded-2xl border border-cream-line"
+                  >
+                    <img
+                      src={photo.url}
+                      alt={`${venue.name} fotoğrafı`}
+                      loading="lazy"
+                      className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                    />
+                    {photo.attribution ? (
+                      <p className="truncate px-2 py-1.5 text-[10px] text-taupe">
+                        {photo.attribution}
+                      </p>
+                    ) : null}
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-cream-line py-14 text-center">
+                <p className="text-sm text-taupe">Bu mekan için henüz fotoğraf yok.</p>
+              </div>
+            )}
           </div>
         )}
 

@@ -6,7 +6,14 @@
     "address": "Tevkifhane Sok. No:1, Sultanahmet, 34110 Fatih/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Eski bir hapishane binasından dönüştürülmüş, Sultanahmet Camii'ne yürüme mesafesinde tarihi bir lüks otel."
+    "note": "Eski bir hapishane binasından dönüştürülmüş, Sultanahmet Camii'ne yürüme mesafesinde tarihi bir lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Four_Seasons_Sultanahmet_March_2008.JPG",
+        "source": "https://commons.wikimedia.org/wiki/File:Four_Seasons_Sultanahmet_March_2008.JPG",
+        "attribution": "Fotoğraf: Gryffindor — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "hotel-ibrahim-pasha",
@@ -15,7 +22,14 @@
     "address": "Terzihane Sok. No:7, Sultanahmet, 34122 Fatih/İstanbul",
     "kind": "hotel",
     "priceLevel": 3,
-    "note": "Hipodrom'a yakın, butik ölçekli ve tarihi dokuya sahip bir otel."
+    "note": "Hipodrom'a yakın, butik ölçekli ve tarihi dokuya sahip bir otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Hotel_Ibrahim_Pasha.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotel_Ibrahim_Pasha.jpg",
+        "attribution": "Fotoğraf: Nburako — Wikimedia Commons (CC0)"
+      }
+    ]
   },
   {
     "id": "sirkeci-mansion",
@@ -33,7 +47,14 @@
     "address": "Meşrutiyet Cd. No:52, 34430 Beyoğlu/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "1892'de Orient Express yolcuları için açılan, 2010'da restore edilmiş tarihi lüks otel."
+    "note": "1892'de Orient Express yolcuları için açılan, 2010'da restore edilmiş tarihi lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Istanbul_asv2020-02_img39_Pera_Palace_Hotel.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Istanbul_asv2020-02_img39_Pera_Palace_Hotel.jpg",
+        "attribution": "Fotoğraf: A.Savin — Wikimedia Commons (FAL)"
+      }
+    ]
   },
   {
     "id": "vault-karakoy",
@@ -60,7 +81,14 @@
     "address": "Gümüşsuyu Mah., Taksim Meydanı No:3, 34437 Beyoğlu/İstanbul",
     "kind": "hotel",
     "priceLevel": 3,
-    "note": "Taksim Meydanı'na cephesi olan, üst-orta segment şehir oteli."
+    "note": "Taksim Meydanı'na cephesi olan, üst-orta segment şehir oteli.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/The_Marmara_Istanbul_1.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Marmara_Istanbul_1.jpg",
+        "attribution": "Fotoğraf: Chapultepec — Wikimedia Commons (Public domain)"
+      }
+    ]
   },
   {
     "id": "cvk-park-bosphorus",
@@ -69,7 +97,14 @@
     "address": "Gümüşsuyu Mah., İnönü Cd. No:8, 34437 Beyoğlu/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Taksim'de Boğaz manzaralı büyük ölçekli lüks otel."
+    "note": "Taksim'de Boğaz manzaralı büyük ölçekli lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/CVK_Park_Bosphorus_Hotel%2C_2022.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:CVK_Park_Bosphorus_Hotel,_2022.jpg",
+        "attribution": "Fotoğraf: Basak — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "ciragan-palace-kempinski",
@@ -78,7 +113,14 @@
     "address": "Çırağan Cd. No:32, 34349 Beşiktaş/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Eski bir Osmanlı sarayında konumlanan, Boğaz kıyısında ikonik lüks otel."
+    "note": "Eski bir Osmanlı sarayında konumlanan, Boğaz kıyısında ikonik lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Ciragan_Palace_2014.JPG",
+        "source": "https://commons.wikimedia.org/wiki/File:Ciragan_Palace_2014.JPG",
+        "attribution": "Fotoğraf: This Photo was taken by Wolfgang Moroder.  \n\nFeel free to use my photos, but please mention me as the author and send me a  message. \n\n\n\nThis image is not in the public domain. Please respect the copyright protection. It may only be used according to the rules mentioned here. This specifically excludes use in social media, if applicable terms of the licenses listed here not appropriate.\n\n\n\nPlease do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract. — Wikimedia Commons (CC BY-SA 3.0)"
+      }
+    ]
   },
   {
     "id": "conrad-istanbul-bosphorus",
@@ -87,7 +129,14 @@
     "address": "Cihannüma Mah., Saray Cd. No:5, 34353 Beşiktaş/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Yıldız Parkı yakınında, Boğaz manzaralı büyük ölçekli lüks otel."
+    "note": "Yıldız Parkı yakınında, Boğaz manzaralı büyük ölçekli lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Conrad_Istanbul_Bosphorus.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Conrad_Istanbul_Bosphorus.jpg",
+        "attribution": "Fotoğraf: Jwslubbock — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "shangri-la-bosphorus",
@@ -114,7 +163,14 @@
     "address": "Mim Kemal Öke Cd. No:35, Nişantaşı, 34367 Şişli/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Nişantaşı'nın merkezinde, 24 saat butler hizmeti sunan lüks otel."
+    "note": "Nişantaşı'nın merkezinde, 24 saat butler hizmeti sunan lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Ni%C5%9Fanta%C5%9F%C4%B1_The_St._Regis_%C4%B0stanbul_Hotel.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Ni%C5%9Fanta%C5%9F%C4%B1_The_St._Regis_%C4%B0stanbul_Hotel.jpg",
+        "attribution": "Fotoğraf: Metuboy — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "hilton-istanbul-bosphorus",
@@ -123,7 +179,14 @@
     "address": "Cumhuriyet Cd. No:50, Harbiye, 34367 Şişli/İstanbul",
     "kind": "hotel",
     "priceLevel": 3,
-    "note": "Dolmabahçe'ye yakın, geniş bahçeli ve Boğaz manzaralı köklü bir otel."
+    "note": "Dolmabahçe'ye yakın, geniş bahçeli ve Boğaz manzaralı köklü bir otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Hilton%2C_Besiktas%2C_Istanbul_%28P1100283%29.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Hilton,_Besiktas,_Istanbul_(P1100283).jpg",
+        "attribution": "Fotoğraf: Matti Blume — Wikimedia Commons (CC BY-SA 4.0)"
+      }
+    ]
   },
   {
     "id": "the-stay-nisantasi",
@@ -150,7 +213,14 @@
     "address": "Çubuklu Cd. No:27, Kanlıca, 34810 Beykoz/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "19. yüzyıl Osmanlı yalısından dönüştürülmüş, Boğaz'a sıfır butik lüks otel."
+    "note": "19. yüzyıl Osmanlı yalısından dönüştürülmüş, Boğaz'a sıfır butik lüks otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Ahmet_Rasim_Pa%C5%9Fa_Yal%C4%B1s%C4%B1_%28A%27ija_Hotel%29_on_the_Bosphorus%2C_Turkey_001.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Ahmet_Rasim_Pa%C5%9Fa_Yal%C4%B1s%C4%B1_(A%27ija_Hotel)_on_the_Bosphorus,_Turkey_001.jpg",
+        "attribution": "Fotoğraf: Moonik — Wikimedia Commons (CC BY-SA 3.0)"
+      }
+    ]
   },
   {
     "id": "sumahan-on-the-water",
@@ -159,6 +229,13 @@
     "address": "Kuleli Cd. No:51, Çengelköy, 34684 Üsküdar/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Eski bir rakı damıtımhanesinden dönüştürülmüş, Boğaz'a sıfır tasarım butik otel."
+    "note": "Eski bir rakı damıtımhanesinden dönüştürülmüş, Boğaz'a sıfır tasarım butik otel.",
+    "photos": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Sumahan_on_the_Water%2C_Cengelk%C3%B6y_-_panoramio.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Sumahan_on_the_Water,_Cengelk%C3%B6y_-_panoramio.jpg",
+        "attribution": "Fotoğraf: gertrudis2010 — Wikimedia Commons (CC BY-SA 3.0)"
+      }
+    ]
   }
 ]

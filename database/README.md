@@ -1,24 +1,49 @@
 # Database
 
-There is no database connected yet in this version of KesfetPlus.
+There is no PostgreSQL connection yet — but this folder is **not empty
+notes anymore**. It holds a real, working file-based data layer plus the
+real seed dataset.
 
-## Why PostgreSQL, and why later?
+## What's actually here today
 
-PostgreSQL will eventually store things like places, reviews, user
-preferences, and business/trust data. We are not adding it yet because:
+- **`seed/`** — the real venue dataset: `places.json` (132), `gurme.json`
+  (93), `hotels.json` (18), 243 real Istanbul venues total. This is the
+  source of truth the frontend reads from (mirrored into
+  `frontend/public/data/` — kept in sync by the
+  `.claude/skills/kesfetplus-veri-kontrol` check).
+- **`comments_store.py`** — a JSON-file-backed store (`comments.json`,
+  gitignored — real user data, not committed) for the live comment
+  system exposed at `/places/{id}/comments`. Every comment gets a
+  trust score (see below) before it's saved.
+- **`trust_scoring.py`** — computes a 0-100 trust score per comment from
+  location consistency, text-similarity (duplicate/spam detection), and
+  submission-velocity signals. Comments scoring below the visibility
+  threshold are hidden from the public list; nothing is deleted.
+- **`checkins_store.py`** — a JSON-file-backed store (`checkins.json`,
+  `status.json`, both gitignored) for the "anlık bilgi akışı" (real-time
+  presence) feature: location-optional check-ins and short status
+  updates that expire after a few hours.
 
-1. We want to prove the API and AI agent foundation works first, without
-   the extra complexity of a database connection.
-2. Adding a database too early makes it harder to change our data model
-   while we are still figuring out what KesfetPlus needs to store.
-3. Keeping this step separate makes each stage of the project easier to
-   understand and test on its own.
+All three stores follow the same pattern: plain JSON files, a
+`threading.Lock` for safe concurrent writes, and no demo/example data
+seeded in — they start empty and only ever contain real submissions.
+
+## Why PostgreSQL, and why not yet?
+
+PostgreSQL is still the planned home for this data (places, reviews,
+check-ins, trust scores) as the project grows past file-based storage.
+It hasn't been added yet because the file-based approach has been
+sufficient at the current scale (243 venues, a small number of live
+submissions) and migrating early would mean guessing at a schema before
+the data model has settled.
 
 ## What will happen later
 
-- We will add PostgreSQL as a running service (locally, then in the cloud).
-- We will define tables for places, reviews, users, and trust scores.
-- We will connect FastAPI to PostgreSQL using a library such as SQLAlchemy.
+- PostgreSQL (+ PostGIS for geo queries) as a running service, per the
+  plan in `docs/research/turkiye-pazar-teknik-mimari.md`.
+- The three JSON stores above become real tables; the store modules'
+  function signatures are written so the API layer (`api/main.py`)
+  shouldn't need to change much when that migration happens.
 
-Until then, this folder just holds notes and, later, database scripts
-(migrations, schema definitions, etc.).
+For anything more current than this file, check `CLAUDE.md` in the repo
+root.

@@ -5,17 +5,28 @@ final form it will help people discover places, restaurants, hotels,
 activities, events, and nature locations — and it will help verify
 business/advertisement information using AI and a trust-scoring system.
 
-## What we are building right now
+## Current status (updated 2026-09-29)
 
-This repository currently contains only the **foundation**:
+- **Frontend is live**: `frontend/` is a React 19 + Vite + Tailwind v4
+  mobile-first app with 9 screens (Splash, Home, PlaceDetail, AIAssistant,
+  ExploreAll, MapView, Messages, Notifications, Profile).
+- **Real data**: `database/seed/` holds 243 real Istanbul venues
+  (`places.json` 132, `gurme.json` 93, `hotels.json` 18) — no
+  placeholder/fake data.
+- **Backend has more than a skeleton**: `api/main.py` serves comments
+  (`/places/{id}/comments`), check-ins (`/places/{id}/checkins`), and
+  status updates (`/places/{id}/status`), backed by file-based JSON
+  stores (see `database/README.md`).
+- **No PostgreSQL yet** — still planned, see `database/README.md`.
+- **Scout Agent** (`agents/scout_agent.py`) calls the real Google Places
+  API when `GOOGLE_PLACES_API_KEY` is set; it's a standalone CLI script,
+  not wired into any API endpoint yet.
+- No other external/paid APIs connected yet.
 
-- A minimal FastAPI backend with two endpoints (`/` and `/health`).
-- A minimal LangGraph "Scout Agent" that proves our AI-orchestration
-  setup works (it does not call the internet or any external service
-  yet).
-- No database connection yet (PostgreSQL will be added later).
-- No frontend yet.
-- No external/paid APIs connected yet.
+For the authoritative, actively-maintained project context (architecture,
+team, known issues), see **`CLAUDE.md`** — it's kept current on every
+change; this README and `docs/ARCHITECTURE.md` are the beginner-friendly
+walkthroughs.
 
 ## Project structure
 
@@ -23,24 +34,33 @@ This repository currently contains only the **foundation**:
 kesfetplus/
 │
 ├── api/
-│   ├── main.py            # FastAPI application
-│   └── requirements.txt   # Python packages needed for the backend
+│   ├── main.py             # FastAPI app: comments, check-ins, status endpoints
+│   └── requirements.txt    # Python packages needed for the backend
 │
 ├── agents/
 │   ├── __init__.py
-│   └── scout_agent.py     # Minimal LangGraph agent
+│   └── scout_agent.py      # LangGraph agent, calls Google Places API if key is set
 │
 ├── database/
-│   └── README.md          # Notes on the future PostgreSQL setup
+│   ├── README.md           # File-based data layer + future PostgreSQL plan
+│   ├── seed/                # Real seed data (places/gurme/hotels, 243 venues)
+│   ├── comments_store.py    # Comments + trust-scoring
+│   ├── checkins_store.py    # "Anlık bilgi akışı" check-ins/status
+│   └── trust_scoring.py     # Comment trust-score signals
+│
+├── frontend/                # React 19 + Vite + Tailwind, 9 screens
 │
 ├── docs/
-│   └── ARCHITECTURE.md    # Architecture explained in simple Turkish
+│   ├── ARCHITECTURE.md      # Architecture explained in simple Turkish
+│   └── research/            # Strategy/technical research reports
 │
 ├── scripts/
-│   └── README.md          # Placeholder for future helper scripts
+│   └── README.md            # Placeholder for future helper scripts
 │
-├── .env.example            # Example environment variables (no secrets)
+├── .claude/                 # Team agents, skills, hooks (see CLAUDE.md)
+├── .env.example              # Example environment variables (no secrets)
 ├── .gitignore
+├── CLAUDE.md                 # Authoritative, up-to-date project context
 └── README.md
 ```
 
@@ -114,7 +134,23 @@ This should print something like:
 {'city': 'Istanbul', 'status': 'ready', 'message': 'Scout agent is ready to search for discovery candidates.'}
 ```
 
+## 7. Run the frontend
+
+In a separate terminal, from the `frontend` folder:
+
+```powershell
+npm install
+npm run dev
+```
+
+This starts Vite at `http://localhost:5173`, which proxies `/api`
+requests to the backend at `http://127.0.0.1:8000` (see
+`frontend/vite.config.js`) — so run the backend first.
+
 ## What's next
 
-See `docs/ARCHITECTURE.md` for a beginner-friendly (Turkish) explanation
-of the architecture and the planned next steps.
+`CLAUDE.md` (repo root) is the up-to-date source of truth for project
+state, architecture, and the team's known issues/backlog. `docs/ARCHITECTURE.md`
+has a beginner-friendly (Turkish) explanation of the original foundation
+and planned next steps (note: it now carries a note pointing back to
+`CLAUDE.md` for anything that's changed since).

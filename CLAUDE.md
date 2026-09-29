@@ -79,13 +79,23 @@ paralel oturum ve duplicate GitHub Issue'ya yol açabiliyor (bir kere yaşandı,
 çalışıyor, tam repo taraması yapmıyor — diff yoksa hata verir, bu durumda
 manuel tam-kapsamlı taramaya (sub-agent'larla) düşülmeli.
 
-Son taramada bulunan, henüz düzeltilmemiş gerçek bulgular (detay ve durum için
-GitHub Issue #8'e bak):
-- ORTA: `POST /places/{id}/comments` kimlik doğrulaması yok (spam/kimlik
-  taklidi riski).
-- DÜŞÜK: yorum metni HTML'e karşı temizlenmeden saklanıyor (şu an frontend
-  güvenli JSX render ettiği için aktif XSS yok, gelecek risk).
-- DÜŞÜK: `frontend/src/screens/PlaceDetail.jsx:106` `window.open(..., '_blank')`
-  `noopener`/`noreferrer` eksik.
-- BİLGİ: CORS middleware yok (dev proxy'de sorun değil, prod'a çıkmadan önce
-  eklenmeli).
+Son taramada bulunan bulgular (detay için GitHub Issue #8'e bak — 3'ü
+`8d7aeec` commit'inde düzeltildi, tek geçerli bulgu kaldı):
+- **ORTA — hâlâ açık**: `POST /places/{id}/comments` (ve `/checkins`,
+  `/status`) kimlik doğrulaması yok (spam/kimlik taklidi riski). Projede
+  henüz hesap sistemi olmadığı için gerçek auth, kullanıcı sistemi
+  kurulana kadar bekliyor.
+- ~~DÜŞÜK: yorum metni HTML'e karşı temizlenmeden saklanıyor~~ →
+  **düzeltildi**: `database/comments_store.py`'de `html.escape()` ile
+  temizleniyor.
+- ~~DÜŞÜK: `PlaceDetail.jsx:106` `window.open` `noopener`/`noreferrer`
+  eksik~~ → **düzeltildi**: üçüncü argüman olarak ekli (satır kaymış
+  olabilir, güncel konumu için dosyada `window.open` ara).
+- ~~BİLGİ: CORS middleware yok~~ → **düzeltildi**: `api/main.py`'de
+  localhost/LAN origin regex'iyle ekli.
+
+## Dış kaynaklı katkılar
+
+ECC (github.com/affaan-m/ECC, MIT) projesinden Hafiza'nın inceleme
+kriterlerine ve `docs/research/ecc-backend-pattern-onerileri.md`'ye katkı
+alındı (2026-09-29).

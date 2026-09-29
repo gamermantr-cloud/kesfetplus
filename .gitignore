@@ -33,3 +33,5 @@ htmlcov/
 
 # Runtime data (real user submissions, not source)
 database/comments.json
+database/checkins.json
+database/status.json

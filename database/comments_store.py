@@ -13,6 +13,7 @@ import threading
 import uuid
 from datetime import UTC, datetime
 
+from database.content_filter import check_content
 from database.trust_scoring import score_comment
 
 _STORE_PATH = os.path.join(os.path.dirname(__file__), "comments.json")
@@ -52,13 +53,25 @@ def add_comment(
     the account system existed - old records without it are simply never
     matched by a blocked_user_ids filter, never crash on it (see
     list_comments's exclude_user_ids).
+
+    Content is also run through database/content_filter.py (App Store
+    Guideline 1.2 - UGC moderation). This is a separate check from trust
+    scoring: an objectionable comment is still stored (never silently
+    dropped, matching the project's "be transparent" stance) but forced to
+    review_status="hidden" regardless of its trust score - see
+    _apply_content_filter below. Only the boolean result is ever used; the
+    matched terms themselves are never logged or stored.
     """
     escaped_author = html.escape(author)
     escaped_text = html.escape(text)
+    content_check = check_content(text)
 
     with _lock:
         data = _load()
         trust = score_comment(place_id, escaped_author, escaped_text, lat, lng, data)
+        if content_check["is_objectionable"]:
+            trust["review_status"] = "hidden"
+            trust["flagged_reason"] = "objectionable_content"
         comment = {
             "id": str(uuid.uuid4()),
             "place_id": place_id,

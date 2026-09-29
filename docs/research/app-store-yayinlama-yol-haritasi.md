@@ -216,6 +216,13 @@ endpoint'leri var, `/report` veya `/block` gibi bir endpoint yok.
    geliyor, **doğrulanmadı**)
    ([buddyboss.com — Guideline 1.2 çözüm rehberi](https://buddyboss.com/docs/app-store-guideline-1-2-safety-user-generated-content/)).
 
+**Güncelleme (2026-09-30):** Destek e-postası `kesfetplusdestek@gmail.com`
+olarak belirlendi ve `frontend/src/screens/Support.jsx` adıyla eklenen gerçek
+bir Destek/Hata Bildir ekranına (mailto: linki + "Bize Ulaş" bölümü) eklendi
+— madde 5 ("Yayınlanmış iletişim bilgisi") bu haliyle karşılanıyor.
+Kullanıcının bu e-posta adresini gerçekten oluşturması gerekiyor, bu görev
+kapsamında hesap oluşturma işlemi yapılmadı.
+
 Bu gereksinim projenin kendi CLAUDE.md'sinde bahsedilen "auth yok" durumuyla
 doğrudan çakışıyor — App Store'a çıkmadan önce en azından temel bir kullanıcı
 kimliği/hesap kavramı (şu an sadece serbest metin `author` alanı var) ve

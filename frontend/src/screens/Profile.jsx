@@ -20,7 +20,7 @@ const MENU_ITEMS = [
   { id: 'saved', label: 'Kaydettiklerim', icon: Bookmark },
   { id: 'comments', label: 'Yorumlarım', icon: MessageSquare },
   { id: 'settings', label: 'Ayarlar', icon: Settings },
-  { id: 'help', label: 'Yardım', icon: HelpCircle },
+  { id: 'help', label: 'Destek', icon: HelpCircle, to: '/support' },
 ]
 
 export default function Profile() {
@@ -140,7 +140,7 @@ export default function Profile() {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => showComingSoon(item.label)}
+                onClick={() => (item.to ? navigate(item.to) : showComingSoon(item.label))}
                 className={`flex w-full items-center gap-3 px-4 py-4 text-left ${
                   i !== MENU_ITEMS.length - 1 ? 'border-b border-cream-line' : ''
                 }`}

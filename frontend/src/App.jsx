@@ -11,6 +11,7 @@ import PlaceDetail from './screens/PlaceDetail.jsx'
 import Profile from './screens/Profile.jsx'
 import Register from './screens/Register.jsx'
 import Splash from './screens/Splash.jsx'
+import Support from './screens/Support.jsx'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/map" element={<MapView />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </PhoneFrame>
   )

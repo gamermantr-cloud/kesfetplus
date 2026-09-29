@@ -22,6 +22,8 @@ import uuid
 from datetime import UTC, datetime, timedelta
 from functools import lru_cache
 
+from database.content_filter import check_content
+
 _CHECKINS_PATH = os.path.join(os.path.dirname(__file__), "checkins.json")
 _STATUS_PATH = os.path.join(os.path.dirname(__file__), "status.json")
 _SEED_DIR = os.path.join(os.path.dirname(__file__), "seed")
@@ -185,6 +187,16 @@ def count_recent_checkins(place_id: str, hours: int = CHECKIN_ACTIVE_WINDOW_HOUR
 def add_status(
     place_id: str, author: str, tag: str, text: str, author_user_id: str | None = None
 ) -> dict:
+    """Store a status update.
+
+    `text` is optional/free-form (the tag alone is enough to post), so it's
+    run through database/content_filter.py (App Store Guideline 1.2 - UGC
+    moderation) the same way comments_store.add_comment does: an
+    objectionable status is still stored (never silently dropped) but forced
+    to review_status="hidden" - see list_status's default filtering. Only
+    the boolean result is used; matched terms are never logged or stored.
+    """
+    content_check = check_content(text) if text else {"is_objectionable": False}
     status = {
         "id": str(uuid.uuid4()),
         "place_id": place_id,
@@ -193,6 +205,8 @@ def add_status(
         "tag": html.escape(tag),
         "text": html.escape(text) if text else "",
         "created_at": datetime.now(UTC).isoformat(),
+        "review_status": "hidden" if content_check["is_objectionable"] else "visible",
+        "flagged_reason": "objectionable_content" if content_check["is_objectionable"] else None,
     }
     with _lock:
         data = _load(_STATUS_PATH)
@@ -205,16 +219,23 @@ def list_status(
     place_id: str,
     stale_hours: int = STATUS_STALE_HOURS,
     exclude_user_ids: set[str] | None = None,
+    include_hidden: bool = False,
 ) -> list[dict]:
     """List status updates for a place.
 
     exclude_user_ids: when given (the requesting user's blocked_user_ids),
     entries whose author_user_id is in that set are filtered out
     server-side - see comments_store.list_comments for the same pattern.
+
+    include_hidden: like comments_store.list_comments, entries flagged by
+    database/content_filter.py (review_status="hidden") are excluded by
+    default - the content is still stored, just not served publicly.
     """
     with _lock:
         data = _load(_STATUS_PATH)
     entries = data.get(place_id, [])
+    if not include_hidden:
+        entries = [e for e in entries if e.get("review_status") != "hidden"]
     if exclude_user_ids:
         entries = [e for e in entries if e.get("author_user_id") not in exclude_user_ids]
     cutoff = datetime.now(UTC) - timedelta(hours=stale_hours)

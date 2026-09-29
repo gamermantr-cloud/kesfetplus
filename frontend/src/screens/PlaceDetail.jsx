@@ -30,6 +30,15 @@ import { getAllVenues } from '../lib/data.js'
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
 
+// Shown when the caller's own just-submitted comment/status came back with
+// flagged_reason === "objectionable_content" (see database/content_filter.py).
+// The content IS saved (never silently dropped, see comments_store.py /
+// checkins_store.py) but forced to review_status="hidden" - so it's honest,
+// not accusatory, and doesn't claim the content is still visible anywhere.
+const OBJECTIONABLE_CONTENT_MESSAGE =
+  'İçeriğin topluluk kurallarına aykırı bulundu, bu yüzden şu an yayınlanmadı. ' +
+  'Bunun bir hata olduğunu düşünüyorsan bizimle iletişime geçebilirsin.'
+
 function timeAgo(isoString) {
   const then = new Date(isoString).getTime()
   const diffMs = Date.now() - then
@@ -67,6 +76,7 @@ export default function PlaceDetail() {
   const [showForm, setShowForm] = useState(false)
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [contentNotice, setContentNotice] = useState(null)
 
   const [checkedIn, setCheckedIn] = useState(false)
   const [checkinLoading, setCheckinLoading] = useState(false)
@@ -78,6 +88,7 @@ export default function PlaceDetail() {
   const [selectedTag, setSelectedTag] = useState(null)
   const [statusText, setStatusText] = useState('')
   const [statusSubmitting, setStatusSubmitting] = useState(false)
+  const [statusContentNotice, setStatusContentNotice] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -185,7 +196,10 @@ export default function PlaceDetail() {
     setStatusSubmitting(true)
     setStatusError(null)
     try {
-      await postStatusUpdate(placeId, { tag: selectedTag, text: statusText.trim() })
+      const created = await postStatusUpdate(placeId, { tag: selectedTag, text: statusText.trim() })
+      setStatusContentNotice(
+        created?.flagged_reason === 'objectionable_content' ? OBJECTIONABLE_CONTENT_MESSAGE : null,
+      )
       setSelectedTag(null)
       setStatusText('')
       await loadStatus()
@@ -219,7 +233,10 @@ export default function PlaceDetail() {
     setSubmitting(true)
     try {
       const { lat, lng, accuracy } = await getCommentLocation()
-      await postComment(placeId, { text: text.trim(), lat, lng, accuracy })
+      const created = await postComment(placeId, { text: text.trim(), lat, lng, accuracy })
+      setContentNotice(
+        created?.flagged_reason === 'objectionable_content' ? OBJECTIONABLE_CONTENT_MESSAGE : null,
+      )
       setText('')
       setShowForm(false)
       await loadComments()
@@ -361,6 +378,7 @@ export default function PlaceDetail() {
             />
 
             {statusError && <p className="text-sm text-tan-dark">{statusError}</p>}
+            {statusContentNotice && <p className="text-sm text-tan-dark">{statusContentNotice}</p>}
 
             {!isLoggedIn ? (
               <button
@@ -509,6 +527,7 @@ export default function PlaceDetail() {
               </form>
             )}
 
+            {contentNotice && <p className="mb-3 text-sm text-tan-dark">{contentNotice}</p>}
             {commentsError && <p className="mb-3 text-sm text-tan-dark">{commentsError}</p>}
 
             {commentsLoading ? (
@@ -572,6 +591,7 @@ export default function PlaceDetail() {
             }
             setActiveTab('Yorumlar')
             setShowForm(true)
+            setContentNotice(null)
           }}
           className="flex flex-1 items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream"
         >

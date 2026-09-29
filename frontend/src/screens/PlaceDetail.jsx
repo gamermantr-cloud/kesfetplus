@@ -1,6 +1,7 @@
 import {
   Bell,
   ChevronLeft,
+  Flag,
   Loader2,
   MapPin,
   Navigation,
@@ -8,6 +9,7 @@ import {
   ShieldQuestion,
   Sparkles,
   Star,
+  UserX,
   Users,
   Wallet,
 } from 'lucide-react'
@@ -20,12 +22,13 @@ import {
   postCheckin,
   postComment,
   postStatusUpdate,
+  reportContent,
 } from '../lib/api.js'
+import { useAuth } from '../lib/AuthContext.jsx'
 import { getAllVenues } from '../lib/data.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
-const DISPLAY_NAME_KEY = 'kesfetplus_display_name'
 
 function timeAgo(isoString) {
   const then = new Date(isoString).getTime()
@@ -51,6 +54,8 @@ function crowdLabel(venue) {
 export default function PlaceDetail() {
   const { placeId } = useParams()
   const navigate = useNavigate()
+  const { user, isLoggedIn, block } = useAuth()
+  const loginState = { state: { from: `/place/${placeId}` } }
 
   const [venue, setVenue] = useState(undefined) // undefined = loading, null = not found
   const [activeTab, setActiveTab] = useState(TABS[0])
@@ -60,17 +65,9 @@ export default function PlaceDetail() {
   const [commentsError, setCommentsError] = useState(null)
 
   const [showForm, setShowForm] = useState(false)
-  const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const [displayName, setDisplayName] = useState(() => {
-    try {
-      return localStorage.getItem(DISPLAY_NAME_KEY) || ''
-    } catch {
-      return ''
-    }
-  })
   const [checkedIn, setCheckedIn] = useState(false)
   const [checkinLoading, setCheckinLoading] = useState(false)
   const [checkinNote, setCheckinNote] = useState(null)
@@ -81,14 +78,6 @@ export default function PlaceDetail() {
   const [selectedTag, setSelectedTag] = useState(null)
   const [statusText, setStatusText] = useState('')
   const [statusSubmitting, setStatusSubmitting] = useState(false)
-
-  useEffect(() => {
-    try {
-      if (displayName.trim()) localStorage.setItem(DISPLAY_NAME_KEY, displayName.trim())
-    } catch {
-      // localStorage unavailable (private mode etc.) - not critical, skip silently
-    }
-  }, [displayName])
 
   useEffect(() => {
     let cancelled = false
@@ -154,15 +143,17 @@ export default function PlaceDetail() {
   }, [loadStatus, loadCheckinCount])
 
   async function handleCheckin() {
-    const name = displayName.trim()
-    if (!name) return
+    if (!isLoggedIn) {
+      navigate('/login', loginState)
+      return
+    }
     setCheckinLoading(true)
     setCheckinNote(null)
     setStatusError(null)
 
     const submit = async (lat, lng, accuracy, note) => {
       try {
-        await postCheckin(placeId, { author: name, lat, lng, accuracy })
+        await postCheckin(placeId, { lat, lng, accuracy })
         setCheckedIn(true)
         setCheckinNote(note)
         await Promise.all([loadStatus(), loadCheckinCount()])
@@ -190,12 +181,11 @@ export default function PlaceDetail() {
   }
 
   async function handleStatusSubmit() {
-    const name = displayName.trim()
-    if (!name || !selectedTag) return
+    if (!isLoggedIn || !selectedTag) return
     setStatusSubmitting(true)
     setStatusError(null)
     try {
-      await postStatusUpdate(placeId, { author: name, tag: selectedTag, text: statusText.trim() })
+      await postStatusUpdate(placeId, { tag: selectedTag, text: statusText.trim() })
       setSelectedTag(null)
       setStatusText('')
       await loadStatus()
@@ -225,12 +215,11 @@ export default function PlaceDetail() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!author.trim() || !text.trim()) return
+    if (!text.trim()) return
     setSubmitting(true)
     try {
       const { lat, lng, accuracy } = await getCommentLocation()
-      await postComment(placeId, { author: author.trim(), text: text.trim(), lat, lng, accuracy })
-      setAuthor('')
+      await postComment(placeId, { text: text.trim(), lat, lng, accuracy })
       setText('')
       setShowForm(false)
       await loadComments()
@@ -238,6 +227,15 @@ export default function PlaceDetail() {
       setCommentsError('Yorum gönderilemedi. Backend çalışıyor mu kontrol edin.')
     } finally {
       setSubmitting(false)
+    }
+  }
+
+  async function handleBlock(authorUserId) {
+    try {
+      await block(authorUserId)
+      await Promise.all([loadComments(), loadStatus()])
+    } catch {
+      setCommentsError('Kullanıcı engellenemedi.')
     }
   }
 
@@ -364,21 +362,19 @@ export default function PlaceDetail() {
 
             {statusError && <p className="text-sm text-tan-dark">{statusError}</p>}
 
-            {!displayName.trim() && (
-              <input
-                type="text"
-                placeholder="İsmin (paylaşımlarda görünür)"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
-              />
-            )}
-
-            {!checkedIn ? (
+            {!isLoggedIn ? (
+              <button
+                type="button"
+                onClick={() => navigate('/login', loginState)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream"
+              >
+                Durum paylaşmak için giriş yap
+              </button>
+            ) : !checkedIn ? (
               <button
                 type="button"
                 onClick={handleCheckin}
-                disabled={!displayName.trim() || checkinLoading}
+                disabled={checkinLoading}
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
               >
                 {checkinLoading ? (
@@ -461,6 +457,14 @@ export default function PlaceDetail() {
                           {s.text ? ` — ${s.text}` : ''}
                         </p>
                         {s.is_stale && <p className="mt-0.5 text-xs text-taupe">Eski bilgi</p>}
+                        <ModerationRow
+                          item={s}
+                          targetType="status"
+                          placeId={placeId}
+                          currentUserId={user?.id}
+                          isLoggedIn={isLoggedIn}
+                          onBlock={handleBlock}
+                        />
                       </li>
                     ))}
                 </ul>
@@ -482,14 +486,10 @@ export default function PlaceDetail() {
                 onSubmit={handleSubmit}
                 className="mb-5 space-y-3 rounded-2xl border border-cream-line bg-sand/50 p-4"
               >
-                <input
-                  type="text"
-                  placeholder="İsminiz"
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                  className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
-                  required
-                />
+                <p className="text-xs text-taupe">
+                  <span className="font-medium text-espresso">{user?.display_name}</span> olarak
+                  yorum yapıyorsun.
+                </p>
                 <textarea
                   placeholder="Yorumunuz..."
                   value={text}
@@ -537,6 +537,14 @@ export default function PlaceDetail() {
                         Topluluk incelemesi bekliyor
                       </span>
                     )}
+                    <ModerationRow
+                      item={c}
+                      targetType="comment"
+                      placeId={placeId}
+                      currentUserId={user?.id}
+                      isLoggedIn={isLoggedIn}
+                      onBlock={handleBlock}
+                    />
                   </li>
                 ))}
               </ul>
@@ -558,6 +566,10 @@ export default function PlaceDetail() {
         <button
           type="button"
           onClick={() => {
+            if (!isLoggedIn) {
+              navigate('/login', loginState)
+              return
+            }
             setActiveTab('Yorumlar')
             setShowForm(true)
           }}
@@ -584,6 +596,140 @@ function StatCard({ icon, label, value, wide }) {
         <p className="text-xs text-taupe">{label}</p>
         <p className="truncate text-sm font-medium text-espresso">{value}</p>
       </div>
+    </div>
+  )
+}
+
+/**
+ * "Şikayet et" / "Engelle" row under a comment or status card. Both are
+ * single-click-to-reveal, second-click-to-confirm (never fires on the
+ * first tap) - see task requirement: report/block must never happen
+ * without an explicit confirm step, but also without a full modal dialog.
+ * Hidden entirely for logged-out visitors (reporting/blocking requires a
+ * real account) and for a user's own content.
+ */
+function ModerationRow({ item, targetType, placeId, currentUserId, isLoggedIn, onBlock }) {
+  const [reportOpen, setReportOpen] = useState(false)
+  const [reason, setReason] = useState('')
+  const [reportSubmitting, setReportSubmitting] = useState(false)
+  const [reportDone, setReportDone] = useState(false)
+  const [reportError, setReportError] = useState(null)
+
+  const [blockConfirming, setBlockConfirming] = useState(false)
+  const [blockSubmitting, setBlockSubmitting] = useState(false)
+
+  if (!isLoggedIn) return null
+  const isOwnContent = item.author_user_id && item.author_user_id === currentUserId
+  if (isOwnContent) return null
+
+  async function handleReportSubmit() {
+    if (!reason.trim()) return
+    setReportSubmitting(true)
+    setReportError(null)
+    try {
+      await reportContent({
+        targetType,
+        targetId: item.id,
+        placeId,
+        reason: reason.trim(),
+      })
+      setReportDone(true)
+      setReportOpen(false)
+    } catch {
+      setReportError('Şikayet gönderilemedi.')
+    } finally {
+      setReportSubmitting(false)
+    }
+  }
+
+  async function handleBlockConfirm() {
+    if (!item.author_user_id) return
+    setBlockSubmitting(true)
+    try {
+      await onBlock(item.author_user_id)
+    } finally {
+      setBlockSubmitting(false)
+      setBlockConfirming(false)
+    }
+  }
+
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
+      {reportDone ? (
+        <span className="text-taupe">Şikayet edildi, teşekkürler.</span>
+      ) : reportOpen ? (
+        <div className="flex w-full flex-col gap-2 rounded-xl border border-cream-line bg-cream p-3">
+          <input
+            type="text"
+            autoFocus
+            placeholder="Şikayet nedeni (kısaca)"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            className="w-full rounded-lg border border-cream-line bg-cream px-2.5 py-1.5 text-xs text-espresso outline-none focus:border-tan"
+          />
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={handleReportSubmit}
+              disabled={!reason.trim() || reportSubmitting}
+              className="rounded-full bg-tan px-3 py-1.5 font-medium text-cream disabled:opacity-60"
+            >
+              {reportSubmitting ? 'Gönderiliyor…' : 'Şikayeti gönder'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setReportOpen(false)
+                setReason('')
+              }}
+              className="text-taupe"
+            >
+              Vazgeç
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setReportOpen(true)}
+          className="flex items-center gap-1 text-taupe"
+        >
+          <Flag size={12} />
+          Şikayet et
+        </button>
+      )}
+
+      {reportError && <span className="text-tan-dark">{reportError}</span>}
+
+      {item.author_user_id && (
+        <>
+          {blockConfirming ? (
+            <span className="flex items-center gap-2">
+              <span className="text-taupe">Bu kişiyi engelle, emin misin?</span>
+              <button
+                type="button"
+                onClick={handleBlockConfirm}
+                disabled={blockSubmitting}
+                className="font-medium text-tan-dark"
+              >
+                {blockSubmitting ? '…' : 'Evet'}
+              </button>
+              <button type="button" onClick={() => setBlockConfirming(false)} className="text-taupe">
+                Vazgeç
+              </button>
+            </span>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setBlockConfirming(true)}
+              className="flex items-center gap-1 text-taupe"
+            >
+              <UserX size={12} />
+              Engelle
+            </button>
+          )}
+        </>
+      )}
     </div>
   )
 }

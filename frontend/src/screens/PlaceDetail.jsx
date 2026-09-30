@@ -579,7 +579,11 @@ export default function PlaceDetail() {
                       <div className="mb-2 flex items-center justify-between px-1">
                         <span className="inline-flex items-center gap-1 rounded-full bg-espresso px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-cream">
                           <Video size={11} />
-                          {embed.platform === 'tiktok' ? 'TikTok' : embed.platform}
+                          {embed.platform === 'tiktok'
+                            ? 'TikTok'
+                            : embed.platform === 'instagram'
+                              ? 'Instagram'
+                              : embed.platform}
                         </span>
                         <a
                           href={embed.url}
@@ -590,7 +594,11 @@ export default function PlaceDetail() {
                           Orijinal gönderi
                         </a>
                       </div>
-                      <TikTokEmbed html={embed.oembed_html} />
+                      {embed.platform === 'instagram' ? (
+                        <InstagramEmbed html={embed.oembed_html} />
+                      ) : (
+                        <TikTokEmbed html={embed.oembed_html} />
+                      )}
                       {embed.creator ? (
                         <p className="px-1 pb-1 pt-2 text-[10px] text-taupe">@{embed.creator}</p>
                       ) : null}
@@ -774,6 +782,37 @@ function TikTokEmbed({ html }) {
     const script = document.createElement('script')
     script.id = scriptId
     script.src = 'https://www.tiktok.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+  }, [html])
+
+  if (!html) return null
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+/**
+ * Renders an Instagram oEmbed blockquote (fetched ahead of time from
+ * https://graph.facebook.com/v21.0/instagram_oembed - Meta made this public
+ * endpoint work without an access token as of June 15, 2026, see
+ * database/seed/*.json `embeds[].oembed_html`). Instagram's own
+ * `embeds.js` scans the page for `.instagram-media` blockquotes and
+ * replaces them with the real player; it's loaded once and re-invoked via
+ * `window.instgrm.Embeds.process()` for any embeds mounted afterwards
+ * (e.g. switching tabs), matching Instagram's documented embed pattern -
+ * same approach as `TikTokEmbed` above, kept consistent on purpose.
+ */
+function InstagramEmbed({ html }) {
+  useEffect(() => {
+    if (!html) return
+    const scriptId = 'instagram-embed-script'
+    if (window.instgrm?.Embeds?.process) {
+      window.instgrm.Embeds.process()
+      return
+    }
+    if (document.getElementById(scriptId)) return
+    const script = document.createElement('script')
+    script.id = scriptId
+    script.src = 'https://www.instagram.com/embed.js'
     script.async = true
     document.body.appendChild(script)
   }, [html])

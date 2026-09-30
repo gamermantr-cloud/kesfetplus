@@ -154,6 +154,14 @@ def authenticate(email: str, password: str) -> dict:
     raise UserError("E-posta veya şifre hatalı.")
 
 
+def count_users() -> int:
+    """Total registered accounts (real count from users.json, 0 if the file
+    is missing/empty) - used by GET /moderation/stats in api/main.py."""
+    with _lock:
+        users = _load(_USERS_PATH)
+    return len(users)
+
+
 def get_user_by_id(user_id: str) -> dict | None:
     with _lock:
         users = _load(_USERS_PATH)

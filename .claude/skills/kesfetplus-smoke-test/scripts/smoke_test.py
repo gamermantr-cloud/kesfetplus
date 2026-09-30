@@ -33,6 +33,13 @@ Usage:
 Requires the backend to already be running (see kesfetplus-dev skill).
 Exit code 0 = all checks passed, 1 = at least one failed (or backend down).
 
+Set SKIP_PHOTO_COMPARE=1 to skip the photo-comparison scenario (section 8
+below, plus the reference-photo lookup that only feeds it). That scenario
+makes real network calls to Wikimedia Commons and is rate-limit-flaky by
+nature - used by CI, which shouldn't fail a run over external flakiness
+unrelated to this codebase. Local/manual runs should leave it unset so the
+scenario still gets exercised.
+
 Cleanup: every account/comment/check-in/status/report this script creates
 is tagged with a throwaway `SMOKE-TEST-<run id>` marker (in display_name,
 and therefore in the `author` field written by comments/checkins/status),
@@ -84,6 +91,10 @@ USER_B_EMAIL = f"smoke-test-{RUN_ID}-b@example.test"
 USER_B_PASSWORD = "SmokeTest5678!"  # noqa: S105 - throwaway test-account password, not a secret
 
 VALID_REVIEW_STATUSES = {"visible", "pending_review", "hidden"}
+
+# See module docstring: skips the Wikimedia-dependent photo-compare scenario
+# (and its reference-photo lookup) when set - CI sets this, manual runs don't.
+SKIP_PHOTO_COMPARE = os.getenv("SKIP_PHOTO_COMPARE", "") == "1"
 
 # One entry from database/content_filter.py's own word list - used only to
 # exercise the filter's end-to-end *behavior* (never copied/reproduced as a
@@ -684,7 +695,11 @@ def main() -> int:
 
     require_backend_up()
     place_id = load_real_place_id()
-    photo_place_id, photo_url = load_place_with_reference_photo()
+    if SKIP_PHOTO_COMPARE:
+        photo_place_id, photo_url = None, None
+        print("\n2b. Referans fotografi olan mekan araniyor... ATLANDI (SKIP_PHOTO_COMPARE=1)")
+    else:
+        photo_place_id, photo_url = load_place_with_reference_photo()
 
     before_snapshots = {
         "comments.json": _load_json(COMMENTS_PATH),
@@ -702,7 +717,14 @@ def main() -> int:
         run_content_tests(place_id, token_a)
         run_content_filter_test(place_id, token_a)
         run_block_and_report_tests(place_id, token_a, user_a, token_b, user_b)
-        run_photo_compare_tests(photo_place_id, photo_url, token_a)
+        if SKIP_PHOTO_COMPARE:
+            print(
+                "\n8. Foto karsilastirma ATLANDI (SKIP_PHOTO_COMPARE=1 - "
+                "Wikimedia Commons'a bagimli/flaky, bu calistirmada disarida "
+                "birakildi)"
+            )
+        else:
+            run_photo_compare_tests(photo_place_id, photo_url, token_a)
     finally:
         test_user_ids = {uid for uid in (user_a.get("id"), user_b.get("id")) if uid}
         cleanup_and_verify(before_snapshots, test_user_ids)

@@ -35,3 +35,50 @@ jobs:
 
       - name: pip-audit
         run: pip-audit -r api/requirements.txt
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    env:
+      # Moderation-panel gate (see database/users_store.py) - the smoke test
+      # deliberately never exercises /moderation/* endpoints, but the
+      # backend reads this at request time regardless, so it's defined
+      # explicitly (empty = no moderator accounts) rather than left unset.
+      MODERATOR_EMAILS: ""
+      # The photo-compare scenario makes real calls to Wikimedia Commons and
+      # is rate-limit-flaky by nature (see kesfetplus-smoke-test SKILL.md) -
+      # skip it in CI so external flakiness never fails an unrelated PR.
+      SKIP_PHOTO_COMPARE: "1"
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install backend dependencies
+        run: pip install -r api/requirements.txt
+
+      - name: Start backend (uvicorn, background)
+        run: |
+          nohup python -m uvicorn api.main:app --host 127.0.0.1 --port 8000 \
+            > backend.log 2>&1 &
+
+      - name: Backend saglik kontrolu bekleniyor
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:8000/health > /dev/null; then
+              echo "Backend hazir (deneme $i)."
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Backend 30 saniye icinde ayaga kalkmadi."
+          cat backend.log || true
+          exit 1
+
+      - name: Smoke test calistir (foto-karsilastirma haric)
+        run: python .claude/skills/kesfetplus-smoke-test/scripts/smoke_test.py
+
+      - name: Backend loglari (basarisizlik durumunda)
+        if: failure()
+        run: cat backend.log || true

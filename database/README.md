@@ -28,6 +28,22 @@ All three stores follow the same pattern: plain JSON files, a
 `threading.Lock` for safe concurrent writes, and no demo/example data
 seeded in — they start empty and only ever contain real submissions.
 
+## ⚠ Deployment warning — do not deploy to ephemeral disk without reading this
+
+These JSON stores live on local disk. Most modern PaaS platforms (Render,
+Railway, Fly.io, Vercel, most container hosts) give each deploy/restart a
+**fresh, ephemeral filesystem** unless you explicitly attach a persistent
+volume. Deploying this app as-is to such a platform means every container
+restart (a new deploy, a crash, a scale event) **silently wipes all real
+user data** - accounts, comments, check-ins, reports, everything in
+`database/*.json`. This is not a hypothetical: it's the default behavior
+of the free/cheap tiers most likely to be used first.
+
+Before any real deploy: either (a) migrate to PostgreSQL first (the
+planned path, see below), or (b) if deploying file-based storage as an
+interim step, attach a genuinely persistent volume and verify data
+survives a restart - don't assume it does.
+
 ## Why PostgreSQL, and why not yet?
 
 PostgreSQL is still the planned home for this data (places, reviews,

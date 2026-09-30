@@ -146,6 +146,15 @@ export async function restoreContent(contentType, contentId) {
   )
 }
 
+/**
+ * Basit istatistik görünümü - her sayı backend'de ilgili JSON deposundan
+ * anlık hesaplanır, hiçbiri uydurulmaz/önbelleğe alınmaz (bkz.
+ * api/main.py GET /moderation/stats).
+ */
+export async function getModerationStats() {
+  return request('/moderation/stats')
+}
+
 // --- Places: comments / check-ins / status --------------------------------
 
 export async function getComments(placeId) {

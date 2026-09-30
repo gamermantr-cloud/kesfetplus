@@ -364,6 +364,35 @@ def list_status(
     return result
 
 
+def count_all_checkins() -> int:
+    """Total check-ins stored across every place (0 if checkins.json is
+    missing/empty) - used by GET /moderation/stats in api/main.py."""
+    with _lock:
+        data = _load(_CHECKINS_PATH)
+    return sum(len(entries) for entries in data.values())
+
+
+def count_all_status() -> int:
+    """Total status updates stored across every place, regardless of
+    review_status (0 if status.json is missing/empty) - used by
+    GET /moderation/stats in api/main.py."""
+    with _lock:
+        data = _load(_STATUS_PATH)
+    return sum(len(entries) for entries in data.values())
+
+
+def list_place_ids_with_activity() -> set[str]:
+    """place_ids with at least one check-in or status update - used (unioned
+    with comments_store.list_place_ids_with_comments) to compute
+    GET /moderation/stats venues_with_activity in api/main.py."""
+    with _lock:
+        checkins = _load(_CHECKINS_PATH)
+        status = _load(_STATUS_PATH)
+    place_ids = {place_id for place_id, entries in checkins.items() if entries}
+    place_ids |= {place_id for place_id, entries in status.items() if entries}
+    return place_ids
+
+
 def list_hidden_status() -> list[dict]:
     """Every status update across every place that's hidden or flagged -
     moderator-only visibility (see comments_store.list_hidden_comments for

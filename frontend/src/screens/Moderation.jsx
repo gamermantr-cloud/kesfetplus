@@ -1,16 +1,29 @@
-import { ChevronLeft, Eye, EyeOff, Flag, RotateCcw, ShieldCheck } from 'lucide-react'
+import { BarChart3, ChevronLeft, Eye, EyeOff, Flag, RotateCcw, ShieldCheck } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   getHiddenContent,
   getModerationReports,
+  getModerationStats,
   getUserProfile,
   resolveReport,
   restoreContent,
 } from '../lib/api.js'
 import { useAuth } from '../lib/AuthContext.jsx'
 
-const TABS = ['Şikayetler', 'Gizli İçerik']
+const TABS = ['Şikayetler', 'Gizli İçerik', 'İstatistikler']
+
+const STAT_CARDS = [
+  { key: 'total_users', label: 'Toplam Kullanıcı' },
+  { key: 'total_comments', label: 'Toplam Yorum' },
+  { key: 'total_checkins', label: 'Toplam Check-in' },
+  { key: 'total_status_updates', label: 'Toplam Durum Güncellemesi' },
+  { key: 'hidden_comments_count', label: 'Gizli Yorum' },
+  { key: 'hidden_status_count', label: 'Gizli Durum Güncellemesi' },
+  { key: 'open_reports_count', label: 'Açık Şikayet' },
+  { key: 'resolved_reports_count', label: 'İncelenen Şikayet' },
+  { key: 'venues_with_activity', label: 'Aktivite Olan Mekan' },
+]
 
 const TARGET_TYPE_LABELS = {
   comment: 'Yorum',
@@ -42,6 +55,10 @@ export default function Moderation() {
   const [hiddenLoading, setHiddenLoading] = useState(true)
   const [hiddenError, setHiddenError] = useState(null)
   const [restoreConfirmKey, setRestoreConfirmKey] = useState(null)
+
+  const [stats, setStats] = useState(null)
+  const [statsLoading, setStatsLoading] = useState(true)
+  const [statsError, setStatsError] = useState(null)
 
   const isModerator = Boolean(user?.is_moderator)
 
@@ -92,6 +109,21 @@ export default function Moderation() {
       })
       .finally(() => {
         if (!cancelled) setHiddenLoading(false)
+      })
+
+    setStatsLoading(true)
+    getModerationStats()
+      .then((data) => {
+        if (!cancelled) {
+          setStats(data)
+          setStatsError(null)
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setStatsError(err.message || 'İstatistikler yüklenemedi.')
+      })
+      .finally(() => {
+        if (!cancelled) setStatsLoading(false)
       })
 
     return () => {
@@ -400,6 +432,31 @@ export default function Moderation() {
                   </div>
                 </div>
               </>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'İstatistikler' && (
+          <div>
+            {statsLoading ? (
+              <p className="text-sm text-taupe">Yükleniyor…</p>
+            ) : statsError ? (
+              <p className="text-sm text-tan-dark">{statsError}</p>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {STAT_CARDS.map(({ key, label }) => (
+                  <div
+                    key={key}
+                    className="rounded-2xl border border-cream-line bg-sand/40 px-4 py-4"
+                  >
+                    <p className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-taupe">
+                      <BarChart3 size={12} />
+                      {label}
+                    </p>
+                    <p className="mt-1 font-display text-2xl text-espresso">{stats[key]}</p>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         )}

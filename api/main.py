@@ -1,8 +1,13 @@
 import os
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
+from slowapi import Limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 
 from database.checkins_store import (
     GOZCU_THRESHOLD,
@@ -11,9 +16,12 @@ from database.checkins_store import (
     StatusError,
     add_checkin,
     add_status,
+    count_all_checkins,
+    count_all_status,
     count_recent_checkins,
     count_user_statuses,
     list_hidden_status,
+    list_place_ids_with_activity,
     list_status,
     restore_status,
     toggle_helpful_status,
@@ -21,8 +29,10 @@ from database.checkins_store import (
 from database.comments_store import (
     CommentError,
     add_comment,
+    count_all_comments,
     list_comments,
     list_hidden_comments,
+    list_place_ids_with_comments,
     restore_comment,
     toggle_helpful_comment,
 )
@@ -51,6 +61,7 @@ from database.reports_store import (
 from database.users_store import (
     UserError,
     authenticate,
+    count_users,
     create_session,
     delete_session,
     get_public_profile,
@@ -69,6 +80,26 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+# ---------------------------------------------------------------------------
+# Rate limiting (IP-based) - /auth/register and /auth/login are the only
+# endpoints that work without a token (they run *before* a user has one),
+# so they're this app's real brute-force/spam-account attack surface. Every
+# other endpoint already requires get_current_user, which register/login
+# hands out. See per-route @limiter.limit(...) below for the actual values.
+# ---------------------------------------------------------------------------
+
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_middleware(SlowAPIMiddleware)
+
+
+@app.exception_handler(RateLimitExceeded)
+def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+    return JSONResponse(
+        status_code=429,
+        content={"detail": "Çok fazla deneme yapıldı. Lütfen bir süre bekleyip tekrar deneyin."},
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -202,7 +233,8 @@ def health_check():
 
 
 @app.post("/auth/register", status_code=201)
-def register(payload: RegisterRequest):
+@limiter.limit("5/minute")
+def register(request: Request, payload: RegisterRequest):
     try:
         user = register_user(payload.email, payload.password, payload.display_name)
     except UserError as e:
@@ -212,7 +244,8 @@ def register(payload: RegisterRequest):
 
 
 @app.post("/auth/login")
-def login(payload: LoginRequest):
+@limiter.limit("10/minute")
+def login(request: Request, payload: LoginRequest):
     try:
         user = authenticate(payload.email, payload.password)
     except UserError as e:
@@ -516,3 +549,25 @@ def moderation_restore_content(
     except (CommentError, StatusError) as e:
         raise HTTPException(status_code=404, detail=str(e)) from e
     raise HTTPException(status_code=400, detail="content_type 'comment' veya 'status' olmalı.")
+
+
+@app.get("/moderation/stats")
+def moderation_stats(moderator: dict = Depends(get_current_moderator)):
+    """Basit, moderatör-korumalı istatistik görünümü. Her sayı ilgili
+    JSON deposundan bu çağrıda taze hesaplanır - hiçbiri saklanmaz/önbelleğe
+    alınmaz ve hiçbiri uydurulmaz (bkz. CLAUDE.md "sahte veri yasak"): bir
+    dosya yoksa/boşsa ilgili sayı sadece 0 olur, hata fırlatılmaz (her store
+    fonksiyonu zaten dosya yoksa boş dict/list döner)."""
+    reports = list_all_reports()
+    venues_with_activity = list_place_ids_with_comments() | list_place_ids_with_activity()
+    return {
+        "total_users": count_users(),
+        "total_comments": count_all_comments(),
+        "total_checkins": count_all_checkins(),
+        "total_status_updates": count_all_status(),
+        "hidden_comments_count": len(list_hidden_comments()),
+        "hidden_status_count": len(list_hidden_status()),
+        "open_reports_count": sum(1 for r in reports if r["status"] == "open"),
+        "resolved_reports_count": sum(1 for r in reports if r["status"] == "resolved"),
+        "venues_with_activity": len(venues_with_activity),
+    }

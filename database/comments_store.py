@@ -139,6 +139,24 @@ def list_comments(
     ]
 
 
+def count_all_comments() -> int:
+    """Total comments stored across every place, regardless of
+    review_status (0 if comments.json is missing/empty) - used by
+    GET /moderation/stats in api/main.py."""
+    with _lock:
+        data = _load()
+    return sum(len(comments) for comments in data.values())
+
+
+def list_place_ids_with_comments() -> set[str]:
+    """place_ids with at least one comment (any review_status) - used to
+    compute GET /moderation/stats venues_with_activity in api/main.py
+    (unioned there with checkins_store.list_place_ids_with_activity)."""
+    with _lock:
+        data = _load()
+    return {place_id for place_id, comments in data.items() if comments}
+
+
 def list_hidden_comments() -> list[dict]:
     """Every comment across every place that's hidden or flagged -
     moderator-only visibility (see api/main.py get_current_moderator). Until

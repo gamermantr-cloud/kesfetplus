@@ -312,5 +312,455 @@
         "oembed_html": "<blockquote class=\"instagram-media\" data-instgrm-captioned data-instgrm-permalink=\"https://www.instagram.com/p/C0UAK3YIPxV/?utm_source=ig_embed&amp;utm_campaign=loading\" data-instgrm-version=\"14\" style=\" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);\"><div style=\"padding:16px;\"> <a href=\"https://www.instagram.com/p/C0UAK3YIPxV/?utm_source=ig_embed&amp;utm_campaign=loading\" style=\" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;\" target=\"_blank\"> <div style=\" display: flex; flex-direction: row; align-items: center;\"> <div style=\"background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;\"></div> <div style=\"display: flex; flex-direction: column; flex-grow: 1; justify-content: center;\"> <div style=\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;\"></div> <div style=\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;\"></div></div></div><div style=\"padding: 19% 0;\"></div> <div style=\"display:block; height:50px; margin:0 auto 12px; width:50px;\"><svg width=\"50px\" height=\"50px\" viewBox=\"0 0 60 60\" version=\"1.1\" xmlns=\"https://www.w3.org/2000/svg\" xmlns:xlink=\"https://www.w3.org/1999/xlink\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(-511.000000, -20.000000)\" fill=\"#000000\"><g><path d=\"M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631\"></path></g></g></g></svg></div><div style=\"padding-top: 8px;\"> <div style=\" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;\">View this post on Instagram</div></div><div style=\"padding: 12.5% 0;\"></div> <div style=\"display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;\"><div> <div style=\"background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);\"></div> <div style=\"background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;\"></div> <div style=\"background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);\"></div></div><div style=\"margin-left: 8px;\"> <div style=\" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;\"></div> <div style=\" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)\"></div></div><div style=\"margin-left: auto;\"> <div style=\" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);\"></div> <div style=\" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);\"></div> <div style=\" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);\"></div></div></div> <div style=\"display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;\"> <div style=\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;\"></div> <div style=\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;\"></div></div></a></div></blockquote>\n<script async src=\"//platform.instagram.com/en_US/embeds.js\"></script>"
       }
     ]
+  },
+  {
+    "id": "ritz-carlton-istanbul",
+    "name": "The Ritz-Carlton, Istanbul",
+    "area": "Elmadağ/Şişli",
+    "address": "Suzer Plaza, Asker Ocağı Cd. No:6, 34367 Elmadağ/Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Dolmabahçe Sarayı'na yakın, Boğaz manzaralı büyük ölçekli lüks otel."
+  },
+  {
+    "id": "raffles-istanbul",
+    "name": "Raffles Istanbul",
+    "area": "Zorlu Center/Beşiktaş",
+    "address": "Zorlu Center, Levazım Mah., Koru Sk. No:2, 34340 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Zorlu Center içinde, alışveriş ve sanat merkezine doğrudan bağlantılı lüks otel."
+  },
+  {
+    "id": "mandarin-oriental-bosphorus",
+    "name": "Mandarin Oriental Bosphorus, Istanbul",
+    "area": "Kuruçeşme/Beşiktaş (Boğaz kıyısı)",
+    "address": "Kuruçeşme Mah., Muallim Naci Cd. No:62, 34345 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Ortaköy ile Bebek arasında, Boğaz'a sıfır konumda lüks otel."
+  },
+  {
+    "id": "six-senses-kocatas-mansions",
+    "name": "Six Senses Kocataş Mansions, Istanbul",
+    "area": "Sarıyer (Boğaz kıyısı)",
+    "address": "Merkez Mah., Meserburnu Cd., 34450 Sarıyer/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Boğaz kıyısındaki tarihi yalı/konaklardan dönüştürülmüş lüks otel."
+  },
+  {
+    "id": "park-hyatt-istanbul-macka",
+    "name": "Park Hyatt Istanbul - Maçka Palas",
+    "area": "Teşvikiye/Şişli",
+    "address": "Teşvikiye Mah., Bronz Sk. No:4, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "1922'de inşa edilmiş Maçka Palas apartmanından dönüştürülmüş lüks otel."
+  },
+  {
+    "id": "swissotel-the-bosphorus",
+    "name": "Swissôtel The Bosphorus, Istanbul",
+    "area": "Maçka/Beşiktaş",
+    "address": "Vişnezade Mah., Acısu Sk. No:19, 34357 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Dolmabahçe Sarayı bahçelerine komşu, geniş araziye yayılan büyük ölçekli otel."
+  },
+  {
+    "id": "intercontinental-istanbul",
+    "name": "InterContinental Istanbul",
+    "area": "Taksim/Beyoğlu",
+    "address": "Asker Ocağı Cd. No:1, Taksim, 34435 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Taksim Meydanı yakınında, köklü büyük ölçekli şehir oteli."
+  },
+  {
+    "id": "sofa-hotel-istanbul",
+    "name": "The Sofa Hotel Istanbul, Autograph Collection",
+    "area": "Nişantaşı/Şişli",
+    "address": "Teşvikiye Cd. No:41-41A, Nişantaşı, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Nişantaşı'nın alışveriş caddesinde, çağdaş sanat koleksiyonuyla bilinen otel."
+  },
+  {
+    "id": "witt-istanbul-suites",
+    "name": "Witt Istanbul Suites",
+    "area": "Cihangir/Beyoğlu",
+    "address": "Defterdar Yokuşu No:26, Cihangir, 34433 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Cihangir sırtlarında, tamamı süit odalardan oluşan tasarım butik otel."
+  },
+  {
+    "id": "four-seasons-bosphorus",
+    "name": "Four Seasons Hotel Istanbul at the Bosphorus",
+    "area": "Beşiktaş (Boğaz kıyısı)",
+    "address": "Çırağan Cd. No:28, 34349 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "19. yüzyıl Osmanlı sahil sarayından dönüştürülmüş, Boğaz'a sıfır lüks otel."
+  },
+  {
+    "id": "w-istanbul",
+    "name": "W Istanbul",
+    "area": "Akaretler/Beşiktaş",
+    "address": "Süleyman Seba Cd. No:22, Akaretler, 34357 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "19. yüzyıldan kalma Akaretler sıra evlerinde konumlanan tasarım odaklı otel."
+  },
+  {
+    "id": "les-ottomans",
+    "name": "Hotel Les Ottomans",
+    "area": "Kuruçeşme/Beşiktaş (Boğaz kıyısı)",
+    "address": "Muallim Naci Cd. No:68, Kuruçeşme, 34345 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Eski bir Osmanlı yalısından dönüştürülmüş, Boğaz'a sıfır özel kategori otel."
+  },
+  {
+    "id": "house-hotel-bosphorus",
+    "name": "The House Hotel Bosphorus",
+    "area": "Ortaköy/Beşiktaş",
+    "address": "Salhane Sk. No:1, Ortaköy, 34347 Beşiktaş/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Ortaköy sahilinde, Boğaz manzaralı butik zincir otel."
+  },
+  {
+    "id": "house-hotel-nisantasi",
+    "name": "The House Hotel Nişantaşı",
+    "area": "Nişantaşı/Şişli",
+    "address": "Abdi İpekçi Cd. No:34, Nişantaşı, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Nişantaşı'nın merkezinde, alışveriş caddesine cepheli butik otel."
+  },
+  {
+    "id": "soho-house-istanbul",
+    "name": "Soho House Istanbul",
+    "area": "Beyoğlu (Asmalımescit)",
+    "address": "Evliya Çelebi Mah., Meşrutiyet Cd. No:56, 34430 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "1873'te inşa edilmiş Palazzo Corpi binasında, üye kulübü ve otel bir arada."
+  },
+  {
+    "id": "empress-zoe-hotel",
+    "name": "Hotel Empress Zoe",
+    "area": "Sultanahmet",
+    "address": "Akbıyık Cd. No:10, Sultanahmet, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Ayasofya'ya yürüme mesafesinde, teraslı küçük butik otel."
+  },
+  {
+    "id": "hagia-sofia-mansions-curio",
+    "name": "Hagia Sofia Mansions Istanbul, Curio Collection by Hilton",
+    "area": "Cankurtaran/Sultanahmet",
+    "address": "Kabasakal Cd. No:5, Cankurtaran, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Eski adıyla Yeşil Ev; restore edilmiş Osmanlı konaklarından oluşan otel, 2020'lerde Hilton'a katıldı."
+  },
+  {
+    "id": "armada-istanbul-old-city",
+    "name": "Armada Istanbul Old City Hotel",
+    "area": "Ahırkapı/Sultanahmet",
+    "address": "Ahırkapı Sk. No:24, Sultanahmet, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Sultanahmet'in güneyinde, restore edilmiş tarihi binalardan oluşan otel."
+  },
+  {
+    "id": "kybele-hotel",
+    "name": "Kybele Hotel",
+    "area": "Sultanahmet",
+    "address": "Yerebatan Cd. No:23, Sultanahmet, 34410 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Yerebatan Sarnıcı'na komşu, rengarenk cam fenerleriyle tanınan küçük otel."
+  },
+  {
+    "id": "sarnic-hotel",
+    "name": "Sarnıç Hotel",
+    "area": "Sultanahmet",
+    "address": "Küçük Ayasofya Cd. No:26, Sultanahmet, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Küçük Ayasofya Camii yakınında, Osmanlı evi tarzında küçük otel."
+  },
+  {
+    "id": "hotel-amira-istanbul",
+    "name": "Hotel Amira Istanbul",
+    "area": "Sultanahmet",
+    "address": "Küçük Ayasofya Mah., Mustafa Paşa Sk. No:43, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Sultanahmet'in tarihi dokusunda, çatı terası olan orta ölçekli otel."
+  },
+  {
+    "id": "ajwa-sultanahmet",
+    "name": "Ajwa Sultanahmet",
+    "area": "Sultanahmet",
+    "address": "Emin Sinan Mah., Piyer Loti Cd. No:30, 34126 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Sultanahmet'te, çatı katı restoranıyla bilinen üst-orta segment otel."
+  },
+  {
+    "id": "hotel-nomade-istanbul",
+    "name": "Hotel Nomade Istanbul",
+    "area": "Sultanahmet",
+    "address": "Ticarethane Sk. No:15, Sultanahmet, 34110 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Ayasofya'ya yakın, çatı terasından Sultanahmet manzarası sunan küçük otel."
+  },
+  {
+    "id": "kariye-hotel",
+    "name": "Kariye Hotel",
+    "area": "Edirnekapı/Fatih",
+    "address": "Kariye Camii Sk. No:6, Edirnekapı, 34087 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Kariye (Chora) Müzesi'nin hemen yanında, tarihi surlara yakın küçük otel."
+  },
+  {
+    "id": "anemon-galata-hotel",
+    "name": "Anemon Galata Hotel",
+    "area": "Galata/Beyoğlu",
+    "address": "Bereketzade Mah., Büyük Hendek Cd. No:5, 34421 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Galata Kulesi'ne bir dakika mesafede, taş binalı orta-üst segment otel."
+  },
+  {
+    "id": "point-hotel-taksim",
+    "name": "Point Hotel Taksim",
+    "area": "Talimhane/Beyoğlu",
+    "address": "Topçu Cd. No:2, Talimhane, Taksim, 34437 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Taksim Meydanı'na yakın, iş ve turizm amaçlı büyük ölçekli şehir oteli."
+  },
+  {
+    "id": "divan-istanbul",
+    "name": "Divan Istanbul",
+    "area": "Elmadağ/Şişli",
+    "address": "Harbiye Mah., Asker Ocağı Cd. No:1, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "1956'da açılmış, Taksim Gezi Parkı'na komşu köklü şehir oteli."
+  },
+  {
+    "id": "radisson-blu-pera",
+    "name": "Radisson Blu Hotel, Istanbul Pera",
+    "area": "Beyoğlu",
+    "address": "Evliya Çelebi Mah., Refik Saydam Cd. No:19, 34430 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Haliç manzaralı, Beyoğlu'nun merkezinde büyük ölçekli otel."
+  },
+  {
+    "id": "grand-hyatt-istanbul",
+    "name": "Grand Hyatt Istanbul",
+    "area": "Harbiye/Şişli (Taksim yakını)",
+    "address": "Harbiye Mah., Taşkışla Cd. No:1, 34367 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Taksim Meydanı'na yürüme mesafesinde, geniş bahçeli büyük ölçekli otel."
+  },
+  {
+    "id": "splendid-palace-buyukada",
+    "name": "Büyükada Splendid Palace Hotel",
+    "area": "Büyükada/Adalar",
+    "address": "23 Nisan Cd. No:39, Büyükada, 34970 Adalar/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "1908'de açılmış, Büyükada'nın simge otellerinden biri; beyaz kubbeleriyle tanınır."
+  },
+  {
+    "id": "bank-hotel-istanbul",
+    "name": "The Bank Hotel Istanbul",
+    "area": "Karaköy/Beyoğlu",
+    "address": "Azapkapı Mah., Bankalar Cd. No:5, 34421 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Eski bir banka binasında, Bankalar Caddesi üzerinde tarihi dokulu otel."
+  },
+  {
+    "id": "karakoy-rooms",
+    "name": "Karaköy Rooms",
+    "area": "Karaköy/Beyoğlu",
+    "address": "Kemankeş Cd., Galata Şarap İskelesi Sk. No:10, 34425 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Karaköy'ün liman sokaklarında, az odalı küçük butik otel."
+  },
+  {
+    "id": "jw-marriott-istanbul-bosphorus",
+    "name": "JW Marriott Istanbul Bosphorus",
+    "area": "Karaköy/Beyoğlu",
+    "address": "Kemankeş Karamustafa Paşa Mah., Kemankeş Cd. No:49, 34425 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 4,
+    "note": "Karaköy sahilinde, Boğaz manzaralı büyük ölçekli lüks otel."
+  },
+  {
+    "id": "renaissance-polat-bosphorus",
+    "name": "Renaissance Istanbul Polat Bosphorus Hotel",
+    "area": "Yeşilyurt/Bakırköy",
+    "address": "Sahil Yolu Cd. No:2, Yeşilyurt, 34149 Bakırköy/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Marmara Denizi kıyısında, havalimanına yakın büyük ölçekli otel."
+  },
+  {
+    "id": "hyatt-regency-istanbul-atakoy",
+    "name": "Hyatt Regency Istanbul Ataköy",
+    "area": "Ataköy/Bakırköy",
+    "address": "Ataköy 2-5-6 Kısım, Rauf Orbay Cd., Sahil Yolu No:2/1, 34158 Bakırköy/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Marmara sahilinde, havalimanına yakın konaklama ve toplantı oteli."
+  },
+  {
+    "id": "crowne-plaza-istanbul-old-city",
+    "name": "Crowne Plaza Istanbul - Old City",
+    "area": "Laleli/Fatih",
+    "address": "Balabanağa Mah., Fethi Bey Cd. No:2, Laleli, 34134 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Tarihi yarımadada, Yenikapı aktarma merkezine yakın şehir oteli."
+  },
+  {
+    "id": "wyndham-grand-istanbul-levent",
+    "name": "Wyndham Grand İstanbul Levent",
+    "area": "Esentepe/Şişli",
+    "address": "Esentepe Mah., Büyükdere Cd. No:177-183, 34394 Şişli/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Levent iş merkezinde, konferans salonlarıyla bilinen büyük ölçekli otel."
+  },
+  {
+    "id": "titanic-business-kartal",
+    "name": "Titanic Business Kartal",
+    "area": "Kartal (Anadolu Yakası)",
+    "address": "Orta Mah., Kaptanıderya Cd. No:37, 34880 Kartal/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Anadolu yakasında, Sabiha Gökçen Havalimanı'na yakın iş oteli."
+  },
+  {
+    "id": "radisson-blu-istanbul-asia",
+    "name": "Radisson Blu Hotel, Istanbul Asia",
+    "area": "Ataşehir (Anadolu Yakası)",
+    "address": "Atatürk Mah., Yakut Cd. No:10, 34758 Ataşehir/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Ataşehir'in iş merkezinde, Anadolu yakasına hizmet veren büyük ölçekli otel."
+  },
+  {
+    "id": "rivas-moda-hotel",
+    "name": "Riva's Moda Hotel",
+    "area": "Moda/Kadıköy",
+    "address": "Caferağa Mah., Dr. Esat Işık Cd. No:98, 34710 Kadıköy/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Moda'nın sakin bir köşesinde, aile işletmesi küçük butik otel."
+  },
+  {
+    "id": "doubletree-hilton-istanbul-moda",
+    "name": "DoubleTree by Hilton Hotel Istanbul - Moda",
+    "area": "Kadıköy",
+    "address": "Caferağa Mah., Albay Faik Sözdener Cd. No:31, 34710 Kadıköy/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Kadıköy'ün canlı sokaklarına yürüme mesafesinde, Anadolu yakasında büyük ölçekli otel."
+  },
+  {
+    "id": "tomtom-suites",
+    "name": "Tomtom Suites",
+    "area": "Tomtom/Beyoğlu (Cihangir yakını)",
+    "address": "Boğazkesen Cd., Tomtom Kaptan Sk. No:18, 34433 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Eski bir rahibeler manastırından dönüştürülmüş, tamamı süit odalı butik otel."
+  },
+  {
+    "id": "adahan-decamondo-pera",
+    "name": "Adahan DeCamondo Pera, Autograph Collection",
+    "area": "Asmalımescit/Beyoğlu",
+    "address": "Asmalı Mescit Mah., General Yazgan Sk. No:14, 34430 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Pera'nın merkezinde, Şişhane Metro'ya yakın butik otel."
+  },
+  {
+    "id": "dersaadet-hotel-istanbul",
+    "name": "Dersaadet Hotel Istanbul",
+    "area": "Sultanahmet",
+    "address": "Küçük Ayasofya Cd., Kapıağası Sk. No:5, 34400 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Sultanahmet'te sakin bir sokakta, aile işletmesi küçük otel."
+  },
+  {
+    "id": "legacy-ottoman-hotel",
+    "name": "Legacy Ottoman Hotel",
+    "area": "Sirkeci/Eminönü",
+    "address": "Hobyar Mah., Hamidiye Cd. No:16, Sirkeci, 34112 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Yeni Cami'ye yürüme mesafesinde, tarihi yarımadada orta ölçekli otel."
+  },
+  {
+    "id": "bosphorus-palace-hotel",
+    "name": "Bosphorus Palace Hotel",
+    "area": "Beylerbeyi/Üsküdar (Boğaz kıyısı, Anadolu yakası)",
+    "address": "Beylerbeyi Mah., Yalıboyu Cd. No:64, 34676 Üsküdar/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Beylerbeyi'nde neo-Osmanlı tarzı konaktan dönüştürülmüş, Boğaz'a sıfır otel."
+  },
+  {
+    "id": "vogue-hotel-supreme-istanbul",
+    "name": "Vogue Hotel Supreme Istanbul",
+    "area": "Sultanahmet/Fatih",
+    "address": "Alemdar Mah., Yerebatan Cd. No:13-15, 34122 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Ayasofya ve Topkapı Sarayı'na yürüme mesafesinde şehir oteli."
+  },
+  {
+    "id": "elite-world-istanbul-florya",
+    "name": "Elite World İstanbul Florya",
+    "area": "Florya/Küçükçekmece",
+    "address": "Gültepe Mah., Şehit Zafer Kızıltaş Sk. No:1, Florya, 34295 Küçükçekmece/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 3,
+    "note": "Florya sahiline yakın, E5 karayolu üzerinde büyük ölçekli otel."
+  },
+  {
+    "id": "hotel-momento",
+    "name": "Hotel Momento",
+    "area": "Beyazıt/Fatih (Sultanahmet yakını)",
+    "address": "Mithat Paşa Cd., Küçük Haydar Efendi Sk. No:14, 34130 Fatih/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Tarihi yarımadada, Beyazıt Meydanı'na yakın orta ölçekli otel."
+  },
+  {
+    "id": "feronya-hotel",
+    "name": "Feronya Hotel",
+    "area": "Talimhane/Taksim/Beyoğlu",
+    "address": "Abdülhak Hamit Cd. No:58, Talimhane, 34437 Beyoğlu/İstanbul",
+    "kind": "hotel",
+    "priceLevel": 2,
+    "note": "Taksim Meydanı'na 10 dakika yürüme mesafesinde orta ölçekli otel."
   }
 ]

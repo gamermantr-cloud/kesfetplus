@@ -3536,5 +3536,658 @@
         "attribution": "osmanm - Wikimedia Commons (CC BY 3.0)"
       }
     ]
+  },
+  {
+    "id": "sile-agva-plaji",
+    "name": "Ağva Plajı",
+    "area": "Şile",
+    "tags": [
+      "plaj",
+      "orman",
+      "kamp",
+      "piknik"
+    ],
+    "note": "Ağva'da 2,5 km uzunluğundaki plaj, çevresindeki ormanlık alanda kamp ve piknik imkânı sunuyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sile-kilimli-koyu",
+    "name": "Kilimli Koyu",
+    "area": "Şile",
+    "tags": [
+      "koy",
+      "doğa yürüyüşü",
+      "sakin"
+    ],
+    "note": "Ağva ile Şile arasında, bölgenin sevilen doğa yürüyüşü parkurlarından biri olan sakin bir koy.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sile-akcakese-plaji",
+    "name": "Akçakese Plajı",
+    "area": "Şile",
+    "tags": [
+      "plaj",
+      "sakin",
+      "doğa"
+    ],
+    "note": "Ağva ile Şile arasında yer alan, henüz az bilinen bir sahil noktası.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sile-sardala-koyu",
+    "name": "Sardala Koyu",
+    "area": "Şile",
+    "tags": [
+      "koy",
+      "kamp",
+      "yürüyüş"
+    ],
+    "note": "1,5 km uzunluğunda sakin bir sahil şeridi; Ağva çevresinde kamp için tercih edilen noktalardan biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "agva-sakli-gol",
+    "name": "Saklı Göl",
+    "area": "Şile (Ağva)",
+    "tags": [
+      "göl",
+      "orman",
+      "doğa yürüyüşü"
+    ],
+    "note": "Ormanlık patikalardan ulaşılan, sisli sabah atmosferiyle bilinen küçük bir doğal göl.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sile-sofular-plaji",
+    "name": "Sofular Plajı",
+    "area": "Şile",
+    "tags": [
+      "plaj",
+      "kamp",
+      "sahil"
+    ],
+    "note": "Sofular köyü yakınında yaklaşık 2,3 km kumsalı olan doğal kamp ve plaj alanı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sile-kabakoz-koyu",
+    "name": "Kabakoz Koyu",
+    "area": "Şile",
+    "tags": [
+      "koy",
+      "kamp",
+      "orman yürüyüşü"
+    ],
+    "note": "Meşe, gürgen ve kayın ormanından geçen kolay bir yürüyüş rotasıyla ulaşılan, denize yürüme mesafesindeki kamp koyu.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beykoz-riva-sahili",
+    "name": "Riva Sahili",
+    "area": "Beykoz",
+    "tags": [
+      "sahil",
+      "sakin",
+      "doğa"
+    ],
+    "note": "Şehir gürültüsünden uzak, Karadeniz kıyısında sakin bir sahil kasabası.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beykoz-goksu-parki",
+    "name": "Göksu Parkı",
+    "area": "Beykoz",
+    "tags": [
+      "park",
+      "dere",
+      "yürüyüş"
+    ],
+    "note": "Göksu Deresi kıyısında, asırlık çınarlarıyla bilinen; oyun alanı ve spor imkânları da olan yeşil bir park.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beykoz-yusa-tepesi",
+    "name": "Yuşa Tepesi",
+    "area": "Beykoz",
+    "tags": [
+      "tepe",
+      "manzara",
+      "yürüyüş"
+    ],
+    "note": "Deniz seviyesinden yaklaşık 200 metre yükseklikte, Boğaz ve Anadolu Kavağı manzarasıyla bilinen İstanbul'un en yüksek ikinci tepelerinden biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beykoz-mihrabat-korusu",
+    "name": "Mihrabat Korusu",
+    "area": "Beykoz (Kanlıca)",
+    "tags": [
+      "koru",
+      "orman",
+      "manzara",
+      "yürüyüş"
+    ],
+    "note": "Kanlıca'da, 3 km'lik orman içi yürüyüş rotası ve Boğaz manzarasıyla bilinen korulardan biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beykoz-anadolu-kavagi",
+    "name": "Anadolu Kavağı",
+    "area": "Beykoz",
+    "tags": [
+      "sahil",
+      "tarihi",
+      "manzara"
+    ],
+    "note": "Yüzyıllardır balıkçı köyü olan, sahil boyunca bahçeleriyle bilinen tarihi bir Boğaz köyü.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sariyer-garipce-koyu",
+    "name": "Garipçe Köyü",
+    "area": "Sarıyer",
+    "tags": [
+      "köy",
+      "sahil",
+      "sakin",
+      "tarihi"
+    ],
+    "note": "Rumeli Kavağı ile Rumeli Feneri arasında, sakinliği ve doğasıyla bilinen bir balıkçı köyü.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sariyer-rumeli-feneri",
+    "name": "Rumeli Feneri",
+    "area": "Sarıyer",
+    "tags": [
+      "sahil",
+      "tarihi",
+      "manzara"
+    ],
+    "note": "Karadeniz'e açılan noktada, feneri ve sahil dokusuyla bilinen tarihi bir köy.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sariyer-kisirkaya-sahili",
+    "name": "Kısırkaya Sahili",
+    "area": "Sarıyer",
+    "tags": [
+      "sahil",
+      "köy"
+    ],
+    "note": "Karadeniz kıyısındaki Sarıyer köylerinden biri; uzun sahil şeridiyle bilinir.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "catalca-ormanli-sahili",
+    "name": "Ormanlı Köyü Sahili",
+    "area": "Çatalca",
+    "tags": [
+      "sahil",
+      "orman",
+      "kamp"
+    ],
+    "note": "Arkasında orman dokusu olan temiz bir kumsalı bulunan köy; yamaç paraşütü ve doğa yürüyüşü için de tercih ediliyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "catalca-incegiz-vadisi",
+    "name": "İnceğiz Vadisi",
+    "area": "Çatalca",
+    "tags": [
+      "vadi",
+      "doğa yürüyüşü",
+      "mağara"
+    ],
+    "note": "İnceğiz köyü çevresinde, insan eliyle oyulmuş kaya yerleşimleri ve manastırlarıyla bilinen bir vadi; yaklaşık 7 km'lik yürüyüş rotası bulunuyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "burgazada-levent-lavi-kovos",
+    "name": "Levent Lavi Kovos Korusu",
+    "area": "Adalar (Burgazada)",
+    "tags": [
+      "koru",
+      "orman",
+      "yürüyüş"
+    ],
+    "note": "Burgazada'nın kuzey yamacında, kızılçam ormanıyla kaplı, sakin bir yürüyüş korusu.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kinaliada-dusler-sahili",
+    "name": "Düşler Sahili",
+    "area": "Adalar (Kınalıada)",
+    "tags": [
+      "sahil",
+      "sakin",
+      "manzara"
+    ],
+    "note": "Kınalıada'da az bilindiği için sakin kalabilen, adaya özgü manzaraya sahip bir sahil.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-gumusyaka-plaji",
+    "name": "Gümüşyaka Plajı",
+    "area": "Silivri",
+    "tags": [
+      "plaj",
+      "sahil",
+      "sakin"
+    ],
+    "note": "Uzun kum sahili ve sakin deniziyle bilinen, kalabalık dönemlerde bile ferah kalan bir plaj.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-selimpasa-plaji",
+    "name": "Selimpaşa Plajı",
+    "area": "Silivri",
+    "tags": [
+      "plaj",
+      "sakin",
+      "gün batımı"
+    ],
+    "note": "Kalabalıktan uzak, sahil boyunca piknik ve gün batımı izlemeye uygun sakin bir plaj.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-gumusyaka-goleti",
+    "name": "Gümüşyaka Göleti",
+    "area": "Silivri",
+    "tags": [
+      "gölet",
+      "sazlık",
+      "doğa"
+    ],
+    "note": "Silivri'nin kuzeyinde, çevresi genellikle sazlık ve ormanlık alanlarla kaplı bir sulak alan.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-danamandira-tabiat-parki",
+    "name": "Danamandıra Tabiat Parkı",
+    "area": "Silivri",
+    "tags": [
+      "tabiat parkı",
+      "gölet",
+      "piknik",
+      "yürüyüş"
+    ],
+    "note": "Silivri'nin kuzeyinde geniş piknik alanları, yürüyüş rotaları ve gölet bulunan bir tabiat parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-degirmenkoy-goleti",
+    "name": "Değirmenköy Göleti",
+    "area": "Silivri",
+    "tags": [
+      "gölet",
+      "kamp",
+      "doğa"
+    ],
+    "note": "Silivri'nin iç kesiminde, gölet çevresinde piknik ve kamp yapılabilen bir doğa alanı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "silivri-kavakli-orman",
+    "name": "Kavaklı Orman Mesire Alanı",
+    "area": "Silivri",
+    "tags": [
+      "orman",
+      "mesire",
+      "kamp"
+    ],
+    "note": "Silivri'nin günübirlik doğa ve kamp bölgelerinden biri; orman içi mesire alanı olarak biliniyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "buyukcekmece-kumburgaz-sahili",
+    "name": "Kumburgaz Sahili",
+    "area": "Büyükçekmece",
+    "tags": [
+      "sahil",
+      "plaj"
+    ],
+    "note": "Marmara kıyısında yaklaşık 8 km uzunluğunda sahil şeridine sahip bir bölge.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "eyupsultan-kemerburgaz-kent-ormani",
+    "name": "Kemerburgaz Kent Ormanı",
+    "area": "Eyüpsultan (Kemerburgaz)",
+    "tags": [
+      "kent ormanı",
+      "yürüyüş",
+      "piknik"
+    ],
+    "note": "Alibeyköy Baraj Gölü kıyısında kurulu, yaklaşık 6 km'lik koşu parkuru ve piknik alanları bulunan bir kent ormanı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kadikoy-fenerbahce-parki",
+    "name": "Fenerbahçe Parkı",
+    "area": "Kadıköy",
+    "tags": [
+      "park",
+      "sahil",
+      "manzara",
+      "tarihi"
+    ],
+    "note": "Deniz kenarında, sahile paralel yürüyüş yollarıyla bilinen tarihi dokulu bir park.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kadikoy-kalamis-parki",
+    "name": "Kalamış Parkı",
+    "area": "Kadıköy",
+    "tags": [
+      "park",
+      "spor",
+      "yürüyüş"
+    ],
+    "note": "Koşu ve bisiklet yolları, açık hava spor alanları bulunan Kadıköy'ün merkezi parklarından biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kadikoy-yogurtcu-parki",
+    "name": "Yoğurtçu Parkı",
+    "area": "Kadıköy",
+    "tags": [
+      "park",
+      "dere",
+      "tarihi"
+    ],
+    "note": "1925'e uzanan tarihiyle, Kurbağalıdere kıyısında Moda sahiline paralel uzanan kentsel bir park.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "uskudar-validebag-korusu",
+    "name": "Validebağ Korusu",
+    "area": "Üsküdar",
+    "tags": [
+      "koru",
+      "orman",
+      "doğa koruma alanı"
+    ],
+    "note": "Altunizade, Acıbadem ve Koşuyolu arasında yer alan, 1. derece doğal sit statüsündeki 354 bin m²'lik koru; 40'ı aşkın ağaç türü ve 100'ü aşkın kuş türüne ev sahipliği yapıyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "pendik-kaynarca-sahil-park",
+    "name": "Kaynarca Sahil Park",
+    "area": "Pendik",
+    "tags": [
+      "sahil",
+      "park",
+      "yürüyüş"
+    ],
+    "note": "Pendik'in Kaynarca mahallesinde, sakin atmosferiyle özellikle sabah yürüyüşleri için tercih edilen bir sahil parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "pendik-kaynarca-botas-park",
+    "name": "Kaynarca Botaş Park",
+    "area": "Pendik",
+    "tags": [
+      "park",
+      "yürüyüş",
+      "çocuk oyun alanı"
+    ],
+    "note": "Yürüyüş yolları ve çocuk oyun alanlarıyla şehir içinde yeşil bir mola noktası.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beylikduzu-kavakli-sahil-parki",
+    "name": "Kavaklı Sahil Parkı",
+    "area": "Beylikdüzü",
+    "tags": [
+      "sahil",
+      "yürüyüş",
+      "balık tutma"
+    ],
+    "note": "Deniz kenarında kitap okuma, yürüyüş ve balık tutma için tercih edilen sakin bir sahil parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "beylikduzu-gurpinar-halk-plaji",
+    "name": "Gürpınar Halk Plajı",
+    "area": "Beylikdüzü",
+    "tags": [
+      "plaj",
+      "piknik"
+    ],
+    "note": "Duş, soyunma kabini, otopark ve piknik alanı bulunan bir halk plajı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "avcilar-ogr-hakki-orman-parki",
+    "name": "Öğr. Hakkı Orman Parkı",
+    "area": "Avcılar",
+    "tags": [
+      "orman",
+      "park",
+      "yürüyüş"
+    ],
+    "note": "Avcılar'da Küçükçekmece Gölü ile Marmara kıyısı arasında kalan bölgedeki orman parklarından biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "avcilar-paseli-kent-parki",
+    "name": "Paşaeli Kent Parkı",
+    "area": "Avcılar",
+    "tags": [
+      "park",
+      "yürüyüş"
+    ],
+    "note": "Avcılar'ın yürüyüş yolları ve açık alan imkânları bulunan kent parklarından biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sancaktepe-orman-parki-mesire",
+    "name": "Sancaktepe Orman Parkı ve Mesire Alanı",
+    "area": "Sancaktepe",
+    "tags": [
+      "orman",
+      "mesire",
+      "piknik",
+      "yürüyüş"
+    ],
+    "note": "Eyüpsultan ve Fatih mahalleleri arasında 155 hektarlık alana kurulu; dumanlı/dumansız piknik alanları ve yürüyüş yolları bulunuyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kagithane-hasbahce-mesire",
+    "name": "Hasbahçe Mesire Alanı",
+    "area": "Kağıthane",
+    "tags": [
+      "mesire",
+      "piknik",
+      "yürüyüş"
+    ],
+    "note": "Kağıthane'nin en büyük yeşil alanlarından biri; piknik alanları ve çocuk oyun alanları bulunuyor.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "kagithane-kent-ormani",
+    "name": "Kağıthane Kent Ormanı",
+    "area": "Kağıthane",
+    "tags": [
+      "kent ormanı",
+      "yürüyüş",
+      "bisiklet",
+      "manzara"
+    ],
+    "note": "Doğa yürüyüşü ve bisiklet imkânı sunan, İstanbul manzaralı seyir teraslarına sahip bir kent ormanı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "bahcelievler-yayla-parki",
+    "name": "Yayla Parkı",
+    "area": "Bahçelievler",
+    "tags": [
+      "park",
+      "yürüyüş",
+      "piknik"
+    ],
+    "note": "Geniş yürüyüş yollarıyla, özellikle hafta sonları piknik için tercih edilen bir mahalle parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "bahcelievler-catalmese-piknik",
+    "name": "Çatalmeşe Piknik Alanı",
+    "area": "Bahçelievler",
+    "tags": [
+      "piknik",
+      "orman"
+    ],
+    "note": "Yaklaşık 100.000 m² alanda meşe, kayın ve ladin ağaçlarıyla kaplı geniş bir piknik alanı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "bagcilar-kestane-bahcesi",
+    "name": "Kestane Bahçesi",
+    "area": "Bağcılar",
+    "tags": [
+      "bahçe",
+      "piknik",
+      "seyir terası"
+    ],
+    "note": "200'den fazla kestane ağacı, oturma alanları ve seyir teraslarıyla bilinen yaklaşık 11.000 m²'lik bir alan.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "sisli-macka-demokrasi-parki",
+    "name": "Maçka Demokrasi Parkı",
+    "area": "Şişli",
+    "tags": [
+      "park",
+      "yürüyüş",
+      "tarihi"
+    ],
+    "note": "Maçka ile Nişantaşı arasında, eskiden Dolmabahçe Sarayı bahçelerinin bir parçası olan geniş bir yeşil alan.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "maltepe-dragos-tepesi",
+    "name": "Dragos Tepesi",
+    "area": "Maltepe",
+    "tags": [
+      "tepe",
+      "manzara",
+      "gün batımı"
+    ],
+    "note": "Adalar manzarası ve gün batımı seyri ile bilinen, Maltepe'nin en yüksek noktalarından biri.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "maltepe-basibuyuk-ormani",
+    "name": "Başıbüyük Ormanı",
+    "area": "Maltepe",
+    "tags": [
+      "orman",
+      "yürüyüş",
+      "piknik"
+    ],
+    "note": "Maltepe'nin iç kesiminde meşe ve çam ağaçlarıyla kaplı, yürüyüş rotaları ve piknik alanları olan bir orman.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "bakirkoy-yesilkoy-sahil-parki",
+    "name": "Yeşilköy Sahil Parkı",
+    "area": "Bakırköy (Yeşilköy)",
+    "tags": [
+      "sahil",
+      "park",
+      "kafe"
+    ],
+    "note": "Deniz kıyısında yürüyüş yolları, çocuk oyun alanı ve spor sahalarıyla bilinen bir sahil parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "zeytinburnu-balkan-sehirleri-parki",
+    "name": "Balkan Şehirleri Parkı",
+    "area": "Zeytinburnu",
+    "tags": [
+      "park",
+      "yürüyüş",
+      "koşu"
+    ],
+    "note": "Surlar boyunca terk edilmiş bir alandan geliştirilen, aktif ve pasif yeşil alanları bir arada barındıran bir park.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "arnavutkoy-samlar-tabiat-parki",
+    "name": "Şamlar Tabiat Parkı",
+    "area": "Arnavutköy",
+    "tags": [
+      "tabiat parkı",
+      "orman",
+      "yürüyüş",
+      "bisiklet"
+    ],
+    "note": "335 hektarlık alanda fıstık çamı ve çeşitli ağaç türleriyle kaplı; doğa yürüyüşü, bisiklet ve olta balıkçılığına uygun bir tabiat parkı.",
+    "source": "websearch",
+    "verified": false
+  },
+  {
+    "id": "arnavutkoy-hacimasli-piknik-alani",
+    "name": "Hacımaşlı Piknik Alanı",
+    "area": "Arnavutköy",
+    "tags": [
+      "piknik",
+      "gölet",
+      "doğa yürüyüşü"
+    ],
+    "note": "Arnavutköy merkezine yaklaşık 6 km mesafede, göleti ve doğa yürüyüşü imkânlarıyla bilinen bir mesire yeri.",
+    "source": "websearch",
+    "verified": false
   }
 ]

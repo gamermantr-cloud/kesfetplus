@@ -111,6 +111,7 @@ def list_comments(
     place_id: str,
     include_hidden: bool = False,
     exclude_user_ids: set[str] | None = None,
+    viewer_user_id: str | None = None,
 ) -> list[dict]:
     """List comments for a place.
 
@@ -118,25 +119,51 @@ def list_comments(
     comments whose author_user_id is in that set are filtered out
     server-side - hiding them only in the frontend is not enough (a blocked
     author's content must not be served to the blocker at all).
+
+    viewer_user_id: the requesting user's own id (None if anonymous/not
+    logged in). Two things depend on it, both for the "explainable trust
+    score" feature (see docs/research/rakip-analizi-guncelleme-2026-09-30.md
+    Bolum 3):
+      - A comment whose review_status is "hidden" is still included here
+        when it belongs to viewer_user_id (so the author can see their own
+        held-back comment and why), but never for anyone else - the
+        include_hidden=False filter below still applies to every other
+        author's hidden comments exactly as before.
+      - computed_trust_score (the raw numeric score / would-be formula
+        leak) is never sent to any caller over this endpoint, author
+        included. flagged_reason is kept only for the comment's own author
+        and stripped (set to None) for every other viewer - moderators get
+        the unredacted version through the separate
+        list_hidden_comments()/list_all_reports() moderator-only paths, not
+        this one.
     """
     with _lock:
         data = _load()
     comments = data.get(place_id, [])
     if not include_hidden:
-        comments = [c for c in comments if c.get("review_status") != "hidden"]
+        comments = [
+            c
+            for c in comments
+            if c.get("review_status") != "hidden" or c.get("author_user_id") == viewer_user_id
+        ]
     if exclude_user_ids:
         comments = [c for c in comments if c.get("author_user_id") not in exclude_user_ids]
     # Backfill helpful_count/helpful_user_ids for comments written before
     # this field existed (see add_comment) - never crash on a missing key,
     # just treat it as "nobody has marked this helpful yet".
-    return [
-        {
+    result = []
+    for c in comments:
+        item = {
             **c,
             "helpful_count": c.get("helpful_count", 0),
             "helpful_user_ids": c.get("helpful_user_ids", []),
         }
-        for c in comments
-    ]
+        item.pop("computed_trust_score", None)
+        is_own = viewer_user_id is not None and item.get("author_user_id") == viewer_user_id
+        if not is_own:
+            item["flagged_reason"] = None
+        result.append(item)
+    return result
 
 
 def count_all_comments() -> int:

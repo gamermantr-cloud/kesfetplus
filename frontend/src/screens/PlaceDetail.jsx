@@ -48,6 +48,46 @@ const OBJECTIONABLE_CONTENT_MESSAGE =
   'İçeriğin topluluk kurallarına aykırı bulundu, bu yüzden şu an yayınlanmadı. ' +
   'Bunun bir hata olduğunu düşünüyorsan bizimle iletişime geçebilirsin.'
 
+// "Açıklanabilir güven skoru" - flagged_reason -> author-only explanation
+// (see docs/research/rakip-analizi-guncelleme-2026-09-30.md Bolum 3 and
+// database/trust_scoring.py). Each message names only which *signal* came
+// back low ("konumun uzak görünüyor", "çok benzer bir yorum"), never the
+// numeric score or the signals' weights/thresholds (those stay entirely
+// server-side, see trust_scoring.py's ACCOUNT/LOCATION/TEXT/VELOCITY
+// *_SIGNAL_MAX constants - nothing like them is ever sent to the frontend).
+// The backend (database/comments_store.list_comments /
+// checkins_store.list_status) already strips flagged_reason down to null
+// for every comment/status that isn't the requesting viewer's own, so this
+// map is never even reachable with someone else's reason - this is a
+// second, defense-in-depth check, not the only one.
+const FLAGGED_REASON_MESSAGES = {
+  duplicate_text: 'Yorumun, daha önce paylaşılan bir yoruma çok benziyor gibi görünüyor.',
+  velocity_spike: 'Kısa sürede çok fazla paylaşım yaptığın için yorumun inceleniyor.',
+  unverified_location: 'Konumun mekana biraz uzak görünüyor, bu yüzden yorumun inceleniyor.',
+  objectionable_content: OBJECTIONABLE_CONTENT_MESSAGE,
+}
+
+/**
+ * The author-only "why is my comment/status pending or hidden" explanation
+ * for `item`, or null when none applies - either it isn't flagged, its
+ * review_status isn't pending/hidden, or (most importantly) `item` isn't
+ * `currentUserId`'s own content. flagged_reason can be a comma-joined list
+ * (database/trust_scoring.py score_comment can fire more than one signal at
+ * once) - the first recognized reason is shown rather than stacking all of
+ * them, so this reads as a simple explanation, not a lecture.
+ */
+function ownFlaggedMessage(item, currentUserId) {
+  if (!currentUserId || !item.author_user_id || item.author_user_id !== currentUserId) {
+    return null
+  }
+  if (item.review_status !== 'pending_review' && item.review_status !== 'hidden') return null
+  const reasons = (item.flagged_reason ?? '').split(',').map((r) => r.trim())
+  for (const reason of reasons) {
+    if (FLAGGED_REASON_MESSAGES[reason]) return FLAGGED_REASON_MESSAGES[reason]
+  }
+  return null
+}
+
 function timeAgo(isoString) {
   const then = new Date(isoString).getTime()
   const diffMs = Date.now() - then
@@ -606,6 +646,11 @@ export default function PlaceDetail() {
                           {s.text ? ` — ${s.text}` : ''}
                         </p>
                         {s.is_stale && <p className="mt-0.5 text-xs text-taupe">Eski bilgi</p>}
+                        {ownFlaggedMessage(s, user?.id) && (
+                          <p className="mt-1.5 text-xs text-tan-dark">
+                            {ownFlaggedMessage(s, user?.id)}
+                          </p>
+                        )}
                         <div className="mt-2 flex flex-wrap items-center gap-3">
                           <HelpfulButton
                             item={s}
@@ -795,6 +840,9 @@ export default function PlaceDetail() {
                         <ShieldQuestion size={12} />
                         Topluluk incelemesi bekliyor
                       </span>
+                    )}
+                    {ownFlaggedMessage(c, user?.id) && (
+                      <p className="mt-2 text-xs text-tan-dark">{ownFlaggedMessage(c, user?.id)}</p>
                     )}
                     <div className="mt-2 flex flex-wrap items-center gap-3">
                       <HelpfulButton

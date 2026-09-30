@@ -360,7 +360,9 @@ def create_comment(place_id: str, comment: CommentCreate, user: dict = Depends(g
 @app.get("/places/{place_id}/comments")
 def get_comments(place_id: str, user: dict | None = Depends(get_current_user_optional)):
     exclude = set(user["blocked_user_ids"]) if user else None
-    return list_comments(place_id, exclude_user_ids=exclude)
+    return list_comments(
+        place_id, exclude_user_ids=exclude, viewer_user_id=user["id"] if user else None
+    )
 
 
 @app.post("/places/{place_id}/comments/{comment_id}/helpful")
@@ -396,7 +398,9 @@ def create_status(place_id: str, status: StatusCreate, user: dict = Depends(get_
 @app.get("/places/{place_id}/status")
 def get_status(place_id: str, user: dict | None = Depends(get_current_user_optional)):
     exclude = set(user["blocked_user_ids"]) if user else None
-    return list_status(place_id, exclude_user_ids=exclude)
+    return list_status(
+        place_id, exclude_user_ids=exclude, viewer_user_id=user["id"] if user else None
+    )
 
 
 @app.post("/places/{place_id}/status/{status_id}/helpful")

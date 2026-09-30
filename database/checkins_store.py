@@ -324,6 +324,7 @@ def list_status(
     stale_hours: int = STATUS_STALE_HOURS,
     exclude_user_ids: set[str] | None = None,
     include_hidden: bool = False,
+    viewer_user_id: str | None = None,
 ) -> list[dict]:
     """List status updates for a place.
 
@@ -334,12 +335,24 @@ def list_status(
     include_hidden: like comments_store.list_comments, entries flagged by
     database/content_filter.py (review_status="hidden") are excluded by
     default - the content is still stored, just not served publicly.
+
+    viewer_user_id: the requesting user's own id (None if anonymous). Same
+    "explainable trust score" rules as comments_store.list_comments - a
+    hidden entry is still returned when it belongs to viewer_user_id (so the
+    author can see it and why), and flagged_reason is stripped for every
+    entry that isn't viewer_user_id's own (status updates have no
+    computed_trust_score field to begin with - see add_status - so there's
+    nothing numeric to strip here).
     """
     with _lock:
         data = _load(_STATUS_PATH)
     entries = data.get(place_id, [])
     if not include_hidden:
-        entries = [e for e in entries if e.get("review_status") != "hidden"]
+        entries = [
+            e
+            for e in entries
+            if e.get("review_status") != "hidden" or e.get("author_user_id") == viewer_user_id
+        ]
     if exclude_user_ids:
         entries = [e for e in entries if e.get("author_user_id") not in exclude_user_ids]
     cutoff = datetime.now(UTC) - timedelta(hours=stale_hours)
@@ -351,6 +364,7 @@ def list_status(
             is_stale = created < cutoff
         except (KeyError, ValueError):
             pass
+        is_own = viewer_user_id is not None and entry.get("author_user_id") == viewer_user_id
         # Backfill helpful_count/helpful_user_ids for status updates written
         # before this field existed (same pattern as comments_store.list_comments).
         result.append(
@@ -359,6 +373,7 @@ def list_status(
                 "is_stale": is_stale,
                 "helpful_count": entry.get("helpful_count", 0),
                 "helpful_user_ids": entry.get("helpful_user_ids", []),
+                "flagged_reason": entry.get("flagged_reason") if is_own else None,
             }
         )
     return result

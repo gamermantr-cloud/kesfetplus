@@ -128,8 +128,18 @@ sınıflandırma çıkarmaktır:
 
 ```python
 OUTDOOR_WEATHER_SENSITIVE_TAGS = {
-    "piknik", "sahil", "park", "orman", "plaj", "millet bahçesi",
-    "kamp", "yürüyüş", "bisiklet", "koşu", "gün batımı", "mangal",
+    "piknik",
+    "sahil",
+    "park",
+    "orman",
+    "plaj",
+    "millet bahçesi",
+    "kamp",
+    "yürüyüş",
+    "bisiklet",
+    "koşu",
+    "gün batımı",
+    "mangal",
 }
 ```
 

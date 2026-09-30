@@ -74,10 +74,41 @@ const TICK_INFO_TAGS = new Set([
 // Tüm doğa mekanları için TEK, sabit ve genel bir bilgi metni - mekana özel
 // değil, bu yüzden places.json'a eklenmiyor (CLAUDE.md "sahte veri yasak" -
 // bu zaten gerçek bir veri değil, genel bir güvenlik hatırlatması).
-const TICK_INFO_TEXT =
-  'Çayırlık ve ormanlık alanlarda mevsimsel olarak kene görülebilir. Uzun kollu ' +
-  'kıyafet giymeniz, açık renkli giysi tercih etmeniz ve dönüşte vücudunuzu ' +
-  'kontrol etmeniz önerilir.'
+const TICK_INFO_INTRO =
+  'KKKA (Kırım Kongo Kanamalı Ateşi) için bilinen hiperendemik bölgeler Orta ve ' +
+  'Doğu Karadeniz, İç Anadolu\'nun kuzeyi ve Doğu Anadolu\'daki yaklaşık 30 il ' +
+  '(örn. Tokat, Sivas, Çorum, Erzurum, Gümüşhane, Bayburt). İstanbul bu ' +
+  'hiperendemik bölgeler arasında yer almıyor, ancak keneler ağaçlardan değil ' +
+  'ot/çalı/çimenlik alanlardan bulaşır — bu yüzden ormanlık alanlarla sınırlı ' +
+  'olmayan genel bir mevsimsel dikkat (Mayıs-Ekim) her bölge için geçerlidir.'
+
+const TICK_INFO_SPECIES = [
+  {
+    name: 'Hyalomma cinsi',
+    desc: "Kırım Kongo Kanamalı Ateşi'nin (KKKA) başlıca taşıyıcısı. Kurak/yarı kurak, açık ve çalılık arazilerde yaygın.",
+    regions: "İç Anadolu, Karadeniz'in iç kesimleri, Doğu Anadolu; kıyı bölgelerinde de bildirilmiştir.",
+  },
+  {
+    name: 'Rhipicephalus cinsi',
+    desc: 'İlkbahar, yaz ve sonbaharda aktif; çiftlik hayvanları ve otlaklarla ilişkili.',
+    regions: 'Ülke genelinde yaygın.',
+  },
+  {
+    name: 'Dermacentor marginatus',
+    desc: 'Özellikle sonbaharda yoğunluğu artar.',
+    regions: 'Ülke genelinde, özellikle orman kenarı ve çayırlık alanlar.',
+  },
+  {
+    name: 'Haemaphysalis cinsi',
+    desc: 'Sonbahar ve kışın yoğunluğu artabilir. Bu cinse ait, ülkeye yeni yerleşen istilacı bir tür de bildirilmiştir.',
+    regions: 'Ülke genelinde.',
+  },
+]
+
+const TICK_INFO_FOOTER =
+  'Bu bilgiler genel farkındalık amaçlıdır, belirli bir mekân için ölçülmüş veri ' +
+  'değildir. Kene ısırığı sonrası ateş, halsizlik veya kas ağrısı gibi belirtiler ' +
+  'görülürse vakit kaybetmeden bir sağlık kuruluşuna başvurun.'
 
 function hasTickInfoTag(venue) {
   if (!venue?.tags?.length) return false
@@ -626,9 +657,19 @@ export default function PlaceDetail() {
                   />
                 </button>
                 {tickInfoOpen && (
-                  <p className="mt-2 rounded-2xl bg-sand px-4 py-3 text-sm leading-relaxed text-espresso-soft">
-                    {TICK_INFO_TEXT}
-                  </p>
+                  <div className="mt-2 space-y-3 rounded-2xl bg-sand px-4 py-3 text-sm leading-relaxed text-espresso-soft">
+                    <p>{TICK_INFO_INTRO}</p>
+                    <ul className="space-y-2">
+                      {TICK_INFO_SPECIES.map((species) => (
+                        <li key={species.name} className="rounded-xl bg-cream/60 px-3 py-2">
+                          <p className="font-medium text-espresso">{species.name}</p>
+                          <p>{species.desc}</p>
+                          <p className="text-taupe">Görüldüğü bölgeler: {species.regions}</p>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-taupe">{TICK_INFO_FOOTER}</p>
+                  </div>
                 )}
               </div>
             )}

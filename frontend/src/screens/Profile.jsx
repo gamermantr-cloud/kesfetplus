@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Toast from '../components/Toast.jsx'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { getUserProfile, getUserStats } from '../lib/api.js'
 import { disablePushNotifications, enablePushNotifications, getPermissionState, isPushSupported } from '../lib/push.js'
@@ -391,11 +392,7 @@ export default function Profile() {
         </div>
       )}
 
-      {toast && (
-        <div className="fixed bottom-8 inset-x-0 z-10 mx-auto w-fit max-w-[430px] rounded-full bg-espresso px-4 py-2 text-xs font-medium text-cream shadow-lg">
-          {toast}
-        </div>
-      )}
+      <Toast message={toast} />
     </div>
   )
 }

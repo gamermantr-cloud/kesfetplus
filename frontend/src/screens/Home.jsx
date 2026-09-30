@@ -15,7 +15,9 @@ import {
   Utensils,
   Wine,
 } from 'lucide-react'
+import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
+import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
 import { getAllVenues } from '../lib/data.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
@@ -39,6 +41,7 @@ const CARD_GRADIENTS = [
 
 export default function Home() {
   const navigate = useNavigate()
+  const shouldReduceMotion = useReducedMotion()
   const [venues, setVenues] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
@@ -184,11 +187,14 @@ export default function Home() {
         {filtered.slice(0, 12).map((venue, i) => {
           const VenueIcon = getVenueIcon(venue)
           return (
-          <button
+          <motion.button
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
             className="bg-sand rounded-2xl overflow-hidden text-left"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}
           >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
               <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
@@ -214,7 +220,7 @@ export default function Home() {
               <p className="text-sm font-medium text-espresso truncate">{venue.name}</p>
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}
             </div>
-          </button>
+          </motion.button>
           )
         })}
       </div>
@@ -226,13 +232,14 @@ export default function Home() {
         <button aria-label="Harita" onClick={() => navigate('/map')} className="text-taupe">
           <MapPin size={24} />
         </button>
-        <button
+        <motion.button
           aria-label="Hızlı check-in"
           onClick={handleQuickCheckin}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
           className="w-12 h-12 -mt-6 rounded-full bg-tan flex items-center justify-center shadow-lg"
         >
           <Plus size={24} className="text-cream" />
-        </button>
+        </motion.button>
         <button aria-label="Mesajlar" onClick={() => navigate('/messages')} className="text-taupe">
           <MessageCircle size={24} />
         </button>
@@ -241,11 +248,7 @@ export default function Home() {
         </button>
       </nav>
 
-      {toast && (
-        <div className="fixed bottom-24 inset-x-0 mx-auto w-fit max-w-[430px] z-10 rounded-full bg-espresso px-4 py-2 text-xs font-medium text-cream shadow-lg">
-          {toast}
-        </div>
-      )}
+      <Toast message={toast} className="bottom-24" />
     </div>
   )
 }

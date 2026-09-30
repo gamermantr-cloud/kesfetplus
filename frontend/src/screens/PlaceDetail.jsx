@@ -17,6 +17,7 @@ import {
   Wallet,
   X,
 } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
@@ -71,6 +72,7 @@ function crowdLabel(venue) {
 export default function PlaceDetail() {
   const { placeId } = useParams()
   const navigate = useNavigate()
+  const shouldReduceMotion = useReducedMotion()
   const { user, isLoggedIn, block } = useAuth()
   const loginState = { state: { from: `/place/${placeId}` } }
   const [searchParams] = useSearchParams()
@@ -451,6 +453,21 @@ export default function PlaceDetail() {
 
       {/* Tab content */}
       <div className="flex-1 px-6 py-5">
+        {/*
+          Opacity-only fade (no transform) on tab switch. Deliberately not a
+          slide: the Fotoğraflar tab renders `fixed`-positioned children (the
+          compare-photo button/panel), and a non-"none" transform on this
+          wrapper would change their containing block to this div instead of
+          the viewport - opacity doesn't have that side effect.
+        */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+          >
         {activeTab === 'Genel Bakış' && (
           <div>
             <div className="grid grid-cols-2 gap-3">
@@ -492,10 +509,11 @@ export default function PlaceDetail() {
                 Durum paylaşmak için giriş yap
               </button>
             ) : !checkedIn ? (
-              <button
+              <motion.button
                 type="button"
                 onClick={handleCheckin}
                 disabled={checkinLoading}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
               >
                 {checkinLoading ? (
@@ -504,7 +522,7 @@ export default function PlaceDetail() {
                   <Navigation size={16} />
                 )}
                 Buradayım
-              </button>
+              </motion.button>
             ) : (
               <div className="space-y-3 rounded-2xl border border-cream-line bg-sand/50 p-4">
                 {checkinNote && <p className="text-xs text-taupe">{checkinNote}</p>}
@@ -534,15 +552,16 @@ export default function PlaceDetail() {
                   rows={2}
                   className="w-full resize-none rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
                 />
-                <button
+                <motion.button
                   type="button"
                   onClick={handleStatusSubmit}
                   disabled={!selectedTag || statusSubmitting}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
                   className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-2 text-sm font-medium text-cream disabled:opacity-60"
                 >
                   {statusSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                   Paylaş
-                </button>
+                </motion.button>
               </div>
             )}
 
@@ -736,14 +755,15 @@ export default function PlaceDetail() {
                   className="w-full resize-none rounded-lg border border-cream-line bg-cream px-3 py-2 text-sm text-espresso outline-none focus:border-tan"
                   required
                 />
-                <button
+                <motion.button
                   type="submit"
                   disabled={submitting}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
                   className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-2 text-sm font-medium text-cream disabled:opacity-60"
                 >
                   {submitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                   Gönder
-                </button>
+                </motion.button>
               </form>
             )}
 
@@ -799,6 +819,8 @@ export default function PlaceDetail() {
             )}
           </div>
         )}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Bottom actions */}
@@ -811,7 +833,7 @@ export default function PlaceDetail() {
           <MapPin size={16} />
           Haritada Gör
         </button>
-        <button
+        <motion.button
           type="button"
           onClick={() => {
             if (!isLoggedIn) {
@@ -822,10 +844,11 @@ export default function PlaceDetail() {
             setShowForm(true)
             setContentNotice(null)
           }}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
           className="flex flex-1 items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream"
         >
           Yorum Yap
-        </button>
+        </motion.button>
       </div>
     </div>
   )

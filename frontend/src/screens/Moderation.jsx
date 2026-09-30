@@ -1,6 +1,7 @@
 import { BarChart3, ChevronLeft, Eye, EyeOff, Flag, RotateCcw, ShieldCheck } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Toast from '../components/Toast.jsx'
 import {
   getHiddenContent,
   getModerationReports,
@@ -462,11 +463,7 @@ export default function Moderation() {
         )}
       </div>
 
-      {toast && (
-        <div className="fixed bottom-8 inset-x-0 z-10 mx-auto w-fit max-w-[430px] rounded-full bg-espresso px-4 py-2 text-xs font-medium text-cream shadow-lg">
-          {toast}
-        </div>
-      )}
+      <Toast message={toast} />
     </div>
   )
 }

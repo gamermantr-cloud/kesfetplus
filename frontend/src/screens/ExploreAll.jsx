@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BedDouble, ChevronLeft, Search, Star, Trees, Utensils, Wine } from 'lucide-react'
+import { motion, useReducedMotion } from 'motion/react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
@@ -25,6 +26,7 @@ const CARD_GRADIENTS = [
 
 export default function ExploreAll() {
   const navigate = useNavigate()
+  const shouldReduceMotion = useReducedMotion()
   const [venues, setVenues] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
@@ -111,11 +113,14 @@ export default function ExploreAll() {
         {filtered.map((venue, i) => {
           const VenueIcon = getVenueIcon(venue)
           return (
-          <button
+          <motion.button
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
             className="bg-sand rounded-2xl overflow-hidden text-left"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}
           >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
               <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
@@ -141,7 +146,7 @@ export default function ExploreAll() {
               <p className="text-sm font-medium text-espresso truncate">{venue.name}</p>
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}
             </div>
-          </button>
+          </motion.button>
           )
         })}
       </div>

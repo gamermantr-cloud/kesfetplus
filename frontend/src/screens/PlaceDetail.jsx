@@ -1,4 +1,5 @@
 import {
+  Accessibility,
   AlertTriangle,
   Bug,
   Camera,
@@ -113,6 +114,27 @@ const TICK_INFO_FOOTER =
 function hasTickInfoTag(venue) {
   if (!venue?.tags?.length) return false
   return venue.tags.some((tag) => TICK_INFO_TAGS.has(tag))
+}
+
+// Engelli/bebek arabası ulaşım kolaylığı baloncuğu - venue.accessibility gerçek
+// seed verisi varsa gösterilir (bkz. database/seed/places.json/gurme.json
+// "accessibility" alanı). Otel kayıtlarında (hotels.json) bu alan hiç yok -
+// bu durumda bubble hiç render edilmiyor (uydurma veri yasak, dürüst boş durum).
+function hasAccessibilityInfo(venue) {
+  return Boolean(venue?.accessibility)
+}
+
+const ACCESSIBILITY_LABELS = {
+  uygun: 'Uygun',
+  kısmen: 'Kısmen uygun',
+  zor: 'Zor / uygun değil',
+}
+
+const STROLLER_LABELS = {
+  uygun: 'Uygun',
+  kısmen: 'Kısmen uygun',
+  zor: 'Zor',
+  'uygun değil': 'Uygun değil',
 }
 
 // WMO weather-code group (database/weather_cache.py condition_group) -> icon.
@@ -234,6 +256,7 @@ export default function PlaceDetail() {
   const [statusContentNotice, setStatusContentNotice] = useState(null)
 
   const [tickInfoOpen, setTickInfoOpen] = useState(false)
+  const [accessibilityInfoOpen, setAccessibilityInfoOpen] = useState(false)
 
   const [comparePanelOpen, setComparePanelOpen] = useState(false)
   const [compareLoading, setCompareLoading] = useState(false)
@@ -670,6 +693,63 @@ export default function PlaceDetail() {
                     </ul>
                     <p className="text-taupe">{TICK_INFO_FOOTER}</p>
                   </div>
+                )}
+              </div>
+            )}
+            {hasAccessibilityInfo(venue) && (
+              <div className="mb-4">
+                <button
+                  type="button"
+                  onClick={() => setAccessibilityInfoOpen((open) => !open)}
+                  aria-expanded={accessibilityInfoOpen}
+                  className="flex w-full items-center justify-between gap-2 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3 text-sm font-medium text-espresso"
+                >
+                  <span className="flex items-center gap-2">
+                    <Accessibility size={16} className="shrink-0 text-tan-dark" />
+                    Engelli Ulaşım Kolaylığı
+                  </span>
+                  <ChevronDown
+                    size={16}
+                    className={`shrink-0 text-taupe transition-transform ${accessibilityInfoOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {accessibilityInfoOpen && (
+                  <ul className="mt-2 space-y-2 rounded-2xl bg-sand px-4 py-3 text-sm leading-relaxed text-espresso-soft">
+                    <li>
+                      Genel erişilebilirlik:{' '}
+                      <span className="font-medium text-espresso">
+                        {ACCESSIBILITY_LABELS[venue.accessibility] ?? venue.accessibility}
+                      </span>
+                    </li>
+                    {venue.stroller && (
+                      <li>
+                        Tekerlekli sandalye / bebek arabası:{' '}
+                        <span className="font-medium text-espresso">
+                          {STROLLER_LABELS[venue.stroller] ?? venue.stroller}
+                        </span>
+                      </li>
+                    )}
+                    {typeof venue.toilet === 'boolean' && (
+                      <li>
+                        Erişilebilir tuvalet:{' '}
+                        <span className="font-medium text-espresso">
+                          {venue.toilet ? 'Var' : 'Bilgi yok / yok'}
+                        </span>
+                      </li>
+                    )}
+                    {typeof venue.parking === 'boolean' && (
+                      <li>
+                        Engelli otoparkı:{' '}
+                        <span className="font-medium text-espresso">
+                          {venue.parking ? 'Otopark var' : 'Otopark bilgisi yok'}
+                        </span>
+                      </li>
+                    )}
+                    <li className="text-taupe">
+                      Bu bilgiler mekanın genel fiziksel yapısına dayanır, kişiye özel
+                      ihtiyaçlar için önceden mekanla iletişime geçmeniz önerilir.
+                    </li>
+                  </ul>
                 )}
               </div>
             )}

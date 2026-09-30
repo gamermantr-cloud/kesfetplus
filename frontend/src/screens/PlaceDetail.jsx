@@ -1,6 +1,8 @@
 import {
   AlertTriangle,
+  Bug,
   Camera,
+  ChevronDown,
   ChevronLeft,
   Cloud,
   CloudFog,
@@ -46,6 +48,41 @@ import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
+
+// "Kene Bilgisi" rozeti sadece çim/yeşillik temalı doğa mekanlarında
+// gösterilir - venue.tags üzerinden basit bir kesişim kontrolü (yeni bir
+// veri alanı/dosya YOK, mevcut tags'a göre türetilmiş bir UI kararı,
+// isOutdoorWeatherSensitive'deki desenle aynı fikir - bkz. lib/weather.js).
+const TICK_INFO_TAGS = new Set([
+  'orman',
+  'orman yürüyüşü',
+  'kent ormanı',
+  'koru',
+  'çayır',
+  'otlak',
+  'piknik',
+  'mesire',
+  'yürüyüş',
+  'doğa yürüyüşü',
+  'kamp',
+  'kamp ateşi',
+  'bisiklet',
+  'tabiat parkı',
+  'doğa koruma alanı',
+])
+
+// Tüm doğa mekanları için TEK, sabit ve genel bir bilgi metni - mekana özel
+// değil, bu yüzden places.json'a eklenmiyor (CLAUDE.md "sahte veri yasak" -
+// bu zaten gerçek bir veri değil, genel bir güvenlik hatırlatması).
+const TICK_INFO_TEXT =
+  'Çayırlık ve ormanlık alanlarda mevsimsel olarak kene görülebilir. Uzun kollu ' +
+  'kıyafet giymeniz, açık renkli giysi tercih etmeniz ve dönüşte vücudunuzu ' +
+  'kontrol etmeniz önerilir.'
+
+function hasTickInfoTag(venue) {
+  if (!venue?.tags?.length) return false
+  return venue.tags.some((tag) => TICK_INFO_TAGS.has(tag))
+}
 
 // WMO weather-code group (database/weather_cache.py condition_group) -> icon.
 // Aynı eşleme Home.jsx'te de kullanılıyor - kasıtlı olarak tutarlı tutuldu.
@@ -164,6 +201,8 @@ export default function PlaceDetail() {
   const [statusText, setStatusText] = useState('')
   const [statusSubmitting, setStatusSubmitting] = useState(false)
   const [statusContentNotice, setStatusContentNotice] = useState(null)
+
+  const [tickInfoOpen, setTickInfoOpen] = useState(false)
 
   const [comparePanelOpen, setComparePanelOpen] = useState(false)
   const [compareLoading, setCompareLoading] = useState(false)
@@ -569,6 +608,30 @@ export default function PlaceDetail() {
         {activeTab === 'Genel Bakış' && (
           <div>
             <WeatherCard weather={weather} loading={weatherLoading} failed={weatherFailed} />
+            {hasTickInfoTag(venue) && (
+              <div className="mb-4">
+                <button
+                  type="button"
+                  onClick={() => setTickInfoOpen((open) => !open)}
+                  aria-expanded={tickInfoOpen}
+                  className="flex w-full items-center justify-between gap-2 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3 text-sm font-medium text-espresso"
+                >
+                  <span className="flex items-center gap-2">
+                    <Bug size={16} className="shrink-0 text-tan-dark" />
+                    Kene Bilgisi
+                  </span>
+                  <ChevronDown
+                    size={16}
+                    className={`shrink-0 text-taupe transition-transform ${tickInfoOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {tickInfoOpen && (
+                  <p className="mt-2 rounded-2xl bg-sand px-4 py-3 text-sm leading-relaxed text-espresso-soft">
+                    {TICK_INFO_TEXT}
+                  </p>
+                )}
+              </div>
+            )}
             {weather && !weather.is_outdoor_friendly && isOutdoorWeatherSensitive(venue) && (
               <div className="mb-4 flex items-start gap-2 rounded-2xl bg-sand px-4 py-3 text-sm text-espresso-soft">
                 <CloudRain size={16} className="mt-0.5 shrink-0 text-tan-dark" />

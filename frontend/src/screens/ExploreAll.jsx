@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BedDouble, ChevronLeft, Search, Star, Trees, Utensils, Wine } from 'lucide-react'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
+import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
 import { getAllVenues } from '../lib/data.js'
+import { getVenueIcon } from '../lib/venueIcon.js'
 
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
@@ -62,7 +66,9 @@ export default function ExploreAll() {
         </button>
         <div>
           <h1 className="font-display text-xl text-espresso">Tüm Mekanlar</h1>
-          <p className="text-xs text-taupe">{loading ? 'Yükleniyor...' : `${filtered.length} mekan`}</p>
+          <p className="text-xs text-taupe">
+            {loading ? <Skeleton width={70} height={11} baseColor="var(--color-sand-dark)" highlightColor="var(--color-cream)" /> : `${filtered.length} mekan`}
+          </p>
         </div>
       </header>
 
@@ -98,18 +104,21 @@ export default function ExploreAll() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 px-5 mt-5">
-        {loading && <p className="col-span-2 text-taupe text-sm">Yükleniyor...</p>}
+        {loading && <VenueCardSkeleton count={8} />}
         {!loading && filtered.length === 0 && (
           <p className="col-span-2 text-taupe text-sm">Bu kritere uyan mekan bulunamadı.</p>
         )}
-        {filtered.map((venue, i) => (
+        {filtered.map((venue, i) => {
+          const VenueIcon = getVenueIcon(venue)
+          return (
           <button
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
             className="bg-sand rounded-2xl overflow-hidden text-left"
           >
-            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}>
+            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
+              <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
               {venue.photos?.[0]?.url && (
                 <img
                   src={venue.photos[0].url}
@@ -133,7 +142,8 @@ export default function ExploreAll() {
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}
             </div>
           </button>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

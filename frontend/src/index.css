@@ -27,6 +27,15 @@
   --color-cream-line: rgba(16, 36, 26, 0.1);
 }
 
+/*
+  RGB triplet mirroring --color-espresso, for spots (e.g. box-shadow) that
+  need an alpha value CSS can't derive from a hex custom property directly:
+  rgba(var(--color-espresso-rgb), 0.4).
+*/
+:root {
+  --color-espresso-rgb: 16 36 26;
+}
+
 body {
   margin: 0;
   background: var(--color-cream);
@@ -37,4 +46,32 @@ body {
 
 #root {
   min-height: 100svh;
+}
+
+/*
+  react-leaflet-cluster (leaflet.markercluster) ships its own default
+  small/medium/large cluster colors (green/yellow/orange). Re-themed here to
+  the project's tan tokens so clusters read as part of the brand instead of
+  the library default, without hardcoding new hex values.
+*/
+.marker-cluster-small {
+  background-color: color-mix(in srgb, var(--color-sand-dark) 70%, transparent);
+}
+.marker-cluster-small div {
+  background-color: color-mix(in srgb, var(--color-tan) 75%, transparent);
+  color: var(--color-cream);
+}
+.marker-cluster-medium {
+  background-color: color-mix(in srgb, var(--color-tan) 45%, transparent);
+}
+.marker-cluster-medium div {
+  background-color: color-mix(in srgb, var(--color-tan) 85%, transparent);
+  color: var(--color-cream);
+}
+.marker-cluster-large {
+  background-color: color-mix(in srgb, var(--color-tan-dark) 50%, transparent);
+}
+.marker-cluster-large div {
+  background-color: color-mix(in srgb, var(--color-tan-dark) 90%, transparent);
+  color: var(--color-cream);
 }

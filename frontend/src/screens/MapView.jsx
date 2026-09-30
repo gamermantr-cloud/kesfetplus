@@ -1,8 +1,11 @@
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 import { ChevronLeft } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-cluster'
 import { useNavigate } from 'react-router-dom'
 import { approxLatLng } from '../lib/districts.js'
 import { getAllVenues } from '../lib/data.js'
@@ -12,9 +15,10 @@ const ISTANBUL_CENTER = [41.02, 28.965]
 // Custom pin so we don't need to bundle Leaflet's default marker images.
 const pinIcon = L.divIcon({
   className: '',
-  // rgba shadow mirrors --color-espresso (#2b2018); no token exists for an
-  // arbitrary alpha value, so it can't be expressed as var(--color-*).
-  html: '<div style="width:14px;height:14px;border-radius:9999px;background:var(--color-tan);border:2px solid var(--color-cream);box-shadow:0 1px 4px rgba(43,32,24,0.4)"></div>',
+  // rgba shadow mirrors --color-espresso (#10241a); expressed via the
+  // --color-espresso-rgb triplet token (index.css) since rgba() needs
+  // separate r/g/b channels, not a hex custom property.
+  html: '<div style="width:14px;height:14px;border-radius:9999px;background:var(--color-tan);border:2px solid var(--color-cream);box-shadow:0 1px 4px rgba(var(--color-espresso-rgb),0.4)"></div>',
   iconSize: [14, 14],
   iconAnchor: [7, 7],
 })
@@ -61,23 +65,25 @@ export default function MapView() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> katkıda bulunanları'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {points.map(({ venue, pos }) => (
-            <Marker key={venue.id} position={[pos.lat, pos.lng]} icon={pinIcon}>
-              <Popup>
-                <div className="min-w-[140px]">
-                  <p className="font-medium text-espresso">{venue.name}</p>
-                  {venue.area && <p className="text-xs text-taupe">{venue.area}</p>}
-                  <button
-                    type="button"
-                    onClick={() => navigate(`/place/${venue.id}`)}
-                    className="mt-2 rounded-full bg-tan px-3 py-1 text-xs font-medium text-cream"
-                  >
-                    Detayı gör
-                  </button>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+          <MarkerClusterGroup chunkedLoading>
+            {points.map(({ venue, pos }) => (
+              <Marker key={venue.id} position={[pos.lat, pos.lng]} icon={pinIcon}>
+                <Popup>
+                  <div className="min-w-[140px]">
+                    <p className="font-medium text-espresso">{venue.name}</p>
+                    {venue.area && <p className="text-xs text-taupe">{venue.area}</p>}
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/place/${venue.id}`)}
+                      className="mt-2 rounded-full bg-tan px-3 py-1 text-xs font-medium text-cream"
+                    >
+                      Detayı gör
+                    </button>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
         </MapContainer>
       </div>
 

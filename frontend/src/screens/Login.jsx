@@ -40,53 +40,55 @@ export default function Login() {
         <ChevronLeft size={20} />
       </button>
 
-      <div className="mt-8">
-        <h1 className="font-display text-2xl font-medium text-espresso">Giriş Yap</h1>
-        <p className="mt-1 text-sm text-taupe">Yorum ve durum paylaşmak için giriş yapmalısın.</p>
+      <div className="mt-8 flex flex-1 flex-col justify-center gap-6">
+        <div>
+          <h1 className="font-display text-2xl font-medium text-espresso">Giriş Yap</h1>
+          <p className="mt-1 text-sm text-taupe">Yorum ve durum paylaşmak için giriş yapmalısın.</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            type="email"
+            placeholder="E-posta"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            required
+            className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
+          />
+          <input
+            type="password"
+            placeholder="Şifre"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+            className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
+          />
+
+          {error && <p className="text-sm text-tan-dark">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
+          >
+            {submitting ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
+            Giriş Yap
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-taupe">
+          Hesabın yok mu?{' '}
+          <button
+            type="button"
+            onClick={() => navigate('/register', { state: { from: redirectTo } })}
+            className="font-medium text-tan-dark underline"
+          >
+            Kayıt ol
+          </button>
+        </p>
       </div>
-
-      <form onSubmit={handleSubmit} className="mt-6 space-y-3">
-        <input
-          type="email"
-          placeholder="E-posta"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-          required
-          className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
-        />
-        <input
-          type="password"
-          placeholder="Şifre"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-          required
-          className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
-        />
-
-        {error && <p className="text-sm text-tan-dark">{error}</p>}
-
-        <button
-          type="submit"
-          disabled={submitting}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
-        >
-          {submitting ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
-          Giriş Yap
-        </button>
-      </form>
-
-      <p className="mt-6 text-center text-sm text-taupe">
-        Hesabın yok mu?{' '}
-        <button
-          type="button"
-          onClick={() => navigate('/register', { state: { from: redirectTo } })}
-          className="font-medium text-tan-dark underline"
-        >
-          Kayıt ol
-        </button>
-      </p>
     </div>
   )
 }

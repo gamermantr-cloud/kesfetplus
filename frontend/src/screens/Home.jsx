@@ -16,7 +16,9 @@ import {
   Wine,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
 import { getAllVenues } from '../lib/data.js'
+import { getVenueIcon } from '../lib/venueIcon.js'
 
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
@@ -44,8 +46,8 @@ export default function Home() {
   const [toast, setToast] = useState(null)
   const toastTimer = useRef(null)
 
-  function showComingSoon(label) {
-    setToast(`${label} yakında geliyor`)
+  function showToast(message) {
+    setToast(message)
     clearTimeout(toastTimer.current)
     toastTimer.current = setTimeout(() => setToast(null), 1800)
   }
@@ -80,6 +82,16 @@ export default function Home() {
       return true
     })
   }, [venues, activeCategory, query, featured])
+
+  function handleQuickCheckin() {
+    if (!featured) {
+      showToast('Mekanlar yükleniyor, birazdan tekrar dene')
+      return
+    }
+    // Sends the user straight into the featured venue's "Anlık Durum" tab,
+    // which hosts the existing check-in/durum-paylaşma flow (PlaceDetail.jsx).
+    navigate(`/place/${featured.id}?tab=durum`)
+  }
 
   return (
     <div className="relative min-h-screen bg-cream pb-28">
@@ -165,18 +177,21 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 px-5 mt-3">
-        {loading && <p className="col-span-2 text-taupe text-sm">Yükleniyor...</p>}
+        {loading && <VenueCardSkeleton count={6} />}
         {!loading && filtered.length === 0 && (
           <p className="col-span-2 text-taupe text-sm">Bu kritere uyan mekan bulunamadı.</p>
         )}
-        {filtered.slice(0, 12).map((venue, i) => (
+        {filtered.slice(0, 12).map((venue, i) => {
+          const VenueIcon = getVenueIcon(venue)
+          return (
           <button
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
             className="bg-sand rounded-2xl overflow-hidden text-left"
           >
-            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}>
+            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
+              <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
               {venue.photos?.[0]?.url && (
                 <img
                   src={venue.photos[0].url}
@@ -200,7 +215,8 @@ export default function Home() {
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}
             </div>
           </button>
-        ))}
+          )
+        })}
       </div>
 
       <nav className="fixed bottom-0 inset-x-0 mx-auto w-full max-w-[430px] bg-cream border-t border-cream-line px-6 py-3 flex items-center justify-between">
@@ -211,8 +227,8 @@ export default function Home() {
           <MapPin size={24} />
         </button>
         <button
-          aria-label="Ekle"
-          onClick={() => showComingSoon('Mekan ekleme')}
+          aria-label="Hızlı check-in"
+          onClick={handleQuickCheckin}
           className="w-12 h-12 -mt-6 rounded-full bg-tan flex items-center justify-center shadow-lg"
         >
           <Plus size={24} className="text-cream" />

@@ -1,5 +1,6 @@
 import { ChevronLeft, MessageCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import EmptyState from '../components/EmptyState.jsx'
 
 // Placeholder shape for a future conversation list item. Not wired up yet -
 // there is no messaging backend, so nothing renders this component today.
@@ -36,15 +37,11 @@ export default function Messages() {
         <h1 className="font-display text-xl text-espresso">Mesajlar</h1>
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-sand text-taupe">
-          <MessageCircle size={26} />
-        </span>
-        <p className="font-display text-lg text-espresso">Henüz mesajın yok</p>
-        <p className="text-sm text-taupe">
-          Bir mekan sayfasından yorum yapan kullanıcılarla ileride buradan mesajlaşabileceksin.
-        </p>
-      </div>
+      <EmptyState
+        icon={<MessageCircle size={26} />}
+        title="Henüz mesajın yok"
+        description="Bir mekan sayfasından yorum yapan kullanıcılarla ileride buradan mesajlaşabileceksin."
+      />
     </div>
   )
 }

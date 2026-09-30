@@ -1,6 +1,5 @@
 import {
   AlertTriangle,
-  Bell,
   Camera,
   ChevronLeft,
   Flag,
@@ -9,7 +8,6 @@ import {
   Navigation,
   Send,
   ShieldQuestion,
-  Sparkles,
   Star,
   Telescope,
   ThumbsUp,
@@ -20,7 +18,7 @@ import {
   X,
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
   comparePhoto,
   getCheckinCount,
@@ -75,9 +73,14 @@ export default function PlaceDetail() {
   const navigate = useNavigate()
   const { user, isLoggedIn, block } = useAuth()
   const loginState = { state: { from: `/place/${placeId}` } }
+  const [searchParams] = useSearchParams()
 
   const [venue, setVenue] = useState(undefined) // undefined = loading, null = not found
-  const [activeTab, setActiveTab] = useState(TABS[0])
+  // Lets callers (e.g. Home's quick check-in shortcut) deep-link straight
+  // into a tab via ?tab=durum instead of always landing on "Genel Bakış".
+  const [activeTab, setActiveTab] = useState(
+    searchParams.get('tab') === 'durum' ? 'Anlık Durum' : TABS[0],
+  )
 
   const [comments, setComments] = useState([])
   const [commentsLoading, setCommentsLoading] = useState(true)
@@ -129,8 +132,9 @@ export default function PlaceDetail() {
       try {
         const data = await getComments(placeId)
         setComments(data)
-      } catch {
-        setCommentsError('Yorumlar yüklenemedi. Backend çalışıyor mu kontrol edin.')
+      } catch (err) {
+        console.error('getComments failed', err)
+        setCommentsError('Yorumlar şu an yüklenemedi. Birazdan tekrar dener misin?')
       } finally {
         setCommentsLoading(false)
       }
@@ -148,8 +152,9 @@ export default function PlaceDetail() {
       try {
         const data = await getStatusUpdates(placeId)
         setStatusUpdates(data)
-      } catch {
-        setStatusError('Anlık durumlar yüklenemedi. Backend çalışıyor mu kontrol edin.')
+      } catch (err) {
+        console.error('getStatusUpdates failed', err)
+        setStatusError('Anlık durumlar şu an yüklenemedi. Birazdan tekrar dener misin?')
       } finally {
         setStatusLoading(false)
       }
@@ -216,8 +221,9 @@ export default function PlaceDetail() {
         setCheckedIn(true)
         setCheckinNote(note)
         await Promise.all([loadStatus(), loadCheckinCount()])
-      } catch {
-        setStatusError('Check-in gönderilemedi. Backend çalışıyor mu kontrol edin.')
+      } catch (err) {
+        console.error('postCheckin failed', err)
+        setStatusError('Check-in şu an gönderilemedi. Birazdan tekrar dener misin?')
       } finally {
         setCheckinLoading(false)
       }
@@ -251,8 +257,9 @@ export default function PlaceDetail() {
       setSelectedTag(null)
       setStatusText('')
       await loadStatus()
-    } catch {
-      setStatusError('Durum paylaşılamadı. Backend çalışıyor mu kontrol edin.')
+    } catch (err) {
+      console.error('postStatusUpdate failed', err)
+      setStatusError('Durumun şu an paylaşılamadı. Birazdan tekrar dener misin?')
     } finally {
       setStatusSubmitting(false)
     }
@@ -306,8 +313,9 @@ export default function PlaceDetail() {
       setText('')
       setShowForm(false)
       await loadComments()
-    } catch {
-      setCommentsError('Yorum gönderilemedi. Backend çalışıyor mu kontrol edin.')
+    } catch (err) {
+      console.error('postComment failed', err)
+      setCommentsError('Yorumun şu an gönderilemedi. Birazdan tekrar dener misin?')
     } finally {
       setSubmitting(false)
     }
@@ -331,9 +339,8 @@ export default function PlaceDetail() {
       const result = await comparePhoto(placeId, file)
       setCompareResult(result)
     } catch (err) {
-      setCompareError(
-        err?.message ?? 'Karşılaştırma yapılamadı. Backend çalışıyor mu kontrol edin.',
-      )
+      console.error('comparePhoto failed', err)
+      setCompareError('Karşılaştırma şu an yapılamadı. Birazdan tekrar dener misin?')
     } finally {
       setCompareLoading(false)
     }
@@ -452,8 +459,6 @@ export default function PlaceDetail() {
                 label="Yoğunluk"
                 value={crowdLabel(venue)}
               />
-              <StatCard icon={<Sparkles size={18} />} label="Temizlik" value="Veri yok" />
-              <StatCard icon={<Bell size={18} />} label="Hizmet" value="Veri yok" />
               <StatCard
                 icon={<Wallet size={18} />}
                 label="Fiyat"

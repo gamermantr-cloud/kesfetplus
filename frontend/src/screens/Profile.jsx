@@ -261,10 +261,12 @@ export default function Profile() {
                   <Bell size={14} />
                   {pushBusy ? 'Açılıyor…' : 'Bildirimleri Aç'}
                 </button>
-                <p className="text-xs text-taupe">
-                  Push bildirimleri sadece HTTPS (veya localhost'ta geliştirme
-                  sırasında) çalışır.
-                </p>
+                {typeof window !== 'undefined' && !window.isSecureContext && (
+                  <p className="text-xs text-taupe">
+                    Bildirimleri açabilmek için bu sayfaya güvenli bir bağlantı
+                    üzerinden erişmen gerekiyor.
+                  </p>
+                )}
               </div>
             )}
           </div>

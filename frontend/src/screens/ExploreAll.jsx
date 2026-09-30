@@ -128,7 +128,7 @@ export default function ExploreAll() {
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
-            className="bg-sand rounded-2xl overflow-hidden text-left"
+            className="bg-sand rounded-2xl overflow-hidden text-left grain"
             initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}

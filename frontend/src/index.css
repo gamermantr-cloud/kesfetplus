@@ -25,6 +25,28 @@
   --color-taupe: #57685d;
   --color-gold: #16a34a;
   --color-cream-line: rgba(16, 36, 26, 0.1);
+
+  /*
+    "Sıcak/organik" karakter geçişi: Tailwind'in varsayılan radius
+    ölçeğini burada override ediyoruz, böylece mevcut `rounded-lg`/
+    `rounded-xl`/`rounded-2xl`/`rounded-3xl` kullanımları (her ekranda
+    tek tek değiştirmeden) daha yumuşak/yuvarlak köşelerle render olur.
+  */
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  /*
+    Aynı geçiş: Tailwind'in varsayılan shadow-md/lg/xl'i siyah (rgb(0 0 0))
+    tabanlı - burada --color-espresso-rgb ile "sıcak" (espresso tonlu),
+    daha geniş/düşük-opasiteli gölgelerle override ediyoruz. Mevcut
+    `shadow-md`/`shadow-lg` class kullanımları değişmeden bu yeni,
+    daha yumuşak gölgeleri alır.
+  */
+  --shadow-md: 0 6px 16px -4px rgba(var(--color-espresso-rgb), 0.16), 0 3px 6px -3px rgba(var(--color-espresso-rgb), 0.08);
+  --shadow-lg: 0 14px 28px -8px rgba(var(--color-espresso-rgb), 0.18), 0 6px 10px -6px rgba(var(--color-espresso-rgb), 0.1);
+  --shadow-xl: 0 24px 40px -10px rgba(var(--color-espresso-rgb), 0.2), 0 10px 16px -8px rgba(var(--color-espresso-rgb), 0.1);
 }
 
 /*
@@ -74,4 +96,33 @@ body {
 .marker-cluster-large div {
   background-color: color-mix(in srgb, var(--color-tan-dark) 90%, transparent);
   color: var(--color-cream);
+}
+
+/*
+  "Sıcak/organik" karakter: çok hafif bir kağıt/grain dokusu.
+  Tek bir küçük (150x150) inline SVG - SVG feTurbulence ile üretilmiş
+  gri gürültü, data-URI olarak gömülü (dış dosya/asset indirme yok,
+  tek bir ağ isteği de yok). `.grain` eklenen herhangi bir yüzeye
+  (body, kartlar, alt sheet'ler) ::after ile çok düşük opasitede
+  (0.05) ve `mix-blend-mode: overlay` ile bindirilir, böylece altındaki
+  --color-* arka plana/fotoğrafa göre doğal bir doku hissi verir.
+  `pointer-events: none` sayesinde tıklama/etkileşimi hiç etkilemez;
+  `background-repeat: repeat` ile tek küçük pattern tüm yüzeye döşenir
+  (performans maliyeti ihmal edilebilir düzeyde).
+*/
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSIyIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNuKSIvPjwvc3ZnPgo=");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  border-radius: inherit;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }

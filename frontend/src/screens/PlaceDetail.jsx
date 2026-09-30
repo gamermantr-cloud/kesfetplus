@@ -693,7 +693,7 @@ export default function PlaceDetail() {
                     .map((s) => (
                       <li
                         key={s.id}
-                        className={`rounded-2xl border border-cream-line bg-sand/40 p-3 ${
+                        className={`rounded-2xl border border-cream-line bg-sand/40 p-3 grain ${
                           s.is_stale ? 'opacity-50' : ''
                         }`}
                       >
@@ -896,7 +896,7 @@ export default function PlaceDetail() {
                 {comments.map((c) => (
                   <li
                     key={c.id}
-                    className="rounded-2xl border border-cream-line bg-sand/40 p-4"
+                    className="rounded-2xl border border-cream-line bg-sand/40 p-4 grain"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-espresso">{c.author}</span>
@@ -1009,7 +1009,7 @@ function WeatherCard({ weather, loading, failed }) {
   const WeatherIcon = WEATHER_ICONS[weather.condition_group] ?? Cloud
 
   return (
-    <div className="mb-4 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3">
+    <div className="mb-4 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3 grain">
       <div className="flex items-center gap-2">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sand text-tan-dark">
           <WeatherIcon size={18} />
@@ -1027,7 +1027,7 @@ function WeatherCard({ weather, loading, failed }) {
 function StatCard({ icon, label, value, wide }) {
   return (
     <div
-      className={`flex items-center gap-3 rounded-2xl border border-cream-line bg-sand/40 p-4 ${
+      className={`flex items-center gap-3 rounded-2xl border border-cream-line bg-sand/40 p-4 grain ${
         wide ? 'col-span-2' : ''
       }`}
     >
@@ -1317,7 +1317,7 @@ function ComparePhotoPanel({ venueName, loading, result, error, onFileSelected, 
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-espresso/50 backdrop-blur-sm">
-      <div className="w-full max-w-[430px] rounded-t-3xl border-t border-cream-line bg-cream p-6 pb-8">
+      <div className="w-full max-w-[430px] rounded-t-3xl border-t border-cream-line bg-cream p-6 pb-8 grain">
         <div className="flex items-center justify-between">
           <h2 className="font-display text-lg font-medium text-espresso">Fotoğraf Karşılaştır</h2>
           <button

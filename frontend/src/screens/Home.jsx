@@ -266,7 +266,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => navigate(`/place/${featured.id}`)}
-            className={`relative h-48 w-full rounded-3xl overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[0]} p-5 flex flex-col justify-end text-left`}
+            className={`relative h-48 w-full rounded-3xl overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[0]} p-5 flex flex-col justify-end text-left grain`}
           >
             <span className="text-cream/80 text-xs font-medium uppercase tracking-wide">Bu hafta keşfet</span>
             <h2 className="font-display text-3xl text-cream mt-1 leading-tight">{featured.name}</h2>
@@ -304,7 +304,7 @@ export default function Home() {
             type="button"
             key={venue.id}
             onClick={() => navigate(`/place/${venue.id}`)}
-            className="bg-sand rounded-2xl overflow-hidden text-left"
+            className="bg-sand rounded-2xl overflow-hidden text-left grain"
             initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}

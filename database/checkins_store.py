@@ -20,6 +20,7 @@ resolved (real DB, or cross-process locking) before a multi-worker deploy.
 
 import html
 import json
+import logging
 import math
 import os
 import threading
@@ -28,6 +29,9 @@ from datetime import UTC, datetime, timedelta
 from functools import lru_cache
 
 from database.content_filter import check_content
+from database.push_notify import notify_new_status
+
+logger = logging.getLogger(__name__)
 
 _CHECKINS_PATH = os.path.join(os.path.dirname(__file__), "checkins.json")
 _STATUS_PATH = os.path.join(os.path.dirname(__file__), "status.json")
@@ -38,6 +42,10 @@ _lock = threading.Lock()
 class StatusError(Exception):
     """Raised when a status-update lookup (e.g. restore) doesn't match a
     real id."""
+
+
+class SelfHelpfulError(StatusError):
+    """Raised when a user tries to mark their own status update as helpful."""
 
 
 # How recent a check-in must be to count towards the "how many people are
@@ -52,6 +60,19 @@ STATUS_STALE_HOURS = 5
 LOCATION_VERIFY_RADIUS_KM = 3.0
 
 STATUS_TAGS = ("Kalabalık", "Orta", "Sakin")
+
+# "Gözcü" badge threshold (docs/research/anlik-bilgi-akisi.md "Teşvik
+# Katmanı"): 10+ status updates. Never stored on the user record - always
+# recomputed from status.json (see count_user_statuses) so it can't drift
+# from the real data.
+GOZCU_THRESHOLD = 10
+
+# How far back to look for "other people who were just at this venue" when a
+# new status update goes out - see _recent_checkin_user_ids / add_status.
+# Matches the task's "same venue, checked in within the last 6 hours" rule;
+# deliberately reuses the existing check-in data instead of a new "follow a
+# venue" system.
+NOTIFY_CHECKIN_WINDOW_HOURS = 6
 
 # Mirrors frontend/src/lib/districts.js DISTRICT_LATLNG - kept in sync
 # manually since the frontend has no build step that shares this with Python.
@@ -111,6 +132,23 @@ def _venue_areas() -> dict:
                 if venue.get("id") and venue.get("area"):
                     areas[venue["id"]] = venue["area"]
     return areas
+
+
+@lru_cache(maxsize=1)
+def _venue_names() -> dict:
+    """place_id -> display name, loaded once from the seed JSON files - used
+    to write a human-readable push notification body (see
+    database/push_notify.py notify_new_status)."""
+    names: dict[str, str] = {}
+    for filename in ("places.json", "gurme.json", "hotels.json"):
+        path = os.path.join(_SEED_DIR, filename)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as f:
+            for venue in json.load(f):
+                if venue.get("id") and venue.get("name"):
+                    names[venue["id"]] = venue["name"]
+    return names
 
 
 def _district_center(area: str | None) -> tuple[float, float]:
@@ -195,6 +233,50 @@ def count_recent_checkins(place_id: str, hours: int = CHECKIN_ACTIVE_WINDOW_HOUR
     return count
 
 
+def _recent_checkin_user_ids(place_id: str, hours: int, exclude_user_id: str | None) -> set[str]:
+    """user_ids who checked in at place_id within the last `hours` hours,
+    excluding exclude_user_id (the person who just posted the status update
+    that triggered this lookup) and any check-in with no real account
+    attached. Deliberately reuses the existing check-in data - see
+    NOTIFY_CHECKIN_WINDOW_HOURS - instead of introducing a new "follow this
+    venue" subscription concept."""
+    with _lock:
+        data = _load(_CHECKINS_PATH)
+    checkins = data.get(place_id, [])
+    cutoff = datetime.now(UTC) - timedelta(hours=hours)
+    user_ids: set[str] = set()
+    for c in checkins:
+        user_id = c.get("author_user_id")
+        if not user_id or user_id == exclude_user_id:
+            continue
+        try:
+            created = datetime.fromisoformat(c["created_at"])
+        except (KeyError, ValueError):
+            continue
+        if created >= cutoff:
+            user_ids.add(user_id)
+    return user_ids
+
+
+def _notify_recent_checkins(place_id: str, tag: str, exclude_user_id: str | None) -> None:
+    """Best-effort push fan-out to everyone who checked in at this venue
+    recently (see _recent_checkin_user_ids), skipping the author. This must
+    never be able to break add_status's real job (saving the status
+    update) - database/push_notify.notify_new_status already never raises
+    on its own, but this extra try/except is a second safety net around the
+    lookup itself (e.g. a corrupted checkins.json)."""
+    try:
+        recipient_ids = _recent_checkin_user_ids(
+            place_id, NOTIFY_CHECKIN_WINDOW_HOURS, exclude_user_id
+        )
+        if not recipient_ids:
+            return
+        venue_name = _venue_names().get(place_id, "bir mekan")
+        notify_new_status(place_id, venue_name, tag, recipient_ids)
+    except Exception:  # pragma: no cover - safety net, must never break add_status
+        logger.exception("Anlık durum push bildirimi gönderilirken beklenmeyen hata.")
+
+
 def add_status(
     place_id: str, author: str, tag: str, text: str, author_user_id: str | None = None
 ) -> dict:
@@ -206,9 +288,16 @@ def add_status(
     objectionable status is still stored (never silently dropped) but forced
     to review_status="hidden" - see list_status's default filtering. Only
     the boolean result is used; matched terms are never logged or stored.
+
+    If the update is actually visible, this also fans out a real Web Push
+    notification (database/push_notify.py) to anyone who checked in at the
+    same place_id within the last NOTIFY_CHECKIN_WINDOW_HOURS hours (except
+    the author) - see _notify_recent_checkins. That send happens after the
+    write is already durably saved, and can never raise back into this
+    function.
     """
     content_check = check_content(text) if text else {"is_objectionable": False}
-    status = {
+    status: dict = {
         "id": str(uuid.uuid4()),
         "place_id": place_id,
         "author": html.escape(author),
@@ -218,11 +307,15 @@ def add_status(
         "created_at": datetime.now(UTC).isoformat(),
         "review_status": "hidden" if content_check["is_objectionable"] else "visible",
         "flagged_reason": "objectionable_content" if content_check["is_objectionable"] else None,
+        "helpful_count": 0,
+        "helpful_user_ids": [],
     }
     with _lock:
         data = _load(_STATUS_PATH)
         data.setdefault(place_id, []).append(status)
         _save(_STATUS_PATH, data)
+    if status["review_status"] == "visible":
+        _notify_recent_checkins(place_id, status["tag"], author_user_id)
     return status
 
 
@@ -258,7 +351,16 @@ def list_status(
             is_stale = created < cutoff
         except (KeyError, ValueError):
             pass
-        result.append({**entry, "is_stale": is_stale})
+        # Backfill helpful_count/helpful_user_ids for status updates written
+        # before this field existed (same pattern as comments_store.list_comments).
+        result.append(
+            {
+                **entry,
+                "is_stale": is_stale,
+                "helpful_count": entry.get("helpful_count", 0),
+                "helpful_user_ids": entry.get("helpful_user_ids", []),
+            }
+        )
     return result
 
 
@@ -274,6 +376,54 @@ def list_hidden_status() -> list[dict]:
             if entry.get("review_status") == "hidden" or entry.get("flagged_reason"):
                 hidden.append(entry)
     return hidden
+
+
+def toggle_helpful_status(place_id: str, status_id: str, user_id: str) -> dict:
+    """Mark/unmark a status update as "helpful" for user_id - same toggle
+    semantics as comments_store.toggle_helpful_comment (one mark per user,
+    calling again removes it, self-marking refused with StatusError -> 400).
+    See that function's docstring for the full reasoning."""
+    with _lock:
+        data = _load(_STATUS_PATH)
+        for entry in data.get(place_id, []):
+            if entry["id"] != status_id:
+                continue
+            if entry.get("author_user_id") == user_id:
+                raise SelfHelpfulError("Kendi durumunu faydalı olarak işaretleyemezsin.")
+            helpful_ids = list(entry.get("helpful_user_ids", []))
+            if user_id in helpful_ids:
+                helpful_ids.remove(user_id)
+            else:
+                helpful_ids.append(user_id)
+            entry["helpful_user_ids"] = helpful_ids
+            entry["helpful_count"] = len(helpful_ids)
+            _save(_STATUS_PATH, data)
+            return entry
+    raise StatusError("Durum güncellemesi bulunamadı.")
+
+
+def count_user_statuses(user_id: str, include_hidden: bool = False) -> int:
+    """Real-time count of how many status updates this user has posted -
+    the sole input for the "Gözcü" badge (GOZCU_THRESHOLD, see api/main.py
+    GET /users/{id}/stats). Deliberately NOT cached/stored anywhere: it is
+    recomputed from status.json on every call, so the badge can never drift
+    from the real data (see CLAUDE.md "sahte veri yasak" / MUTLAK KURAL).
+
+    include_hidden=False (default) excludes status updates the content
+    filter hid (review_status == "hidden") - content that was never
+    actually shown to anyone shouldn't count toward a reputation badge.
+    """
+    with _lock:
+        data = _load(_STATUS_PATH)
+    count = 0
+    for entries in data.values():
+        for entry in entries:
+            if entry.get("author_user_id") != user_id:
+                continue
+            if not include_hidden and entry.get("review_status") == "hidden":
+                continue
+            count += 1
+    return count
 
 
 def restore_status(status_id: str) -> dict:

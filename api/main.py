@@ -1,16 +1,22 @@
+import os
+
 from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
 from database.checkins_store import (
+    GOZCU_THRESHOLD,
     STATUS_TAGS,
+    SelfHelpfulError,
     StatusError,
     add_checkin,
     add_status,
     count_recent_checkins,
+    count_user_statuses,
     list_hidden_status,
     list_status,
     restore_status,
+    toggle_helpful_status,
 )
 from database.comments_store import (
     CommentError,
@@ -18,6 +24,10 @@ from database.comments_store import (
     list_comments,
     list_hidden_comments,
     restore_comment,
+    toggle_helpful_comment,
+)
+from database.comments_store import (
+    SelfHelpfulError as CommentSelfHelpfulError,
 )
 from database.photo_compare import (
     InvalidImageError,
@@ -25,6 +35,10 @@ from database.photo_compare import (
     ReferenceDownloadError,
     compare_images,
     get_reference_photo_url,
+)
+from database.push_subscriptions_store import (
+    add_subscription,
+    remove_subscription,
 )
 from database.reports_store import (
     VALID_TARGET_TYPES,
@@ -155,6 +169,23 @@ class StatusCreate(BaseModel):
         return value
 
 
+class PushSubscriptionKeys(BaseModel):
+    p256dh: str = Field(min_length=1, max_length=500)
+    auth: str = Field(min_length=1, max_length=500)
+
+
+class PushSubscriptionCreate(BaseModel):
+    """Mirrors the browser's PushSubscription.toJSON() shape exactly (see
+    frontend/src/lib/push.js) - no reshaping on either side of the wire."""
+
+    endpoint: str = Field(min_length=1, max_length=2000)
+    keys: PushSubscriptionKeys
+
+
+class PushUnsubscribeRequest(BaseModel):
+    endpoint: str = Field(min_length=1, max_length=2000)
+
+
 @app.get("/")
 def read_root():
     return {"name": "KesfetPlus", "status": "running"}
@@ -210,6 +241,23 @@ def get_user_profile(user_id: str):
     if not profile:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
     return profile
+
+
+@app.get("/users/{user_id}/stats")
+def get_user_stats(user_id: str):
+    """Real, on-demand computed stats for the "Teşvik Katmanı" (see
+    docs/research/anlik-bilgi-akisi.md) - status_count is counted fresh
+    from status.json every call (database/checkins_store.count_user_statuses),
+    never stored, so it can't drift from reality. badges is ["gozcu"] once
+    status_count reaches GOZCU_THRESHOLD, else []. Public (no auth) so
+    PlaceDetail.jsx can show a "Gözcü" tag next to any author's post, not
+    just the logged-in user's own profile."""
+    profile = get_public_profile(user_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    status_count = count_user_statuses(user_id)
+    badges = ["gozcu"] if status_count >= GOZCU_THRESHOLD else []
+    return {"status_count": status_count, "badges": badges, "gozcu_threshold": GOZCU_THRESHOLD}
 
 
 # ---------------------------------------------------------------------------
@@ -282,6 +330,19 @@ def get_comments(place_id: str, user: dict | None = Depends(get_current_user_opt
     return list_comments(place_id, exclude_user_ids=exclude)
 
 
+@app.post("/places/{place_id}/comments/{comment_id}/helpful")
+def mark_comment_helpful(place_id: str, comment_id: str, user: dict = Depends(get_current_user)):
+    """Toggle: first call marks helpful, a second call from the same user
+    unmarks it (see database/comments_store.toggle_helpful_comment). Marking
+    your own comment is refused with 400; an unknown comment_id is a 404."""
+    try:
+        return toggle_helpful_comment(place_id, comment_id, user["id"])
+    except CommentSelfHelpfulError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    except CommentError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+
+
 @app.post("/places/{place_id}/checkins", status_code=201)
 def create_checkin(place_id: str, checkin: CheckinCreate, user: dict = Depends(get_current_user)):
     return add_checkin(
@@ -303,6 +364,60 @@ def create_status(place_id: str, status: StatusCreate, user: dict = Depends(get_
 def get_status(place_id: str, user: dict | None = Depends(get_current_user_optional)):
     exclude = set(user["blocked_user_ids"]) if user else None
     return list_status(place_id, exclude_user_ids=exclude)
+
+
+@app.post("/places/{place_id}/status/{status_id}/helpful")
+def mark_status_helpful(place_id: str, status_id: str, user: dict = Depends(get_current_user)):
+    """Toggle: first call marks helpful, a second call from the same user
+    unmarks it (see database/checkins_store.toggle_helpful_status). Marking
+    your own status update is refused with 400; an unknown status_id is a
+    404."""
+    try:
+        return toggle_helpful_status(place_id, status_id, user["id"])
+    except SelfHelpfulError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    except StatusError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+
+
+# ---------------------------------------------------------------------------
+# Web Push (RFC 8030 + VAPID/RFC 8292) - see database/push_notify.py and
+# scripts/generate_vapid_keys.py. No third-party account/API key is needed
+# (unlike FCM/APNs): VAPID is a self-generated key pair the server keeps in
+# .env. Real sends only start once VAPID_PRIVATE_KEY/VAPID_CLAIMS_EMAIL are
+# actually set - see GET /push/vapid-public-key for the honest "not
+# configured yet" case.
+# ---------------------------------------------------------------------------
+
+
+@app.get("/push/vapid-public-key")
+def get_vapid_public_key():
+    """The frontend needs this to call PushManager.subscribe({
+    applicationServerKey }) - see frontend/src/lib/push.js. Returns 503
+    with an honest message (not a fake/placeholder key) if the server
+    hasn't had a real VAPID key pair generated yet (see
+    scripts/generate_vapid_keys.py)."""
+    public_key = os.getenv("VAPID_PUBLIC_KEY")
+    if not public_key:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "VAPID anahtarları henüz üretilmedi. Sunucuda "
+                "scripts/generate_vapid_keys.py çalıştırılıp .env dosyasına "
+                "VAPID_PUBLIC_KEY/VAPID_PRIVATE_KEY eklenmeli."
+            ),
+        )
+    return {"public_key": public_key}
+
+
+@app.post("/push/subscribe", status_code=201)
+def push_subscribe(payload: PushSubscriptionCreate, user: dict = Depends(get_current_user)):
+    return add_subscription(user["id"], payload.endpoint, payload.keys.p256dh, payload.keys.auth)
+
+
+@app.post("/push/unsubscribe", status_code=204)
+def push_unsubscribe(payload: PushUnsubscribeRequest, user: dict = Depends(get_current_user)):
+    remove_subscription(user["id"], payload.endpoint)
 
 
 # ---------------------------------------------------------------------------

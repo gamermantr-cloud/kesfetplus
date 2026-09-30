@@ -1,4 +1,6 @@
 import {
+  Bell,
+  BellOff,
   Bookmark,
   ChevronLeft,
   ChevronRight,
@@ -9,13 +11,15 @@ import {
   Settings,
   ShieldCheck,
   ShieldX,
+  Telescope,
   User,
   UserX,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../lib/AuthContext.jsx'
-import { getUserProfile } from '../lib/api.js'
+import { getUserProfile, getUserStats } from '../lib/api.js'
+import { disablePushNotifications, enablePushNotifications, getPermissionState, isPushSupported } from '../lib/push.js'
 
 const MENU_ITEMS = [
   { id: 'saved', label: 'Kaydettiklerim', icon: Bookmark },
@@ -33,6 +37,34 @@ export default function Profile() {
   const [blockedProfiles, setBlockedProfiles] = useState([])
   const [blockedLoading, setBlockedLoading] = useState(false)
   const [unblockConfirmId, setUnblockConfirmId] = useState(null)
+
+  const [pushPermission, setPushPermission] = useState(() => getPermissionState())
+  const [pushBusy, setPushBusy] = useState(false)
+
+  // Real, on-demand computed stats for the "Teşvik Katmanı" (Gözcü rozeti) -
+  // see docs/research/anlik-bilgi-akisi.md and GET /users/{id}/stats.
+  // stats === null while loading/not-yet-fetched; never a guessed number.
+  const [stats, setStats] = useState(null)
+  const [statsError, setStatsError] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    if (!isLoggedIn || !user?.id) {
+      setStats(null)
+      return undefined
+    }
+    setStatsError(false)
+    getUserStats(user.id)
+      .then((data) => {
+        if (!cancelled) setStats(data)
+      })
+      .catch(() => {
+        if (!cancelled) setStatsError(true)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [isLoggedIn, user?.id])
 
   useEffect(() => {
     let cancelled = false
@@ -80,6 +112,31 @@ export default function Profile() {
     await logout()
     showToast('Çıkış yapıldı')
     navigate('/home')
+  }
+
+  async function handleEnablePush() {
+    setPushBusy(true)
+    try {
+      await enablePushNotifications()
+      setPushPermission(getPermissionState())
+      showToast('Bildirimler açıldı')
+    } catch (err) {
+      showToast(err?.message ?? 'Bildirimler açılamadı')
+    } finally {
+      setPushBusy(false)
+    }
+  }
+
+  async function handleDisablePush() {
+    setPushBusy(true)
+    try {
+      await disablePushNotifications()
+      showToast('Bildirimler kapatıldı')
+    } catch {
+      showToast('Bildirimler kapatılamadı')
+    } finally {
+      setPushBusy(false)
+    }
   }
 
   return (
@@ -156,6 +213,107 @@ export default function Profile() {
           })}
         </div>
       </div>
+
+      {isLoggedIn && (
+        <div className="mt-6 px-5">
+          <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+            <Bell size={14} />
+            Push Bildirimleri
+          </p>
+          <div className="rounded-2xl border border-cream-line bg-sand/40 p-4">
+            {!isPushSupported() ? (
+              <p className="text-sm text-taupe">
+                Bu tarayıcı push bildirimlerini desteklemiyor.
+              </p>
+            ) : pushPermission === 'denied' ? (
+              <p className="text-sm text-taupe">
+                Bildirim izni engellenmiş. Açmak için tarayıcı site ayarlarından izni
+                değiştirmen gerekiyor.
+              </p>
+            ) : pushPermission === 'granted' ? (
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm text-espresso-soft">
+                  Bildirimler açık - takip ettiğin mekanlarda yeni bir durum
+                  paylaşıldığında haber verilir.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleDisablePush}
+                  disabled={pushBusy}
+                  className="flex shrink-0 items-center gap-2 rounded-full border border-tan-dark px-3 py-2 text-xs font-medium text-espresso disabled:opacity-60"
+                >
+                  <BellOff size={14} />
+                  Kapat
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <p className="text-sm text-espresso-soft">
+                  Check-in yaptığın bir mekanda yeni bir durum paylaşıldığında anında
+                  haberin olsun.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleEnablePush}
+                  disabled={pushBusy}
+                  className="flex items-center gap-2 rounded-full bg-tan px-4 py-2 text-xs font-medium text-cream disabled:opacity-60"
+                >
+                  <Bell size={14} />
+                  {pushBusy ? 'Açılıyor…' : 'Bildirimleri Aç'}
+                </button>
+                <p className="text-xs text-taupe">
+                  Push bildirimleri sadece HTTPS (veya localhost'ta geliştirme
+                  sırasında) çalışır.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {isLoggedIn && (
+        <div className="mt-6 px-5">
+          <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+            <Telescope size={14} />
+            Gözcü Rozeti
+          </p>
+          <div className="rounded-2xl border border-cream-line bg-sand/40 p-4">
+            {stats === null ? (
+              statsError ? (
+                <p className="text-sm text-taupe">İstatistikler yüklenemedi.</p>
+              ) : (
+                <p className="text-sm text-taupe">Yükleniyor…</p>
+              )
+            ) : stats.badges.includes('gozcu') ? (
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 text-tan-dark">
+                  <Telescope size={20} />
+                </span>
+                <div>
+                  <p className="text-sm font-medium text-espresso">
+                    Gözcü rozetini kazandın!
+                  </p>
+                  <p className="text-xs text-taupe">
+                    Toplam {stats.status_count} durum paylaştın.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p className="text-sm font-medium text-espresso">
+                  {stats.status_count === 0
+                    ? 'Henüz durum paylaşımın yok.'
+                    : `${stats.status_count} durum paylaştın.`}
+                </p>
+                <p className="mt-1 text-xs text-taupe">
+                  Gözcü rozetini kazanmak için {stats.gozcu_threshold - stats.status_count} durum
+                  daha paylaş.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {isLoggedIn && user?.is_moderator && (
         <div className="mt-6 px-5">

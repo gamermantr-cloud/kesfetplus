@@ -38,3 +38,4 @@ database/status.json
 database/users.json
 database/sessions.json
 database/reports.json
+database/push_subscriptions.json

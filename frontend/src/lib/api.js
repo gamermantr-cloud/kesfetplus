@@ -94,6 +94,16 @@ export async function getUserProfile(userId) {
   return request(`/users/${encodeURIComponent(userId)}`)
 }
 
+/**
+ * Real-time computed stats (never a stored/fabricated number) for the
+ * "Teşvik Katmanı" - see docs/research/anlik-bilgi-akisi.md and
+ * database/checkins_store.count_user_statuses. { status_count, badges,
+ * gozcu_threshold }.
+ */
+export async function getUserStats(userId) {
+  return request(`/users/${encodeURIComponent(userId)}/stats`)
+}
+
 // --- Blocking -------------------------------------------------------------
 
 export async function blockUser(userId) {
@@ -169,6 +179,43 @@ export async function postStatusUpdate(placeId, { tag, text }) {
     method: 'POST',
     body: { tag, text },
   })
+}
+
+// --- "Faydalı oldu" (helpful) - see docs/research/anlik-bilgi-akisi.md
+// "Teşvik Katmanı". Toggle: calling again on the same content un-marks it.
+
+export async function markCommentHelpful(placeId, commentId) {
+  return request(
+    `/places/${encodeURIComponent(placeId)}/comments/${encodeURIComponent(commentId)}/helpful`,
+    { method: 'POST' },
+  )
+}
+
+export async function markStatusHelpful(placeId, statusId) {
+  return request(
+    `/places/${encodeURIComponent(placeId)}/status/${encodeURIComponent(statusId)}/helpful`,
+    { method: 'POST' },
+  )
+}
+
+// --- Web Push (VAPID) -------------------------------------------------------
+
+/**
+ * The public VAPID key the browser needs for PushManager.subscribe(). See
+ * database/push_notify.py / scripts/generate_vapid_keys.py - throws (with
+ * an honest server-provided message) if no real key pair has been
+ * generated yet, rather than returning a fake one.
+ */
+export async function getVapidPublicKey() {
+  return request('/push/vapid-public-key')
+}
+
+export async function subscribePush(subscription) {
+  return request('/push/subscribe', { method: 'POST', body: subscription })
+}
+
+export async function unsubscribePush(endpoint) {
+  return request('/push/unsubscribe', { method: 'POST', body: { endpoint } })
 }
 
 // --- Places: photo comparison ----------------------------------------------

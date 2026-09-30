@@ -32,6 +32,10 @@ class CommentError(Exception):
     """Raised when a comment lookup (e.g. restore) doesn't match a real id."""
 
 
+class SelfHelpfulError(CommentError):
+    """Raised when a user tries to mark their own comment as helpful."""
+
+
 def _load() -> dict:
     if not os.path.exists(_STORE_PATH):
         return {}
@@ -94,6 +98,8 @@ def add_comment(
             "lng": lng,
             "accuracy": accuracy,
             "created_at": datetime.now(UTC).isoformat(),
+            "helpful_count": 0,
+            "helpful_user_ids": [],
             **trust,
         }
         data.setdefault(place_id, []).append(comment)
@@ -120,7 +126,17 @@ def list_comments(
         comments = [c for c in comments if c.get("review_status") != "hidden"]
     if exclude_user_ids:
         comments = [c for c in comments if c.get("author_user_id") not in exclude_user_ids]
-    return comments
+    # Backfill helpful_count/helpful_user_ids for comments written before
+    # this field existed (see add_comment) - never crash on a missing key,
+    # just treat it as "nobody has marked this helpful yet".
+    return [
+        {
+            **c,
+            "helpful_count": c.get("helpful_count", 0),
+            "helpful_user_ids": c.get("helpful_user_ids", []),
+        }
+        for c in comments
+    ]
 
 
 def list_hidden_comments() -> list[dict]:
@@ -135,6 +151,40 @@ def list_hidden_comments() -> list[dict]:
             if comment.get("review_status") == "hidden" or comment.get("flagged_reason"):
                 hidden.append(comment)
     return hidden
+
+
+def toggle_helpful_comment(place_id: str, comment_id: str, user_id: str) -> dict:
+    """Mark/unmark a comment as "helpful" for user_id (see
+    docs/research/anlik-bilgi-akisi.md "Teşvik Katmanı" - TripAdvisor's
+    "helpful" signal). One user can only be counted once: calling this a
+    second time removes the mark instead of adding a duplicate (the
+    frontend's single "Faydalı" button toggles both ways via this same
+    endpoint - see api/main.py).
+
+    Marking your own comment is refused (CommentError -> 400): a helpful
+    count is only meaningful as *other* people's signal, and self-marking
+    would let anyone trivially inflate their own count.
+
+    Old comments written before helpful_count/helpful_user_ids existed are
+    backfilled to 0/[] here on first toggle (same default as list_comments).
+    """
+    with _lock:
+        data = _load()
+        for comment in data.get(place_id, []):
+            if comment["id"] != comment_id:
+                continue
+            if comment.get("author_user_id") == user_id:
+                raise SelfHelpfulError("Kendi yorumunu faydalı olarak işaretleyemezsin.")
+            helpful_ids = list(comment.get("helpful_user_ids", []))
+            if user_id in helpful_ids:
+                helpful_ids.remove(user_id)
+            else:
+                helpful_ids.append(user_id)
+            comment["helpful_user_ids"] = helpful_ids
+            comment["helpful_count"] = len(helpful_ids)
+            _save(data)
+            return comment
+    raise CommentError("Yorum bulunamadı.")
 
 
 def restore_comment(comment_id: str) -> dict:

@@ -11,6 +11,8 @@ import {
   ShieldQuestion,
   Sparkles,
   Star,
+  Telescope,
+  ThumbsUp,
   UserX,
   Users,
   Video,
@@ -24,6 +26,9 @@ import {
   getCheckinCount,
   getComments,
   getStatusUpdates,
+  getUserStats,
+  markCommentHelpful,
+  markStatusHelpful,
   postCheckin,
   postComment,
   postStatusUpdate,
@@ -100,6 +105,12 @@ export default function PlaceDetail() {
   const [compareResult, setCompareResult] = useState(null)
   const [compareError, setCompareError] = useState(null)
 
+  // author_user_id -> badges[] (e.g. ["gozcu"]) - fetched lazily per unique
+  // status author, see the effect below. Not fetched for comment authors
+  // (task marks the "Gözcü" tag on status updates as the important spot,
+  // comments optional/out of scope).
+  const [authorBadges, setAuthorBadges] = useState({})
+
   useEffect(() => {
     let cancelled = false
     getAllVenues().then((venues) => {
@@ -163,6 +174,33 @@ export default function PlaceDetail() {
     loadCheckinCount()
   }, [loadStatus, loadCheckinCount])
 
+  // Lazily fetch "Gözcü" badge info for status authors not yet looked up.
+  // Guarded so it only ever fetches ids missing from authorBadges - once an
+  // id has an entry (even []), it's never re-fetched for this mount.
+  useEffect(() => {
+    let cancelled = false
+    const ids = [...new Set(statusUpdates.map((s) => s.author_user_id).filter(Boolean))]
+    const toFetch = ids.filter((id) => authorBadges[id] === undefined)
+    if (toFetch.length === 0) return undefined
+    Promise.all(
+      toFetch.map((id) =>
+        getUserStats(id)
+          .then((stats) => [id, stats.badges ?? []])
+          .catch(() => [id, []]),
+      ),
+    ).then((pairs) => {
+      if (cancelled) return
+      setAuthorBadges((prev) => {
+        const next = { ...prev }
+        for (const [id, badges] of pairs) next[id] = badges
+        return next
+      })
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [statusUpdates, authorBadges])
+
   async function handleCheckin() {
     if (!isLoggedIn) {
       navigate('/login', loginState)
@@ -217,6 +255,24 @@ export default function PlaceDetail() {
       setStatusError('Durum paylaşılamadı. Backend çalışıyor mu kontrol edin.')
     } finally {
       setStatusSubmitting(false)
+    }
+  }
+
+  async function handleCommentHelpful(commentId) {
+    try {
+      await markCommentHelpful(placeId, commentId)
+      await loadComments()
+    } catch {
+      setCommentsError('İşlem gerçekleştirilemedi.')
+    }
+  }
+
+  async function handleStatusHelpful(statusId) {
+    try {
+      await markStatusHelpful(placeId, statusId)
+      await loadStatus()
+    } catch {
+      setStatusError('İşlem gerçekleştirilemedi.')
     }
   }
 
@@ -512,19 +568,37 @@ export default function PlaceDetail() {
                         <p className="text-sm text-espresso-soft">
                           <span className="text-taupe">{timeAgo(s.created_at)}, </span>
                           <span className="font-medium text-espresso">{s.author}</span>
+                          {s.author_user_id && authorBadges[s.author_user_id]?.includes('gozcu') && (
+                            <span
+                              title="Gözcü rozeti: 10+ durum paylaşımı"
+                              className="ml-1 inline-flex items-center gap-0.5 rounded-full bg-gold/20 px-1.5 py-0.5 text-[10px] font-medium text-tan-dark"
+                            >
+                              <Telescope size={10} />
+                              Gözcü
+                            </span>
+                          )}
                           <span className="text-taupe"> paylaştı: </span>
                           <span className="font-medium text-espresso">{s.tag}</span>
                           {s.text ? ` — ${s.text}` : ''}
                         </p>
                         {s.is_stale && <p className="mt-0.5 text-xs text-taupe">Eski bilgi</p>}
-                        <ModerationRow
-                          item={s}
-                          targetType="status"
-                          placeId={placeId}
-                          currentUserId={user?.id}
-                          isLoggedIn={isLoggedIn}
-                          onBlock={handleBlock}
-                        />
+                        <div className="mt-2 flex flex-wrap items-center gap-3">
+                          <HelpfulButton
+                            item={s}
+                            currentUserId={user?.id}
+                            isLoggedIn={isLoggedIn}
+                            onNavigateLogin={() => navigate('/login', loginState)}
+                            onToggle={() => handleStatusHelpful(s.id)}
+                          />
+                          <ModerationRow
+                            item={s}
+                            targetType="status"
+                            placeId={placeId}
+                            currentUserId={user?.id}
+                            isLoggedIn={isLoggedIn}
+                            onBlock={handleBlock}
+                          />
+                        </div>
                       </li>
                     ))}
                 </ul>
@@ -697,14 +771,23 @@ export default function PlaceDetail() {
                         Topluluk incelemesi bekliyor
                       </span>
                     )}
-                    <ModerationRow
-                      item={c}
-                      targetType="comment"
-                      placeId={placeId}
-                      currentUserId={user?.id}
-                      isLoggedIn={isLoggedIn}
-                      onBlock={handleBlock}
-                    />
+                    <div className="mt-2 flex flex-wrap items-center gap-3">
+                      <HelpfulButton
+                        item={c}
+                        currentUserId={user?.id}
+                        isLoggedIn={isLoggedIn}
+                        onNavigateLogin={() => navigate('/login', loginState)}
+                        onToggle={() => handleCommentHelpful(c.id)}
+                      />
+                      <ModerationRow
+                        item={c}
+                        targetType="comment"
+                        placeId={placeId}
+                        currentUserId={user?.id}
+                        isLoggedIn={isLoggedIn}
+                        onBlock={handleBlock}
+                      />
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -822,6 +905,56 @@ function InstagramEmbed({ html }) {
 }
 
 /**
+ * "👍 Faydalı (N)" toggle button for a comment or status update (see
+ * docs/research/anlik-bilgi-akisi.md "Teşvik Katmanı" - TripAdvisor's
+ * "helpful" signal). N is the real helpful_count from the backend, never a
+ * guessed number. active = the current user already marked it helpful
+ * (item.helpful_user_ids includes their id) - shown filled/highlighted so
+ * a second click reads as "undo" rather than "mark again". Hidden entirely
+ * for the item's own author (self-marking is refused server-side too, see
+ * database/comments_store.toggle_helpful_comment / checkins_store's
+ * equivalent - this is just the matching UI-side rule).
+ */
+function HelpfulButton({ item, currentUserId, isLoggedIn, onNavigateLogin, onToggle }) {
+  const [submitting, setSubmitting] = useState(false)
+  const isOwnContent = item.author_user_id && item.author_user_id === currentUserId
+  if (isOwnContent) return null
+
+  const count = item.helpful_count ?? 0
+  const active = Boolean(
+    isLoggedIn && currentUserId && (item.helpful_user_ids ?? []).includes(currentUserId),
+  )
+
+  async function handleClick() {
+    if (!isLoggedIn) {
+      onNavigateLogin()
+      return
+    }
+    setSubmitting(true)
+    try {
+      await onToggle()
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={submitting}
+      aria-pressed={active}
+      className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-colors disabled:opacity-60 ${
+        active ? 'bg-tan text-cream' : 'border border-cream-line text-taupe'
+      }`}
+    >
+      <ThumbsUp size={12} className={active ? 'fill-cream' : ''} />
+      Faydalı{count > 0 ? ` (${count})` : ''}
+    </button>
+  )
+}
+
+/**
  * "Şikayet et" / "Engelle" row under a comment or status card. Both are
  * single-click-to-reveal, second-click-to-confirm (never fires on the
  * first tap) - see task requirement: report/block must never happen
@@ -875,7 +1008,7 @@ function ModerationRow({ item, targetType, placeId, currentUserId, isLoggedIn, o
   }
 
   return (
-    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
+    <div className="flex flex-wrap items-center gap-3 text-xs">
       {reportDone ? (
         <span className="text-taupe">Şikayet edildi, teşekkürler.</span>
       ) : reportOpen ? (

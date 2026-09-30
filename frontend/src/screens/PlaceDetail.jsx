@@ -2,7 +2,11 @@ import {
   AlertTriangle,
   Camera,
   ChevronLeft,
+  Cloud,
+  CloudFog,
+  CloudLightning,
   CloudRain,
+  CloudSnow,
   Flag,
   Loader2,
   MapPin,
@@ -10,6 +14,7 @@ import {
   Send,
   ShieldQuestion,
   Star,
+  Sun,
   Telescope,
   ThumbsUp,
   UserX,
@@ -41,6 +46,18 @@ import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
+
+// WMO weather-code group (database/weather_cache.py condition_group) -> icon.
+// Aynı eşleme Home.jsx'te de kullanılıyor - kasıtlı olarak tutarlı tutuldu.
+const WEATHER_ICONS = {
+  clear: Sun,
+  cloudy: Cloud,
+  fog: CloudFog,
+  rain: CloudRain,
+  snow: CloudSnow,
+  storm: CloudLightning,
+  unknown: Cloud,
+}
 
 // Shown when the caller's own just-submitted comment/status came back with
 // flagged_reason === "objectionable_content" (see database/content_filter.py).
@@ -170,21 +187,38 @@ export default function PlaceDetail() {
     }
   }, [placeId])
 
-  // Hava durumuna duyarlı mekan uyarısı ("hava durumuna duyarlı mekan
-  // önerileri" MVP) - sadece açık-hava-duyarlı etiketli mekanlar için
-  // anlamlı, ama basitlik için venue.area'ya göre hep çekiliyor (backend
-  // önbelleğe alıyor, bkz. database/weather_cache.py). weather null kalırsa
-  // (Open-Meteo'ya ulaşılamazsa) hiçbir uyarı gösterilmez - uydurma veri yok.
+  // Mekanın bulunduğu ilçenin gerçek anlık hava durumu (Genel Bakış
+  // sekmesindeki her zaman görünen WeatherCard İÇİN, ayrıca aşağıdaki
+  // koşullu açık-hava uyarısı da aynı veriyi kullanıyor - iki ayrı istek
+  // atılmıyor). venue.area backend'e olduğu gibi gönderiliyor;
+  // database/weather_cache.py._resolve_district "Sarıyer (Emirgan)" gibi
+  // tam area string'lerinden de ilk bilinen ilçe adını substring olarak
+  // buluyor, ayrıca bir formatlama/encode işi frontend'de gerekmiyor
+  // (getWeather zaten encodeURIComponent kullanıyor, bkz. lib/api.js).
+  // weather null kalırsa (Open-Meteo'ya ulaşılamazsa) weatherFailed true
+  // olur ve dürüstçe "hava durumu bilgisi şu an yok" gösterilir - uydurma
+  // sıcaklık/son-bilinen değer YOK (CLAUDE.md "sahte veri yasak").
   const [weather, setWeather] = useState(null)
+  const [weatherLoading, setWeatherLoading] = useState(true)
+  const [weatherFailed, setWeatherFailed] = useState(false)
   useEffect(() => {
-    if (!venue?.area) return undefined
+    if (!venue?.area) {
+      setWeatherLoading(false)
+      return undefined
+    }
     let cancelled = false
+    setWeatherLoading(true)
+    setWeatherFailed(false)
     getWeather(venue.area)
       .then((data) => {
         if (!cancelled) setWeather(data)
       })
       .catch((err) => {
         console.error('getWeather failed', err)
+        if (!cancelled) setWeatherFailed(true)
+      })
+      .finally(() => {
+        if (!cancelled) setWeatherLoading(false)
       })
     return () => {
       cancelled = true
@@ -534,6 +568,7 @@ export default function PlaceDetail() {
           >
         {activeTab === 'Genel Bakış' && (
           <div>
+            <WeatherCard weather={weather} loading={weatherLoading} failed={weatherFailed} />
             {weather && !weather.is_outdoor_friendly && isOutdoorWeatherSensitive(venue) && (
               <div className="mb-4 flex items-start gap-2 rounded-2xl bg-sand px-4 py-3 text-sm text-espresso-soft">
                 <CloudRain size={16} className="mt-0.5 shrink-0 text-tan-dark" />
@@ -931,6 +966,60 @@ export default function PlaceDetail() {
           Yorum Yap
         </motion.button>
       </div>
+    </div>
+  )
+}
+
+/**
+ * Genel Bakış sekmesinde HER mekan için her zaman görünen, gerçek anlık
+ * hava durumu kartı (venue.area üzerinden GET /weather/{district} - bkz.
+ * yukarıdaki useEffect). Bu, aşağıdaki koşullu açık-hava uyarısının
+ * YERİNE geçmiyor: o uyarı sadece açık-hava-duyarlı etiketli bir mekan
+ * VE hava elverişsizken görünen, eyleme çağıran özel bir satır; bu kart
+ * ise her mekan için nötr/bilgilendirici genel durum. Bilerek
+ * birleştirilmedi - birleştirseydik nötr kart, uyarının kendine özgü
+ * görsel vurgusunu (CloudRain ikonlu sand kutusu) yutardı ve "sadece bu
+ * mekan için önemli" sinyali kaybolurdu.
+ *
+ * loading = istek sürüyor. !weather (loading bittikten sonra) = Open-
+ * Meteo'ya ulaşılamadı - sahte/son-bilinen bir sıcaklık UYDURULMAZ,
+ * dürüstçe "hava durumu bilgisi şu an yok" gösterilir (CLAUDE.md "sahte
+ * veri yasak", aynı desen Home.jsx'te de kullanılıyor).
+ */
+function WeatherCard({ weather, loading, failed }) {
+  if (loading) {
+    return (
+      <div className="mb-4 flex items-center gap-2 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3 text-sm text-taupe">
+        <Loader2 size={16} className="shrink-0 animate-spin" />
+        Hava durumu yükleniyor…
+      </div>
+    )
+  }
+
+  if (!weather) {
+    return (
+      <div className="mb-4 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3 text-sm text-taupe">
+        {failed
+          ? 'Hava durumu bilgisi şu an yok.'
+          : 'Bu mekan için hava durumu bilgisi yok.'}
+      </div>
+    )
+  }
+
+  const WeatherIcon = WEATHER_ICONS[weather.condition_group] ?? Cloud
+
+  return (
+    <div className="mb-4 rounded-2xl border border-cream-line bg-sand/40 px-4 py-3">
+      <div className="flex items-center gap-2">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sand text-tan-dark">
+          <WeatherIcon size={18} />
+        </span>
+        <p className="text-sm text-espresso-soft">
+          <span className="font-medium text-espresso">{Math.round(weather.temperature)}°C</span>{' '}
+          · {weather.district} · {weather.condition}
+        </p>
+      </div>
+      <p className="mt-1.5 text-[10px] text-taupe">Hava durumu verisi: Open-Meteo.com</p>
     </div>
   )
 }

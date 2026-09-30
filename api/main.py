@@ -69,6 +69,7 @@ from database.users_store import (
     register_user,
     set_blocked,
 )
+from database.weather_cache import WeatherUnavailableError, get_weather
 
 app = FastAPI(title="KesfetPlus")
 
@@ -225,6 +226,24 @@ def read_root():
 @app.get("/health")
 def health_check():
     return {"status": "healthy"}
+
+
+# ---------------------------------------------------------------------------
+# Weather - "hava durumuna duyarlı mekan önerileri" MVP (see
+# docs/research/yeni-ozellik-onerisi-hava-durumu-onerileri.md and
+# database/weather_cache.py). Public/no-auth: it's Istanbul district-level,
+# server-shared weather, not user-specific data. Real Open-Meteo data only -
+# if it can't be reached, this returns 502 with an honest message, never a
+# fabricated temperature/condition (CLAUDE.md "sahte veri yasak").
+# ---------------------------------------------------------------------------
+
+
+@app.get("/weather/{district}")
+def get_weather_for_district(district: str):
+    try:
+        return get_weather(district)
+    except WeatherUnavailableError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
 
 
 # ---------------------------------------------------------------------------

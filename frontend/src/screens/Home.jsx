@@ -3,6 +3,11 @@ import {
   ArrowRight,
   Bell,
   BedDouble,
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
   Compass,
   MapPin,
   MessageCircle,
@@ -10,6 +15,7 @@ import {
   Search,
   Sparkles,
   Star,
+  Sun,
   Trees,
   User,
   Utensils,
@@ -19,8 +25,11 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
+import { getWeather } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
+import { nearestDistrict } from '../lib/districts.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
+import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
@@ -39,6 +48,23 @@ const CARD_GRADIENTS = [
   'from-tan-dark to-espresso-soft',
 ]
 
+// WMO weather-code group (database/weather_cache.py condition_group) -> icon.
+const WEATHER_ICONS = {
+  clear: Sun,
+  cloudy: Cloud,
+  fog: CloudFog,
+  rain: CloudRain,
+  snow: CloudSnow,
+  storm: CloudLightning,
+  unknown: Cloud,
+}
+
+// "Varsayılan İstanbul merkezi" - kullanıcı konum izni vermediğinde/
+// navigator.geolocation yoksa GET /api/weather/{district}'e gönderilen
+// değer (backend bilinmeyen bir ilçe adını İstanbul'un genel merkez
+// koordinatına düşürüyor, bkz. database/weather_cache.py _resolve_district).
+const DEFAULT_WEATHER_DISTRICT = 'İstanbul'
+
 export default function Home() {
   const navigate = useNavigate()
   const shouldReduceMotion = useReducedMotion()
@@ -48,6 +74,10 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState(null)
   const [toast, setToast] = useState(null)
   const toastTimer = useRef(null)
+  // null = henüz yüklenmedi ya da Open-Meteo'ya ulaşılamadı - asla uydurma
+  // bir sıcaklık/durum gösterilmez (CLAUDE.md "sahte veri yasak").
+  const [weather, setWeather] = useState(null)
+  const [weatherFailed, setWeatherFailed] = useState(false)
 
   function showToast(message) {
     setToast(message)
@@ -56,6 +86,37 @@ export default function Home() {
   }
 
   useEffect(() => () => clearTimeout(toastTimer.current), [])
+
+  // Hava durumu şeridi: konum izni varsa en yakın ilçe, yoksa/GPS
+  // desteklenmiyorsa/izin reddedilirse varsayılan İstanbul merkezi (aynı
+  // opt-in + zarif düşme deseni PlaceDetail.jsx'in check-in akışında da
+  // kullanılıyor). Gerçek Open-Meteo verisi gelmezse weather null kalır ve
+  // aşağıda dürüstçe "hava durumu bilgisi şu an yok" gösterilir.
+  useEffect(() => {
+    let cancelled = false
+    function loadWeather(district) {
+      getWeather(district)
+        .then((data) => {
+          if (!cancelled) setWeather(data)
+        })
+        .catch((err) => {
+          console.error('getWeather failed', err)
+          if (!cancelled) setWeatherFailed(true)
+        })
+    }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => loadWeather(nearestDistrict(pos.coords.latitude, pos.coords.longitude)),
+        () => loadWeather(DEFAULT_WEATHER_DISTRICT),
+        { timeout: 8000, maximumAge: 300000 },
+      )
+    } else {
+      loadWeather(DEFAULT_WEATHER_DISTRICT)
+    }
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -152,6 +213,37 @@ export default function Home() {
         })}
       </div>
 
+      {weather && (
+        <div className="px-5 mt-4">
+          {(() => {
+            const WeatherIcon = WEATHER_ICONS[weather.condition_group] ?? Cloud
+            return (
+              <div className="flex items-center gap-2 bg-sand/70 rounded-2xl px-4 py-2.5">
+                <WeatherIcon size={18} className="text-tan-dark shrink-0" />
+                <p className="text-sm text-espresso-soft">
+                  <span className="font-medium text-espresso">
+                    {Math.round(weather.temperature)}°C
+                  </span>{' '}
+                  · {weather.district} · {weather.condition}
+                  {!weather.is_outdoor_friendly && (
+                    <span className="text-taupe">
+                      {' '}
+                      — bugün açık hava mekanları yerine kapalı mekanlar daha uygun olabilir
+                    </span>
+                  )}
+                </p>
+              </div>
+            )
+          })()}
+          <p className="mt-1 text-[10px] text-taupe">Hava durumu verisi: Open-Meteo.com</p>
+        </div>
+      )}
+      {!weather && weatherFailed && (
+        <div className="px-5 mt-4">
+          <p className="text-xs text-taupe">Hava durumu bilgisi şu an yok.</p>
+        </div>
+      )}
+
       <div className="px-5 mt-5">
         {featured && (
           <button
@@ -186,6 +278,10 @@ export default function Home() {
         )}
         {filtered.slice(0, 12).map((venue, i) => {
           const VenueIcon = getVenueIcon(venue)
+          // Yağmurlu/karlı/fırtınalı/sisli bir günde açık-hava-duyarlı
+          // mekanlara nazik bir rozet - sadece gerçek weather verisi
+          // geldiyse (weather null iken hiçbir rozet gösterilmez).
+          const showWeatherBadge = Boolean(weather) && !weather.is_outdoor_friendly && isOutdoorWeatherSensitive(venue)
           return (
           <motion.button
             type="button"
@@ -213,6 +309,15 @@ export default function Home() {
                 <div className="absolute top-2 right-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-xs font-semibold text-espresso">
                   <Star size={11} className="fill-gold text-gold" />
                   {venue.rating}
+                </div>
+              )}
+              {showWeatherBadge && (
+                <div
+                  title="Bugün yağmurlu, kapalı mekanlar daha uygun olabilir"
+                  className="absolute top-2 left-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-[10px] font-medium text-tan-dark"
+                >
+                  <CloudRain size={11} />
+                  Hava duyarlı
                 </div>
               )}
             </div>

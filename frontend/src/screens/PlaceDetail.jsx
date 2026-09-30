@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   Camera,
   ChevronLeft,
+  CloudRain,
   Flag,
   Loader2,
   MapPin,
@@ -26,6 +27,7 @@ import {
   getComments,
   getStatusUpdates,
   getUserStats,
+  getWeather,
   markCommentHelpful,
   markStatusHelpful,
   postCheckin,
@@ -35,6 +37,7 @@ import {
 } from '../lib/api.js'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { getAllVenues } from '../lib/data.js'
+import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
@@ -166,6 +169,27 @@ export default function PlaceDetail() {
       cancelled = true
     }
   }, [placeId])
+
+  // Hava durumuna duyarlı mekan uyarısı ("hava durumuna duyarlı mekan
+  // önerileri" MVP) - sadece açık-hava-duyarlı etiketli mekanlar için
+  // anlamlı, ama basitlik için venue.area'ya göre hep çekiliyor (backend
+  // önbelleğe alıyor, bkz. database/weather_cache.py). weather null kalırsa
+  // (Open-Meteo'ya ulaşılamazsa) hiçbir uyarı gösterilmez - uydurma veri yok.
+  const [weather, setWeather] = useState(null)
+  useEffect(() => {
+    if (!venue?.area) return undefined
+    let cancelled = false
+    getWeather(venue.area)
+      .then((data) => {
+        if (!cancelled) setWeather(data)
+      })
+      .catch((err) => {
+        console.error('getWeather failed', err)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [venue?.area])
 
   const loadComments = useMemo(
     () => async () => {
@@ -510,6 +534,15 @@ export default function PlaceDetail() {
           >
         {activeTab === 'Genel Bakış' && (
           <div>
+            {weather && !weather.is_outdoor_friendly && isOutdoorWeatherSensitive(venue) && (
+              <div className="mb-4 flex items-start gap-2 rounded-2xl bg-sand px-4 py-3 text-sm text-espresso-soft">
+                <CloudRain size={16} className="mt-0.5 shrink-0 text-tan-dark" />
+                <p>
+                  Bugün {venue.area ?? 'bu bölgede'} {weather.condition.toLowerCase()} görünüyor —
+                  bu açık hava mekanı için ideal olmayabilir.
+                </p>
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3">
               <StatCard
                 icon={<Users size={18} />}

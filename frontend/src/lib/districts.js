@@ -73,3 +73,33 @@ export function approxLatLng(venue) {
   const jitterLng = (((h >> 10) % 1000) / 1000 - 0.5) * 0.02
   return { lat: center.lat + jitterLat, lng: center.lng + jitterLng }
 }
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371
+  const toRad = (deg) => (deg * Math.PI) / 180
+  const dLat = toRad(lat2 - lat1)
+  const dLng = toRad(lng2 - lng1)
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(a))
+}
+
+/**
+ * Nearest district name to a raw lat/lng (e.g. from
+ * navigator.geolocation) - used by Home.jsx to pick which district's
+ * weather to request (GET /api/weather/{district}, see
+ * database/weather_cache.py which resolves the name the same way).
+ */
+export function nearestDistrict(lat, lng) {
+  let best = null
+  let bestDistance = Infinity
+  for (const [district, center] of Object.entries(DISTRICT_LATLNG)) {
+    const distance = haversineKm(lat, lng, center.lat, center.lng)
+    if (distance < bestDistance) {
+      bestDistance = distance
+      best = district
+    }
+  }
+  return best
+}

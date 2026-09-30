@@ -157,6 +157,16 @@ export async function getModerationStats() {
 
 // --- Places: comments / check-ins / status --------------------------------
 
+// --- Weather ("hava durumuna duyarlı mekan önerileri" MVP) --------------
+// Public/no-auth endpoint - see database/weather_cache.py. Real Open-Meteo
+// data only; if it can't be reached this throws (502), and callers must
+// show an honest "hava durumu bilgisi şu an yok" state, never a fabricated
+// temperature/condition (CLAUDE.md "sahte veri yasak").
+
+export async function getWeather(district) {
+  return request(`/weather/${encodeURIComponent(district)}`)
+}
+
 export async function getComments(placeId) {
   return request(`/places/${encodeURIComponent(placeId)}/comments`)
 }

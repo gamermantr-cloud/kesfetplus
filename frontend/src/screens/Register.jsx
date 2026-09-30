@@ -1,16 +1,21 @@
 import { ChevronLeft, Loader2, UserPlus } from 'lucide-react'
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../lib/AuthContext.jsx'
 
 export default function Register() {
   const navigate = useNavigate()
   const location = useLocation()
   const { register } = useAuth()
+  const [searchParams] = useSearchParams()
 
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // Auto-filled from a ?ref=<code> invite link (see Profile.jsx "Kopyala"
+  // link), but always optional - registering without one works fine, the
+  // field is just plain text the user can also edit/clear.
+  const [referralCode, setReferralCode] = useState(() => searchParams.get('ref') ?? '')
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
@@ -22,7 +27,12 @@ export default function Register() {
     setSubmitting(true)
     setError(null)
     try {
-      await register({ email: email.trim(), password, displayName: displayName.trim() })
+      await register({
+        email: email.trim(),
+        password,
+        displayName: displayName.trim(),
+        referralCode: referralCode.trim() || undefined,
+      })
       navigate(redirectTo, { replace: true })
     } catch (err) {
       setError(err.message || 'Kayıt olunamadı.')
@@ -77,6 +87,13 @@ export default function Register() {
             autoComplete="new-password"
             minLength={8}
             required
+            className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
+          />
+          <input
+            type="text"
+            placeholder="Davet kodu (opsiyonel)"
+            value={referralCode}
+            onChange={(e) => setReferralCode(e.target.value)}
             className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
           />
 

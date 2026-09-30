@@ -64,6 +64,7 @@ from database.reports_store import (
 from database.users_store import (
     UserError,
     authenticate,
+    count_referrals,
     count_users,
     create_session,
     delete_session,
@@ -158,6 +159,10 @@ class RegisterRequest(BaseModel):
     email: str = Field(min_length=3, max_length=254)
     password: str = Field(min_length=1, max_length=200)
     display_name: str = Field(min_length=1, max_length=80)
+    # Optional inviter's referral_code (e.g. from a ?ref= link) - see
+    # database/users_store.register_user(). An unrecognized code is
+    # silently ignored, never an error.
+    referral_code: str | None = Field(default=None, max_length=20)
 
 
 class LoginRequest(BaseModel):
@@ -258,7 +263,12 @@ def get_weather_for_district(district: str):
 @limiter.limit("5/minute")
 def register(request: Request, payload: RegisterRequest):
     try:
-        user = register_user(payload.email, payload.password, payload.display_name)
+        user = register_user(
+            payload.email,
+            payload.password,
+            payload.display_name,
+            referral_code=payload.referral_code,
+        )
     except UserError as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
     token = create_session(user["id"])
@@ -306,13 +316,25 @@ def get_user_stats(user_id: str):
     never stored, so it can't drift from reality. badges is ["gozcu"] once
     status_count reaches GOZCU_THRESHOLD, else []. Public (no auth) so
     PlaceDetail.jsx can show a "Gözcü" tag next to any author's post, not
-    just the logged-in user's own profile."""
+    just the logged-in user's own profile.
+
+    referral_count is the same real-count pattern applied to the referral
+    system (see docs/research/buyume-ilk-100-kullanici-stratejisi.md Bölüm
+    2.4 and database.users_store.count_referrals): how many accounts have
+    referred_by == user_id, counted fresh from users.json every call -
+    never a stored/guessed number, and deliberately not fed into
+    trust-scoring (manipulation-risk warning in the same report)."""
     profile = get_public_profile(user_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
     status_count = count_user_statuses(user_id)
     badges = ["gozcu"] if status_count >= GOZCU_THRESHOLD else []
-    return {"status_count": status_count, "badges": badges, "gozcu_threshold": GOZCU_THRESHOLD}
+    return {
+        "status_count": status_count,
+        "badges": badges,
+        "gozcu_threshold": GOZCU_THRESHOLD,
+        "referral_count": count_referrals(user_id),
+    }
 
 
 # ---------------------------------------------------------------------------

@@ -1,9 +1,12 @@
 import {
+  Award,
   Bell,
   BellOff,
   Bookmark,
+  Check,
   ChevronLeft,
   ChevronRight,
+  Copy,
   HelpCircle,
   LogIn,
   LogOut,
@@ -13,6 +16,7 @@ import {
   ShieldX,
   Telescope,
   User,
+  UserPlus,
   UserX,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
@@ -41,6 +45,8 @@ export default function Profile() {
 
   const [pushPermission, setPushPermission] = useState(() => getPermissionState())
   const [pushBusy, setPushBusy] = useState(false)
+
+  const [referralLinkCopied, setReferralLinkCopied] = useState(false)
 
   // Real, on-demand computed stats for the "Teşvik Katmanı" (Gözcü rozeti) -
   // see docs/research/anlik-bilgi-akisi.md and GET /users/{id}/stats.
@@ -115,6 +121,21 @@ export default function Profile() {
     navigate('/home')
   }
 
+  async function handleCopyReferralLink() {
+    if (!user?.referral_code) return
+    // Real origin the app is actually served from - never a hardcoded/guessed
+    // domain (see docs/research/buyume-ilk-100-kullanici-stratejisi.md 2.4).
+    const link = `${window.location.origin}/register?ref=${encodeURIComponent(user.referral_code)}`
+    try {
+      await navigator.clipboard.writeText(link)
+      setReferralLinkCopied(true)
+      showToast('Davet linki kopyalandı')
+      setTimeout(() => setReferralLinkCopied(false), 1800)
+    } catch {
+      showToast('Kopyalanamadı')
+    }
+  }
+
   async function handleEnablePush() {
     setPushBusy(true)
     try {
@@ -164,6 +185,12 @@ export default function Profile() {
           <>
             <p className="mt-4 font-display text-lg text-espresso">{user.display_name}</p>
             <p className="mt-1 text-xs text-taupe">{user.email}</p>
+            {user.is_founding_member && (
+              <span className="mt-2 flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 text-xs font-medium text-tan-dark">
+                <Award size={13} />
+                {user.member_number}. Kurucu Üye
+              </span>
+            )}
             <button
               type="button"
               onClick={handleLogout}
@@ -314,6 +341,38 @@ export default function Profile() {
                 </p>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {isLoggedIn && user?.referral_code && (
+        <div className="mt-6 px-5">
+          <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+            <UserPlus size={14} />
+            Arkadaşını Davet Et
+          </p>
+          <div className="rounded-2xl border border-cream-line bg-sand/40 p-4">
+            <p className="text-sm text-espresso-soft">
+              Davet ettiğin kişi sayısı:{' '}
+              <span className="font-medium text-espresso">
+                {stats === null ? '…' : stats.referral_count}
+              </span>
+            </p>
+            <div className="mt-3 flex items-center gap-2">
+              <code className="flex-1 truncate rounded-lg border border-cream-line bg-cream px-3 py-2 text-xs text-espresso-soft">
+                {window.location.origin}/register?ref={user.referral_code}
+              </code>
+              <button
+                type="button"
+                onClick={handleCopyReferralLink}
+                aria-label="Davet linkini kopyala"
+                className="flex shrink-0 items-center gap-1.5 rounded-full bg-tan px-3 py-2 text-xs font-medium text-cream"
+              >
+                {referralLinkCopied ? <Check size={14} /> : <Copy size={14} />}
+                Kopyala
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-taupe">Davet kodun: {user.referral_code}</p>
           </div>
         </div>
       )}

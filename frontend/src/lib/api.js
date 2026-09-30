@@ -58,10 +58,17 @@ async function request(path, { method = 'GET', body } = {}) {
 
 // --- Auth ---------------------------------------------------------------
 
-export async function register({ email, password, displayName }) {
+export async function register({ email, password, displayName, referralCode }) {
   const data = await request('/auth/register', {
     method: 'POST',
-    body: { email, password, display_name: displayName },
+    body: {
+      email,
+      password,
+      display_name: displayName,
+      // Optional inviter's code (e.g. from a ?ref= link) - omitted entirely
+      // rather than sent as "" so an unused field doesn't even reach the API.
+      ...(referralCode ? { referral_code: referralCode } : {}),
+    },
   })
   setToken(data.token)
   return data.user
@@ -98,7 +105,7 @@ export async function getUserProfile(userId) {
  * Real-time computed stats (never a stored/fabricated number) for the
  * "Teşvik Katmanı" - see docs/research/anlik-bilgi-akisi.md and
  * database/checkins_store.count_user_statuses. { status_count, badges,
- * gozcu_threshold }.
+ * gozcu_threshold, referral_count }.
  */
 export async function getUserStats(userId) {
   return request(`/users/${encodeURIComponent(userId)}/stats`)

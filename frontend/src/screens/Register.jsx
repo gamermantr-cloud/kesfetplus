@@ -11,6 +11,7 @@ export default function Register() {
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
 
@@ -78,11 +79,33 @@ export default function Register() {
           className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
         />
 
+        <label className="flex items-start gap-2.5 pt-1 text-xs text-taupe">
+          <input
+            type="checkbox"
+            checked={privacyAccepted}
+            onChange={(e) => setPrivacyAccepted(e.target.checked)}
+            required
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-cream-line accent-tan"
+          />
+          <span>
+            Kayıt olarak{' '}
+            <button
+              type="button"
+              onClick={() => navigate('/privacy')}
+              className="font-medium text-tan-dark underline"
+            >
+              Gizlilik Politikası
+            </button>
+            'nı okuduğumu ve kişisel verilerimin belirtilen amaçlarla
+            işlenmesini kabul ediyorum.
+          </span>
+        </label>
+
         {error && <p className="text-sm text-tan-dark">{error}</p>}
 
         <button
           type="submit"
-          disabled={submitting}
+          disabled={submitting || !privacyAccepted}
           className="flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream disabled:opacity-60"
         >
           {submitting ? <Loader2 size={16} className="animate-spin" /> : <UserPlus size={16} />}

@@ -9,6 +9,7 @@ import Messages from './screens/Messages.jsx'
 import Moderation from './screens/Moderation.jsx'
 import Notifications from './screens/Notifications.jsx'
 import PlaceDetail from './screens/PlaceDetail.jsx'
+import Privacy from './screens/Privacy.jsx'
 import Profile from './screens/Profile.jsx'
 import Register from './screens/Register.jsx'
 import Splash from './screens/Splash.jsx'
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/moderation" element={<Moderation />} />
       </Routes>
     </PhoneFrame>

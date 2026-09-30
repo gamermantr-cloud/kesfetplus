@@ -1,4 +1,4 @@
-import { ChevronLeft, HelpCircle, Mail, Send, ShieldX } from 'lucide-react'
+import { ChevronLeft, HelpCircle, Mail, Send, ShieldCheck, ShieldX } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -114,6 +114,24 @@ export default function Support() {
             butonu e-posta uygulamanı önceden doldurulmuş bir mesajla açar.
           </p>
         </form>
+      </div>
+
+      {/* Gizlilik */}
+      <div className="mt-6 px-5">
+        <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+          <ShieldCheck size={14} />
+          Gizlilik
+        </p>
+        <button
+          type="button"
+          onClick={() => navigate('/privacy')}
+          className="flex w-full items-center justify-between gap-2 rounded-2xl border border-cream-line bg-sand/40 px-4 py-4 text-left"
+        >
+          <span className="text-sm text-espresso-soft">
+            KVKK Aydınlatma Metni / Gizlilik Politikası
+          </span>
+          <ChevronLeft size={16} className="rotate-180 text-taupe" />
+        </button>
       </div>
 
       {/* SSS */}

@@ -20,6 +20,10 @@ _lock = threading.Lock()
 VALID_TARGET_TYPES = ("comment", "status", "checkin")
 
 
+class ReportError(Exception):
+    """Raised when a report lookup (e.g. resolve) doesn't match a real id."""
+
+
 def _load() -> list[dict]:
     if not os.path.exists(_STORE_PATH):
         return []
@@ -60,3 +64,24 @@ def list_reports_by_user(reporter_user_id: str) -> list[dict]:
     with _lock:
         data = _load()
     return [r for r in data if r["reporter_user_id"] == reporter_user_id]
+
+
+def list_all_reports() -> list[dict]:
+    """Every report from every user - moderator-only (see
+    api/main.py get_current_moderator)."""
+    with _lock:
+        return _load()
+
+
+def resolve_report(report_id: str) -> dict:
+    """Mark a report as reviewed by a moderator. Never touches the reported
+    content itself - see module docstring. Raises ReportError if no report
+    with this id exists."""
+    with _lock:
+        data = _load()
+        for report in data:
+            if report["id"] == report_id:
+                report["status"] = "resolved"
+                _save(data)
+                return report
+    raise ReportError("Şikayet bulunamadı.")

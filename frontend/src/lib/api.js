@@ -113,6 +113,29 @@ export async function reportContent({ targetType, targetId, placeId, reason }) {
   })
 }
 
+// --- Moderation (moderator-only, see database/users_store.py) -------------
+
+export async function getModerationReports() {
+  return request('/moderation/reports')
+}
+
+export async function resolveReport(reportId) {
+  return request(`/moderation/reports/${encodeURIComponent(reportId)}/resolve`, {
+    method: 'POST',
+  })
+}
+
+export async function getHiddenContent() {
+  return request('/moderation/hidden-content')
+}
+
+export async function restoreContent(contentType, contentId) {
+  return request(
+    `/moderation/content/${encodeURIComponent(contentType)}/${encodeURIComponent(contentId)}/restore`,
+    { method: 'POST' },
+  )
+}
+
 // --- Places: comments / check-ins / status --------------------------------
 
 export async function getComments(placeId) {

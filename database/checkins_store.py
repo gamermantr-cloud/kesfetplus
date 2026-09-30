@@ -11,6 +11,11 @@ coordinate (see frontend/src/lib/districts.js), not a real address. So the
 GPS check here is deliberately loose (3km radius) and only ever produces a
 soft `location_verified` flag - it never rejects a check-in. Callers must
 not present this flag as a strong/precise verification.
+
+KNOWN LIMITATION: same as comments_store.py - the threading.Lock only
+guards a single process. Running the API with multiple workers against
+these same JSON files risks corrupting checkins.json/status.json. Must be
+resolved (real DB, or cross-process locking) before a multi-worker deploy.
 """
 
 import html
@@ -28,6 +33,12 @@ _CHECKINS_PATH = os.path.join(os.path.dirname(__file__), "checkins.json")
 _STATUS_PATH = os.path.join(os.path.dirname(__file__), "status.json")
 _SEED_DIR = os.path.join(os.path.dirname(__file__), "seed")
 _lock = threading.Lock()
+
+
+class StatusError(Exception):
+    """Raised when a status-update lookup (e.g. restore) doesn't match a
+    real id."""
+
 
 # How recent a check-in must be to count towards the "how many people are
 # here right now" proxy.
@@ -249,3 +260,33 @@ def list_status(
             pass
         result.append({**entry, "is_stale": is_stale})
     return result
+
+
+def list_hidden_status() -> list[dict]:
+    """Every status update across every place that's hidden or flagged -
+    moderator-only visibility (see comments_store.list_hidden_comments for
+    the same pattern; checkins have no review_status so they're excluded)."""
+    with _lock:
+        data = _load(_STATUS_PATH)
+    hidden = []
+    for entries in data.values():
+        for entry in entries:
+            if entry.get("review_status") == "hidden" or entry.get("flagged_reason"):
+                hidden.append(entry)
+    return hidden
+
+
+def restore_status(status_id: str) -> dict:
+    """Moderator override: set a status update's review_status back to
+    "visible". Raises StatusError if no status update with this id exists
+    in any place."""
+    with _lock:
+        data = _load(_STATUS_PATH)
+        for entries in data.values():
+            for entry in entries:
+                if entry["id"] == status_id:
+                    entry["review_status"] = "visible"
+                    entry["flagged_reason"] = None
+                    _save(_STATUS_PATH, data)
+                    return entry
+    raise StatusError("Durum güncellemesi bulunamadı.")

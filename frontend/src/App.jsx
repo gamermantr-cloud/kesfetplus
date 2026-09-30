@@ -6,6 +6,7 @@ import Home from './screens/Home.jsx'
 import Login from './screens/Login.jsx'
 import MapView from './screens/MapView.jsx'
 import Messages from './screens/Messages.jsx'
+import Moderation from './screens/Moderation.jsx'
 import Notifications from './screens/Notifications.jsx'
 import PlaceDetail from './screens/PlaceDetail.jsx'
 import Profile from './screens/Profile.jsx'
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/moderation" element={<Moderation />} />
       </Routes>
     </PhoneFrame>
   )

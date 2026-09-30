@@ -7,6 +7,7 @@ import {
   LogOut,
   MessageSquare,
   Settings,
+  ShieldCheck,
   ShieldX,
   User,
   UserX,
@@ -155,6 +156,22 @@ export default function Profile() {
           })}
         </div>
       </div>
+
+      {isLoggedIn && user?.is_moderator && (
+        <div className="mt-6 px-5">
+          <button
+            type="button"
+            onClick={() => navigate('/moderation')}
+            className="flex w-full items-center gap-3 rounded-2xl border border-cream-line bg-sand/40 px-4 py-4 text-left"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sand text-tan-dark">
+              <ShieldCheck size={18} />
+            </span>
+            <span className="flex-1 text-sm font-medium text-espresso">Moderasyon Paneli</span>
+            <ChevronRight size={18} className="text-taupe" />
+          </button>
+        </div>
+      )}
 
       {isLoggedIn && (
         <div className="mt-6 px-5">

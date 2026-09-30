@@ -28,6 +28,15 @@ checkins_store.py already html.escape() the `author` field) - escaping
 it here too would double-escape it (e.g. "&" -> "&amp;" -> "&amp;amp;").
 API responses that include display_name raw (e.g. /auth/me) are fine
 because the frontend renders them through React, which escapes on render.
+
+MODERATION MVP: there's no role-management UI. The *only* way to become a
+moderator is to be listed in the MODERATOR_EMAILS env var (comma-separated
+email list, read via `.env` - see .env.example). is_moderator is computed
+from that list at register time and re-synced on every login/token lookup
+(_sync_moderator_status), so adding/removing an email from the env var
+takes effect the next time that user authenticates - no need to re-register.
+This is deliberately minimal (see api/main.py's moderation endpoints for
+what a moderator can actually do); a real admin UI is out of scope.
 """
 
 from __future__ import annotations
@@ -41,6 +50,9 @@ import uuid
 from datetime import UTC, datetime
 
 import bcrypt
+from dotenv import load_dotenv
+
+load_dotenv()
 
 _USERS_PATH = os.path.join(os.path.dirname(__file__), "users.json")
 _SESSIONS_PATH = os.path.join(os.path.dirname(__file__), "sessions.json")
@@ -71,6 +83,32 @@ def _public_user(user: dict) -> dict:
     return {k: v for k, v in user.items() if k != "password_hash"}
 
 
+def _moderator_emails() -> set[str]:
+    """MODERATOR_EMAILS env var - comma-separated, case-insensitive. See
+    module docstring "MODERATION MVP" note."""
+    raw = os.getenv("MODERATOR_EMAILS", "")
+    return {email.strip().lower() for email in raw.split(",") if email.strip()}
+
+
+def _sync_moderator_status(user: dict) -> dict:
+    """Recompute is_moderator from MODERATOR_EMAILS and persist it if it
+    changed, so editing the env var takes effect on the user's next
+    login/token lookup without needing a fresh registration. Also backfills
+    the field for accounts created before this field existed."""
+    should_be_moderator = user["email"] in _moderator_emails()
+    if user.get("is_moderator", False) == should_be_moderator:
+        user.setdefault("is_moderator", should_be_moderator)
+        return user
+    with _lock:
+        users = _load(_USERS_PATH)
+        stored = users.get(user["id"])
+        if stored is not None:
+            stored["is_moderator"] = should_be_moderator
+            users[user["id"]] = stored
+            _save(_USERS_PATH, users)
+    return {**user, "is_moderator": should_be_moderator}
+
+
 def register_user(email: str, password: str, display_name: str) -> dict:
     """Create a new account. Raises UserError on bad input or duplicate email."""
     email = email.strip().lower()
@@ -95,6 +133,7 @@ def register_user(email: str, password: str, display_name: str) -> dict:
             "display_name": display_name,
             "created_at": datetime.now(UTC).isoformat(),
             "blocked_user_ids": [],
+            "is_moderator": email in _moderator_emails(),
         }
         users[user_id] = user
         _save(_USERS_PATH, users)
@@ -110,7 +149,7 @@ def authenticate(email: str, password: str) -> dict:
     for user in users.values():
         if user["email"] == email:
             if bcrypt.checkpw(password.encode("utf-8"), user["password_hash"].encode("utf-8")):
-                return _public_user(user)
+                return _public_user(_sync_moderator_status(user))
             break
     raise UserError("E-posta veya şifre hatalı.")
 
@@ -119,7 +158,7 @@ def get_user_by_id(user_id: str) -> dict | None:
     with _lock:
         users = _load(_USERS_PATH)
     user = users.get(user_id)
-    return _public_user(user) if user else None
+    return _public_user(_sync_moderator_status(user)) if user else None
 
 
 def get_public_profile(user_id: str) -> dict | None:

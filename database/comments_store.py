@@ -4,6 +4,14 @@ Temporary until PostgreSQL is wired up (see docs/ARCHITECTURE.md). Comments
 are appended to a JSON file so real submissions persist across API restarts
 without needing a database yet. No demo/example comments are seeded here -
 the store starts empty.
+
+KNOWN LIMITATION: the threading.Lock here only guards against concurrent
+writes *within a single process*. It provides no safety if the API is ever
+run with multiple worker processes (e.g. `uvicorn --workers N`, gunicorn)
+pointed at the same JSON files - concurrent writes from different processes
+can interleave and corrupt comments.json. Fine for today's single-worker
+dev/small-scale deployment; must be resolved (real DB, or a cross-process
+lock) before scaling to multiple workers.
 """
 
 import html
@@ -18,6 +26,10 @@ from database.trust_scoring import score_comment
 
 _STORE_PATH = os.path.join(os.path.dirname(__file__), "comments.json")
 _lock = threading.Lock()
+
+
+class CommentError(Exception):
+    """Raised when a comment lookup (e.g. restore) doesn't match a real id."""
 
 
 def _load() -> dict:
@@ -109,3 +121,33 @@ def list_comments(
     if exclude_user_ids:
         comments = [c for c in comments if c.get("author_user_id") not in exclude_user_ids]
     return comments
+
+
+def list_hidden_comments() -> list[dict]:
+    """Every comment across every place that's hidden or flagged -
+    moderator-only visibility (see api/main.py get_current_moderator). Until
+    now nothing surfaced these; this is the "moderation isn't blind" fix."""
+    with _lock:
+        data = _load()
+    hidden = []
+    for comments in data.values():
+        for comment in comments:
+            if comment.get("review_status") == "hidden" or comment.get("flagged_reason"):
+                hidden.append(comment)
+    return hidden
+
+
+def restore_comment(comment_id: str) -> dict:
+    """Moderator override: set a comment's review_status back to "visible"
+    (e.g. the content filter false-positived). Raises CommentError if no
+    comment with this id exists in any place."""
+    with _lock:
+        data = _load()
+        for comments in data.values():
+            for comment in comments:
+                if comment["id"] == comment_id:
+                    comment["review_status"] = "visible"
+                    comment["flagged_reason"] = None
+                    _save(data)
+                    return comment
+    raise CommentError("Yorum bulunamadı.")

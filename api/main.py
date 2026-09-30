@@ -4,12 +4,21 @@ from pydantic import BaseModel, Field, field_validator
 
 from database.checkins_store import (
     STATUS_TAGS,
+    StatusError,
     add_checkin,
     add_status,
     count_recent_checkins,
+    list_hidden_status,
     list_status,
+    restore_status,
 )
-from database.comments_store import add_comment, list_comments
+from database.comments_store import (
+    CommentError,
+    add_comment,
+    list_comments,
+    list_hidden_comments,
+    restore_comment,
+)
 from database.photo_compare import (
     InvalidImageError,
     PhotoCompareError,
@@ -17,7 +26,14 @@ from database.photo_compare import (
     compare_images,
     get_reference_photo_url,
 )
-from database.reports_store import VALID_TARGET_TYPES, add_report, list_reports_by_user
+from database.reports_store import (
+    VALID_TARGET_TYPES,
+    ReportError,
+    add_report,
+    list_all_reports,
+    list_reports_by_user,
+    resolve_report,
+)
 from database.users_store import (
     UserError,
     authenticate,
@@ -73,6 +89,15 @@ def get_current_user_optional(authorization: str | None = Header(default=None)) 
     is present (comments/status listing)."""
     token = _extract_token(authorization)
     return get_user_by_token(token) if token else None
+
+
+def get_current_moderator(user: dict = Depends(get_current_user)) -> dict:
+    """Required auth + is_moderator check: raises 403 if the logged-in user
+    isn't a moderator. See database/users_store.py "MODERATION MVP" note
+    for how a user becomes a moderator (MODERATOR_EMAILS env var)."""
+    if not user.get("is_moderator"):
+        raise HTTPException(status_code=403, detail="Bu işlem için moderatör yetkisi gerekli.")
+    return user
 
 
 # ---------------------------------------------------------------------------
@@ -225,8 +250,8 @@ def create_report(payload: ReportCreate, user: dict = Depends(get_current_user))
 @app.get("/reports")
 def get_reports(user: dict = Depends(get_current_user)):
     """Minimal self-service listing: a logged-in user sees only the
-    reports *they* filed, not everyone's. A real admin/moderation view is
-    out of scope here."""
+    reports *they* filed, not everyone's. The moderator-only view of
+    *everyone's* reports lives at GET /moderation/reports below."""
     return list_reports_by_user(user["id"])
 
 
@@ -322,3 +347,57 @@ async def compare_photo(
         raise HTTPException(status_code=400, detail=str(e)) from e
     except PhotoCompareError as e:  # pragma: no cover - safety net
         raise HTTPException(status_code=500, detail=str(e)) from e
+
+
+# ---------------------------------------------------------------------------
+# Moderation - moderator-only visibility panel. Before this, reports/hidden
+# content were recorded but never surfaced to anyone (see
+# docs/research/sonraki-adimlar-firsat-analizi.md) - moderation was
+# effectively blind. See database/users_store.py "MODERATION MVP" note for
+# how a user becomes a moderator (MODERATOR_EMAILS env var, no admin UI).
+# ---------------------------------------------------------------------------
+
+
+@app.get("/moderation/reports")
+def moderation_list_reports(moderator: dict = Depends(get_current_moderator)):
+    """Every report from every user, not just the caller's own."""
+    return list_all_reports()
+
+
+@app.post("/moderation/reports/{report_id}/resolve")
+def moderation_resolve_report(report_id: str, moderator: dict = Depends(get_current_moderator)):
+    """Mark a report as reviewed. Never touches the reported content
+    itself - use /moderation/content/{content_type}/{content_id}/restore
+    for that."""
+    try:
+        return resolve_report(report_id)
+    except ReportError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+
+
+@app.get("/moderation/hidden-content")
+def moderation_hidden_content(moderator: dict = Depends(get_current_moderator)):
+    """Every comment/status update across every place currently hidden by
+    the content filter (review_status == "hidden") or otherwise flagged."""
+    return {
+        "comments": list_hidden_comments(),
+        "status_updates": list_hidden_status(),
+    }
+
+
+@app.post("/moderation/content/{content_type}/{content_id}/restore")
+def moderation_restore_content(
+    content_type: str,
+    content_id: str,
+    moderator: dict = Depends(get_current_moderator),
+):
+    """Moderator override for a content-filter false positive: sets the
+    item's review_status back to "visible"."""
+    try:
+        if content_type == "comment":
+            return restore_comment(content_id)
+        if content_type == "status":
+            return restore_status(content_id)
+    except (CommentError, StatusError) as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+    raise HTTPException(status_code=400, detail="content_type 'comment' veya 'status' olmalı.")

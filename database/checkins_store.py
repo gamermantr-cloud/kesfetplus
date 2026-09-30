@@ -387,6 +387,37 @@ def count_all_checkins() -> int:
     return sum(len(entries) for entries in data.values())
 
 
+def count_checkins_by_place() -> dict[str, int]:
+    """Total (all-time) check-in count per place_id, in one pass over
+    checkins.json - used by GET /places/popularity-scores in api/main.py to
+    build a relevance/sıralama signal for the venue list without an extra
+    HTTP round-trip per venue. Unlike count_recent_checkins (per-place,
+    restricted to CHECKIN_ACTIVE_WINDOW_HOURS - "who's here right now"),
+    this is unrestricted by time, since popularity ranking should reflect
+    all-time activity, not just the last couple of hours."""
+    with _lock:
+        data = _load(_CHECKINS_PATH)
+    return {place_id: len(entries) for place_id, entries in data.items() if entries}
+
+
+def sum_helpful_status_by_place() -> dict[str, int]:
+    """Sum of helpful_count across all *visible* status updates, grouped by
+    place_id - used by GET /places/popularity-scores (api/main.py) as part
+    of the venue popularity signal. Hidden/flagged entries are excluded,
+    same rule list_status applies by default (content nobody actually saw
+    shouldn't count toward a venue's popularity)."""
+    with _lock:
+        data = _load(_STATUS_PATH)
+    result: dict[str, int] = {}
+    for place_id, entries in data.items():
+        total = sum(
+            e.get("helpful_count", 0) for e in entries if e.get("review_status") != "hidden"
+        )
+        if total:
+            result[place_id] = total
+    return result
+
+
 def count_all_status() -> int:
     """Total status updates stored across every place, regardless of
     review_status (0 if status.json is missing/empty) - used by

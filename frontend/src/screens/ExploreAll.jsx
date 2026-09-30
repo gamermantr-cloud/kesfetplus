@@ -5,7 +5,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
+import { getPopularityScores } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
+import { rankVenues } from '../lib/search.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
 
 const CATEGORIES = [
@@ -31,6 +33,10 @@ export default function ExploreAll() {
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState(null)
+  // {} = henüz yüklenmedi ya da istek başarısız oldu - search.js bunu
+  // "hiçbir venue için sinyal yok" olarak yorumlar, uydurma bir popülerlik
+  // göstermez (bkz. lib/search.js popularityScore).
+  const [popularityScores, setPopularityScores] = useState({})
 
   useEffect(() => {
     let cancelled = false
@@ -45,15 +51,20 @@ export default function ExploreAll() {
     }
   }, [])
 
+  useEffect(() => {
+    let cancelled = false
+    getPopularityScores().then((data) => {
+      if (!cancelled) setPopularityScores(data)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const filtered = useMemo(() => {
     const category = CATEGORIES.find((c) => c.id === activeCategory)
-    const q = query.trim().toLowerCase()
-    return venues.filter((v) => {
-      if (category?.match && !category.match(v)) return false
-      if (q && !`${v.name} ${v.area ?? ''}`.toLowerCase().includes(q)) return false
-      return true
-    })
-  }, [venues, activeCategory, query])
+    return rankVenues(venues, { query, category, popularityScores })
+  }, [venues, activeCategory, query, popularityScores])
 
   return (
     <div className="min-h-screen bg-cream pb-10">

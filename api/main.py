@@ -18,12 +18,14 @@ from database.checkins_store import (
     add_status,
     count_all_checkins,
     count_all_status,
+    count_checkins_by_place,
     count_recent_checkins,
     count_user_statuses,
     list_hidden_status,
     list_place_ids_with_activity,
     list_status,
     restore_status,
+    sum_helpful_status_by_place,
     toggle_helpful_status,
 )
 from database.comments_store import (
@@ -34,6 +36,7 @@ from database.comments_store import (
     list_hidden_comments,
     list_place_ids_with_comments,
     restore_comment,
+    sum_helpful_by_place,
     toggle_helpful_comment,
 )
 from database.comments_store import (
@@ -407,6 +410,33 @@ def create_checkin(place_id: str, checkin: CheckinCreate, user: dict = Depends(g
 @app.get("/places/{place_id}/checkin-count")
 def get_checkin_count(place_id: str):
     return {"count": count_recent_checkins(place_id)}
+
+
+@app.get("/places/popularity-scores")
+def get_popularity_scores():
+    """Batch, salt-okunur popülerlik sinyali - tüm mekanlar için TEK
+    istekte checkin_count + helpful_count döner (bkz.
+    docs/research/arama-siralama-algoritmasi-onerisi.md §4). Frontend'in
+    arama/sıralama algoritması (frontend/src/lib/search.js) bunu kullanır.
+    Moderasyon/kullanıcı istatistikleri ile aynı "never stored, always
+    recomputed" deseni (bkz. GET /users/{id}/stats, GET /moderation/stats):
+    hiçbir sayı saklanmaz, her çağrıda checkins.json/comments.json/
+    status.json'dan taze hesaplanır, hiçbir venue için uydurma bir sayı
+    üretilmez - hiç aktivitesi olmayan bir mekan sonuçta hiç yer almaz
+    (frontend bunu 0/0 olarak, yani nötr sinyal olarak yorumlar). Auth
+    gerekmez - GET /places/{id}/checkin-count ile aynı görünürlük seviyesi
+    (herkese açık, salt sayısal bir sinyal, kişisel veri içermiyor)."""
+    checkin_counts = count_checkins_by_place()
+    helpful_comments = sum_helpful_by_place()
+    helpful_status = sum_helpful_status_by_place()
+    place_ids = set(checkin_counts) | set(helpful_comments) | set(helpful_status)
+    return {
+        place_id: {
+            "checkin_count": checkin_counts.get(place_id, 0),
+            "helpful_count": helpful_comments.get(place_id, 0) + helpful_status.get(place_id, 0),
+        }
+        for place_id in place_ids
+    }
 
 
 @app.post("/places/{place_id}/status", status_code=201)

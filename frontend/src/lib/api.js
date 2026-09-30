@@ -189,6 +189,23 @@ export async function getCheckinCount(placeId) {
   return request(`/places/${encodeURIComponent(placeId)}/checkin-count`)
 }
 
+/**
+ * Tüm mekanlar için tek istekte checkin_count + helpful_count (bkz.
+ * GET /places/popularity-scores, api/main.py) - frontend/src/lib/search.js
+ * bunu sıralama sinyali olarak kullanır. Liste ekranı açılışında bir kez
+ * çekilir (Home.jsx/ExploreAll.jsx), 484 mekan için ayrı ayrı istek
+ * gerektirmez. İstek başarısız olursa {} döner - search.js bunu "hiçbir
+ * venue için sinyal yok" olarak yorumlar, uydurma bir popülerlik göstermez.
+ */
+export async function getPopularityScores() {
+  try {
+    return await request('/places/popularity-scores')
+  } catch (err) {
+    console.error('getPopularityScores failed', err)
+    return {}
+  }
+}
+
 export async function getStatusUpdates(placeId) {
   return request(`/places/${encodeURIComponent(placeId)}/status`)
 }

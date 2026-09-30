@@ -175,6 +175,25 @@ def count_all_comments() -> int:
     return sum(len(comments) for comments in data.values())
 
 
+def sum_helpful_by_place() -> dict[str, int]:
+    """Sum of helpful_count across all *visible* comments, grouped by
+    place_id - used by GET /places/popularity-scores (api/main.py) as part
+    of the venue popularity signal (see checkins_store.sum_helpful_status_by_place
+    for the same pattern applied to status updates). Hidden/flagged
+    comments are excluded - content nobody actually saw shouldn't count
+    toward a venue's popularity."""
+    with _lock:
+        data = _load()
+    result: dict[str, int] = {}
+    for place_id, comments in data.items():
+        total = sum(
+            c.get("helpful_count", 0) for c in comments if c.get("review_status") != "hidden"
+        )
+        if total:
+            result[place_id] = total
+    return result
+
+
 def list_place_ids_with_comments() -> set[str]:
     """place_ids with at least one comment (any review_status) - used to
     compute GET /moderation/stats venues_with_activity in api/main.py

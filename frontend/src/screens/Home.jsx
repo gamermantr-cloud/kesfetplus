@@ -25,9 +25,10 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
-import { getWeather } from '../lib/api.js'
+import { getPopularityScores, getWeather } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { nearestDistrict } from '../lib/districts.js'
+import { rankVenues } from '../lib/search.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
 import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
@@ -78,6 +79,10 @@ export default function Home() {
   // bir sıcaklık/durum gösterilmez (CLAUDE.md "sahte veri yasak").
   const [weather, setWeather] = useState(null)
   const [weatherFailed, setWeatherFailed] = useState(false)
+  // {} = henüz yüklenmedi ya da istek başarısız oldu - search.js bunu
+  // "hiçbir venue için sinyal yok" olarak yorumlar, uydurma bir popülerlik
+  // göstermez (bkz. lib/search.js popularityScore).
+  const [popularityScores, setPopularityScores] = useState({})
 
   function showToast(message) {
     setToast(message)
@@ -131,6 +136,19 @@ export default function Home() {
     }
   }, [])
 
+  // Popülerlik sinyalleri (checkin/helpful) ayrı, tek seferlik bir istekle
+  // gelir - venue listesi gibi render'ı bloklamaz, gelince sıralama
+  // otomatik güncellenir (bkz. lib/search.js rankVenues).
+  useEffect(() => {
+    let cancelled = false
+    getPopularityScores().then((data) => {
+      if (!cancelled) setPopularityScores(data)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const featured = useMemo(() => {
     if (!venues.length) return null
     return venues.find((v) => v.tags?.includes('manzara')) ?? venues[0]
@@ -138,14 +156,13 @@ export default function Home() {
 
   const filtered = useMemo(() => {
     const category = CATEGORIES.find((c) => c.id === activeCategory)
-    const q = query.trim().toLowerCase()
-    return venues.filter((v) => {
-      if (category?.match && !category.match(v)) return false
-      if (v.id === featured?.id) return false
-      if (q && !`${v.name} ${v.area ?? ''}`.toLowerCase().includes(q)) return false
-      return true
+    return rankVenues(venues, {
+      query,
+      category,
+      popularityScores,
+      excludeId: featured?.id,
     })
-  }, [venues, activeCategory, query, featured])
+  }, [venues, activeCategory, query, featured, popularityScores])
 
   function handleQuickCheckin() {
     if (!featured) {

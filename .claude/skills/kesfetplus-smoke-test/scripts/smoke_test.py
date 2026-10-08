@@ -587,9 +587,12 @@ def run_photo_compare_tests(photo_place_id: str, photo_url: str, token_a: str | 
     )
 
 
-def _load_json(path: str) -> dict | list:
+def _load_json(path: str, default: dict | list | None = None) -> dict | list:
+    """Parsed JSON at `path`, or `default` ({} if None) when the file is
+    missing. List-shaped stores (reports.json) must pass default=[] so a
+    missing file compares equal to the empty list cleanup produces."""
     if not os.path.exists(path):
-        return {}
+        return {} if default is None else default
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
@@ -652,7 +655,7 @@ def _clean_sessions_store(label: str, path: str, before: dict, test_user_ids: se
 def _clean_reports_store(label: str, path: str, before: list, test_user_ids: set[str]) -> bool:
     """reports.json: list[report]. Removes every report filed by one of
     this run's test users."""
-    current = _load_json(path)
+    current = _load_json(path, default=[])
     cleaned = [rep for rep in current if rep.get("reporter_user_id") not in test_user_ids]
     removed = len(current) - len(cleaned)
     if os.path.exists(path) or cleaned:
@@ -707,7 +710,7 @@ def main() -> int:
         "status.json": _load_json(STATUS_PATH),
         "users.json": _load_json(USERS_PATH),
         "sessions.json": _load_json(SESSIONS_PATH),
-        "reports.json": _load_json(REPORTS_PATH),
+        "reports.json": _load_json(REPORTS_PATH, default=[]),
     }
 
     user_a: dict = {}

@@ -3696,5 +3696,18 @@
     "verified": false,
     "source": "websearch-editorial",
     "crowdNow": "Veri yok"
+  },
+  {
+    "id": "burger-lobster-zorlu",
+    "name": "Burger & Lobster",
+    "area": "Beşiktaş (Zorlu Center)",
+    "address": "Koru Sokağı No:2, Levazım Mah., 34340 Beşiktaş/İstanbul (Zorlu Center içinde; kaynaklarda tam kat/mağaza numarası belirtilmiyor)",
+    "dish": "Burger ve ıstakoz (lobster) odaklı menü",
+    "note": "Londra merkezli Burger & Lobster zincirinin Türkiye'deki ve Avrupa'daki ilk şubesi; YKT Gıda (YKT Global) yatırımıyla Zorlu Center'da açıldı. Kaynaklarda kesin açılış tarihi netleşmiyor: 18.06.2026 haberinde \"açılışa hazırlanıyor\", 07.09.2026 haberinde \"7 Eylül itibarıyla misafir ağırlamaya hazırlanıyor\" ifadesi geçiyor. Fiili açılışın saha/Google Haritalar üzerinden teyidi önerilir.",
+    "kind": "gurme",
+    "category": "dunya-mutfagi",
+    "verified": false,
+    "source": "https://www.foreks.com/haber/detay/6a9e907c24008d7d4372da40/FRKS/tr/londra-merkezli-global-restoran-markasi-burger-lobster-turkiye-pazarina-ykt-gida-yatirimiyla-giris-yapiyor-07-09-26/",
+    "crowdNow": "Veri yok"
   }
 ]

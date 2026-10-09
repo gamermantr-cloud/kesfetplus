@@ -1,0 +1,594 @@
+[
+  {
+    "dataset": "places",
+    "id": "arnavutkoy-bolluca",
+    "seed_name": "Bolluca Korusu",
+    "found_name": "Bolluca Çocuk Köyü",
+    "similarity": 0.562,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "park-albatros",
+    "seed_name": "Park Albatros",
+    "found_name": "Albatros Parkı",
+    "similarity": 0.593,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "hosdere-hayat-park",
+    "seed_name": "Hoşdere Hayat Park",
+    "found_name": "HOŞDERE HAYAT PARK",
+    "similarity": 0.278,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "bayrampasa-millet-bahcesi",
+    "seed_name": "Bayrampaşa Millet Bahçesi",
+    "found_name": "PROF. DR. NECMETTİN ERBAKAN MİLLET BAHÇESİ",
+    "similarity": 0.149,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "menekse-gol-agzi-parki",
+    "seed_name": "Menekşe Göl Ağzı Parkı",
+    "found_name": "MENEKŞE GÖL AĞZI PARKI",
+    "similarity": 0.318,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "aydos-forest-lake",
+    "seed_name": "Aydos Forest Lake",
+    "found_name": "Aydos Ormanı Gölü",
+    "similarity": 0.471,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "sile-central-beach",
+    "seed_name": "Şile Central Beach",
+    "found_name": "Şile Merkez Plaj",
+    "similarity": 0.471,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "beykoz-riva-sahili",
+    "seed_name": "Riva Sahili",
+    "found_name": "Riva Plajı",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "catalca-ormanli-sahili",
+    "seed_name": "Ormanlı Köyü Sahili",
+    "found_name": "Ormanlı Plajı",
+    "similarity": 0.562,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "catalca-incegiz-vadisi",
+    "seed_name": "İnceğiz Vadisi",
+    "found_name": "Çatalca inceğiz Mağaraları",
+    "similarity": 0.4,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "kinaliada-dusler-sahili",
+    "seed_name": "Düşler Sahili",
+    "found_name": "Turist friendly dreams beach | Burgazada Düşler Sahiliplajı ve Kamp alanı",
+    "similarity": 0.302,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "silivri-kavakli-orman",
+    "seed_name": "Kavaklı Orman Mesire Alanı",
+    "found_name": "Selimpaşa Kavaklı Piknik Alanı",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "bahcelievler-catalmese-piknik",
+    "seed_name": "Çatalmeşe Piknik Alanı",
+    "found_name": "Belgrad Ormanı Çatalmeşe Mesire Alanı",
+    "similarity": 0.576,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "maltepe-dragos-tepesi",
+    "seed_name": "Dragos Tepesi",
+    "found_name": "İBB Dragos Sosyal Tesisi",
+    "similarity": 0.595,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "places",
+    "id": "arnavutkoy-hacimasli-piknik-alani",
+    "seed_name": "Hacımaşlı Piknik Alanı",
+    "found_name": "Şamlar Tabiat Parkı",
+    "similarity": 0.341,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "turk-fatih-tutak",
+    "seed_name": "TURK Fatih Tutak",
+    "found_name": "TURK FATIH TUTAK",
+    "similarity": 0.5,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "aseka-karakoy",
+    "seed_name": "Aşeka Karaköy",
+    "found_name": "AŞEKA KARAKÖY",
+    "similarity": 0.231,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "buyruk-esnaf-lokantasi",
+    "seed_name": "Buyruk Esnaf Lokantası",
+    "found_name": "Buyruk Esnaf Lokantası | 1980'den Bugüne | Lezzet Adresi | Osmanlı Mutfağı | Sirkeci Lokanta",
+    "similarity": 0.386,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "kalamar-restaurant",
+    "seed_name": "Kalamar Restaurant",
+    "found_name": "Kalamar",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "sunanin-yeri",
+    "seed_name": "Suna'nın Yeri",
+    "found_name": "Kandilli Balıkçısı Suna Abla",
+    "similarity": 0.244,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "uskumru",
+    "seed_name": "Uskumru",
+    "found_name": "Uskumru Restaurant",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "day-day-patisserie",
+    "seed_name": "Day Day Patisserie",
+    "found_name": "Tarihi Kapalı Çarsı Day Day Pastanesi",
+    "similarity": 0.436,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "bena-ice-cream",
+    "seed_name": "Bena Ice Cream",
+    "found_name": "Bena Dondurmaları",
+    "similarity": 0.452,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "cafer-erol",
+    "seed_name": "Confectioner Cafer Erol",
+    "found_name": "Şekerci Cafer Erol - Kadıköy",
+    "similarity": 0.549,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "sensus-wine-galata",
+    "seed_name": "Sensus Wine Boutique Galata",
+    "found_name": "Sensus Galata Şarap Butiği",
+    "similarity": 0.491,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "mikla-rooftop-bar",
+    "seed_name": "Mikla Rooftop Bar",
+    "found_name": "Mikla",
+    "similarity": 0.455,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "le-fumoir-galata",
+    "seed_name": "Le Fumoir",
+    "found_name": "Le Fumoir at Georges Hotel Galata",
+    "similarity": 0.429,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "sevic-meyhanesi",
+    "seed_name": "Seviç Meyhanesi",
+    "found_name": "Seviç Restoran | Bayram'ın Yeri",
+    "similarity": 0.478,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "mahzen-cicek-pasaji",
+    "seed_name": "Mahzen",
+    "found_name": "Mahzen Restaurant",
+    "similarity": 0.522,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "manolya-cicek-pasaji",
+    "seed_name": "Manolya",
+    "found_name": "Çiçek Pasajı Manolya Restaurant",
+    "similarity": 0.368,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "james-joyce-irish-pub",
+    "seed_name": "James Joyce Irish Pub",
+    "found_name": "Irish Pub The James Joyce",
+    "similarity": 0.478,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "otantik-turku-bar",
+    "seed_name": "Otantik Türkü Bar",
+    "found_name": "OTANTİK BEYOĞLU",
+    "similarity": 0.25,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "flekk-bar",
+    "seed_name": "Flekk",
+    "found_name": "FLEKK",
+    "similarity": 0.2,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "alt-caz-club",
+    "seed_name": "Alt Caz Club",
+    "found_name": "Alt Caz Club",
+    "similarity": 1.0,
+    "reason": "matched_but_no_photos"
+  },
+  {
+    "dataset": "gurme",
+    "id": "the-barley",
+    "seed_name": "The Barley",
+    "found_name": "Barley 1789 Cihangir",
+    "similarity": 0.4,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "ostre-cihangir",
+    "seed_name": "Østre",
+    "found_name": "Østre İstanbul",
+    "similarity": 0.526,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "besinci-kat",
+    "seed_name": "5. Kat",
+    "found_name": "5. Kat Cafe Bar Restaurant",
+    "similarity": 0.375,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "finn-karakoy",
+    "seed_name": "Finn",
+    "found_name": "Finn Karaköy",
+    "similarity": 0.5,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "the-roof-ritz-carlton",
+    "seed_name": "The Roof",
+    "found_name": "The Roof at The Ritz-Carlton, Istanbul",
+    "similarity": 0.348,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "klein-harbiye",
+    "seed_name": "Klein",
+    "found_name": "Klein Harbiye",
+    "similarity": 0.556,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "16-roof-swissotel",
+    "seed_name": "16 Roof",
+    "found_name": "16 Roof Bar & Restaurant - Swissotel The Bosphorus, Istanbul",
+    "similarity": 0.209,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "taps-bebek",
+    "seed_name": "Taps",
+    "found_name": "Taps Bebek",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "novikov-lounge-bar",
+    "seed_name": "Novikov Lounge Bar",
+    "found_name": "Novikov Istanbul Restaurant & Bar",
+    "similarity": 0.549,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "ruby-ortakoy",
+    "seed_name": "Ruby",
+    "found_name": "RUBY RESTAURANT",
+    "similarity": 0.105,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "hera-cafe-bar",
+    "seed_name": "Hera Café Bar",
+    "found_name": "Hera Kadıköy",
+    "similarity": 0.48,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "north-shield-caddebostan",
+    "seed_name": "The North Shield",
+    "found_name": "The Irish Pub CKM",
+    "similarity": 0.424,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "robins-galata",
+    "seed_name": "Robin's",
+    "found_name": "Robin Coffee and More",
+    "similarity": 0.357,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "backyard-backbar-bebek",
+    "seed_name": "Backyard / Backbar",
+    "found_name": null,
+    "similarity": 0.0,
+    "reason": "no_results"
+  },
+  {
+    "dataset": "gurme",
+    "id": "chicki-boom-etiler",
+    "seed_name": "Chicki Boom",
+    "found_name": "Chicki boo.",
+    "similarity": 0.818,
+    "reason": "matched_but_no_photos"
+  },
+  {
+    "dataset": "gurme",
+    "id": "birdy-roof",
+    "seed_name": "Birdy Roof",
+    "found_name": "BIRDY",
+    "similarity": 0.267,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "city-lights-intercontinental",
+    "seed_name": "City Lights Restaurant & Bar",
+    "found_name": "City Lights Bar - InterContinental Istanbul",
+    "similarity": 0.479,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "kupeste-restaurant-bar",
+    "seed_name": "Küpeşte Restaurant & Bar",
+    "found_name": "Küpeşte Bar & Restaurant",
+    "similarity": 0.75,
+    "reason": "matched_but_no_photos"
+  },
+  {
+    "dataset": "gurme",
+    "id": "hunhar-topagaci",
+    "seed_name": "Hunhar Cocktails & More",
+    "found_name": "Hunhar Topağacı",
+    "similarity": 0.474,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "dama-nisantasi",
+    "seed_name": "Dama Nişantaşı",
+    "found_name": "DAMA - Cafe by day, Hi-Fi by night",
+    "similarity": 0.292,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "hunkar-lokantasi",
+    "seed_name": "Hünkar Lokantası",
+    "found_name": "Hünkar",
+    "similarity": 0.545,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "beyti-restaurant-florya",
+    "seed_name": "Beyti Restaurant",
+    "found_name": "Beyti-Florya",
+    "similarity": 0.429,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "pandeli-misir-carsisi",
+    "seed_name": "Pandeli",
+    "found_name": "Pandeli Restaurant",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "konyali-topkapi-sarayi",
+    "seed_name": "Konyalı Lokantası",
+    "found_name": "Konyali Restaurant",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "ulus-29-besiktas",
+    "seed_name": "Ulus 29",
+    "found_name": "29",
+    "similarity": 0.444,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "feriye-lokantasi-ortakoy",
+    "seed_name": "Feriye Lokantası",
+    "found_name": "Feriye",
+    "similarity": 0.545,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "lacivert-restaurant-anadoluhisari",
+    "seed_name": "Lacivert Restaurant",
+    "found_name": "Lacivert",
+    "similarity": 0.593,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "federal-coffee-galata",
+    "seed_name": "Federal Coffee Company",
+    "found_name": "Federal Galata",
+    "similarity": 0.5,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "erzincanli-ali-baba-suleymaniye",
+    "seed_name": "Erzincanlı Ali Baba",
+    "found_name": "KURUFASÜLYECİ ALİ BABA",
+    "similarity": 0.244,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "gurme",
+    "id": "ministry-of-coffee-nisantasi",
+    "seed_name": "Ministry of Coffee (MOC)",
+    "found_name": "MOC Teşvikiye",
+    "similarity": 0.162,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "vault-karakoy",
+    "seed_name": "Vault Karaköy, The House Hotel",
+    "found_name": "The House Hotel Karaköy",
+    "similarity": 0.566,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "sofa-hotel-istanbul",
+    "seed_name": "The Sofa Hotel Istanbul, Autograph Collection",
+    "found_name": "The Stay Boulevard Nisantasi",
+    "similarity": 0.356,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "w-istanbul",
+    "seed_name": "W Istanbul",
+    "found_name": "W Studios",
+    "similarity": 0.316,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "house-hotel-bosphorus",
+    "seed_name": "The House Hotel Bosphorus",
+    "found_name": "THE STAY Bosphorus",
+    "similarity": 0.558,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "house-hotel-nisantasi",
+    "seed_name": "The House Hotel Nişantaşı",
+    "found_name": "The Stay Nisantasi",
+    "similarity": 0.558,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "armada-istanbul-old-city",
+    "seed_name": "Armada Istanbul Old City Hotel",
+    "found_name": "Armada Hotel, Istanbul",
+    "similarity": 0.577,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "hotel-nomade-istanbul",
+    "seed_name": "Hotel Nomade Istanbul",
+    "found_name": "Nomade Old City Hotel",
+    "similarity": 0.429,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "kariye-hotel",
+    "seed_name": "Kariye Hotel",
+    "found_name": "Kariye Camii",
+    "similarity": 0.583,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "karakoy-rooms",
+    "seed_name": "Karaköy Rooms",
+    "found_name": "Roya Rooms Karakoy",
+    "similarity": 0.452,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "hotels",
+    "id": "vogue-hotel-supreme-istanbul",
+    "seed_name": "Vogue Hotel Supreme Istanbul",
+    "found_name": "Sura Luxury Million & Spa Sultanahmet",
+    "similarity": 0.246,
+    "reason": "low_similarity"
+  }
+]

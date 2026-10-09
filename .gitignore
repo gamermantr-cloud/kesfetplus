@@ -39,3 +39,7 @@ database/users.json
 database/sessions.json
 database/reports.json
 database/push_subscriptions.json
+
+# scripts/fetch_google_places_photos.py progress tracking (local run state,
+# not source - lets reruns resume instead of re-querying from scratch)
+scripts/.places_photo_progress.json

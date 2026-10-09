@@ -25,7 +25,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
-import { getPopularityScores, getWeather } from '../lib/api.js'
+import { getPopularityScores, getWeather, photoSrc } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { nearestDistrict } from '../lib/districts.js'
 import { rankVenues } from '../lib/search.js'
@@ -311,9 +311,9 @@ export default function Home() {
           >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
               <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
-              {venue.photos?.[0]?.url && (
+              {photoSrc(venue.photos?.[0]) && (
                 <img
-                  src={venue.photos[0].url}
+                  src={photoSrc(venue.photos[0])}
                   alt=""
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"

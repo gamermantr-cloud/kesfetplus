@@ -272,6 +272,32 @@ export async function unsubscribePush(endpoint) {
  * helper always JSON-encodes the body). The browser sets the multipart
  * Content-Type boundary itself - never set it manually on a FormData body.
  */
+/**
+ * Resolves a venue.photos[] entry to a displayable <img src>, without
+ * breaking existing Wikimedia-sourced photos.
+ *
+ * - `photo.url` set (the existing Wikimedia photos) -> used as-is.
+ * - no `url` but `photo.photo_name` set (the 363 real Google Places photos
+ *   added by scripts/fetch_google_places_photos.py, see that script's and
+ *   database/places_photo_proxy.py's docstrings) -> routed through our own
+ *   backend proxy (GET /places/photo), which resolves photo_name into
+ *   Google's key-free CDN URL server-side and 307-redirects here. This is
+ *   the ONLY safe way to show these photos: the raw Google Photo Media URL
+ *   needs an API key embedded, and this app's venue data (including
+ *   photo_name) is served to the browser as public static JSON, so that
+ *   key must never leave the backend.
+ * - neither set -> null (caller shows its own gradient/icon fallback, same
+ *   as today).
+ */
+export function photoSrc(photo) {
+  if (!photo) return null
+  if (photo.url) return photo.url
+  if (photo.photo_name) {
+    return `${BASE}/places/photo?photo_name=${encodeURIComponent(photo.photo_name)}`
+  }
+  return null
+}
+
 export async function comparePhoto(placeId, file) {
   const formData = new FormData()
   formData.append('photo', file)

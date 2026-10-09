@@ -38,6 +38,7 @@ import {
   getWeather,
   markCommentHelpful,
   markStatusHelpful,
+  photoSrc,
   postCheckin,
   postComment,
   postStatusUpdate,
@@ -579,9 +580,9 @@ export default function PlaceDetail() {
     <div className="flex min-h-screen flex-col pb-28">
       {/* Photo header */}
       <div className="relative h-64 w-full shrink-0 overflow-hidden">
-        {venue.photos && venue.photos.length > 0 ? (
+        {venue.photos && venue.photos.length > 0 && photoSrc(venue.photos[0]) ? (
           <img
-            src={venue.photos[0].url}
+            src={photoSrc(venue.photos[0])}
             alt={`${venue.name} fotoğrafı`}
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -932,27 +933,29 @@ export default function PlaceDetail() {
           <div>
             {venue.photos && venue.photos.length > 0 ? (
               <div className="grid grid-cols-2 gap-3">
-                {venue.photos.map((photo, idx) => (
-                  <a
-                    key={photo.url ?? idx}
-                    href={photo.source ?? photo.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block overflow-hidden rounded-2xl border border-cream-line"
-                  >
-                    <img
-                      src={photo.url}
-                      alt={`${venue.name} fotoğrafı`}
-                      loading="lazy"
-                      className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                    />
-                    {photo.attribution ? (
-                      <p className="truncate px-2 py-1.5 text-[10px] text-taupe">
-                        {photo.attribution}
-                      </p>
-                    ) : null}
-                  </a>
-                ))}
+                {venue.photos
+                  .filter((photo) => photoSrc(photo))
+                  .map((photo, idx) => (
+                    <a
+                      key={photo.url ?? photo.photo_name ?? idx}
+                      href={photo.source ?? photoSrc(photo)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block overflow-hidden rounded-2xl border border-cream-line"
+                    >
+                      <img
+                        src={photoSrc(photo)}
+                        alt={`${venue.name} fotoğrafı`}
+                        loading="lazy"
+                        className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                      />
+                      {photo.attribution ? (
+                        <p className="truncate px-2 py-1.5 text-[10px] text-taupe">
+                          {photo.attribution}
+                        </p>
+                      ) : null}
+                    </a>
+                  ))}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-cream-line py-14 text-center">

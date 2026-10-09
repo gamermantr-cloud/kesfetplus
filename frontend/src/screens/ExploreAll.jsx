@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
-import { getPopularityScores } from '../lib/api.js'
+import { getPopularityScores, photoSrc } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { rankVenues } from '../lib/search.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
@@ -135,9 +135,9 @@ export default function ExploreAll() {
           >
             <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
               <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
-              {venue.photos?.[0]?.url && (
+              {photoSrc(venue.photos?.[0]) && (
                 <img
-                  src={venue.photos[0].url}
+                  src={photoSrc(venue.photos[0])}
                   alt=""
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"

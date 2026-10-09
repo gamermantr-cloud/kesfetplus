@@ -2,7 +2,7 @@ import os
 
 from fastapi import Depends, FastAPI, File, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, Field, field_validator
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
@@ -48,6 +48,12 @@ from database.photo_compare import (
     ReferenceDownloadError,
     compare_images,
     get_reference_photo_url,
+)
+from database.places_photo_proxy import (
+    DEFAULT_MAX_WIDTH_PX,
+    PhotoUnavailableError,
+    UnknownPhotoNameError,
+    resolve_photo_uri,
 )
 from database.push_subscriptions_store import (
     add_subscription,
@@ -252,6 +258,35 @@ def get_weather_for_district(district: str):
         return get_weather(district)
     except WeatherUnavailableError as e:
         raise HTTPException(status_code=502, detail=str(e)) from e
+
+
+# ---------------------------------------------------------------------------
+# Places photo proxy - see database/places_photo_proxy.py module docstring
+# for the full "why": seed venues carry a real Google Places `photo_name`
+# but a `null` url, because embedding a key-bearing Google Photo Media URL
+# into frontend/public/data/*.json would leak GOOGLE_PLACES_API_KEY to every
+# visitor. This endpoint resolves photo_name -> Google's own key-free,
+# short-lived CDN `photoUri` *server-side* and 307-redirects the browser
+# there - we never proxy the actual image bytes ourselves (no bandwidth
+# cost, no extra latency hop). Public/no-auth: these photos are already
+# public on Google Maps, same visibility level as GET /places/{id}/comments.
+# Rate-limited (not behind get_current_user, so it's otherwise-unauthenticated
+# attack surface, same reasoning as /auth/register and /auth/login above) -
+# a generous but real cap since legitimate traffic can load several photos
+# per place page.
+# ---------------------------------------------------------------------------
+
+
+@app.get("/places/photo")
+@limiter.limit("60/minute")
+def get_place_photo(request: Request, photo_name: str, max_width: int = DEFAULT_MAX_WIDTH_PX):
+    try:
+        photo_uri = resolve_photo_uri(photo_name, max_width_px=max_width)
+    except UnknownPhotoNameError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+    except PhotoUnavailableError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
+    return RedirectResponse(url=photo_uri, status_code=307)
 
 
 # ---------------------------------------------------------------------------

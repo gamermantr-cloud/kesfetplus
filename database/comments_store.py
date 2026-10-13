@@ -1,31 +1,26 @@
-"""File-backed comment storage.
+"""PostgreSQL-backed comment storage.
 
-Temporary until PostgreSQL is wired up (see docs/ARCHITECTURE.md). Comments
-are appended to a JSON file so real submissions persist across API restarts
-without needing a database yet. No demo/example comments are seeded here -
-the store starts empty.
+Used to be a JSON file (database/comments.json) guarded by a
+threading.Lock - see database/README.md and git history for that version.
+Now backed by the `comments` table (database/schema.sql); every write runs
+inside one DB transaction via database/db.get_cursor(), which is what
+replaces the old lock (and, unlike it, stays correct across multiple
+worker processes too).
 
-KNOWN LIMITATION: the threading.Lock here only guards against concurrent
-writes *within a single process*. It provides no safety if the API is ever
-run with multiple worker processes (e.g. `uvicorn --workers N`, gunicorn)
-pointed at the same JSON files - concurrent writes from different processes
-can interleave and corrupt comments.json. Fine for today's single-worker
-dev/small-scale deployment; must be resolved (real DB, or a cross-process
-lock) before scaling to multiple workers.
+Every public function here keeps the exact same name/signature/return
+shape it had as a JSON store, so api/main.py needed no changes at all.
 """
 
+from __future__ import annotations
+
 import html
-import json
-import os
-import threading
 import uuid
 from datetime import UTC, datetime
+from typing import Any
 
 from database.content_filter import check_content
+from database.db import get_cursor
 from database.trust_scoring import score_comment
-
-_STORE_PATH = os.path.join(os.path.dirname(__file__), "comments.json")
-_lock = threading.Lock()
 
 
 class CommentError(Exception):
@@ -36,16 +31,43 @@ class SelfHelpfulError(CommentError):
     """Raised when a user tries to mark their own comment as helpful."""
 
 
-def _load() -> dict:
-    if not os.path.exists(_STORE_PATH):
-        return {}
-    with open(_STORE_PATH, encoding="utf-8") as f:
-        return json.load(f)
+def _normalize_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Row from the `comments` table -> the same dict shape the JSON store
+    used to produce. The only real difference is `created_at`: psycopg
+    hands back a timezone-aware datetime for a TIMESTAMPTZ column, but the
+    rest of this codebase (trust_scoring.py's velocity signal,
+    checkins_store.py's staleness checks, etc.) expects an ISO-8601
+    string - the same thing `datetime.now(UTC).isoformat()` used to write
+    to the JSON file - so it's converted back here, once, at the boundary."""
+    out = dict(row)
+    created_at = out.get("created_at")
+    if isinstance(created_at, datetime):
+        out["created_at"] = created_at.isoformat()
+    return out
 
 
-def _save(data: dict) -> None:
-    with open(_STORE_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def _all_comments_by_place() -> dict[str, list[dict[str, Any]]]:
+    """Every comment in the table, grouped by place_id - the same shape
+    database/trust_scoring.score_comment expects for its `data` argument
+    (it needs to see comments across *every* place for the velocity-signal
+    "same author, any place" check, and a fallback text-similarity pool
+    when a place has too few comments of its own).
+
+    This is a full-table scan, same cost profile the old JSON version had
+    (it loaded the whole comments.json on every new comment too) - fine at
+    today's scale (a handful of real submissions). If comment volume ever
+    makes this a real bottleneck, the fix is targeted queries (comments in
+    the last hour for this author, last N platform-wide, etc.) instead of
+    this helper - not before it's an actual, measured problem (see
+    docs/research/turkiye-pazar-teknik-mimari.md Bölüm 3's over-engineering
+    warning)."""
+    with get_cursor() as cur:
+        cur.execute("SELECT place_id, author, text, created_at FROM comments")
+        rows = [_normalize_row(r) for r in cur.fetchall()]
+    data: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        data.setdefault(row["place_id"], []).append(row)
+    return data
 
 
 def add_comment(
@@ -61,8 +83,8 @@ def add_comment(
 
     lat/lng/accuracy are optional (declining location permission is never
     penalized - see database/trust_scoring.py signal 2). Trust scoring is
-    computed against the store's state *before* this comment is appended,
-    so it can't compare/collide with itself.
+    computed against every comment already in the table *before* this one
+    is inserted, so it can't compare/collide with itself.
 
     author_user_id ties the comment to a real account (database/users_store.py)
     for ownership/blocking. It's optional/None for comments written before
@@ -82,29 +104,44 @@ def add_comment(
     escaped_text = html.escape(text)
     content_check = check_content(text)
 
-    with _lock:
-        data = _load()
-        trust = score_comment(place_id, escaped_author, escaped_text, lat, lng, data)
-        if content_check["is_objectionable"]:
-            trust["review_status"] = "hidden"
-            trust["flagged_reason"] = "objectionable_content"
-        comment = {
-            "id": str(uuid.uuid4()),
-            "place_id": place_id,
-            "author": escaped_author,
-            "author_user_id": author_user_id,
-            "text": escaped_text,
-            "lat": lat,
-            "lng": lng,
-            "accuracy": accuracy,
-            "created_at": datetime.now(UTC).isoformat(),
-            "helpful_count": 0,
-            "helpful_user_ids": [],
-            **trust,
-        }
-        data.setdefault(place_id, []).append(comment)
-        _save(data)
-    return comment
+    data = _all_comments_by_place()
+    trust = score_comment(place_id, escaped_author, escaped_text, lat, lng, data)
+    if content_check["is_objectionable"]:
+        trust["review_status"] = "hidden"
+        trust["flagged_reason"] = "objectionable_content"
+
+    comment_id = str(uuid.uuid4())
+    created_at = datetime.now(UTC)
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO comments (
+                id, place_id, author, author_user_id, text, lat, lng, accuracy,
+                created_at, helpful_count, helpful_user_ids,
+                computed_trust_score, flagged_reason, review_status
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, %s, %s, %s, %s)
+            RETURNING *
+            """,
+            (
+                comment_id,
+                place_id,
+                escaped_author,
+                author_user_id,
+                escaped_text,
+                lat,
+                lng,
+                accuracy,
+                created_at,
+                [],
+                trust["computed_trust_score"],
+                trust["flagged_reason"],
+                trust["review_status"],
+            ),
+        )
+        row = cur.fetchone()
+    if row is None:
+        raise RuntimeError("INSERT ... RETURNING satır döndürmedi (beklenmeyen durum).")
+    return _normalize_row(row)
 
 
 def list_comments(
@@ -137,9 +174,12 @@ def list_comments(
         list_hidden_comments()/list_all_reports() moderator-only paths, not
         this one.
     """
-    with _lock:
-        data = _load()
-    comments = data.get(place_id, [])
+    with get_cursor() as cur:
+        cur.execute(
+            "SELECT * FROM comments WHERE place_id = %s ORDER BY created_at",
+            (place_id,),
+        )
+        comments = [_normalize_row(r) for r in cur.fetchall()]
     if not include_hidden:
         comments = [
             c
@@ -148,16 +188,9 @@ def list_comments(
         ]
     if exclude_user_ids:
         comments = [c for c in comments if c.get("author_user_id") not in exclude_user_ids]
-    # Backfill helpful_count/helpful_user_ids for comments written before
-    # this field existed (see add_comment) - never crash on a missing key,
-    # just treat it as "nobody has marked this helpful yet".
     result = []
     for c in comments:
-        item = {
-            **c,
-            "helpful_count": c.get("helpful_count", 0),
-            "helpful_user_ids": c.get("helpful_user_ids", []),
-        }
+        item = dict(c)
         item.pop("computed_trust_score", None)
         is_own = viewer_user_id is not None and item.get("author_user_id") == viewer_user_id
         if not is_own:
@@ -168,11 +201,12 @@ def list_comments(
 
 def count_all_comments() -> int:
     """Total comments stored across every place, regardless of
-    review_status (0 if comments.json is missing/empty) - used by
+    review_status (0 if the table is empty) - used by
     GET /moderation/stats in api/main.py."""
-    with _lock:
-        data = _load()
-    return sum(len(comments) for comments in data.values())
+    with get_cursor() as cur:
+        cur.execute("SELECT COUNT(*) AS n FROM comments")
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
 def sum_helpful_by_place() -> dict[str, int]:
@@ -182,39 +216,43 @@ def sum_helpful_by_place() -> dict[str, int]:
     for the same pattern applied to status updates). Hidden/flagged
     comments are excluded - content nobody actually saw shouldn't count
     toward a venue's popularity."""
-    with _lock:
-        data = _load()
-    result: dict[str, int] = {}
-    for place_id, comments in data.items():
-        total = sum(
-            c.get("helpful_count", 0) for c in comments if c.get("review_status") != "hidden"
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            SELECT place_id, SUM(helpful_count) AS total
+            FROM comments
+            WHERE review_status != 'hidden'
+            GROUP BY place_id
+            HAVING SUM(helpful_count) > 0
+            """
         )
-        if total:
-            result[place_id] = total
-    return result
+        rows = cur.fetchall()
+    return {row["place_id"]: row["total"] for row in rows}
 
 
 def list_place_ids_with_comments() -> set[str]:
     """place_ids with at least one comment (any review_status) - used to
     compute GET /moderation/stats venues_with_activity in api/main.py
     (unioned there with checkins_store.list_place_ids_with_activity)."""
-    with _lock:
-        data = _load()
-    return {place_id for place_id, comments in data.items() if comments}
+    with get_cursor() as cur:
+        cur.execute("SELECT DISTINCT place_id FROM comments")
+        rows = cur.fetchall()
+    return {row["place_id"] for row in rows}
 
 
 def list_hidden_comments() -> list[dict]:
     """Every comment across every place that's hidden or flagged -
-    moderator-only visibility (see api/main.py get_current_moderator). Until
-    now nothing surfaced these; this is the "moderation isn't blind" fix."""
-    with _lock:
-        data = _load()
-    hidden = []
-    for comments in data.values():
-        for comment in comments:
-            if comment.get("review_status") == "hidden" or comment.get("flagged_reason"):
-                hidden.append(comment)
-    return hidden
+    moderator-only visibility (see api/main.py get_current_moderator)."""
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            SELECT * FROM comments
+            WHERE review_status = 'hidden' OR flagged_reason IS NOT NULL
+            ORDER BY created_at
+            """
+        )
+        rows = cur.fetchall()
+    return [_normalize_row(r) for r in rows]
 
 
 def toggle_helpful_comment(place_id: str, comment_id: str, user_id: str) -> dict:
@@ -229,39 +267,53 @@ def toggle_helpful_comment(place_id: str, comment_id: str, user_id: str) -> dict
     count is only meaningful as *other* people's signal, and self-marking
     would let anyone trivially inflate their own count.
 
-    Old comments written before helpful_count/helpful_user_ids existed are
-    backfilled to 0/[] here on first toggle (same default as list_comments).
+    `SELECT ... FOR UPDATE` locks the row for the rest of this transaction,
+    so two concurrent toggles from different users can't both read the same
+    helpful_user_ids and race each other's UPDATE.
     """
-    with _lock:
-        data = _load()
-        for comment in data.get(place_id, []):
-            if comment["id"] != comment_id:
-                continue
-            if comment.get("author_user_id") == user_id:
-                raise SelfHelpfulError("Kendi yorumunu faydalı olarak işaretleyemezsin.")
-            helpful_ids = list(comment.get("helpful_user_ids", []))
-            if user_id in helpful_ids:
-                helpful_ids.remove(user_id)
-            else:
-                helpful_ids.append(user_id)
-            comment["helpful_user_ids"] = helpful_ids
-            comment["helpful_count"] = len(helpful_ids)
-            _save(data)
-            return comment
-    raise CommentError("Yorum bulunamadı.")
+    with get_cursor() as cur:
+        cur.execute(
+            "SELECT * FROM comments WHERE place_id = %s AND id = %s FOR UPDATE",
+            (place_id, comment_id),
+        )
+        row = cur.fetchone()
+        if row is None:
+            raise CommentError("Yorum bulunamadı.")
+        if row.get("author_user_id") == user_id:
+            raise SelfHelpfulError("Kendi yorumunu faydalı olarak işaretleyemezsin.")
+        helpful_ids = list(row.get("helpful_user_ids") or [])
+        if user_id in helpful_ids:
+            helpful_ids.remove(user_id)
+        else:
+            helpful_ids.append(user_id)
+        cur.execute(
+            """
+            UPDATE comments SET helpful_user_ids = %s, helpful_count = %s
+            WHERE place_id = %s AND id = %s
+            RETURNING *
+            """,
+            (helpful_ids, len(helpful_ids), place_id, comment_id),
+        )
+        updated = cur.fetchone()
+    if updated is None:
+        raise RuntimeError("UPDATE ... RETURNING satır döndürmedi (beklenmeyen durum).")
+    return _normalize_row(updated)
 
 
 def restore_comment(comment_id: str) -> dict:
     """Moderator override: set a comment's review_status back to "visible"
     (e.g. the content filter false-positived). Raises CommentError if no
-    comment with this id exists in any place."""
-    with _lock:
-        data = _load()
-        for comments in data.values():
-            for comment in comments:
-                if comment["id"] == comment_id:
-                    comment["review_status"] = "visible"
-                    comment["flagged_reason"] = None
-                    _save(data)
-                    return comment
-    raise CommentError("Yorum bulunamadı.")
+    comment with this id exists."""
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            UPDATE comments SET review_status = 'visible', flagged_reason = NULL
+            WHERE id = %s
+            RETURNING *
+            """,
+            (comment_id,),
+        )
+        row = cur.fetchone()
+    if row is None:
+        raise CommentError("Yorum bulunamadı.")
+    return _normalize_row(row)

@@ -13,12 +13,16 @@ Türkiye pazar/teknik mimari) — bunlar proje vizyonunun kaynak dokümanlarıd�
 - Yerel geliştirme aşamasında, henüz canlıya alınmadı. Repo GitHub'da:
   https://github.com/gamermantr-cloud/kesfetplus (public) — GitHub Actions CI,
   Dependabot, CodeRabbit ve Mergify merge queue kurulu.
-- Gerçek 243 mekan/restoran/otel verisi var (`database/seed/`: places.json 132,
-  gurme.json 93, hotels.json 18) — Google'dan derlenmiş + sahada doğrulanmış.
-- Yorum sistemi çalışıyor ama backend'i henüz dosya tabanlı
-  (`database/comments_store.py` → `database/comments.json`), PostgreSQL'e
-  geçiş planlanıyor. `README.md` ve `database/README.md` bu geçişten önceki
-  eski duruma göre yazılmış, güncel değil — bu dosyadaki bilgiye güven.
+- Gerçek 485 mekan/restoran/otel verisi var (`database/seed/`: places.json 182,
+  gurme.json 235, hotels.json 68) — Google'dan derlenmiş + sahada doğrulanmış.
+- Backend artık PostgreSQL'e geçirildi (`database/schema.sql`,
+  `database/db.py`, `database/*_store.py` — bkz. `database/README.md`).
+  Yerel geliştirmede `DATABASE_URL` tanımlı değilse (henüz bir Postgres
+  kurulmadıysa) uygulama import sırasında çökmez, ama herhangi bir store
+  fonksiyonu çağrıldığında `DatabaseNotConfiguredError` ile açık bir hata
+  verir — bkz. `database/README.md` "Local setup". `README.md` bu
+  geçişten önceki eski duruma göre yazılmış, güncel değil — bu dosyadaki
+  bilgiye güven.
 
 ## Mimari
 

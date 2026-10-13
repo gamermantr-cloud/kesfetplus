@@ -43,9 +43,15 @@ scenario still gets exercised.
 Cleanup: every account/comment/check-in/status/report this script creates
 is tagged with a throwaway `SMOKE-TEST-<run id>` marker (in display_name,
 and therefore in the `author` field written by comments/checkins/status),
-so cleanup can find and remove *only* the rows this run created from the
-JSON stores, byte-for-byte restoring everything else - see
+so cleanup can find and remove *only* the rows this run created - see
 `cleanup_and_verify`.
+
+Storage note: the backend is PostgreSQL-backed now (database/schema.sql,
+database/*_store.py) rather than JSON files - this script talks to the
+same database the running backend uses (DATABASE_URL must be set, same as
+the backend) to verify cleanup, via database/db.get_cursor(), instead of
+reading/writing database/*.json directly like it used to (see git history
+for that version).
 """
 
 from __future__ import annotations
@@ -65,19 +71,16 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from database.checkins_store import STATUS_TAGS  # noqa: E402
+from database.db import get_cursor  # noqa: E402
 from database.photo_compare import get_reference_photo_url  # noqa: E402
 from database.trust_scoring import TEXT_SIMILARITY_THRESHOLD  # noqa: E402
 
-BASE_URL = "http://127.0.0.1:8000"
+# Configurable so this can be pointed at a one-off test server (e.g. a
+# second uvicorn instance on another port, running against a scratch
+# database) without editing this file - defaults to the normal dev setup.
+BASE_URL = os.getenv("SMOKE_TEST_BASE_URL", "http://127.0.0.1:8000")
 SEED_DIR = os.path.join(_REPO_ROOT, "database", "seed")
 PLACES_SEED_PATH = os.path.join(SEED_DIR, "places.json")
-
-COMMENTS_PATH = os.path.join(_REPO_ROOT, "database", "comments.json")
-CHECKINS_PATH = os.path.join(_REPO_ROOT, "database", "checkins.json")
-STATUS_PATH = os.path.join(_REPO_ROOT, "database", "status.json")
-USERS_PATH = os.path.join(_REPO_ROOT, "database", "users.json")
-SESSIONS_PATH = os.path.join(_REPO_ROOT, "database", "sessions.json")
-REPORTS_PATH = os.path.join(_REPO_ROOT, "database", "reports.json")
 
 RUN_ID = uuid.uuid4().hex[:8]
 TEST_AUTHOR = f"SMOKE-TEST-{RUN_ID}"  # kept for the pre-existing author-prefix cleanup pattern
@@ -587,109 +590,75 @@ def run_photo_compare_tests(photo_place_id: str, photo_url: str, token_a: str | 
     )
 
 
-def _load_json(path: str, default: dict | list | None = None) -> dict | list:
-    """Parsed JSON at `path`, or `default` ({} if None) when the file is
-    missing. List-shaped stores (reports.json) must pass default=[] so a
-    missing file compares equal to the empty list cleanup produces."""
-    if not os.path.exists(path):
-        return {} if default is None else default
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+def _table_count(table: str) -> int:
+    with get_cursor() as cur:
+        cur.execute(f"SELECT COUNT(*) AS n FROM {table}")  # noqa: S608 - table from a fixed list below
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
-def _save_json(path: str, data: dict | list) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def _snapshot_counts() -> dict[str, int]:
+    """Row count per table this run might touch, taken *before* any smoke
+    activity - the baseline cleanup must return to."""
+    return {table: _table_count(table) for table in _TOUCHED_TABLES}
 
 
-def _clean_author_keyed_store(label: str, path: str, before: dict) -> bool:
-    """comments.json / checkins.json / status.json: dict[place_id -> [entry,
-    ...]], entries carry an "author" string. Removes only rows whose author
-    starts with the SMOKE-TEST- marker."""
-    current = _load_json(path)
-    cleaned: dict = {}
-    removed = 0
-    for place_id, entries in current.items():
-        kept = [e for e in entries if not str(e.get("author", "")).startswith("SMOKE-TEST-")]
-        removed += len(entries) - len(kept)
-        # Keep the key if it still has rows, or if it existed before the
-        # test (even as an empty list) - never introduce a place_id key
-        # that wasn't there before, never drop one that was.
-        if kept or place_id in before:
-            cleaned[place_id] = kept
-    if os.path.exists(path) or cleaned:
-        _save_json(path, cleaned)
-    restored = cleaned == before
-    check(f"{label}: {removed} smoke kaydi silindi, dosya test-oncesi hale esit", restored)
-    return restored
+_TOUCHED_TABLES = ("comments", "checkins", "status_updates", "users", "sessions", "reports")
 
 
-def _clean_users_store(label: str, path: str, before: dict, test_user_ids: set[str]) -> bool:
-    """users.json: dict[user_id -> user]. Removes exactly the accounts this
-    run created (matched by id, not by a string prefix, so a real account
-    can never be swept up by accident)."""
-    current = _load_json(path)
-    cleaned = {uid: u for uid, u in current.items() if uid not in test_user_ids}
-    removed = len(current) - len(cleaned)
-    if os.path.exists(path) or cleaned:
-        _save_json(path, cleaned)
-    restored = cleaned == before
-    check(f"{label}: {removed} smoke hesabi silindi, dosya test-oncesi hale esit", restored)
-    return restored
+def _clean_author_keyed_table(label: str, table: str) -> int:
+    """comments / checkins / status_updates: removes only rows whose
+    `author` starts with the SMOKE-TEST- marker."""
+    with get_cursor() as cur:
+        cur.execute(f"DELETE FROM {table} WHERE author LIKE 'SMOKE-TEST-%'")  # noqa: S608
+        removed = cur.rowcount
+    print(f"  {label}: {removed} smoke kaydı silindi.")
+    return removed
 
 
-def _clean_sessions_store(label: str, path: str, before: dict, test_user_ids: set[str]) -> bool:
-    """sessions.json: dict[token -> {user_id, ...}]. Removes every session
-    belonging to one of this run's test users (register creates one,
-    login creates another)."""
-    current = _load_json(path)
-    cleaned = {tok: s for tok, s in current.items() if s.get("user_id") not in test_user_ids}
-    removed = len(current) - len(cleaned)
-    if os.path.exists(path) or cleaned:
-        _save_json(path, cleaned)
-    restored = cleaned == before
-    check(f"{label}: {removed} smoke session silindi, dosya test-oncesi hale esit", restored)
-    return restored
+def _clean_users_and_sessions(test_user_ids: set[str]) -> None:
+    """Removes exactly the accounts (and their sessions) this run created,
+    matched by id - never by a string prefix - so a real account can never
+    be swept up by accident."""
+    if not test_user_ids:
+        print("  users/sessions: silinecek smoke hesabı yok.")
+        return
+    ids = list(test_user_ids)
+    with get_cursor() as cur:
+        cur.execute("DELETE FROM sessions WHERE user_id = ANY(%s)", (ids,))
+        sessions_removed = cur.rowcount
+        cur.execute("DELETE FROM users WHERE id = ANY(%s)", (ids,))
+        users_removed = cur.rowcount
+    print(f"  sessions: {sessions_removed} smoke session silindi.")
+    print(f"  users: {users_removed} smoke hesabı silindi.")
 
 
-def _clean_reports_store(label: str, path: str, before: list, test_user_ids: set[str]) -> bool:
-    """reports.json: list[report]. Removes every report filed by one of
-    this run's test users."""
-    current = _load_json(path, default=[])
-    cleaned = [rep for rep in current if rep.get("reporter_user_id") not in test_user_ids]
-    removed = len(current) - len(cleaned)
-    if os.path.exists(path) or cleaned:
-        _save_json(path, cleaned)
-    restored = cleaned == before
-    check(f"{label}: {removed} smoke rapor silindi, dosya test-oncesi hale esit", restored)
-    return restored
-
-
-def cleanup_and_verify(before_snapshots: dict, test_user_ids: set[str]) -> bool:
-    """Remove only the rows this run created from every JSON store it could
-    have touched, then assert each resulting file is byte-for-byte identical
-    (as parsed JSON) to its pre-test snapshot - cleanup is exact, not
-    "close enough"."""
+def cleanup_and_verify(before_counts: dict[str, int], test_user_ids: set[str]) -> bool:
+    """Remove every row this run created, then assert each touched table's
+    row count is back to its pre-test baseline - cleanup is exact, not
+    "close enough". (reports/comments/checkins/status rows created by a
+    test user are removed by the ON DELETE CASCADE on users.id - see
+    database/schema.sql - once _clean_users_and_sessions deletes the user
+    row; comments/checkins/status_updates are *also* swept directly by
+    author-prefix in case a row was posted before its author's account id
+    was known to this script, e.g. nothing today, but keeps this robust.)
+    """
     print("\n9. Temizlik (sadece bu run'in SMOKE-TEST- kayitlari)")
+    _clean_author_keyed_table("comments", "comments")
+    _clean_author_keyed_table("checkins", "checkins")
+    _clean_author_keyed_table("status_updates", "status_updates")
+    _clean_users_and_sessions(test_user_ids)
+
     all_clean = True
-    all_clean &= _clean_author_keyed_store(
-        "comments.json", COMMENTS_PATH, before_snapshots["comments.json"]
-    )
-    all_clean &= _clean_author_keyed_store(
-        "checkins.json", CHECKINS_PATH, before_snapshots["checkins.json"]
-    )
-    all_clean &= _clean_author_keyed_store(
-        "status.json", STATUS_PATH, before_snapshots["status.json"]
-    )
-    all_clean &= _clean_users_store(
-        "users.json", USERS_PATH, before_snapshots["users.json"], test_user_ids
-    )
-    all_clean &= _clean_sessions_store(
-        "sessions.json", SESSIONS_PATH, before_snapshots["sessions.json"], test_user_ids
-    )
-    all_clean &= _clean_reports_store(
-        "reports.json", REPORTS_PATH, before_snapshots["reports.json"], test_user_ids
-    )
+    after_counts = {table: _table_count(table) for table in _TOUCHED_TABLES}
+    for table in _TOUCHED_TABLES:
+        restored = after_counts[table] == before_counts[table]
+        all_clean &= restored
+        check(
+            f"{table}: temizlik sonrası satır sayısı test-öncesi hale eşit",
+            restored,
+            f"before={before_counts[table]} after={after_counts[table]}",
+        )
     return all_clean
 
 
@@ -704,14 +673,7 @@ def main() -> int:
     else:
         photo_place_id, photo_url = load_place_with_reference_photo()
 
-    before_snapshots = {
-        "comments.json": _load_json(COMMENTS_PATH),
-        "checkins.json": _load_json(CHECKINS_PATH),
-        "status.json": _load_json(STATUS_PATH),
-        "users.json": _load_json(USERS_PATH),
-        "sessions.json": _load_json(SESSIONS_PATH),
-        "reports.json": _load_json(REPORTS_PATH, default=[]),
-    }
+    before_counts = _snapshot_counts()
 
     user_a: dict = {}
     user_b: dict = {}
@@ -730,7 +692,7 @@ def main() -> int:
             run_photo_compare_tests(photo_place_id, photo_url, token_a)
     finally:
         test_user_ids = {uid for uid in (user_a.get("id"), user_b.get("id")) if uid}
-        cleanup_and_verify(before_snapshots, test_user_ids)
+        cleanup_and_verify(before_counts, test_user_ids)
 
     passed = sum(1 for _, ok, _ in _results if ok)
     failed = sum(1 for _, ok, _ in _results if not ok)

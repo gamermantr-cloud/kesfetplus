@@ -9,3 +9,4 @@ Pillow
 imagehash
 pywebpush
 slowapi
+psycopg[binary,pool]

@@ -1,8 +1,20 @@
 /**
- * Thin client for the FastAPI backend. Vite proxies /api -> 127.0.0.1:8000
- * (see vite.config.js) so this works in dev without CORS setup.
+ * Thin client for the FastAPI backend.
+ *
+ * Dev (`npm run dev`): uses the relative `/api` path, which Vite proxies to
+ * 127.0.0.1:8000 (see vite.config.js) - no CORS setup needed, behavior
+ * unchanged from before.
+ *
+ * Production/native build (Capacitor iOS/Android WebView has no dev-server
+ * and no proxy): uses an absolute URL from `VITE_API_BASE_URL` (see
+ * .env.example - no real backend domain exists yet, this is a placeholder
+ * until hosting is set up). Falls back to `/api` if the env var isn't set,
+ * which only works where something actually serves that path (e.g. the web
+ * build deployed behind the same origin as the API).
  */
-const BASE = '/api'
+const BASE = import.meta.env.DEV
+  ? '/api'
+  : (import.meta.env.VITE_API_BASE_URL || '/api')
 const TOKEN_KEY = 'kesfetplus_token'
 
 export function getToken() {

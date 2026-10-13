@@ -1,9 +1,12 @@
-"""File-backed check-in and status storage for the "Anlık Bilgi Akışı" MVP.
+"""PostgreSQL-backed check-in and status storage for the "Anlık Bilgi
+Akışı" MVP.
 
-Same pattern as comments_store.py: temporary until PostgreSQL is wired up.
-Two JSON files (checkins.json, status.json) are appended to so real
-submissions persist across API restarts. No demo/example data is seeded
-here - both stores start empty.
+Used to be two JSON files (checkins.json, status.json) guarded by a
+threading.Lock - see database/README.md and git history for that version.
+Now backed by the `checkins` and `status_updates` tables
+(database/schema.sql); every write runs inside one DB transaction via
+database/db.get_cursor(), which is what replaces the old lock (and, unlike
+it, stays correct across multiple worker processes too).
 
 Honesty note (see docs/research/anlik-bilgi-akisi.md and CLAUDE.md "sahte
 veri yasak" rule): seed venues only have an approximate district-center
@@ -12,10 +15,8 @@ GPS check here is deliberately loose (3km radius) and only ever produces a
 soft `location_verified` flag - it never rejects a check-in. Callers must
 not present this flag as a strong/precise verification.
 
-KNOWN LIMITATION: same as comments_store.py - the threading.Lock only
-guards a single process. Running the API with multiple workers against
-these same JSON files risks corrupting checkins.json/status.json. Must be
-resolved (real DB, or cross-process locking) before a multi-worker deploy.
+Every public function here keeps the exact same name/signature/return
+shape it had as a JSON store, so api/main.py needed no changes at all.
 """
 
 import html
@@ -23,20 +24,18 @@ import json
 import logging
 import math
 import os
-import threading
 import uuid
 from datetime import UTC, datetime, timedelta
 from functools import lru_cache
+from typing import Any
 
 from database.content_filter import check_content
+from database.db import get_cursor
 from database.push_notify import notify_new_status
 
 logger = logging.getLogger(__name__)
 
-_CHECKINS_PATH = os.path.join(os.path.dirname(__file__), "checkins.json")
-_STATUS_PATH = os.path.join(os.path.dirname(__file__), "status.json")
 _SEED_DIR = os.path.join(os.path.dirname(__file__), "seed")
-_lock = threading.Lock()
 
 
 class StatusError(Exception):
@@ -179,16 +178,15 @@ def _is_location_plausible(place_id: str, lat: float | None, lng: float | None) 
     return distance <= LOCATION_VERIFY_RADIUS_KM
 
 
-def _load(path: str) -> dict:
-    if not os.path.exists(path):
-        return {}
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def _save(path: str, data: dict) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def _normalize_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Row from `checkins`/`status_updates` -> the same dict shape the JSON
+    stores used to produce - see comments_store._normalize_row for why
+    created_at is converted back to an ISO-8601 string here."""
+    out = dict(row)
+    created_at = out.get("created_at")
+    if isinstance(created_at, datetime):
+        out["created_at"] = created_at.isoformat()
+    return out
 
 
 def add_checkin(
@@ -199,38 +197,45 @@ def add_checkin(
     accuracy: float | None,
     author_user_id: str | None = None,
 ) -> dict:
-    checkin = {
-        "id": str(uuid.uuid4()),
-        "place_id": place_id,
-        "author": html.escape(author),
-        "author_user_id": author_user_id,
-        "lat": lat,
-        "lng": lng,
-        "accuracy": accuracy,
-        "location_verified": _is_location_plausible(place_id, lat, lng),
-        "created_at": datetime.now(UTC).isoformat(),
-    }
-    with _lock:
-        data = _load(_CHECKINS_PATH)
-        data.setdefault(place_id, []).append(checkin)
-        _save(_CHECKINS_PATH, data)
-    return checkin
+    checkin_id = str(uuid.uuid4())
+    created_at = datetime.now(UTC)
+    location_verified = _is_location_plausible(place_id, lat, lng)
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO checkins (
+                id, place_id, author, author_user_id, lat, lng, accuracy,
+                location_verified, created_at
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING *
+            """,
+            (
+                checkin_id,
+                place_id,
+                html.escape(author),
+                author_user_id,
+                lat,
+                lng,
+                accuracy,
+                location_verified,
+                created_at,
+            ),
+        )
+        row = cur.fetchone()
+    if row is None:
+        raise RuntimeError("INSERT ... RETURNING satır döndürmedi (beklenmeyen durum).")
+    return _normalize_row(row)
 
 
 def count_recent_checkins(place_id: str, hours: int = CHECKIN_ACTIVE_WINDOW_HOURS) -> int:
-    with _lock:
-        data = _load(_CHECKINS_PATH)
-    checkins = data.get(place_id, [])
     cutoff = datetime.now(UTC) - timedelta(hours=hours)
-    count = 0
-    for c in checkins:
-        try:
-            created = datetime.fromisoformat(c["created_at"])
-        except (KeyError, ValueError):
-            continue
-        if created >= cutoff:
-            count += 1
-    return count
+    with get_cursor() as cur:
+        cur.execute(
+            "SELECT COUNT(*) AS n FROM checkins WHERE place_id = %s AND created_at >= %s",
+            (place_id, cutoff),
+        )
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
 def _recent_checkin_user_ids(place_id: str, hours: int, exclude_user_id: str | None) -> set[str]:
@@ -240,22 +245,17 @@ def _recent_checkin_user_ids(place_id: str, hours: int, exclude_user_id: str | N
     attached. Deliberately reuses the existing check-in data - see
     NOTIFY_CHECKIN_WINDOW_HOURS - instead of introducing a new "follow this
     venue" subscription concept."""
-    with _lock:
-        data = _load(_CHECKINS_PATH)
-    checkins = data.get(place_id, [])
     cutoff = datetime.now(UTC) - timedelta(hours=hours)
-    user_ids: set[str] = set()
-    for c in checkins:
-        user_id = c.get("author_user_id")
-        if not user_id or user_id == exclude_user_id:
-            continue
-        try:
-            created = datetime.fromisoformat(c["created_at"])
-        except (KeyError, ValueError):
-            continue
-        if created >= cutoff:
-            user_ids.add(user_id)
-    return user_ids
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            SELECT DISTINCT author_user_id FROM checkins
+            WHERE place_id = %s AND created_at >= %s AND author_user_id IS NOT NULL
+            """,
+            (place_id, cutoff),
+        )
+        rows = cur.fetchall()
+    return {row["author_user_id"] for row in rows if row["author_user_id"] != exclude_user_id}
 
 
 def _notify_recent_checkins(place_id: str, tag: str, exclude_user_id: str | None) -> None:
@@ -264,7 +264,7 @@ def _notify_recent_checkins(place_id: str, tag: str, exclude_user_id: str | None
     never be able to break add_status's real job (saving the status
     update) - database/push_notify.notify_new_status already never raises
     on its own, but this extra try/except is a second safety net around the
-    lookup itself (e.g. a corrupted checkins.json)."""
+    lookup itself (e.g. a transient DB error)."""
     try:
         recipient_ids = _recent_checkin_user_ids(
             place_id, NOTIFY_CHECKIN_WINDOW_HOURS, exclude_user_id
@@ -293,27 +293,40 @@ def add_status(
     notification (database/push_notify.py) to anyone who checked in at the
     same place_id within the last NOTIFY_CHECKIN_WINDOW_HOURS hours (except
     the author) - see _notify_recent_checkins. That send happens after the
-    write is already durably saved, and can never raise back into this
+    write is already durably committed, and can never raise back into this
     function.
     """
     content_check = check_content(text) if text else {"is_objectionable": False}
-    status: dict = {
-        "id": str(uuid.uuid4()),
-        "place_id": place_id,
-        "author": html.escape(author),
-        "author_user_id": author_user_id,
-        "tag": html.escape(tag),
-        "text": html.escape(text) if text else "",
-        "created_at": datetime.now(UTC).isoformat(),
-        "review_status": "hidden" if content_check["is_objectionable"] else "visible",
-        "flagged_reason": "objectionable_content" if content_check["is_objectionable"] else None,
-        "helpful_count": 0,
-        "helpful_user_ids": [],
-    }
-    with _lock:
-        data = _load(_STATUS_PATH)
-        data.setdefault(place_id, []).append(status)
-        _save(_STATUS_PATH, data)
+    status_id = str(uuid.uuid4())
+    created_at = datetime.now(UTC)
+    review_status = "hidden" if content_check["is_objectionable"] else "visible"
+    flagged_reason = "objectionable_content" if content_check["is_objectionable"] else None
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO status_updates (
+                id, place_id, author, author_user_id, tag, text, created_at,
+                review_status, flagged_reason, helpful_count, helpful_user_ids
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, %s)
+            RETURNING *
+            """,
+            (
+                status_id,
+                place_id,
+                html.escape(author),
+                author_user_id,
+                html.escape(tag),
+                html.escape(text) if text else "",
+                created_at,
+                review_status,
+                flagged_reason,
+                [],
+            ),
+        )
+        row = cur.fetchone()
+    if row is None:
+        raise RuntimeError("INSERT ... RETURNING satır döndürmedi (beklenmeyen durum).")
+    status = _normalize_row(row)
     if status["review_status"] == "visible":
         _notify_recent_checkins(place_id, status["tag"], author_user_id)
     return status
@@ -344,9 +357,12 @@ def list_status(
     computed_trust_score field to begin with - see add_status - so there's
     nothing numeric to strip here).
     """
-    with _lock:
-        data = _load(_STATUS_PATH)
-    entries = data.get(place_id, [])
+    with get_cursor() as cur:
+        cur.execute(
+            "SELECT * FROM status_updates WHERE place_id = %s ORDER BY created_at",
+            (place_id,),
+        )
+        entries = [_normalize_row(r) for r in cur.fetchall()]
     if not include_hidden:
         entries = [
             e
@@ -365,14 +381,10 @@ def list_status(
         except (KeyError, ValueError):
             pass
         is_own = viewer_user_id is not None and entry.get("author_user_id") == viewer_user_id
-        # Backfill helpful_count/helpful_user_ids for status updates written
-        # before this field existed (same pattern as comments_store.list_comments).
         result.append(
             {
                 **entry,
                 "is_stale": is_stale,
-                "helpful_count": entry.get("helpful_count", 0),
-                "helpful_user_ids": entry.get("helpful_user_ids", []),
                 "flagged_reason": entry.get("flagged_reason") if is_own else None,
             }
         )
@@ -380,24 +392,26 @@ def list_status(
 
 
 def count_all_checkins() -> int:
-    """Total check-ins stored across every place (0 if checkins.json is
-    missing/empty) - used by GET /moderation/stats in api/main.py."""
-    with _lock:
-        data = _load(_CHECKINS_PATH)
-    return sum(len(entries) for entries in data.values())
+    """Total check-ins stored across every place (0 if the table is empty)
+    - used by GET /moderation/stats in api/main.py."""
+    with get_cursor() as cur:
+        cur.execute("SELECT COUNT(*) AS n FROM checkins")
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
 def count_checkins_by_place() -> dict[str, int]:
-    """Total (all-time) check-in count per place_id, in one pass over
-    checkins.json - used by GET /places/popularity-scores in api/main.py to
-    build a relevance/sıralama signal for the venue list without an extra
-    HTTP round-trip per venue. Unlike count_recent_checkins (per-place,
-    restricted to CHECKIN_ACTIVE_WINDOW_HOURS - "who's here right now"),
-    this is unrestricted by time, since popularity ranking should reflect
-    all-time activity, not just the last couple of hours."""
-    with _lock:
-        data = _load(_CHECKINS_PATH)
-    return {place_id: len(entries) for place_id, entries in data.items() if entries}
+    """Total (all-time) check-in count per place_id - used by
+    GET /places/popularity-scores in api/main.py to build a relevance/
+    sıralama signal for the venue list without an extra HTTP round-trip per
+    venue. Unlike count_recent_checkins (per-place, restricted to
+    CHECKIN_ACTIVE_WINDOW_HOURS - "who's here right now"), this is
+    unrestricted by time, since popularity ranking should reflect all-time
+    activity, not just the last couple of hours."""
+    with get_cursor() as cur:
+        cur.execute("SELECT place_id, COUNT(*) AS n FROM checkins GROUP BY place_id")
+        rows = cur.fetchall()
+    return {row["place_id"]: row["n"] for row in rows}
 
 
 def sum_helpful_status_by_place() -> dict[str, int]:
@@ -406,36 +420,41 @@ def sum_helpful_status_by_place() -> dict[str, int]:
     of the venue popularity signal. Hidden/flagged entries are excluded,
     same rule list_status applies by default (content nobody actually saw
     shouldn't count toward a venue's popularity)."""
-    with _lock:
-        data = _load(_STATUS_PATH)
-    result: dict[str, int] = {}
-    for place_id, entries in data.items():
-        total = sum(
-            e.get("helpful_count", 0) for e in entries if e.get("review_status") != "hidden"
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            SELECT place_id, SUM(helpful_count) AS total
+            FROM status_updates
+            WHERE review_status != 'hidden'
+            GROUP BY place_id
+            HAVING SUM(helpful_count) > 0
+            """
         )
-        if total:
-            result[place_id] = total
-    return result
+        rows = cur.fetchall()
+    return {row["place_id"]: row["total"] for row in rows}
 
 
 def count_all_status() -> int:
     """Total status updates stored across every place, regardless of
-    review_status (0 if status.json is missing/empty) - used by
-    GET /moderation/stats in api/main.py."""
-    with _lock:
-        data = _load(_STATUS_PATH)
-    return sum(len(entries) for entries in data.values())
+    review_status (0 if the table is empty) - used by GET /moderation/stats
+    in api/main.py."""
+    with get_cursor() as cur:
+        cur.execute("SELECT COUNT(*) AS n FROM status_updates")
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
 def list_place_ids_with_activity() -> set[str]:
     """place_ids with at least one check-in or status update - used (unioned
     with comments_store.list_place_ids_with_comments) to compute
     GET /moderation/stats venues_with_activity in api/main.py."""
-    with _lock:
-        checkins = _load(_CHECKINS_PATH)
-        status = _load(_STATUS_PATH)
-    place_ids = {place_id for place_id, entries in checkins.items() if entries}
-    place_ids |= {place_id for place_id, entries in status.items() if entries}
+    with get_cursor() as cur:
+        cur.execute("SELECT DISTINCT place_id FROM checkins")
+        checkin_rows = cur.fetchall()
+        cur.execute("SELECT DISTINCT place_id FROM status_updates")
+        status_rows = cur.fetchall()
+    place_ids = {row["place_id"] for row in checkin_rows}
+    place_ids |= {row["place_id"] for row in status_rows}
     return place_ids
 
 
@@ -443,75 +462,87 @@ def list_hidden_status() -> list[dict]:
     """Every status update across every place that's hidden or flagged -
     moderator-only visibility (see comments_store.list_hidden_comments for
     the same pattern; checkins have no review_status so they're excluded)."""
-    with _lock:
-        data = _load(_STATUS_PATH)
-    hidden = []
-    for entries in data.values():
-        for entry in entries:
-            if entry.get("review_status") == "hidden" or entry.get("flagged_reason"):
-                hidden.append(entry)
-    return hidden
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            SELECT * FROM status_updates
+            WHERE review_status = 'hidden' OR flagged_reason IS NOT NULL
+            ORDER BY created_at
+            """
+        )
+        rows = cur.fetchall()
+    return [_normalize_row(r) for r in rows]
 
 
 def toggle_helpful_status(place_id: str, status_id: str, user_id: str) -> dict:
     """Mark/unmark a status update as "helpful" for user_id - same toggle
     semantics as comments_store.toggle_helpful_comment (one mark per user,
     calling again removes it, self-marking refused with StatusError -> 400).
-    See that function's docstring for the full reasoning."""
-    with _lock:
-        data = _load(_STATUS_PATH)
-        for entry in data.get(place_id, []):
-            if entry["id"] != status_id:
-                continue
-            if entry.get("author_user_id") == user_id:
-                raise SelfHelpfulError("Kendi durumunu faydalı olarak işaretleyemezsin.")
-            helpful_ids = list(entry.get("helpful_user_ids", []))
-            if user_id in helpful_ids:
-                helpful_ids.remove(user_id)
-            else:
-                helpful_ids.append(user_id)
-            entry["helpful_user_ids"] = helpful_ids
-            entry["helpful_count"] = len(helpful_ids)
-            _save(_STATUS_PATH, data)
-            return entry
-    raise StatusError("Durum güncellemesi bulunamadı.")
+    See that function's docstring for the full reasoning, including why
+    `SELECT ... FOR UPDATE` is used here too."""
+    with get_cursor() as cur:
+        cur.execute(
+            "SELECT * FROM status_updates WHERE place_id = %s AND id = %s FOR UPDATE",
+            (place_id, status_id),
+        )
+        row = cur.fetchone()
+        if row is None:
+            raise StatusError("Durum güncellemesi bulunamadı.")
+        if row.get("author_user_id") == user_id:
+            raise SelfHelpfulError("Kendi durumunu faydalı olarak işaretleyemezsin.")
+        helpful_ids = list(row.get("helpful_user_ids") or [])
+        if user_id in helpful_ids:
+            helpful_ids.remove(user_id)
+        else:
+            helpful_ids.append(user_id)
+        cur.execute(
+            """
+            UPDATE status_updates SET helpful_user_ids = %s, helpful_count = %s
+            WHERE place_id = %s AND id = %s
+            RETURNING *
+            """,
+            (helpful_ids, len(helpful_ids), place_id, status_id),
+        )
+        updated = cur.fetchone()
+    if updated is None:
+        raise RuntimeError("UPDATE ... RETURNING satır döndürmedi (beklenmeyen durum).")
+    return _normalize_row(updated)
 
 
 def count_user_statuses(user_id: str, include_hidden: bool = False) -> int:
     """Real-time count of how many status updates this user has posted -
     the sole input for the "Gözcü" badge (GOZCU_THRESHOLD, see api/main.py
     GET /users/{id}/stats). Deliberately NOT cached/stored anywhere: it is
-    recomputed from status.json on every call, so the badge can never drift
+    recomputed from the table on every call, so the badge can never drift
     from the real data (see CLAUDE.md "sahte veri yasak" / MUTLAK KURAL).
 
     include_hidden=False (default) excludes status updates the content
     filter hid (review_status == "hidden") - content that was never
     actually shown to anyone shouldn't count toward a reputation badge.
     """
-    with _lock:
-        data = _load(_STATUS_PATH)
-    count = 0
-    for entries in data.values():
-        for entry in entries:
-            if entry.get("author_user_id") != user_id:
-                continue
-            if not include_hidden and entry.get("review_status") == "hidden":
-                continue
-            count += 1
-    return count
+    query = "SELECT COUNT(*) AS n FROM status_updates WHERE author_user_id = %s"
+    params: tuple[str, ...] = (user_id,)
+    if not include_hidden:
+        query += " AND review_status != 'hidden'"
+    with get_cursor() as cur:
+        cur.execute(query, params)
+        row = cur.fetchone()
+    return row["n"] if row else 0
 
 
 def restore_status(status_id: str) -> dict:
     """Moderator override: set a status update's review_status back to
-    "visible". Raises StatusError if no status update with this id exists
-    in any place."""
-    with _lock:
-        data = _load(_STATUS_PATH)
-        for entries in data.values():
-            for entry in entries:
-                if entry["id"] == status_id:
-                    entry["review_status"] = "visible"
-                    entry["flagged_reason"] = None
-                    _save(_STATUS_PATH, data)
-                    return entry
-    raise StatusError("Durum güncellemesi bulunamadı.")
+    "visible". Raises StatusError if no status update with this id exists."""
+    with get_cursor() as cur:
+        cur.execute(
+            """
+            UPDATE status_updates SET review_status = 'visible', flagged_reason = NULL
+            WHERE id = %s
+            RETURNING *
+            """,
+            (status_id,),
+        )
+        row = cur.fetchone()
+    if row is None:
+        raise StatusError("Durum güncellemesi bulunamadı.")
+    return _normalize_row(row)

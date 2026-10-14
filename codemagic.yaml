@@ -1,0 +1,70 @@
+workflows:
+  android-debug:
+    name: Android Debug Build
+    max_build_duration: 30
+    instance_type: linux_x2
+    environment:
+      node: 22
+      vars:
+        PACKAGE_NAME: "com.kesfetplus.app"
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Install frontend dependencies
+        script: |
+          cd frontend
+          npm ci
+      - name: Build web assets
+        script: |
+          cd frontend
+          npm run build
+      - name: Sync Capacitor Android
+        script: |
+          cd frontend
+          npx cap sync android
+      - name: Build debug APK
+        script: |
+          cd frontend/android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - frontend/android/app/build/outputs/**/*.apk
+
+  ios-simulator-build:
+    name: iOS Simulator Build (code signing yok, henuz Apple Developer hesabi gerekmiyor)
+    max_build_duration: 30
+    instance_type: mac_mini_m2
+    environment:
+      node: 22
+      xcode: latest
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Install frontend dependencies
+        script: |
+          cd frontend
+          npm ci
+      - name: Build web assets
+        script: |
+          cd frontend
+          npm run build
+      - name: Sync Capacitor iOS
+        script: |
+          cd frontend
+          npx cap sync ios
+      - name: Build for iOS Simulator (unsigned - no Apple Developer account needed yet)
+        script: |
+          cd frontend/ios/App
+          xcodebuild -project App.xcodeproj -target App \
+            -sdk iphonesimulator -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO build

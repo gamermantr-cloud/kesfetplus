@@ -18,6 +18,8 @@ import uuid
 from datetime import UTC, datetime
 from typing import Any
 
+from psycopg.types.json import Jsonb
+
 from database.content_filter import check_content
 from database.db import get_cursor
 from database.trust_scoring import score_comment
@@ -78,8 +80,14 @@ def add_comment(
     lng: float | None = None,
     accuracy: float | None = None,
     author_user_id: str | None = None,
+    ratings: dict[str, int] | None = None,
 ) -> dict:
     """Store a new comment with a computed trust score.
+
+    ratings: optional category-specific pre-comment scores (e.g.
+    {"hijyen": 4, "servis": 5}), keys/structure validated by
+    api/main.py's CommentCreate before this is ever called. None/empty
+    means the user skipped rating - never backfilled with a guess.
 
     lat/lng/accuracy are optional (declining location permission is never
     penalized - see database/trust_scoring.py signal 2). Trust scoring is
@@ -118,8 +126,8 @@ def add_comment(
             INSERT INTO comments (
                 id, place_id, author, author_user_id, text, lat, lng, accuracy,
                 created_at, helpful_count, helpful_user_ids,
-                computed_trust_score, flagged_reason, review_status
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, %s, %s, %s, %s)
+                computed_trust_score, flagged_reason, review_status, ratings
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, %s, %s, %s, %s, %s)
             RETURNING *
             """,
             (
@@ -136,6 +144,7 @@ def add_comment(
                 trust["computed_trust_score"],
                 trust["flagged_reason"],
                 trust["review_status"],
+                Jsonb(ratings) if ratings else None,
             ),
         )
         row = cur.fetchone()

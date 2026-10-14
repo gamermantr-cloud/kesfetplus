@@ -190,10 +190,10 @@ export async function getComments(placeId) {
   return request(`/places/${encodeURIComponent(placeId)}/comments`)
 }
 
-export async function postComment(placeId, { text, lat, lng, accuracy }) {
+export async function postComment(placeId, { text, lat, lng, accuracy, ratings }) {
   return request(`/places/${encodeURIComponent(placeId)}/comments`, {
     method: 'POST',
-    body: { text, lat, lng, accuracy },
+    body: { text, lat, lng, accuracy, ratings },
   })
 }
 

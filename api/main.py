@@ -195,6 +195,25 @@ class CommentCreate(BaseModel):
     lat: float | None = None
     lng: float | None = None
     accuracy: float | None = None
+    # Yorum öncesi isteğe bağlı kategori puanlaması (ör. {"hijyen": 4}).
+    # Hangi kriterlerin "geçerli" olduğunu frontend venue.kind'e göre
+    # belirliyor (lib/ratingCriteria.js) - burada sadece genel şekil
+    # (anahtar sayısı/uzunluğu, 1-5 aralığı) doğrulanıyor.
+    ratings: dict[str, int] | None = None
+
+    @field_validator("ratings")
+    @classmethod
+    def validate_ratings(cls, value: dict[str, int] | None) -> dict[str, int] | None:
+        if not value:
+            return None
+        if len(value) > 8:
+            raise ValueError("ratings can have at most 8 criteria")
+        for key, score in value.items():
+            if not (1 <= len(key) <= 40):
+                raise ValueError(f"invalid ratings key: {key!r}")
+            if not isinstance(score, int) or not (1 <= score <= 5):
+                raise ValueError(f"ratings[{key!r}] must be an integer 1-5")
+        return value
 
 
 class CheckinCreate(BaseModel):
@@ -433,6 +452,7 @@ def create_comment(place_id: str, comment: CommentCreate, user: dict = Depends(g
         comment.lng,
         comment.accuracy,
         user["id"],
+        comment.ratings,
     )
 
 

@@ -97,7 +97,13 @@ CREATE TABLE IF NOT EXISTS comments (
     helpful_user_ids        TEXT[] NOT NULL DEFAULT '{}',
     computed_trust_score    DOUBLE PRECISION,
     flagged_reason          TEXT,
-    review_status           TEXT NOT NULL DEFAULT 'visible'
+    review_status           TEXT NOT NULL DEFAULT 'visible',
+    -- Yorumdan önceki kategoriye-özel puanlama (ör. {"hijyen": 4, "servis": 5}).
+    -- Kriter seti venue.kind'e göre frontend'de belirleniyor (lib/ratingCriteria.js);
+    -- burada serbest bırakıldı, backend hangi anahtarların "geçerli" olduğunu
+    -- zorlamıyor - ortalamalar da frontend'de gerçek yorumlardan hesaplanıyor,
+    -- hiçbir puan uydurulmuyor. NULL/boş = kullanıcı hiç puanlamadı.
+    ratings                 JSONB
 );
 CREATE INDEX IF NOT EXISTS idx_comments_place_id ON comments (place_id);
 CREATE INDEX IF NOT EXISTS idx_comments_author_user_id ON comments (author_user_id);

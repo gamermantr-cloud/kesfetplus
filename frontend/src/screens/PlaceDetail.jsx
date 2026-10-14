@@ -46,6 +46,7 @@ import {
 } from '../lib/api.js'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { getAllVenues } from '../lib/data.js'
+import { criteriaFor, ratingAverages } from '../lib/ratingCriteria.js'
 import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
@@ -241,6 +242,7 @@ export default function PlaceDetail() {
 
   const [showForm, setShowForm] = useState(false)
   const [text, setText] = useState('')
+  const [ratings, setRatings] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [contentNotice, setContentNotice] = useState(null)
 
@@ -500,11 +502,18 @@ export default function PlaceDetail() {
     setSubmitting(true)
     try {
       const { lat, lng, accuracy } = await getCommentLocation()
-      const created = await postComment(placeId, { text: text.trim(), lat, lng, accuracy })
+      const created = await postComment(placeId, {
+        text: text.trim(),
+        lat,
+        lng,
+        accuracy,
+        ratings: Object.keys(ratings).length > 0 ? ratings : undefined,
+      })
       setContentNotice(
         created?.flagged_reason === 'objectionable_content' ? OBJECTIONABLE_CONTENT_MESSAGE : null,
       )
       setText('')
+      setRatings({})
       setShowForm(false)
       await loadComments()
     } catch (err) {
@@ -1016,16 +1025,17 @@ export default function PlaceDetail() {
                   }
                   setComparePanelOpen(true)
                 }}
-                aria-label="Fotoğrafını karşılaştır"
-                className="fixed bottom-28 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-tan text-cream shadow-lg transition-transform hover:scale-105"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-tan px-4 py-3 text-sm font-medium text-cream transition-transform hover:scale-[1.02]"
               >
-                <Camera size={22} />
+                <Camera size={18} />
+                Fotoğrafını karşılaştır
               </button>
             )}
 
             {comparePanelOpen && (
               <ComparePhotoPanel
                 venueName={venue.name}
+                referencePhotoSrc={photoSrc(venue.photos?.[0])}
                 loading={compareLoading}
                 result={compareResult}
                 error={compareError}
@@ -1047,6 +1057,24 @@ export default function PlaceDetail() {
                   <span className="font-medium text-espresso">{user?.display_name}</span> olarak
                   yorum yapıyorsun.
                 </p>
+                {criteriaFor(venue).length > 0 && (
+                  <div className="space-y-2 rounded-xl bg-cream px-3 py-2.5">
+                    <p className="text-[11px] font-medium uppercase tracking-wide text-taupe">
+                      İstersen önce puanla (opsiyonel)
+                    </p>
+                    {criteriaFor(venue).map((criterion) => (
+                      <div key={criterion.id} className="flex items-center justify-between gap-2">
+                        <span className="text-sm text-espresso-soft">{criterion.label}</span>
+                        <StarRatingInput
+                          value={ratings[criterion.id] ?? 0}
+                          onChange={(score) =>
+                            setRatings((prev) => ({ ...prev, [criterion.id]: score }))
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <textarea
                   placeholder="Yorumunuz..."
                   value={text}
@@ -1069,6 +1097,21 @@ export default function PlaceDetail() {
 
             {contentNotice && <p className="mb-3 text-sm text-tan-dark">{contentNotice}</p>}
             {commentsError && <p className="mb-3 text-sm text-tan-dark">{commentsError}</p>}
+
+            {!commentsLoading && ratingAverages(comments, venue).length > 0 && (
+              <div className="mb-4 grid grid-cols-2 gap-2 rounded-2xl border border-cream-line bg-sand/40 p-4">
+                {ratingAverages(comments, venue).map((r) => (
+                  <div key={r.id}>
+                    <p className="text-xs text-taupe">{r.label}</p>
+                    <p className="flex items-center gap-1 text-sm font-medium text-espresso">
+                      <Star size={13} className="fill-gold text-gold" />
+                      {r.average.toFixed(1)}
+                      <span className="font-normal text-taupe">({r.count})</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {commentsLoading ? (
               <div className="flex justify-center py-8 text-taupe">
@@ -1492,13 +1535,30 @@ const VERDICT_LABELS = {
  * only held in the browser's own file picker state until the request
  * completes, same as any other file input.
  */
-function ComparePhotoPanel({ venueName, loading, result, error, onFileSelected, onClose }) {
-  const [previewName, setPreviewName] = useState(null)
+function ComparePhotoPanel({
+  venueName,
+  referencePhotoSrc,
+  loading,
+  result,
+  error,
+  onFileSelected,
+  onClose,
+}) {
+  const [previewUrl, setPreviewUrl] = useState(null)
+
+  // Blob URL'i panel kapanınca veya yeni fotoğraf seçilince serbest birak -
+  // aksi halde her secimde bellekte birikir.
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
+    }
+  }, [previewUrl])
 
   function handleChange(e) {
     const file = e.target.files?.[0]
     if (!file) return
-    setPreviewName(file.name)
+    if (previewUrl) URL.revokeObjectURL(previewUrl)
+    setPreviewUrl(URL.createObjectURL(file))
     onFileSelected(file)
   }
 
@@ -1518,9 +1578,50 @@ function ComparePhotoPanel({ venueName, loading, result, error, onFileSelected, 
         </div>
 
         <p className="mt-2 text-sm text-taupe">
-          Çektiğin fotoğrafı {venueName}'in referans fotoğrafıyla karşılaştıralım - gerçekten
-          hesaplanmış bir görsel benzerlik ölçümü (perceptual hash), tahmin değil.
+          {venueName}'in sosyal medyadaki fotoğrafını gerçek kullanıcıların çektiği fotoğrafla yan
+          yana karşılaştır - gerçekten hesaplanmış bir görsel benzerlik ölçümü (perceptual hash),
+          tahmin değil.
         </p>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <div>
+            <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-taupe">
+              Sosyal medya fotoğrafı
+            </p>
+            <div className="aspect-square overflow-hidden rounded-2xl border border-cream-line bg-sand/50">
+              {referencePhotoSrc ? (
+                <img
+                  src={referencePhotoSrc}
+                  alt={`${venueName} referans fotoğrafı`}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center px-2 text-center text-xs text-taupe">
+                  Fotoğraf yok
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-taupe">
+              Gerçek kullanıcı fotoğrafı
+            </p>
+            <div className="aspect-square overflow-hidden rounded-2xl border border-dashed border-cream-line bg-sand/50">
+              {previewUrl ? (
+                <img
+                  src={previewUrl}
+                  alt="Yüklediğin fotoğraf"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center gap-1 px-2 text-center text-xs text-taupe">
+                  <Camera size={18} />
+                  Henüz yüklenmedi
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
         <div className="mt-5">
           {loading ? (
@@ -1598,13 +1699,32 @@ function ComparePhotoPanel({ venueName, loading, result, error, onFileSelected, 
                 onChange={handleChange}
                 className="hidden"
               />
-              {previewName && (
-                <p className="mt-2 text-center text-xs text-taupe">{previewName}</p>
-              )}
             </label>
           )}
         </div>
       </div>
+    </div>
+  )
+}
+
+/**
+ * Yorum formundaki tek bir kriter için 1-5 yıldız seçici. Dolu olan yıldıza
+ * tekrar basmak puanı sıfırlar (puanlama tamamen opsiyonel kalır).
+ */
+function StarRatingInput({ value, onChange }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button
+          key={n}
+          type="button"
+          onClick={() => onChange(value === n ? 0 : n)}
+          aria-label={`${n} yıldız`}
+          className="p-0.5"
+        >
+          <Star size={16} className={n <= value ? 'fill-gold text-gold' : 'text-cream-line'} />
+        </button>
+      ))}
     </div>
   )
 }

@@ -2,6 +2,11 @@
 line-length = 100
 target-version = "py312"
 
+[tool.ruff.format]
+# Ruff also formats ```python blocks inside Markdown; the snippets in docs/
+# are illustrative sketches (aligned comments, pseudo-types), not real code.
+exclude = ["docs/**/*.md"]
+
 [tool.ruff.lint]
 select = ["E", "F", "I", "S", "B", "UP"]
 ignore = []

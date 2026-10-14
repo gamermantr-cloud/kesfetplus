@@ -240,14 +240,14 @@ aynı dosya-tabanlı geçici desen (PostgreSQL'e geçişe kadar):
 event = {
     "id": str(uuid4()),
     "place_id": place_id,
-    "creator": html.escape(author),          # comments_store deseni
+    "creator": html.escape(author),  # comments_store deseni
     "creator_user_id": author_user_id,
-    "title": html.escape(title),              # örn. "Cumartesi yürüyüşü"
+    "title": html.escape(title),  # örn. "Cumartesi yürüyüşü"
     "description": html.escape(description),  # check_content() ile taranır
-    "scheduled_at": iso_datetime,              # kullanıcının belirttiği saat
+    "scheduled_at": iso_datetime,  # kullanıcının belirttiği saat
     "created_at": datetime.now(UTC).isoformat(),
     "max_participants": int | None,
-    "participant_user_ids": [],                # toggle_helpful_* ile aynı desen
+    "participant_user_ids": [],  # toggle_helpful_* ile aynı desen
     "review_status": "visible" | "pending_review" | "hidden",
     "flagged_reason": str | None,
 }

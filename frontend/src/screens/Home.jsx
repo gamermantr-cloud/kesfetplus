@@ -14,7 +14,6 @@ import {
   Plus,
   Search,
   Sparkles,
-  Star,
   Sun,
   Trees,
   User,
@@ -25,7 +24,8 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
-import { getPopularityScores, getWeather, photoSrc } from '../lib/api.js'
+import VenueThumb from '../components/VenueThumb.jsx'
+import { getPopularityScores, getWeather } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { nearestDistrict } from '../lib/districts.js'
 import { rankVenues } from '../lib/search.js'
@@ -309,35 +309,22 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}
           >
-            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
-              <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
-              {photoSrc(venue.photos?.[0]) && (
-                <img
-                  src={photoSrc(venue.photos[0])}
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-              )}
-              {venue.rating && (
-                <div className="absolute top-2 right-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-xs font-semibold text-espresso">
-                  <Star size={11} className="fill-gold text-gold" />
-                  {venue.rating}
-                </div>
-              )}
-              {showWeatherBadge && (
-                <div
-                  title="Bugün yağmurlu, kapalı mekanlar daha uygun olabilir"
-                  className="absolute top-2 left-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-[10px] font-medium text-tan-dark"
-                >
-                  <CloudRain size={11} />
-                  Hava duyarlı
-                </div>
-              )}
-            </div>
+            <VenueThumb
+              venue={venue}
+              gradientClass={CARD_GRADIENTS[i % CARD_GRADIENTS.length]}
+              Icon={VenueIcon}
+              leftBadge={
+                showWeatherBadge && (
+                  <div
+                    title="Bugün yağmurlu, kapalı mekanlar daha uygun olabilir"
+                    className="absolute top-2 left-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-[10px] font-medium text-tan-dark"
+                  >
+                    <CloudRain size={11} />
+                    Hava duyarlı
+                  </div>
+                )
+              }
+            />
             <div className="p-3">
               <p className="text-sm font-medium text-espresso truncate">{venue.name}</p>
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}

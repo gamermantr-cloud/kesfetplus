@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BedDouble, ChevronLeft, Search, Star, Trees, Utensils, Wine } from 'lucide-react'
+import { BedDouble, ChevronLeft, Search, Trees, Utensils, Wine } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
-import { getPopularityScores, photoSrc } from '../lib/api.js'
+import VenueThumb from '../components/VenueThumb.jsx'
+import { getPopularityScores } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { rankVenues } from '../lib/search.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
@@ -133,26 +134,11 @@ export default function ExploreAll() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}
           >
-            <div className={`relative h-24 bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]} flex items-center justify-center`}>
-              <VenueIcon size={28} className="text-cream/60" aria-hidden="true" />
-              {photoSrc(venue.photos?.[0]) && (
-                <img
-                  src={photoSrc(venue.photos[0])}
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-              )}
-              {venue.rating && (
-                <div className="absolute top-2 right-2 flex items-center gap-1 bg-cream/90 rounded-full px-2 py-0.5 text-xs font-semibold text-espresso">
-                  <Star size={11} className="fill-gold text-gold" />
-                  {venue.rating}
-                </div>
-              )}
-            </div>
+            <VenueThumb
+              venue={venue}
+              gradientClass={CARD_GRADIENTS[i % CARD_GRADIENTS.length]}
+              Icon={VenueIcon}
+            />
             <div className="p-3">
               <p className="text-sm font-medium text-espresso truncate">{venue.name}</p>
               {venue.area && <p className="text-xs text-taupe truncate mt-0.5">{venue.area}</p>}

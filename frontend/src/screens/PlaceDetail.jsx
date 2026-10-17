@@ -5,6 +5,7 @@ import {
   Camera,
   ChevronDown,
   ChevronLeft,
+  ChevronRight,
   Cloud,
   CloudFog,
   CloudLightning,
@@ -27,7 +28,7 @@ import {
   X,
 } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
   comparePhoto,
@@ -265,6 +266,10 @@ export default function PlaceDetail() {
   const [compareLoading, setCompareLoading] = useState(false)
   const [compareResult, setCompareResult] = useState(null)
   const [compareError, setCompareError] = useState(null)
+
+  // null = kapalı; bir sayı = "Fotoğraflar" sekmesindeki galleryPhotos
+  // dizisinde o an açık olan fotoğrafın index'i (bkz. PhotoLightbox).
+  const [lightboxIndex, setLightboxIndex] = useState(null)
 
   // author_user_id -> badges[] (e.g. ["gozcu"]) - fetched lazily per unique
   // status author, see the effect below. Not fetched for comment authors
@@ -584,6 +589,8 @@ export default function PlaceDetail() {
       </div>
     )
   }
+
+  const galleryPhotos = (venue.photos ?? []).filter((photo) => photoSrc(photo))
 
   return (
     <div className="flex min-h-screen flex-col pb-28">
@@ -945,29 +952,26 @@ export default function PlaceDetail() {
           <div>
             {venue.photos && venue.photos.length > 0 ? (
               <div className="grid grid-cols-2 gap-3">
-                {venue.photos
-                  .filter((photo) => photoSrc(photo))
-                  .map((photo, idx) => (
-                    <a
-                      key={photo.url ?? photo.photo_name ?? idx}
-                      href={photo.source ?? photoSrc(photo)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block overflow-hidden rounded-2xl border border-cream-line"
-                    >
-                      <img
-                        src={photoSrc(photo)}
-                        alt={`${venue.name} fotoğrafı`}
-                        loading="lazy"
-                        className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                      />
-                      {photo.attribution ? (
-                        <p className="truncate px-2 py-1.5 text-[10px] text-taupe">
-                          {photo.attribution}
-                        </p>
-                      ) : null}
-                    </a>
-                  ))}
+                {galleryPhotos.map((photo, idx) => (
+                  <button
+                    type="button"
+                    key={photo.url ?? photo.photo_name ?? idx}
+                    onClick={() => setLightboxIndex(idx)}
+                    className="group block overflow-hidden rounded-2xl border border-cream-line text-left"
+                  >
+                    <img
+                      src={photoSrc(photo)}
+                      alt={`${venue.name} fotoğrafı`}
+                      loading="lazy"
+                      className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                    />
+                    {photo.attribution ? (
+                      <p className="truncate px-2 py-1.5 text-[10px] text-taupe">
+                        {photo.attribution}
+                      </p>
+                    ) : null}
+                  </button>
+                ))}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-cream-line py-14 text-center">
@@ -1044,6 +1048,16 @@ export default function PlaceDetail() {
                 error={compareError}
                 onFileSelected={handleComparePhoto}
                 onClose={closeComparePanel}
+              />
+            )}
+
+            {lightboxIndex !== null && (
+              <PhotoLightbox
+                photos={galleryPhotos}
+                index={lightboxIndex}
+                venueName={venue.name}
+                onIndexChange={setLightboxIndex}
+                onClose={() => setLightboxIndex(null)}
               />
             )}
           </div>
@@ -1721,6 +1735,121 @@ function ComparePhotoPanel({
           )}
         </div>
       </div>
+    </div>
+  )
+}
+
+/**
+ * "Fotoğraflar" sekmesinde bir fotoğrafa dokunulunca açılan tam ekran
+ * görüntüleyici. Artık doğrudan harici bir linke gitmiyor (kullanıcı
+ * isteği) - sürükleyerek (swipe) veya ok butonlarıyla aynı mekanın diğer
+ * fotoğrafları arasında gezilebiliyor. Orijinal kaynağa gitme imkanı
+ * (photo.source) altta küçük bir link olarak korunuyor.
+ */
+function PhotoLightbox({ photos, index, venueName, onIndexChange, onClose }) {
+  const shouldReduceMotion = useReducedMotion()
+  // Son gezinme yönü (1 = sonraki, -1 = önceki) - yeni fotoğrafın hangi
+  // taraftan kayarak gireceğini belirler.
+  const [direction, setDirection] = useState(0)
+  const photo = photos[index]
+
+  const goTo = useCallback(
+    (nextIndex, dir) => {
+      if (nextIndex < 0 || nextIndex >= photos.length) return
+      setDirection(dir)
+      onIndexChange(nextIndex)
+    },
+    [photos.length, onIndexChange],
+  )
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') onClose()
+      else if (e.key === 'ArrowRight') goTo(index + 1, 1)
+      else if (e.key === 'ArrowLeft') goTo(index - 1, -1)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [index, photos.length, onClose, goTo])
+
+  function handleDragEnd(_event, info) {
+    const SWIPE_DISTANCE = 60
+    const SWIPE_VELOCITY = 400
+    if (info.offset.x < -SWIPE_DISTANCE || info.velocity.x < -SWIPE_VELOCITY) {
+      goTo(index + 1, 1)
+    } else if (info.offset.x > SWIPE_DISTANCE || info.velocity.x > SWIPE_VELOCITY) {
+      goTo(index - 1, -1)
+    }
+  }
+
+  if (!photo) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-espresso/95">
+      <div className="flex items-center justify-between px-5 pt-5 text-cream">
+        <span className="text-xs font-medium text-cream/70">
+          {index + 1} / {photos.length}
+        </span>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Kapat"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/15 text-cream"
+        >
+          <X size={18} />
+        </button>
+      </div>
+
+      <div className="relative flex flex-1 items-center justify-center overflow-hidden px-2">
+        {index > 0 && (
+          <button
+            type="button"
+            onClick={() => goTo(index - 1, -1)}
+            aria-label="Önceki fotoğraf"
+            className="absolute left-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-espresso/40 text-cream backdrop-blur-sm"
+          >
+            <ChevronLeft size={22} />
+          </button>
+        )}
+
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.img
+            key={photo.url ?? photo.photo_name ?? index}
+            src={photoSrc(photo)}
+            alt={`${venueName} fotoğrafı`}
+            drag={photos.length > 1 ? 'x' : false}
+            dragSnapToOrigin
+            onDragEnd={handleDragEnd}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: direction * 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, x: direction * -60 }}
+            transition={{ duration: 0.2 }}
+            className="max-h-full max-w-full touch-pan-y object-contain"
+          />
+        </AnimatePresence>
+
+        {index < photos.length - 1 && (
+          <button
+            type="button"
+            onClick={() => goTo(index + 1, 1)}
+            aria-label="Sonraki fotoğraf"
+            className="absolute right-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-espresso/40 text-cream backdrop-blur-sm"
+          >
+            <ChevronRight size={22} />
+          </button>
+        )}
+      </div>
+
+      {photo.attribution || photo.source ? (
+        <div className="flex items-center justify-between gap-3 px-5 pb-6 pt-2 text-xs text-cream/70">
+          <p className="truncate">{photo.attribution}</p>
+          {photo.source ? (
+            <a href={photo.source} target="_blank" rel="noopener noreferrer" className="shrink-0 underline">
+              Kaynağı gör
+            </a>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   )
 }

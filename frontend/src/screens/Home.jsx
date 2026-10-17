@@ -9,6 +9,7 @@ import {
   CloudRain,
   CloudSnow,
   Compass,
+  Croissant,
   MapPin,
   MessageCircle,
   Plus,
@@ -35,6 +36,7 @@ import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
   { id: 'yeme', label: 'Yeme & İçme', icon: Utensils, match: (v) => v.kind === 'gurme' && v.category !== 'bar' },
+  { id: 'brunch', label: 'Kahvaltı & Brunç', icon: Croissant, match: (v) => v.kind === 'gurme' && v.category === 'kahvalti' },
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
   { id: 'eklenti', label: 'Eklentiler', icon: Plus, match: null },
@@ -308,6 +310,7 @@ export default function Home() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, delay: shouldReduceMotion ? 0 : Math.min(i * 0.03, 0.15) }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.96, y: 1 }}
           >
             <VenueThumb
               venue={venue}

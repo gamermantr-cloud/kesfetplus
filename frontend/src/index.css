@@ -126,3 +126,53 @@ body {
   mix-blend-mode: overlay;
   pointer-events: none;
 }
+
+/*
+  Tıklama mikro-etkileşimleri - her buton türü kendi "hissini" alır
+  (kullanıcı isteği: "her butonda farklı eğlenceli bişi"). Saf CSS
+  :active (motion.button'ların whileTap'ı zaten Framer Motion'la
+  kendi dosyalarında tanımlı - bkz. Home.jsx/ExploreAll.jsx/
+  PlaceDetail.jsx/Splash.jsx) - yani buradaki kurallar native
+  <button>'lar için, mevcut class isimlerinden (bg-tan, bg-sand,
+  rounded-full) seçici olarak hedefleniyor, tek tek dosya
+  değiştirmeden tüm projeye otomatik uygulanır.
+  prefers-reduced-motion: reduce'da tamamen devre dışı - projenin
+  motion.button'larındaki useReducedMotion guard'ıyla aynı tutum.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  button:not(:disabled) {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Ana aksiyon butonları (dolgulu, tan renkli): basılı tutulurken ezilen bir "squish". */
+  button.bg-tan:not(:disabled):active {
+    transform: scale(0.94);
+  }
+
+  /* Yuvarlak ikon butonlar (geri, zil vb.): basılırken hafifçe sallanan bir "wobble". */
+  button.bg-sand.rounded-full:not(:disabled):active {
+    transform: scale(0.88) rotate(-8deg);
+  }
+
+  /*
+    "Pop" patlaması - toggle olan (Faydalı, yıldız puanlama gibi) bir
+    aksiyon gerçekten etkinleştiğinde JS tarafından kısa süreliğine
+    eklenen .kp-pop class'ıyla tetiklenir (bkz. PlaceDetail.jsx
+    HelpfulButton/StarRatingInput) - :active'in aksine basılı tutmaya
+    bağlı değil, bir kerelik oynar.
+  */
+  @keyframes kp-pop {
+    0% {
+      transform: scale(1);
+    }
+    45% {
+      transform: scale(1.35);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .kp-pop {
+    animation: kp-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}

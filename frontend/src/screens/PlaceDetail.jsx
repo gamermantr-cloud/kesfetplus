@@ -871,7 +871,10 @@ export default function PlaceDetail() {
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-taupe">
                 Paylaşılan durumlar
               </p>
-              {statusLoading ? (
+              {statusLoading && statusUpdates.length === 0 ? (
+                // Aynı mantık: sadece ilk yüklemede spinner (bkz. yorumlar
+                // listesindeki aynı yorum) - "Faydalı" sonrası loadStatus()
+                // tekrar çağrıldığında liste dolu kalırsa yerinde kalır.
                 <div className="flex justify-center py-6 text-taupe">
                   <Loader2 className="animate-spin" size={18} />
                 </div>
@@ -1113,7 +1116,14 @@ export default function PlaceDetail() {
               </div>
             )}
 
-            {commentsLoading ? (
+            {commentsLoading && comments.length === 0 ? (
+              // Sadece İLK yüklemede spinner göster. "Faydalı" gibi bir
+              // aksiyon sonrası loadComments() tekrar çağrıldığında
+              // (commentsLoading yine true olur) liste halihazırda
+              // doluysa yerinde kalır - aksi halde her tıklamada tüm
+              // <li>/HelpfulButton ağacı söküp yeniden kurulur, bu da
+              // HelpfulButton'ın kendi "pop" animasyon state'ini (ve
+              // genel olarak her türlü local state'i) sıfırlardı.
               <div className="flex justify-center py-8 text-taupe">
                 <Loader2 className="animate-spin" size={18} />
               </div>
@@ -1345,6 +1355,9 @@ function InstagramEmbed({ html }) {
  */
 function HelpfulButton({ item, currentUserId, isLoggedIn, onNavigateLogin, onToggle }) {
   const [submitting, setSubmitting] = useState(false)
+  // Kısa süreli "pop" animasyonu (bkz. index.css .kp-pop) - sadece
+  // kapalıdan açığa geçerken oynar, kapatma tıklamasında oynamaz.
+  const [popping, setPopping] = useState(false)
   const isOwnContent = item.author_user_id && item.author_user_id === currentUserId
   if (isOwnContent) return null
 
@@ -1358,9 +1371,14 @@ function HelpfulButton({ item, currentUserId, isLoggedIn, onNavigateLogin, onTog
       onNavigateLogin()
       return
     }
+    const turningOn = !active
     setSubmitting(true)
     try {
       await onToggle()
+      if (turningOn) {
+        setPopping(true)
+        setTimeout(() => setPopping(false), 420)
+      }
     } finally {
       setSubmitting(false)
     }
@@ -1376,7 +1394,7 @@ function HelpfulButton({ item, currentUserId, isLoggedIn, onNavigateLogin, onTog
         active ? 'bg-tan text-cream' : 'border border-cream-line text-taupe'
       }`}
     >
-      <ThumbsUp size={12} className={active ? 'fill-cream' : ''} />
+      <ThumbsUp size={12} className={`${active ? 'fill-cream' : ''} ${popping ? 'kp-pop' : ''}`} />
       Faydalı{count > 0 ? ` (${count})` : ''}
     </button>
   )
@@ -1712,17 +1730,33 @@ function ComparePhotoPanel({
  * tekrar basmak puanı sıfırlar (puanlama tamamen opsiyonel kalır).
  */
 function StarRatingInput({ value, onChange }) {
+  // Hangi yıldıza tıklandığında kısa bir "pop" oynatılacağını tutar
+  // (bkz. index.css .kp-pop) - sadece seçilen yıldızda, temizlerken değil.
+  const [poppingStar, setPoppingStar] = useState(null)
+
+  function handleSelect(n) {
+    const next = value === n ? 0 : n
+    onChange(next)
+    if (next > 0) {
+      setPoppingStar(n)
+      setTimeout(() => setPoppingStar(null), 420)
+    }
+  }
+
   return (
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((n) => (
         <button
           key={n}
           type="button"
-          onClick={() => onChange(value === n ? 0 : n)}
+          onClick={() => handleSelect(n)}
           aria-label={`${n} yıldız`}
           className="p-0.5"
         >
-          <Star size={16} className={n <= value ? 'fill-gold text-gold' : 'text-cream-line'} />
+          <Star
+            size={16}
+            className={`${n <= value ? 'fill-gold text-gold' : 'text-cream-line'} ${poppingStar === n ? 'kp-pop' : ''}`}
+          />
         </button>
       ))}
     </div>

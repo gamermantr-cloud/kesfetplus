@@ -74,6 +74,7 @@ from database.users_store import (
     count_users,
     create_session,
     delete_session,
+    delete_user,
     get_public_profile,
     get_user_by_token,
     register_user,
@@ -88,7 +89,7 @@ app = FastAPI(title="KesfetPlus")
 app.add_middleware(
     CORSMiddleware,
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+):5173",
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["*"],
 )
 
@@ -251,6 +252,10 @@ class PushUnsubscribeRequest(BaseModel):
     endpoint: str = Field(min_length=1, max_length=2000)
 
 
+class AccountDeleteRequest(BaseModel):
+    password: str = Field(min_length=1, max_length=200)
+
+
 @app.get("/")
 def read_root():
     return {"name": "KesfetPlus", "status": "running"}
@@ -350,6 +355,18 @@ def logout(authorization: str | None = Header(default=None)):
 @app.get("/auth/me")
 def me(user: dict = Depends(get_current_user)):
     return user
+
+
+@app.delete("/auth/me", status_code=204)
+def delete_account(payload: AccountDeleteRequest, user: dict = Depends(get_current_user)):
+    """App Store Guideline 5.1.1(v): permanent, in-app account deletion.
+    Requires the current password (re-authentication) since this is
+    irreversible - see database/users_store.delete_user for exactly what
+    gets deleted vs. merely unlinked."""
+    try:
+        delete_user(user["id"], payload.password)
+    except UserError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
 
 
 @app.get("/users/{user_id}")

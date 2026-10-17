@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   ShieldX,
   Telescope,
+  Trash2,
   User,
   UserPlus,
   UserX,
@@ -35,7 +36,7 @@ const MENU_ITEMS = [
 
 export default function Profile() {
   const navigate = useNavigate()
-  const { user, loading, isLoggedIn, logout, unblock } = useAuth()
+  const { user, loading, isLoggedIn, logout, deleteAccount, unblock } = useAuth()
   const [toast, setToast] = useState(null)
   const toastTimer = useRef(null)
 
@@ -47,6 +48,11 @@ export default function Profile() {
   const [pushBusy, setPushBusy] = useState(false)
 
   const [referralLinkCopied, setReferralLinkCopied] = useState(false)
+
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deletePassword, setDeletePassword] = useState('')
+  const [deleteSubmitting, setDeleteSubmitting] = useState(false)
+  const [deleteError, setDeleteError] = useState(null)
 
   // Real, on-demand computed stats for the "Teşvik Katmanı" (Gözcü rozeti) -
   // see docs/research/anlik-bilgi-akisi.md and GET /users/{id}/stats.
@@ -119,6 +125,21 @@ export default function Profile() {
     await logout()
     showToast('Çıkış yapıldı')
     navigate('/home')
+  }
+
+  async function handleDeleteAccount(e) {
+    e.preventDefault()
+    setDeleteSubmitting(true)
+    setDeleteError(null)
+    try {
+      await deleteAccount(deletePassword)
+      navigate('/home')
+      showToast('Hesabın kalıcı olarak silindi')
+    } catch (err) {
+      setDeleteError(err.message || 'Hesap silinemedi.')
+    } finally {
+      setDeleteSubmitting(false)
+    }
   }
 
   async function handleCopyReferralLink() {
@@ -446,6 +467,68 @@ export default function Profile() {
                   )}
                 </div>
               ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {isLoggedIn && (
+        <div className="mt-6 px-5">
+          <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+            <Trash2 size={14} />
+            Hesap
+          </p>
+          <div className="overflow-hidden rounded-2xl border border-cream-line bg-sand/40 px-4 py-4">
+            {!deleteOpen ? (
+              <button
+                type="button"
+                onClick={() => setDeleteOpen(true)}
+                className="flex items-center gap-2 text-sm font-medium text-tan-dark"
+              >
+                <Trash2 size={15} />
+                Hesabımı Sil
+              </button>
+            ) : (
+              <form onSubmit={handleDeleteAccount} className="space-y-3">
+                <p className="text-sm text-espresso-soft">
+                  Bu işlem geri alınamaz: hesabın, oturumların ve bildirim
+                  aboneliklerin kalıcı olarak silinir. Daha önce yazdığın
+                  yorum/durum paylaşımları (zaten içinde görünen adınla
+                  birlikte) silinmez, sadece hesabınla bağlantısı kalkar.
+                  Onaylamak için şifreni gir.
+                </p>
+                <input
+                  type="password"
+                  placeholder="Şifren"
+                  value={deletePassword}
+                  onChange={(e) => setDeletePassword(e.target.value)}
+                  autoComplete="current-password"
+                  required
+                  className="w-full rounded-lg border border-cream-line bg-cream px-3 py-2.5 text-sm text-espresso outline-none focus:border-tan"
+                />
+                {deleteError && <p className="text-sm text-tan-dark">{deleteError}</p>}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="submit"
+                    disabled={deleteSubmitting}
+                    className="flex items-center gap-2 rounded-full border border-tan-dark px-4 py-2 text-xs font-medium text-tan-dark disabled:opacity-60"
+                  >
+                    <Trash2 size={14} />
+                    {deleteSubmitting ? 'Siliniyor…' : 'Evet, kalıcı olarak sil'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDeleteOpen(false)
+                      setDeletePassword('')
+                      setDeleteError(null)
+                    }}
+                    className="text-xs text-taupe"
+                  >
+                    Vazgeç
+                  </button>
+                </div>
+              </form>
             )}
           </div>
         </div>

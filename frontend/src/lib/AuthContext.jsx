@@ -45,6 +45,11 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
+  async function doDeleteAccount(password) {
+    await api.deleteAccount(password)
+    setUser(null)
+  }
+
   async function doBlock(userId) {
     const { blocked_user_ids: blockedUserIds } = await api.blockUser(userId)
     setUser((u) => (u ? { ...u, blocked_user_ids: blockedUserIds } : u))
@@ -63,6 +68,7 @@ export function AuthProvider({ children }) {
     login: doLogin,
     register: doRegister,
     logout: doLogout,
+    deleteAccount: doDeleteAccount,
     block: doBlock,
     unblock: doUnblock,
     refresh,

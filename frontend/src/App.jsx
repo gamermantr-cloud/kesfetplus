@@ -15,6 +15,7 @@ import Profile from './screens/Profile.jsx'
 import Register from './screens/Register.jsx'
 import Splash from './screens/Splash.jsx'
 import Support from './screens/Support.jsx'
+import Terms from './screens/Terms.jsx'
 
 // Very light cross-fade between routes (opacity only, no transform - a
 // transform here would change the containing block for any `fixed`-
@@ -47,6 +48,7 @@ function AnimatedRoutes() {
           <Route path="/register" element={<Register />} />
           <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/moderation" element={<Moderation />} />
         </Routes>
       </motion.div>

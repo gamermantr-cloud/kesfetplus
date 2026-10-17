@@ -326,6 +326,40 @@ def delete_session(token: str) -> None:
         cur.execute("DELETE FROM sessions WHERE token = %s", (token,))
 
 
+def delete_user(user_id: str, password: str) -> None:
+    """Permanently delete an account (App Store Guideline 5.1.1(v): the app
+    must offer in-app account deletion). Raises UserError if the account
+    doesn't exist or the password doesn't match - re-authentication is
+    required before a destructive, irreversible action like this.
+
+    The `users` row is the single source of truth every other table's
+    FK points back to (database/schema.sql), so one DELETE here is enough:
+    - sessions / push_subscriptions / reports (reporter_user_id): ON DELETE
+      CASCADE - gone automatically, nothing left to act on them with.
+    - comments / checkins / status_updates (author_user_id): ON DELETE SET
+      NULL - the *content* is kept (it already carries its own copied
+      `author` display-name string, same as a deleted Reddit/HN account
+      shows old posts under "[deleted]"'s author field, not literally wiped
+      - and other users may have already read/relied on it), only the link
+      back to this now-gone account is cleared. This also matches the
+      project's own anti-manipulation stance (see users_store.py module
+      docstring "FOUNDING MEMBER / REFERRAL"): content is real, submitted
+      data, never retroactively invalidated just because its author later
+      deleted their account.
+    - users.referred_by (other users who registered with this one's invite
+      code): ON DELETE SET NULL - their own count_referrals() unaffected,
+      they just stop pointing at a referrer that no longer exists.
+    """
+    with get_cursor() as cur:
+        cur.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+        row = cur.fetchone()
+        if row is None:
+            raise UserError("Kullanıcı bulunamadı.")
+        if not bcrypt.checkpw(password.encode("utf-8"), row["password_hash"].encode("utf-8")):
+            raise UserError("Şifre hatalı.")
+        cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+
+
 def set_blocked(user_id: str, target_user_id: str, blocked: bool) -> list[str]:
     """Add/remove target_user_id from user_id's blocked_user_ids. Returns the
     updated list. Raises UserError if user_id doesn't exist or targets self.

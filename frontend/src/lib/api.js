@@ -109,6 +109,18 @@ export async function getMe() {
   return request('/auth/me')
 }
 
+/**
+ * Permanent, in-app account deletion (App Store Guideline 5.1.1(v)).
+ * Requires the current password - irreversible, so re-authentication is
+ * enforced server-side too (see api/main.py's DELETE /auth/me). Only clears
+ * the local token on success - a wrong-password 400 must leave the current
+ * session untouched so the user can just retry.
+ */
+export async function deleteAccount(password) {
+  await request('/auth/me', { method: 'DELETE', body: { password } })
+  setToken(null)
+}
+
 export async function getUserProfile(userId) {
   return request(`/users/${encodeURIComponent(userId)}`)
 }

@@ -109,6 +109,14 @@ export default function Register() {
               Kayıt olarak{' '}
               <button
                 type="button"
+                onClick={() => navigate('/terms')}
+                className="font-medium text-tan-dark underline"
+              >
+                Kullanım Şartları
+              </button>
+              'nı ve{' '}
+              <button
+                type="button"
                 onClick={() => navigate('/privacy')}
                 className="font-medium text-tan-dark underline"
               >

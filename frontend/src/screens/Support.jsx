@@ -1,4 +1,4 @@
-import { ChevronLeft, HelpCircle, Mail, Send, ShieldCheck, ShieldX } from 'lucide-react'
+import { ChevronLeft, Gavel, HelpCircle, Mail, Send, ShieldCheck, ShieldX } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '../components/Toast.jsx'
@@ -131,6 +131,22 @@ export default function Support() {
           <span className="text-sm text-espresso-soft">
             KVKK Aydınlatma Metni / Gizlilik Politikası
           </span>
+          <ChevronLeft size={16} className="rotate-180 text-taupe" />
+        </button>
+      </div>
+
+      {/* Kullanım Şartları */}
+      <div className="mt-6 px-5">
+        <p className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-taupe">
+          <Gavel size={14} />
+          Kullanım Şartları
+        </p>
+        <button
+          type="button"
+          onClick={() => navigate('/terms')}
+          className="flex w-full items-center justify-between gap-2 rounded-2xl border border-cream-line bg-sand/40 px-4 py-4 text-left"
+        >
+          <span className="text-sm text-espresso-soft">Kullanım Şartları</span>
           <ChevronLeft size={16} className="rotate-180 text-taupe" />
         </button>
       </div>

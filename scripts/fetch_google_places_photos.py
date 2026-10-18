@@ -72,9 +72,11 @@ DEFAULT_PROGRESS_FILE = PROJECT_ROOT / "scripts" / ".places_photo_progress.json"
 DEFAULT_NEEDS_REVIEW_FILE = PROJECT_ROOT / "scripts" / "needs_review.json"
 
 TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
+PLACE_DETAILS_URL = "https://places.googleapis.com/v1/places"
 # Narrow field mask on purpose: every extra field costs more and we only
 # ever use these four.
 FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.photos"
+DETAILS_FIELD_MASK = "id,displayName,photos"
 REQUEST_TIMEOUT_SECONDS = 10
 
 DATASET_FILES = {
@@ -182,6 +184,27 @@ def text_search(session: requests.Session, api_key: str, query: str) -> dict[str
     return result
 
 
+def place_details(session: requests.Session, api_key: str, place_id: str) -> dict[str, Any]:
+    """Fetch a place directly by its Google place id. Used instead of
+    text_search() whenever the seed entry already carries a
+    google_place_id (sahne/kultur entries - see fetch_sahne_venues.py /
+    fetch_kultur_venues.py): an id lookup is authoritative, so it skips the
+    fuzzy name-similarity check entirely and sidesteps the EN/TR
+    display-name mismatch that sends otherwise-correct matches to
+    needs_review.json."""
+    response = session.get(
+        f"{PLACE_DETAILS_URL}/{place_id}",
+        headers={
+            "X-Goog-Api-Key": api_key,
+            "X-Goog-FieldMask": DETAILS_FIELD_MASK,
+        },
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
+    response.raise_for_status()
+    result: dict[str, Any] = response.json()
+    return result
+
+
 def build_attribution(photo: dict[str, Any]) -> str:
     authors = photo.get("authorAttributions") or []
     names = [a.get("displayName", "").strip() for a in authors if a.get("displayName")]
@@ -230,10 +253,16 @@ def collect_candidates(
     return candidates
 
 
-def merge_needs_review(path: Path, new_rows: list[dict[str, Any]]) -> None:
+def merge_needs_review(
+    path: Path, new_rows: list[dict[str, Any]], resolved_keys: set[tuple[str, str]]
+) -> None:
     existing = load_json_if_exists(path)
     rows: list[dict[str, Any]] = existing if isinstance(existing, list) else []
     by_key = {(row.get("dataset"), row.get("id")): row for row in rows}
+    # A candidate that matches this run (resolved_keys) no longer needs
+    # review, even if an earlier run had left a stale row for it here.
+    for key in resolved_keys:
+        by_key.pop(key, None)
     for row in new_rows:
         by_key[(row.get("dataset"), row.get("id"))] = row
     save_json(path, list(by_key.values()))
@@ -289,6 +318,7 @@ def run(args: argparse.Namespace) -> int:
     stats = RunStats()
     touched_datasets: set[str] = set()
     needs_review_rows: list[dict[str, Any]] = []
+    matched_keys: set[tuple[str, str]] = set()
     stopped_reason: str | None = None
 
     for candidate in pending:
@@ -297,70 +327,96 @@ def run(args: argparse.Namespace) -> int:
             break
 
         seed_name = candidate.entry.get("name", "")
-        query = build_query(candidate.entry)
+        known_place_id = candidate.entry.get("google_place_id")
 
-        try:
-            result = text_search(session, api_key, query)
-            stats.requests_made += 1
-        except requests.RequestException as exc:
-            stats.requests_made += 1
-            stats.errors += 1
-            # Deliberately NOT marked in progress["processed"]: a request
-            # error (invalid/expired key, network blip, rate limit, ...)
-            # is often transient or fixable, unlike a real "no good match"
-            # verdict. Leaving it out of "processed" means the next run
-            # retries this candidate automatically instead of skipping it
-            # forever.
-            needs_review_rows.append(
-                {
-                    "dataset": candidate.dataset,
-                    "id": candidate.entry.get("id"),
-                    "seed_name": seed_name,
-                    "found_name": None,
-                    "similarity": 0.0,
-                    "reason": f"request_error: {type(exc).__name__}",
-                }
-            )
-            continue
+        if known_place_id:
+            # Authoritative id lookup - no fuzzy name matching needed, so
+            # the EN seed name vs. TR text_search result name mismatch
+            # (what sent sahne/kultur entries to needs_review.json before
+            # this field existed) can't happen here.
+            try:
+                top = place_details(session, api_key, known_place_id)
+                stats.requests_made += 1
+            except requests.RequestException as exc:
+                stats.requests_made += 1
+                stats.errors += 1
+                needs_review_rows.append(
+                    {
+                        "dataset": candidate.dataset,
+                        "id": candidate.entry.get("id"),
+                        "seed_name": seed_name,
+                        "found_name": None,
+                        "similarity": 0.0,
+                        "reason": f"request_error: {type(exc).__name__}",
+                    }
+                )
+                continue
+            found_name = top.get("displayName", {}).get("text", "")
+            similarity = 1.0
+        else:
+            query = build_query(candidate.entry)
+            try:
+                result = text_search(session, api_key, query)
+                stats.requests_made += 1
+            except requests.RequestException as exc:
+                stats.requests_made += 1
+                stats.errors += 1
+                # Deliberately NOT marked in progress["processed"]: a request
+                # error (invalid/expired key, network blip, rate limit, ...)
+                # is often transient or fixable, unlike a real "no good match"
+                # verdict. Leaving it out of "processed" means the next run
+                # retries this candidate automatically instead of skipping it
+                # forever.
+                needs_review_rows.append(
+                    {
+                        "dataset": candidate.dataset,
+                        "id": candidate.entry.get("id"),
+                        "seed_name": seed_name,
+                        "found_name": None,
+                        "similarity": 0.0,
+                        "reason": f"request_error: {type(exc).__name__}",
+                    }
+                )
+                continue
 
-        places = result.get("places") or []
-        if not places:
-            stats.needs_review += 1
-            progress["processed"][candidate.key] = "needs_review"
-            needs_review_rows.append(
-                {
-                    "dataset": candidate.dataset,
-                    "id": candidate.entry.get("id"),
-                    "seed_name": seed_name,
-                    "found_name": None,
-                    "similarity": 0.0,
-                    "reason": "no_results",
-                }
-            )
-            if args.request_delay:
-                time.sleep(args.request_delay)
-            continue
+            places = result.get("places") or []
+            if not places:
+                stats.needs_review += 1
+                progress["processed"][candidate.key] = "needs_review"
+                needs_review_rows.append(
+                    {
+                        "dataset": candidate.dataset,
+                        "id": candidate.entry.get("id"),
+                        "seed_name": seed_name,
+                        "found_name": None,
+                        "similarity": 0.0,
+                        "reason": "no_results",
+                    }
+                )
+                if args.request_delay:
+                    time.sleep(args.request_delay)
+                continue
 
-        top = places[0]
-        found_name = top.get("displayName", {}).get("text", "")
-        similarity = name_similarity(seed_name, found_name)
+            top = places[0]
+            found_name = top.get("displayName", {}).get("text", "")
+            similarity = name_similarity(seed_name, found_name)
 
-        if similarity < args.similarity_threshold:
-            stats.needs_review += 1
-            progress["processed"][candidate.key] = "needs_review"
-            needs_review_rows.append(
-                {
-                    "dataset": candidate.dataset,
-                    "id": candidate.entry.get("id"),
-                    "seed_name": seed_name,
-                    "found_name": found_name,
-                    "similarity": round(similarity, 3),
-                    "reason": "low_similarity",
-                }
-            )
-            if args.request_delay:
-                time.sleep(args.request_delay)
-            continue
+            if similarity < args.similarity_threshold:
+                stats.needs_review += 1
+                progress["processed"][candidate.key] = "needs_review"
+                needs_review_rows.append(
+                    {
+                        "dataset": candidate.dataset,
+                        "id": candidate.entry.get("id"),
+                        "seed_name": seed_name,
+                        "found_name": found_name,
+                        "similarity": round(similarity, 3),
+                        "reason": "low_similarity",
+                    }
+                )
+                if args.request_delay:
+                    time.sleep(args.request_delay)
+                continue
 
         place_id = top.get("id", "")
         photos = top.get("photos") or []
@@ -388,6 +444,7 @@ def run(args: argparse.Namespace) -> int:
         stats.matched += 1
         stats.per_dataset[candidate.dataset] = stats.per_dataset.get(candidate.dataset, 0) + 1
         progress["processed"][candidate.key] = "matched"
+        matched_keys.add((candidate.dataset, candidate.entry.get("id")))
 
         if args.request_delay:
             time.sleep(args.request_delay)
@@ -404,8 +461,8 @@ def run(args: argparse.Namespace) -> int:
     progress["last_run_at"] = datetime.now(UTC).isoformat()
     save_json(progress_path, progress)
 
-    if needs_review_rows:
-        merge_needs_review(needs_review_path, needs_review_rows)
+    if needs_review_rows or matched_keys:
+        merge_needs_review(needs_review_path, needs_review_rows, matched_keys)
 
     print(f"Bu çalıştırmada yapılan gerçek API isteği: {stats.requests_made}")
     print(f"Eşleşip fotoğraf eklenen mekan: {stats.matched}")

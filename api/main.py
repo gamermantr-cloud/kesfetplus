@@ -297,12 +297,18 @@ def get_weather_for_district(district: str):
 # Rate-limited (not behind get_current_user, so it's otherwise-unauthenticated
 # attack surface, same reasoning as /auth/register and /auth/login above) -
 # a generous but real cap since legitimate traffic can load several photos
-# per place page.
+# per place page. 60/minute was sized for single place-detail pages; a
+# category grid (ExploreAll/Home) renders many photo-rich cards at once -
+# each card shows up to 2-3 photos (see VenueThumb.jsx) - so one normal
+# scroll through a category like "Kültür ve Tarih" (66 mekan) already
+# requests 100+ photos and was tripping this cap, silently hiding images
+# (resolve_photo_uri already caches resolved URIs for CACHE_TTL_SECONDS,
+# so the real cost of a higher cap is bounded, not 1:1 with Google calls).
 # ---------------------------------------------------------------------------
 
 
 @app.get("/places/photo")
-@limiter.limit("60/minute")
+@limiter.limit("300/minute")
 def get_place_photo(request: Request, photo_name: str, max_width: int = DEFAULT_MAX_WIDTH_PX):
     try:
         photo_uri = resolve_photo_uri(photo_name, max_width_px=max_width)

@@ -23,7 +23,8 @@
         "place_id": "ChIJQbdCWr-5yhQRKTjvSx6RF7M",
         "photo_name": "places/ChIJQbdCWr-5yhQRKTjvSx6RF7M/photos/Aa-ngMaCfZMhLR4ge4tvaTJ3N1ORI78Tbn8hP0OFI57mcOshggKBpX2lH5yaFiXo9TYryOpJYAq9ZbfFSG8Qe_RRJvaBBYNJnUx4zODdjYVUbZhHCEcFYJyGXBkS0OFEAhWxI6qeIQh8a6GfAgwCXa2YpwbhgCv-V0yAmgHTBcWi_Kx6E_CAp4xIRgJJK2aOT2HxoXktb5X3m6Mfao_Sc9_x4ZDTLUCtMkaCeJdXYfhDpnbFPTP1ku9IGyQNGokiHzZGN4yLeJ9PIYGBX94EL3v9hNnsAox3p-Rcm1ad3t8ediLH1ITEbqxCIwgBWOdpJc5tiYHioB3kDjA1i_jdr8Z8T0BGJGqtjg5P-EEZVHdx4WWXRGLiTPdCeIpIdUW2_Qpd1LHDOveAiVfAt_8xN7Mu1J1Q9TE"
       }
-    ]
+    ],
+    "google_place_id": "ChIJQbdCWr-5yhQRKTjvSx6RF7M"
   },
   {
     "id": "topkapi-palace-museum",
@@ -34,7 +35,23 @@
     "address": "Cankurtaran, Babı Hümayun Cad No: 1, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 121477,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Aycan Parlak — Google Places",
+        "place_id": "ChIJM_ilr7i5yhQRAFMBw0MZqhU",
+        "photo_name": "places/ChIJM_ilr7i5yhQRAFMBw0MZqhU/photos/Aa-ngMY8N0Vs6Q7Je1YyppJxAKAlEXJ7-N6aktOU5Qy5eR4lSJyFzTVQ8ko1csUyw-v_UleEtmsBDtMgrnMHyquH3-kyfMgqpJmcsftczddIvXIRpRTK9yhPazqCJbcbx5n7sduvTetKQwyREXVL7IyafMe7RDbElVbxTXhsTrbcGcO3qR9aMQGF1nBYdglRzngyFZAbZRk5OSzhlyC4tjCvae9rnxDXG1KLnEvZmuowSDXZecXR4I21R5cEybwGQyh2nh7c7IGhdimMHfoTBgC_V9oTXFjSawgHnSQRr0rzgzpqjzBMf_UMh3TdYDCp20R7kLVBZ4qjGWZnt_N7WA9JzXxdDksTeVqNJ4ck51Imp6csqh2M-zRH5Dn6ocWlN3oFAoEaz2cJ5EicVdEyBdr52FU4d4U"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: A K — Google Places",
+        "place_id": "ChIJM_ilr7i5yhQRAFMBw0MZqhU",
+        "photo_name": "places/ChIJM_ilr7i5yhQRAFMBw0MZqhU/photos/Aa-ngMZ0Brss0ATJqANFL3lR6uY7D2E2vt_QZ-CCv8n67bV3DlpPWNWevMOUo5wTqJHKhQRIKnlBAfeokrxzuJdcMcEwh4GmLt-NXzj17TY_ql3b5ntgnt7nlvrmpnBA9bHpLBwahrveGYPmhrqPMAazLMhxGcmeL3uxgUg_9we_5sAri_JOvIsG8ojFFppmbHjUcm6ydUmDOAYPbJmhefFPe2RxTAaYPGlMm_XzSALph8B1ueLwiPkSl52QvgadJswZ5sdLcQ-iIvDyhB_OBn6bHSf0c7JN7huUJeUMCa7gwPGw2R3qYVUT-1ObrfDdgFXcdFbvWTZqVn7EG3NKNTe9LzNKQAwPP5gUtPZDe7llHnBDc1Vq6htCiOakYe85NyONoiWNVKa4jKMQzkINa2WvQmR0f8I"
+      }
+    ],
+    "google_place_id": "ChIJM_ilr7i5yhQRAFMBw0MZqhU"
   },
   {
     "id": "istanbul-museum-of-modern-art",
@@ -45,7 +62,23 @@
     "address": "Kılıçali Paşa, Tophane İskele Cd. No:1/1, 34433 Beyoğlu/İstanbul, Türkiye",
     "rating": 4.4,
     "reviewCount": 11595,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Can Aydın — Google Places",
+        "place_id": "ChIJw8JuD9m5yhQRnegQbG9Irjs",
+        "photo_name": "places/ChIJw8JuD9m5yhQRnegQbG9Irjs/photos/Aa-ngMYVsJVR6ycZEy_SmMtvX1-nsSmJJu508GnlL1hVj_zsum6E0NaLxNsqf20YQMZNmDXEfpxwtFCf9pnvOrn1CqEtDaHb2FXeJmR2PFEeBZtYmvcALEN6b95SZNmlYo-W83KanVmHUAcYE3-Ezgs4cf04pe5gFQRMDjH5hv5W321ifvsvbDa8AMb_JJEbQy3lWR0Wlhd7gf9J3cyN6fUMinqkSA8_1BU82E8InSSoWm895nIdS965Pu_UOPoKpLGubfMoX1kMXHbrkMMyKCjDlG9WhgxkHsmvqLNoGUN2mpzOzf409spFm2_pHgNyCS8QkdiC0a7vKwJG8jwNaA_dyXWvCL_BrhvdX2Bf6YAhtbTW3B3JUU498UWFCNyxzEg2TmV_1qbmWmVJRTNdtPHcBf2-3GMGAo0"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: محمود حاج علي — Google Places",
+        "place_id": "ChIJw8JuD9m5yhQRnegQbG9Irjs",
+        "photo_name": "places/ChIJw8JuD9m5yhQRnegQbG9Irjs/photos/Aa-ngMZT3e93Mqg3DtabhpgDZAauL_9QNbTlikCwo_pBPRnqobhdAJ01I8FRc__kj08dHnF_rUpz-boQrreeVJDYO8UQFVRPOnltlxKr_oohcCVyYTokgzYcYFsVii7WMCALMcIDICLq38Of3G52qpqP_5jxUcEZjSkvufDv66pn5OAMvMlg29_Neb5WyT5vwn3PJUUa7Cvdhy1ZrP9Y3M6pbDpyj57br6gwy8fL2zlh6l6tcz87ozoJmLis5X3PYKiFEKL6vdAW5llwxOXTVkYUErWIWMp7qf9Zq3ixNC_ppOoqxvVzfe-F6h0cNtw1j93TTjOZe72lbnRirlTbLeJnxiaJWbevucwWMasbib1D9a6pnW_SDITpqwwN4Wa2DCcVA-aOR0bsJIyAyiplfMtOL6n_uMg"
+      }
+    ],
+    "google_place_id": "ChIJw8JuD9m5yhQRnegQbG9Irjs"
   },
   {
     "id": "pera-museum",
@@ -71,7 +104,8 @@
         "place_id": "ChIJLTINFuC5yhQRyRbXfXliR9k",
         "photo_name": "places/ChIJLTINFuC5yhQRyRbXfXliR9k/photos/Aa-ngMY69s3t3iaxiNdTQHfByDb0xJ8JCAL34tBf7P-r4J72qv841RT60nXbUoT3TcbHATn3aXCIIEzivrm8qoBQf6vnZbgvpiJ6VQXt_wE2pU77yD0jFfGVVnuxbOTVSI8oEVcWoSV97YlyLo7W4O9hEbrxQnFNWm0yfchXPiLvHB5PSn_27wNyU5ZxoGVPT8_CvgR0PAkrUkvSfnc0rHBlHiFMItE8hHs_kJKpLVlPydAjIvCBDU7r7h4Ns5YLeCPZHIpAGhSFQwZHn2tHM8ZY2hQjT1xBvl7uplOjxzwiUa39MFBiR25_piIpGsAT-0aP6p0AL6F9ZgZ45YgH5YkGYmVrHqhXojttweSplkkXALpZrfZa0q2jqfy_ukPjo2fR4wFvFf35Qdosk6W4I9P1uvGTUFP_ERQ"
       }
-    ]
+    ],
+    "google_place_id": "ChIJLTINFuC5yhQRyRbXfXliR9k"
   },
   {
     "id": "the-museum-of-innocence",
@@ -82,7 +116,23 @@
     "address": "Çukurcuma Caddesi, Firuzağa, Hüseyin Ağa Bahçe Sk. No:2, 34425 Beyoğlu/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 3703,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Eyüp Canbay — Google Places",
+        "place_id": "ChIJeVQDXt-5yhQRwVR-geMJ_-s",
+        "photo_name": "places/ChIJeVQDXt-5yhQRwVR-geMJ_-s/photos/Aa-ngMbjFJ-L1djVifjQPHsysRdzxCjR2senXIRQU56v8Ixl-0Dkj6gxNsAIlnK-1geffwbH7AJYShPJu-agKPg4VNXqQXEaYIWBqsbrE45UPJExabjkLzsDKiRjApA6OUp2EY2qgpoleCQfwWGLGdE1jTLz1OC3nQw-gTRLPHSbexchOGkvCuc7mVTmcVS5Hbyth601vxVZRgiucz3MIXhAn5F02GCw4GJ-NQQQIE16G5X4q7ZVGF8vjOn8_80EJ8KXqU6ObD3bwTpSj5XO1wU0POONV7pa5LUbAZ6suuEf82b_SWS2NsRg2sbf8L8s0lY2OljmHugusc8pNz6To3Iu4RAHyqnKPaeOlTMKqy5C9Pqw8yQwcbHDs_KXYZhQZXl2FSLhi7t_G1lBvoKWdg4i4GLk9h0"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Zhyar Mahdy — Google Places",
+        "place_id": "ChIJeVQDXt-5yhQRwVR-geMJ_-s",
+        "photo_name": "places/ChIJeVQDXt-5yhQRwVR-geMJ_-s/photos/Aa-ngMY8IlqlitSlrTQ2GbwLFk8sJijOe5ml4f0wVayvt4vEKOzzH2M8Jk4pq4HOCGUf0lXiq2m7DZpVMsKxpiD5bKF3zcEnfkYFjiX5IF6gkOzFYxvkPZpbZhCAmxfI6gJZIdNZR_SomPxJ8U2K1UcpS0eAcrGiaE76qqCx9MBsshJNxCaNOvJeSyLRuUiPBArbQoEK-6sHDlo2gF6Sqw3WkBxtAv9MUxTD6leVMDq_WIX-IMBK8sh1cv-weNeLSer7po7l9h8cOj8B1UOg9YQDlm4jWVsjfv_bDOXCD7KHUBfI7KZ9AoA0F2J9L7j6HGkGQKRcG0tWzq_mLbH4xM4z1Q4NG49cnU-ovNXHMqwy45oYzyplU2T61CoegUKO8upCjil3yr_oFgtalX9G1lCO2Eb3bUOukRYWNAULF7sYzHYw"
+      }
+    ],
+    "google_place_id": "ChIJeVQDXt-5yhQRwVR-geMJ_-s"
   },
   {
     "id": "rahmi-m-koc-museum",
@@ -108,7 +158,8 @@
         "place_id": "ChIJwdTlr6uwyhQRXrwLsScTNkQ",
         "photo_name": "places/ChIJwdTlr6uwyhQRXrwLsScTNkQ/photos/Aa-ngMat-fnWUq0LyBhLemqbr_2R3cRPmdwz6yfLRrMrqVs8y58HwNgiW84Y_VE1b_0byC2DgfX-QBGbjH_jN4ha4fVQUKgtZJrhb2CiGXCAy-D_3lWONNM_QweZyhqygCiLn7CX35MCr-hqDdHH29ZwdKcQTzrzRimL4UanB6mhB5TGJLhjaQFaGmowAdk00m9z_65zHMI73YuTCvoBh8_SOYY4mvyfNR_IG_EkSrmKXxI_C2kzYcBeWFdPVO-xp1Mv5yxrfaJDrBbLGqeH037S0HlsXZ8z4ZzGRHjQOjtCkkrEm4PmfWVB37tHI8CxjAfLRoMy1W4SK8s7LDAz-Vq59XOMQBfLvhtbwYNRHDnGAmZQ4YicGpn4B2uFWaNUDUwuQpYQhSvoZMIG6_21MS3PHRu0KRw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJwdTlr6uwyhQRXrwLsScTNkQ"
   },
   {
     "id": "ataturk-museum",
@@ -134,7 +185,8 @@
         "place_id": "ChIJLev1Iw63yhQR6rrZJIKwCjQ",
         "photo_name": "places/ChIJLev1Iw63yhQR6rrZJIKwCjQ/photos/Aa-ngMbtLPdrYwBqw1ZpPUKtIp-EPCNe6krAUZOSVtF08RV4cR91hfjig8vM-0AGBEzlMU8sR_iDt_nk15frLsdBK3-2kQ0wOe2-TbvXo7MzNtcTMN0yh17JvEUxgLNnpOWbPRmFMum1tp-6K7KGJ_4Om-NtYON8R7NZcLbyr5XV824McWuSUpnhWcc0Oy1PjJNRAqbG0-P1rOC0kWs4XAammkJGjHXUgWOQ5NscAU3YEa0UeIp_3H0n_ngMCTvplwCePwDRZ7CIVfWG3S6PXWkCSNMUjgE9M4sIaUuJx9OMUzAQZWZ4FQNHRcssJNIwREOinKy8pJx2W3Deq6fO-dN1aGVYgmjW93CdmTKbUDsMWYbGlusbhqolDiq6z1DpACe8q6nzsCEEmWQBps-vwkYgpMnK3RQyGBqzQ5_wikrMD0W8PA"
       }
-    ]
+    ],
+    "google_place_id": "ChIJLev1Iw63yhQR6rrZJIKwCjQ"
   },
   {
     "id": "istanbul-museum-of-painting-and-sculpture",
@@ -145,7 +197,23 @@
     "address": "Kılıçali Paşa, Meclis-i Mebusan Cd. No:6, 34433 Beyoğlu/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 783,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: ZEYNEP GÜLCE PAK — Google Places",
+        "place_id": "ChIJOw2ymnS5yhQRWYphThIvO9I",
+        "photo_name": "places/ChIJOw2ymnS5yhQRWYphThIvO9I/photos/Aa-ngMblQHQceeyXXxwPb_uwY1A5upOaie8w-fua44uRlsq3lQqcQ_E6tGRLIO_t7TC0g_gl8gTgAXrT5DNQRHew0Xu3WhCcQj33ICFlkBbgVBjXcEjJyn4gKKnpoGQUo4XD88Vcpeobd1OvUb9NN0IbDIUzQItFBdo0QK-152Be6VFNV46goXTXG-5lPX0RgiLXTAIeHzqy8gWXVWIOoxK9kmD_6XZKI_Jj9eTCQIgDnE4It3OytBUAWLphXzhUdtp3o0Zgs739PNEhKZ3MhfyZEBbLRh9XqqizxMF0ndvIVNQMlOpqt1F4KYMWWphFQQ4cL1p3PbBHa_rC5opoRTq-ngsFSvD75SPDnm9Q-6dpabejvzX5LpSezFhrdlhMC39tuOYhJaRscJoMutiGjWKg6_aEMvrw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Mustafa Gokcel — Google Places",
+        "place_id": "ChIJOw2ymnS5yhQRWYphThIvO9I",
+        "photo_name": "places/ChIJOw2ymnS5yhQRWYphThIvO9I/photos/Aa-ngMb7DN-EPs22T3aUghTzZbj2ixdoONQNzjsBWUWl8EAISuG2JUVlbTfWOi3ZoQ0zj4NpbEf_IyLnmcprpbzGLeKLt7SLEolYNRybrRMZfU_KB_DwUAP5EeP5xkGB6sMBuY70aD9VQ9WabXUQ2ji3qVGogkjtLzCauVspZ7od_FN2LZM3Q2g5pia42YpfjM4VHVlALb5psKdqLiEXqP5173qXRJp0udfAOxeI7N9jtcN_wI1WdJiKOhwZtJS5i5Y8cL3VaTFOQS3_07wYh1g_j0wtweWVewjyU0yV9XGpr8sjuHaPmMNjgpXPmKXPLkBsIV5DvL0BcQKNAyWWzy7jWnk0SdwM6jiQkPyPLcw7eaYZGLARwTKumL4S8_rfI4RfWg92QZZQGVhg-ucMpDG-I6D9vA8"
+      }
+    ],
+    "google_place_id": "ChIJOw2ymnS5yhQRWYphThIvO9I"
   },
   {
     "id": "panorama-1453-history-museum",
@@ -171,7 +239,8 @@
         "place_id": "ChIJcQ9aEMe5yhQRxlib-EXk41Y",
         "photo_name": "places/ChIJcQ9aEMe5yhQRxlib-EXk41Y/photos/Aa-ngMZLevh-n2Cf5LHZNSRhMZ3dqK_dNLC6Bi6u_Ey-DCsm8yeLLbUoC6GWH9jw5jCGF4yjT3Jlc6W0-a4oQS5SssxDISJNTV8HR8gQekCmKeYOi51wFgZ0rvpHUT0dELM1kEXPpMiJ2ll00w9e8PyADRZZOI94bMn8IVnkql4VZAVpxEXNEGL6h1-y8MGbp-dBm5Xb5IDzWZ4XQolQqJx77GzZvAGgK89J69RrdDZDpkJfPoeQtaPOoiYqKpq1N8uteMzL9buoUdShLP-htEwHhchMlY9FiPdBdUVMLToH10qaJMIMIP-5ZwjT2sPb_J-Wm--MaopgjMwnVj1H83NKSBHQT6FF4r4WVToSiShgFp-LsHTUiZspEkW2jBDSDmE4KcVeZAUXDkkaIbFoi2c4mdaS-KBGZtIP965t45DGyIHsyw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJcQ9aEMe5yhQRxlib-EXk41Y"
   },
   {
     "id": "museum-of-illusions-istanbul",
@@ -182,7 +251,23 @@
     "address": "Asmalı Mescit, İstiklal Cd. No:180 D:4B, 34430 Beyoğlu/İstanbul, Türkiye",
     "rating": 4.4,
     "reviewCount": 5880,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: N G_MISSOURRY — Google Places",
+        "place_id": "ChIJS7hkWk-5yhQRugpLuSseSaA",
+        "photo_name": "places/ChIJS7hkWk-5yhQRugpLuSseSaA/photos/Aa-ngMbepb6kuytcFW4HbG-ZmXEZa0Zr8ycSp6KkPpOFyv4sk8noljJkrSsjD9rDilDnHa4-_zb1SO7OkWH6nwD5Qr0as5KCRuOLDKxtG8YzxENooGF0s-aAla5_BtC7u1_jB15e-2IMoIZWTdAUKeZRu9MrsBvB0y2SrPa-x_DsALlIh49hXeMLu91mWmPeNeAbvexzC7yVenLMXs7dneJHduWqq3cnFaj3t0rKx4TCFIvutmZZutdwd87TRl7aJ2IHOntD8ZwTc5MfAvhkIQ7dNWeKoj64bcj0rwgqsm9jBUFQpTg1d3qfoH_Uxu8U1uXVwuMiD9UhiCHlemjs3fvF1O_r-OvUfR5RtI-BPNNJem-t98T8CPGlPcjuosxenkAwCjfJQ_Agg0ESFiiYFXBeDuEXMw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: N G_MISSOURRY — Google Places",
+        "place_id": "ChIJS7hkWk-5yhQRugpLuSseSaA",
+        "photo_name": "places/ChIJS7hkWk-5yhQRugpLuSseSaA/photos/Aa-ngMZvuWTxfasCudv2pL5H71TDjIU6ZB0LCgOJWFS0mcN_zj3dQghIUuQk5fyGMeogqrEWhE0aGvRKQHUt8n6_ReMFYoeVb9hz1AwesBL2ucLBijSAYhSgtVy8gl4ar0TTsUnn7KLMtg62DA5mNH0jrPq37hnDkTPnDOFfDDir4_-QociZXL5CRgoK4KusMzEa-zpNDhu4diWTlZEXqKz7A7q04yTfY7P4MI6OWujQsxcTlYdzmEYCEWGepOM__ZncCUqJZtcoPiyI-4zsT9-ceoZ_YopvjT3pSODudUCjolHrhX1_gNnLgM5vAtzjbeqk1zsGxcx7h01o_78zyEaRFJmKrHowVZoi5kfXYy_XXMh8DJMPqrszRGiq-ufzx3Yoo_3Z7wIsKbaFaC-KHE1_KhIztQ"
+      }
+    ],
+    "google_place_id": "ChIJS7hkWk-5yhQRugpLuSseSaA"
   },
   {
     "id": "turkish-islamic-arts-museum",
@@ -193,7 +278,23 @@
     "address": "Binbirdirek, At Meydanı Cd No:12, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 5254,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Can Aydın — Google Places",
+        "place_id": "ChIJnbx_x5e5yhQRlPF66tEpPfs",
+        "photo_name": "places/ChIJnbx_x5e5yhQRlPF66tEpPfs/photos/Aa-ngMamDUu_KZ5xVDzZicaQFZwrhBlwdyhDxCyfUR66GCten5hpmzUylF44VxxSWWzOynVy6YumPHUFneVm2KnufSoOgBY7gAw0EAfc6RWIQCVpDnEEaVSrP49dD2gGhQjUoZUAnWthEpD6BSSpKNM9QiKxTth4gd6OrSJ7plyUWF4dnTcReQdVXQPsB1D0WJX5HNeNwYcGqqPNNArB1AcV9Fi3svPTducrcr8zWdPKCvq3EK_FBWguv3WSOUcTvNfpLioUwagQrft0EVowmmyPteF9pM2srNxs_OSVQO1tqV2bxOURvHIqg5wGw5-NkN5K6tTeERkAHWZHYmXE2idUgw4IKOwBqQEwf0p6LoLQ5gchmHx1MvowxVsKgVyoW5ssPjbiDp1DHPudFGg8W4knnWZTEhljxZ0"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Sabina Hotilovac — Google Places",
+        "place_id": "ChIJnbx_x5e5yhQRlPF66tEpPfs",
+        "photo_name": "places/ChIJnbx_x5e5yhQRlPF66tEpPfs/photos/Aa-ngMaEIgzi7N6W2o-ye_sCcZi065D6MdVioZDssjXsqL2sm2hcnvP6Iqr9VFz8P0sgdLzvGiNpXym44eLjX3Ey5gTcz-9i-X9LoLPp04SyqblchiHLGDVjIN4LhHml5ALxpTFc8V0ZKexjYr4772mzXHLVb0c6z2tIDrapk4WCCAIcb_gddZpmIqxrr6vKMJFGgcTdC1FfpIGpvNT3CwW-8RFQbrVp3IkrP5DKYoTJvfj9SV0VFVCcCE4KWsCdIBqnFH3u-VrFCn4lVcPfbesOj33tc4SHag0ZxsBeZcv9b4LgTfJhpIA0yWRbF97CBW2O1RGWanz3VqADbtTwNzbJzBtC-HVEoD_0wuk3KwoOT4LG_KVwcMvFI2naOGTErm5bsVeYQfL3q3bXVyHT8oHKWxvaeWk"
+      }
+    ],
+    "google_place_id": "ChIJnbx_x5e5yhQRlPF66tEpPfs"
   },
   {
     "id": "naval-museum",
@@ -204,7 +305,23 @@
     "address": "Sinanpaşa, Beşiktaş Cd. No:6 D:1, 34353 Beşiktaş/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 9411,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Cihan Cengiz — Google Places",
+        "place_id": "ChIJSWL9tJi3yhQRK5PbJinlZTw",
+        "photo_name": "places/ChIJSWL9tJi3yhQRK5PbJinlZTw/photos/Aa-ngMa0ng6QWD5mcEgecsrAiuWJuExYeRXSAHx0NfIpEC-UIMoc41NFjnScwgRe6srBOX8-fZFGHL4tSStcgtoBeuVSffis6R1WGmSIVV5h1t0b8uS489KkNMDvmieh6s8OK2qz3ESIUnWGPyJfRZgtmmnXpcpPpctl0DnI0JMMZYArrY0nrzMrD4WooCD6YAgI9Fd6rrt4HcNcBGlY0GSPjGq4z6j6vtIWlbRVHSZr44G63AMRL4--OkaNusIMAKdueRlApFksrG_2pm5m10U-z1bRznwEUeaaAvr2jQzlSLv2WspIgVnDQRk5ZhZ_pbMq7hVbGWmGO82AuPkU05b5azq-R7EUfvNLXoCzUXc2czbxVO_C2od26FQOJCDkc3txLymlg8wGOMZT1nLZuuRnBBmTlidVk6Y"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: NURETTİN TOKDEMİR — Google Places",
+        "place_id": "ChIJSWL9tJi3yhQRK5PbJinlZTw",
+        "photo_name": "places/ChIJSWL9tJi3yhQRK5PbJinlZTw/photos/Aa-ngMbZ8xD-7mWCxrv0nNVoCqMjhxS1lC82Y3Et-ojrVlHiKhUMaWSrNGmKXP5CpaQe65J6cVq2FXsuU-ejaae8KnW6PInnHE-gHinH8kpZcvmhWMmLSeyKJI78KQ9TUp_IEj0Qg8CeuK_n53wa0sL0DTOjKxSTuJqNij8JukI0Om7-bg7Ha1AtumZor3xSseQXKn8PlnGJ96ROgCNX10_gbc27Oou86qO1mow4C1aIqB3j4WreliOue5isIUMYeUy9pwCorPdTWeNV6TyTzVU6NIjmrW9rcTb1ewRly8ClQO7EZmqED1QK-tVx2aHxq6xYGJMvucdVVU3lFRr-t4upWjfylWMqH3vdj3GUWltbHYSpzBsUGqC9ZzfNjIimmHnEV8QHtAqdfs8C-fVRcNBd0iLdJqygKxs"
+      }
+    ],
+    "google_place_id": "ChIJSWL9tJi3yhQRK5PbJinlZTw"
   },
   {
     "id": "sakip-sabanci-museum",
@@ -230,7 +347,8 @@
         "place_id": "ChIJh3PyQXLKyhQRSthFtLCOKqI",
         "photo_name": "places/ChIJh3PyQXLKyhQRSthFtLCOKqI/photos/Aa-ngMZZQs50ckxa5LeCG8Gao9agLIertRcy112qsX_99OSwU-tAh4H3IK88R7PouiUXAxrxC3RazQqye2GzacYgvTd4I2vWtmGiw_tmsgH4CS26nEAX7k0e0XK0dRfzurLPJbMjJwggpcgRM2Ld08LpmpS0qVFn_SxyOTIXU-GeWuefeJhnYSma-JX193QbLvUGLVMAZdB9jnKFiZeujq2mO5b19jTH9kngr6_J9aAGp2uCwiSt7QBUG6Oe8ZLPD04SjKNPQtZAXUOH0nrToGOz_Py00_aSxtYfq-8WESBzF5_yp5y0lBkZWdR9ZBP0YtaGgrqggtix3EOUP0NA3QPn440DHvSakufRw93S-BGltmJZ7kaKRxmwWYz1OcRVO3-bV5kALpgUIeXp1pgK2zI4rZfi7ZPkVts"
       }
-    ]
+    ],
+    "google_place_id": "ChIJh3PyQXLKyhQRSthFtLCOKqI"
   },
   {
     "id": "hagia-sophia-history-and-experience-museum",
@@ -241,7 +359,23 @@
     "address": "Binbirdirek, At Meydanı Cd No:10, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.2,
     "reviewCount": 1305,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ayasofya Tarih ve Deneyim Müzesi — Google Places",
+        "place_id": "ChIJxaLGhp65yhQROawJdRmHNMI",
+        "photo_name": "places/ChIJxaLGhp65yhQROawJdRmHNMI/photos/Aa-ngMYeEpfhJBXHykEOuvJUlflLm1_Xrron5aUjpM_XF2t0GHL5Y-Adf3butHucUwMe8BC7tR1EQCcBdtZwIIYh1-ytoHmxGOGFjd73zQNi6EPpxtPuQeuboSFTTU-S8rjuDXbyvLZ1EuYLmyzp3_wnsY4fJrzvnrCxwM9kgJvYlPnSnXrx0CU_hK1fH0ibPrznGu4kllIZVUrf_urKyxDJqlNUSGk4cY6EMJhJfbDyd0WfZjvMzkdyzKxPf1ZlBwQZo8QeC2TnbzhTkFwklxXb1EP3UtYfFS1iQPXuTkFYdzaMT1OiqYAspf2sHdAIWHg8Hr4EIJo30wPyoPPCEyXp2nMoL05vETEYYp9_MkftxDSQMh4REZyxLrlPitF3EHSnW0j1NLjmVHlaXrqLFiyNQETTc_g9"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Renzo Gagliano — Google Places",
+        "place_id": "ChIJxaLGhp65yhQROawJdRmHNMI",
+        "photo_name": "places/ChIJxaLGhp65yhQROawJdRmHNMI/photos/Aa-ngMapWs-P2RvTQc4H02aUAFBw5FMGEoGWWVu1rRNLhE5P34heAiKR3lpFF4xS_iy3R7RWmkER2nicmuFzXhOTMJyjjgCh7nGw3Jw8NdSMMqA8qWNv0DnVwe4Me656iOXyU-9BPY7cWMH_Sc9w1PuUe1ZpiSUlqteZOJX_sxkr_HmGZuHmngnLFaANp4kq51rApwQXXKeUyx2nDxmma-Hx9EvPyrscEGe5tcpxbi_GL5iEeCtYYgQgqS1pAbswR065DZ4AwdJ6c2vWrHMK0ETmJcjUfpyPnFbhBbZTdp8hUCdSB-KEVD1CdXSPwrzN-C_zAhPGDg5YDHZZQ9l0uXIMYTMOB_7GW39m0pVdzlfV2rXQkkjvgsNm2kAwZjmuKkgoAPx6r4PyyDOAIJz6Cah0JzI894t1XWqPag7nAFJvi5Zj3w"
+      }
+    ],
+    "google_place_id": "ChIJxaLGhp65yhQROawJdRmHNMI"
   },
   {
     "id": "salt-galata",
@@ -267,7 +401,8 @@
         "place_id": "ChIJ9XlKFOi5yhQRpjqu9uyObWE",
         "photo_name": "places/ChIJ9XlKFOi5yhQRpjqu9uyObWE/photos/Aa-ngMarBbIkd9PLtNaIny1i1E79eJd4rZ4jK95drQ0uwgj8rBjHDR6CITS4uam6IGCJrx6dYIiQ3TTxqLw3vBS5oJs_0fHXhXouVBPyaKtj9igozSJkYQcqtNqdP4HjORkt6-ofaEstFiXSNaGj5O71YtqDJC4t8uxQ7YAM3RSgNCLQuL5Q3IvlrI6xMhWILBjUUhYya1s3VPhiR1vUqE7H3NeKgRE5KUzGWhCLBhDXOeonPTrQrOthkD8Ww04GOT0NBCIUWS9h05ZUqIsqxucHwbCDOAlpl8Fn6TAarE2zXPUmYBdCABviv4e3D2CBRb4C24dz4juTPKtySJcA7fEwOD65lVTz56KXSmFIhyukSaK7unKdKifMGgLET1CzJVo82vyHV-bW6KTPehYiBshTMUlH-qAKvbN-Vtk4EMmjJNY0Gw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ9XlKFOi5yhQRpjqu9uyObWE"
   },
   {
     "id": "turkey-is-bank-museum",
@@ -293,7 +428,8 @@
         "place_id": "ChIJW1FXGuu5yhQRQMtzYQOdemI",
         "photo_name": "places/ChIJW1FXGuu5yhQRQMtzYQOdemI/photos/Aa-ngMYSKx9vukz9ZiJwYjGKbz7zWhMq7ta2v_vIzJKqFa686j9B4BywsHF3kubIAaoY_eEK0Jw3BUSfyc3OzyPsWGXLvoDmtOs6b8Twu3qSiMe8jChNAPDaXEeAvgbhCsjXjIBCISA-DMgQbgTizHONlOe6IgMfakhu84F0TCReqPBGqt3fI577MJe713OqPfWmSrxpBgFWXZAbqejVYFbcJDs-id-MaqqsKuXL_bOjRcpgnV212RniQhU7F9tVnvhNurEMfJTIYcy_wbdXRDywpFPm6zpnC2R_S79qVHnWF-xOIiMkzI_-otwk_Scv27E14pgZMYzCwPKPY-c-tpfpazxtgMtRWRYjoBZ9kugW6T66FP6M0_EmPj9Rte5g5G3HkMHRdBDkFEsMom9OnZ9tsM-mXxw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJW1FXGuu5yhQRQMtzYQOdemI"
   },
   {
     "id": "istanbul-museum-of-the-history-of-science-and-technology-in-islam",
@@ -304,7 +440,23 @@
     "address": "Gülhane Parkı, Cankurtaran, Taya Hatun Sk No:8A, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.3,
     "reviewCount": 3656,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ugur Erol — Google Places",
+        "place_id": "ChIJb-8wq7-5yhQRhO0c5-Bhdj8",
+        "photo_name": "places/ChIJb-8wq7-5yhQRhO0c5-Bhdj8/photos/Aa-ngMaGb9liegnfgt5FJjUxTxaTKB_Lua9Cm3xqR-v-JCef4VxJFKEpxA5ANmyJhwbkqIllLRmD1HDeKSpNWmdhSLwqMUNMLT7h59E19SyGK0Gm2eNUmR23vYgSfA1gTceTUY0CxFcEoSkj1vw_y4UZjZTupl39Wd_54cTg57CeDDINQvcPKp3Z689eXwhiMkmKG7EtJ3nFfwHav9lkIJQXegnEqvy2Kisy2vcHoAAOcgIoVT9TfZX7Afv7PRXspRrE5UMmVe8IM3Y9nziNzuddLeGfBn4tLVGqlgU48e4P1UuQtZD7E2ie2qhiIrcEkkzFKfVIrVMKn4bG2amrmj-ulSj_TJN62EqcOp8TlBa6-lRZvAf63LVx2zo8lWQnxXM_EMhkIxWLvECI8CESXJ3NjmrLWxA-ZWs2eoW_OHl5Xw2T"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Cem Vargun — Google Places",
+        "place_id": "ChIJb-8wq7-5yhQRhO0c5-Bhdj8",
+        "photo_name": "places/ChIJb-8wq7-5yhQRhO0c5-Bhdj8/photos/Aa-ngMYLHZakP5zOAqHIsJtqm4vKWNs4BRSQaCE78kY91KBA-2df0982t0wh1sPRA_8naSRRND3VPtyfMOAYfWHm5pgT_j5K0R-T-U9cXFmKcFXa-4F9i9MVrX1-0yE9OgCjNpQvMiXLXpyTz9KnQiQnNluhzNPwOhc-mQALhbKGtOwWMDadXuj2Y-bzqGClboLNTJv0S0wquH7Wcl9-Ot7HIFjypiYxLjGd41SEkvmoo9IYduL0vTyeIyg9uVDSWdzObmWc764QAmfjXB9MupFFRQxgxa5QjtSccA109xJjbk-zMrIBzPFfYiNpN2CSfOrO-SqbrJvg_-5JjF8OQngvcvu9zUIo6tMEivDXR1YQuuHGwcTOE6ns7NUZAkFKwYppOZsJlCxWqqFacPH0c7FVDtkhoGdSy48"
+      }
+    ],
+    "google_place_id": "ChIJb-8wq7-5yhQRhO0c5-Bhdj8"
   },
   {
     "id": "miniaturk",
@@ -330,7 +482,8 @@
         "place_id": "ChIJ9WsAScqwyhQRHNfCzoxQiTE",
         "photo_name": "places/ChIJ9WsAScqwyhQRHNfCzoxQiTE/photos/Aa-ngMYuQXXvDJ_L-hqgwdd-hGxZFybNGe2hLrFFZzNxfEzwA69TGIOGM4byh25Pr-r8gPM9D8obsBt2PoyWR-Emq6EVZf2RyFAu3KL5VPgWqJ61WPc5xeKDyfAMKaVpXdKMWfNoJBToRFFZP7zucD-lN3uq8wpyI7SkIPNV6AQlnoDCEFiA1fVx_wNFehUWxBN64JuYj6wCmTrS5-uHIaiPWk-fZ9STlRrSnoHkXpEctHqZfGCi4un2i3fqEDj5etE3oaUk-sCFizYpnszEXEjYAiKjHNiPiRPBk3qaex3GUPsl6mf4bOmccSsMZ1yNtKzrseruBY1B78t26CJEbhchU1WjyvWSh6gl2sxJ7Ksmz7FP2OGYsWibMMVLW38TThCIs4jGcjn9MzE5bjjU2yxZ7giCXQ"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ9WsAScqwyhQRHNfCzoxQiTE"
   },
   {
     "id": "cat-museum-istanbul",
@@ -356,7 +509,8 @@
         "place_id": "ChIJywXc9WW5yhQReUW2bP7otmE",
         "photo_name": "places/ChIJywXc9WW5yhQReUW2bP7otmE/photos/Aa-ngMYf0Ii3uUB2O8GNctCxCkBVa6GY1cU5rel5leP1SHcgqfK9i-0w3pXA6HyvqoDCMKL22n9nvOnY1gvcqRdMhvoChyvYc5sMWt_llR42XXxGSTLX2qZd4Z7kOcoAwxqFJSP2XjI7Vr04g9IGBoarKT88Z27TseiO5B_mF4ZvJnGuxh0X4YaONhi8ZU8fI6IvjxDvo1x9qfHvcnsUjYdnlFVhNO-5F7RdR3yxqN-LZdksocXc1FUqawbSJ2AWya21BefiRKCC9ZeaER3s-snVroDY2xpLwv8aws9bXYevyGEg0Y-S_UIHSBiVoUbKAxul7fEraPiKZgSSyDt1hEQ8JARSjtAoePpez_8h0JQFRGh68M-Nb58a-e_6cJLXdzQdEepzzvwG3khbhGrfSCx31k5mxpHQAxYjvKTVvJdcr8P_hw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJywXc9WW5yhQReUW2bP7otmE"
   },
   {
     "id": "dolmabahce-palace",
@@ -382,7 +536,8 @@
         "place_id": "ChIJ4307Gna3yhQRC4M7zzg-09w",
         "photo_name": "places/ChIJ4307Gna3yhQRC4M7zzg-09w/photos/Aa-ngMbBF9-sxBHeRtcAGOE1b94U0LBcm3VJ9I_W8IV2-VQihQzT3Foyg7yMSyLBAqBIOdOZGYiQSbnadf1ymsqt6wVkXT_qmB0d3As7bzBZS128Jj7MOCHzdPg8Q4HQLRsJSdoYeHkdzsu285tLWgOp3-xsqflpX6qK-BwsRd-MJsOIBTJ-gCT4K5FOmV4Pq3qoUYVJo51c7e7Gbab4GMW5LIN2_tZf_4lq4umxkCJjyUZLrhWnsokheuX5oZodBnD2YgbotYNWw5Fxc1Xt0LizIUiMuqITFaDB4TpFb2JBI2Iq1ThzIX0hg_j8pXG1UqzQ7LzzM5sEqZnhMo3Cs-9Q2iZFe8oeMyaWsmqKZpVpqVPI9e9gM9u83bkT8FL4Ol_Ocb7GAfBjraFsngtcof6a7j5Jyt5dCYo"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ4307Gna3yhQRC4M7zzg-09w"
   },
   {
     "id": "galata-tower",
@@ -408,7 +563,8 @@
         "place_id": "ChIJQ3x3p-e5yhQRCzOLzD3Pdkw",
         "photo_name": "places/ChIJQ3x3p-e5yhQRCzOLzD3Pdkw/photos/Aa-ngMaj_zz7qvAtG7pnZ_qGFV0345-1nprJ2PCPg_Sij40gtT9XSWMN3K-ecEaOAYZDQf7eB6PuFwFqQptZFZ-DLFkhpTh66VU9nFUsaK64nR_SE4XajvGH4eShKv92wjmXYsW3qoJB6lQBCFoAGmXSB0tQj2i0-eb8ep52K4IfWRNRbBfH9i7ukk2XSSuP-cLJ8HiXqWt6FkU_hf4n77PgQxP4E5m3pgGYC0u98BWV8ZHDWN8Z5NKFyKC2yZ5lblEBDfTa9faqRFUbgOqJT9JTvOqckVcyJmYboyTAmyqeD-wCKHxPyYkRWsBQr70odP4Q-0zVax6IFh2qASwCmeFeioHQOCuw9eBmJrzOPuoy9q3p9pMRz2AGk1ghjwja_Jxah0ddjkqlEohahAs6vgYNXMzXPA"
       }
-    ]
+    ],
+    "google_place_id": "ChIJQ3x3p-e5yhQRCzOLzD3Pdkw"
   },
   {
     "id": "walls-of-constantinople",
@@ -419,7 +575,23 @@
     "address": "Derviş Ali, Hoca Çakır Cd. No:1, 34087 Fatih/İstanbul, Türkiye",
     "rating": 4.4,
     "reviewCount": 2103,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Xu Han — Google Places",
+        "place_id": "ChIJNe1ZnRG6yhQRN8Jfgjjk8CQ",
+        "photo_name": "places/ChIJNe1ZnRG6yhQRN8Jfgjjk8CQ/photos/Aa-ngMbcwB-PNy4SwPew0C4f-cuiu-BZJA_PjB26uv3IyBLX799DF56Af7ZzjDOwuDUJxamP79CUxKx3Q_T3LWQH3qaSeGLyRIjEx-GiPw46E1P6x42y09Fpxrs_1D2dnnNA5kIorOor3yQ1fp-ruFgSBoEo7OZzUKzgehG5m-XvKhURZ4Jv_T1-HHGYt8TCTG5SKD-fL5J5-w62lX9c5d9yKDPM16pMPnDZjoCLhFwQiOaTVAxmOKILB_VqsCh5QMeu24947vEUvUEA4DInUFDWMCrwgSoiXTX07I0hh5E6lk0e6TOZaFJFisSIyohrcqfof7TcwElJrrVND5tChy3nz9XbplUusrmCkxW5MZ5Cd7tl_w3LJ9iJ0LpzViPv-pHssJarlXZeE3B-8QASfHx5yGMAwXPHSRX5vGGeM7ZZIC5-4Q"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ketowarrior Ispas Robert — Google Places",
+        "place_id": "ChIJNe1ZnRG6yhQRN8Jfgjjk8CQ",
+        "photo_name": "places/ChIJNe1ZnRG6yhQRN8Jfgjjk8CQ/photos/Aa-ngMae5scFyTFPTw50rtPDlUkyMa8-o1cgXRB0DL0ORWcVI0_6G9W6_9trEglkn8obp34QjxTWUkl5cUOlmyV7GvKK5iFrg7VNCsGaXJuf0naNWGxdG_YIdvgIET27I7CSc3hAZFzWm3ELxaJI5OjM10y-2RBx4wslLFWaO0mqZNWuJNWPdT-acx4Wm_csv8igRChD84379Y4oz2vlpASZGL-8aRUl7UT7_zHT_pWHRmIHqeax8EKTi-rz9FL6OzStZkqYCViB51MXUWMzNEcvAK9_Sr2BcI1H7MjN5PDUoYHWaqEOTXObzrQqeCTGd_XGR9XsNba4eSRteMRyYVhossJ5hcEX5KE_MJYc4d0AUIsl6WpxJMt4p-sjHEEZJ01JuDRaDYv2_WGlIieuMlfRdqBkgMo4pII"
+      }
+    ],
+    "google_place_id": "ChIJNe1ZnRG6yhQRN8Jfgjjk8CQ"
   },
   {
     "id": "basilica-cistern",
@@ -430,7 +602,23 @@
     "address": "Alemdar, Yerebatan Cd. 1/3, 34110 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 98139,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: ferhat kaya — Google Places",
+        "place_id": "ChIJyWrG4L25yhQRcYRt7uEvwGA",
+        "photo_name": "places/ChIJyWrG4L25yhQRcYRt7uEvwGA/photos/Aa-ngMZ0dhepRfItC8rdbOuBGZyIFUKeUh4kUGIX0nODV7lpNpdQh1RUN4VupVwA1WPsZ4YLeB9J9NBnlmfh-KtGnKCSBzxcaECR7f-tZ0ayThWWI3mrtvbmCT6tl4fBsOqonbRO9kwmhhWXODWCa8kwoekrycqRlNOCGNLNOmbr9k9dYSTlGWvq7eXtSAhfv1L7CbVFKWRYhayXLBdRE-A0iJAmApo6LIx3iPjJFV_Wcq_qIzq9LJbXgUOKh9rDsv7-G39CsU3H4Tc6Gs8IHgGOK0LhCSsKm3BrdkXu8sCzPUYowi404ukP8s8k-5VsGhAdr_I7aMk-unV9xxjTFH6Iog1_aVXlePvovD-faGEIVOV5I4n0DRVUBNwy1BPB31kmjszF5qm4BB8_v-s2ahLSD2E6hvU"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Fernando Merino — Google Places",
+        "place_id": "ChIJyWrG4L25yhQRcYRt7uEvwGA",
+        "photo_name": "places/ChIJyWrG4L25yhQRcYRt7uEvwGA/photos/Aa-ngMZI_v7c_pNJC4IloR3bqVNCi9-ulD-9aI1N3A5BGJL_AB7zVO-ut2udZ4AaIqI76ch8-0WcBI1jS5x4xkmQIFaYWJFXX51wgSxy0s6-5NLP-GxGaoruh7xUFUddW3OakM0v_AR8T2vv8d_DjZ_7leyJKJLDFCoV17Os3ePm3CAX2J55pKgznfs72O1SX11HyrpGbZzB5KqHItbhq575xaDQE75Kcpnq_zPr0j9zYn4wcSBgMSttLeflYHqEkyNxCokBlIDWacIZE0LA9UfDRI-L22T0pDi8mpxABUv_SRcsRtvc7sMfvpfXrdvNvv988WOgWdRPSviuyGioi4_HypDJVorE_tw594O_yanhFRfiL-5v1iy0tJWRumtuiFrwCraU2-_8c05WeSUtnIdOjlm50Kv8ogIf17nlrekLZBBzjw"
+      }
+    ],
+    "google_place_id": "ChIJyWrG4L25yhQRcYRt7uEvwGA"
   },
   {
     "id": "hagia-sophia-grand-mosque",
@@ -441,7 +629,23 @@
     "address": "Sultan Ahmet, Ayasofya Meydanı No:1, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.8,
     "reviewCount": 135368,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Sedik Selim — Google Places",
+        "place_id": "ChIJJxwBkr65yhQRrk9EN29vbiM",
+        "photo_name": "places/ChIJJxwBkr65yhQRrk9EN29vbiM/photos/Aa-ngMYARTtJOv6-G28IdJmn2xLBI6eQLz1BQgIxzfIYXkCglQRdKXtaQE9lEVizCazvnj-wTn86jEtQQlbps4SjocgSxHaz814GEOQ0NnzFiKfmsfRjI7n0rszo8MPUMkz8-cfueJze-7ogA3dbGqmx3Mjp-RTO06lZZsvYaZCjLnnpyqEoDfGK3ijJKvdId_YignUYPTBZRt47YZJ5JVJ9mwe16p0KHQ2yl-Unp17d_2hphxpM3QU6QrD3S4Sr9FYjm9KoTdUFj59ZHdFVuU8WLmkWOduoRgVDhJjxy5aL13G6Lb-oKGopnB1fSS9IbeN-0PXO8ZGbDmnyyVBXM9zZctYHoVbK1F1fQI0xRLoh0pto5x8RfETudj8myYW_LmgZw77bGU0YiZeziySELd12s-jFccPjMf8"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Adrian Visan — Google Places",
+        "place_id": "ChIJJxwBkr65yhQRrk9EN29vbiM",
+        "photo_name": "places/ChIJJxwBkr65yhQRrk9EN29vbiM/photos/Aa-ngMaBhiK38BzSf6xmAA0UqXSRk1jM4eQk5v9z4UBzhJlPNwj9al8NrvbjVjczCg3ux32wHgBg37-WI9MQHXzm5F6dCw2ql_f8v53ST7NWuszq5MdDDmVPDW0_yH3PvNPh_EoPKzxmKMk1uOQCW4xfNflh9IhXPfqYD4YCOHTGCDE5mInVuMhMnMKsZc1ROdtfWs-o-z5qJhoXwWQ7bfpO1--K2MU8LVB5OqZqYHcUIrMg7b4oSs5PKRCODMK7uv8zzm0lG_f50H8pCXl4AU_EjSN9k11_b8hdRcMYiFWO_Di1ANNVrK6pF6VtMUsafhJGa7V205DsE6GgH9pd4UVX42ifjWorYARbmvSMbcZfy5Nnoa32MtG2QyjhpoUIpIh6nqgSUsTK2r-cs0u_RIT2PlIpjQ"
+      }
+    ],
+    "google_place_id": "ChIJJxwBkr65yhQRrk9EN29vbiM"
   },
   {
     "id": "serpent-column",
@@ -452,7 +656,23 @@
     "address": "Binbirdirek, At Meydanı Cd No:53, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 1047,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: LePecheur DuLac (TOINEPA) — Google Places",
+        "place_id": "ChIJh-V3GZa5yhQROCZaARW4krM",
+        "photo_name": "places/ChIJh-V3GZa5yhQROCZaARW4krM/photos/Aa-ngMZm7SPR5m4TgA5Ft8pRdkAH4sJ5cim90MRiuT9MmCXyl5TZgDEETlgSXrGETLiDv7eON5GFow3ep2_baEUk2cl1Sf7z5qjnN3mE--ix-qI_BEXjjaBmnS_n6PBmOSD8YBr_ctvgzwuBz7D27WQIW540xqLCGcLODI4mQX7IaEwrnf07rhdb6OTe0Ci_F8p_1XQPxK3EvKcIJrQFuejzbLYBnu0UJhUeSBnQP-UrbrXydOtqnlkQ490zw2LF-szPwfilasIfv9zNt8hEDAAHaMItUxAhsEP_rYHB-lXmCTfl8lVApgKRvRA3N5rApWuEJNtwGSoOL9HR2jJ1TjPPuQVmYCDUU4plP0pr058U0YengilyoI_o4aIBaGkPCI-KymZcTCnBrv4CW7hUsYadXMRN2TwgHjkymYNgBEaHKy1g9w"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: N. Stoeva — Google Places",
+        "place_id": "ChIJh-V3GZa5yhQROCZaARW4krM",
+        "photo_name": "places/ChIJh-V3GZa5yhQROCZaARW4krM/photos/Aa-ngMZ-W2jucP9cp-vcDJR2zzMA1qQesyk77WbUJw3HTQmVANU0yWo8CxQgJI0qlvpkbJBcYU6JpiAwh-Z3RVPfYJIy4bUSJc-ZBNPSStaokdxo2ePZ8CcdNgpeYkA93mTWyfqJCe5OKc86iqRPaHHTt6vct3TAjUStxYe3xflEkwHlTwLigfESqOW9lCN-C3Xf7s-zC-eUd_Y3Js-K9do22jNwWCI6h5zhIejrIXxC23vzYYIlOgWyqiTwPMpP7mYb81senM8jvGjlia_mfi6wri3TfHH8-7fnLjBlL95EkekQJzbIyuAbyVF9rf3ND-htPePBCh8Y2c62RUHnOXZHKyJtHqEP927yn7l2oSZeISswPU8fCkC4B2njTA5Zi55i2l_l51wueqGc7VFXCf7kvUZc6MWFCts"
+      }
+    ],
+    "google_place_id": "ChIJh-V3GZa5yhQROCZaARW4krM"
   },
   {
     "id": "column-of-constantine",
@@ -463,7 +683,23 @@
     "address": "Molla Fenari, Vezirhan Cd. No:16 D:18, 34120 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 9982,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Dule Damjanovski — Google Places",
+        "place_id": "ChIJSbPdxJa5yhQRm7PHl1ASRfM",
+        "photo_name": "places/ChIJSbPdxJa5yhQRm7PHl1ASRfM/photos/Aa-ngMYLt7L9F01kBjZizC-UPkGwgDrz5237aflcVNFd_Pz3zh5GypP3MH1LMuHlU1uTn-DjrbysctNoIrVLLen0ryZCx4j7Ir31MLxGWr5ML-2GMMDL8GnRlwgP2WVQGYwYhmNbA-HziR1DJO6R02GY-bzIPnQ1_OsIaayljj8lIGAMNYNE_Gm2loBPmUAjEVmFu075yUmyiuc13EasDfD8MzOxOLshIlSx_0vQi_0CIcLYjuOt9k2y6V4Sj_DBXw-aAst1qKK_ABYvwM6rdVCOEYcPdvqbpAv4e7m6fToz7iiWvx0yi6kXpMBPwna-BDqy1iRNWPr6-iagIOyWseF46IpJKDXuoGi_ZND1eyWh8jhuDERZQNdW0V4dILQYit4nGRqAaJW2KzR4NJZ9bn0OPCRk1lFWkus"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Piyasa Uzmanı — Google Places",
+        "place_id": "ChIJSbPdxJa5yhQRm7PHl1ASRfM",
+        "photo_name": "places/ChIJSbPdxJa5yhQRm7PHl1ASRfM/photos/Aa-ngMbqthKOTx_zYoR1eeulz5sL_e4HH0J50miz-xOiC4alJCluxFqg_rovL_Fc2vUAYpmOW-PIcUyBgDrpSVGYmcKBi5yYOi5HDITJalNrM1MgNb2YRBbC3DyTzlJYA8QTl8WUNwkblEHvqMtuyWNgHBg5saX4go2Cmi1CcOwU8bnI6DdUYV1A5EyBs3ddhuyWoCBhV0kTNSveHy6ME0H8z_m75KEB3gMjaP9UiMqGrZ6z7zXLbwIeVG-csjDD-EsRLg2NnT8eXWIdgflCxoeW3rqXQN6ZDCHXlgoHWGS24U61hfhILPS-oZDidEJs3FinZDFxMxErGXwjpnP0YLVy3BwM-C3Gyy-guVMA5KMN71LNzXCL3V7SUuPa_ZspyMJU50YuHhwFywCdQGey97KtdpwhTK-_OH16VOe7ZPO3uqmusA"
+      }
+    ],
+    "google_place_id": "ChIJSbPdxJa5yhQRm7PHl1ASRfM"
   },
   {
     "id": "fountain-of-sultan-ahmed-iii",
@@ -474,7 +710,23 @@
     "address": "Sultan Ahmet Sultanahmet Meydanı Topkapı Sarayı, Cankurtaran, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 1566,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Bilal Sarwar — Google Places",
+        "place_id": "ChIJeZ7Wuri5yhQRMVSj6zngVdg",
+        "photo_name": "places/ChIJeZ7Wuri5yhQRMVSj6zngVdg/photos/Aa-ngMbb-aFKna-cLaF-oI0UBjgN6jkFOic150ZzoFu5TVDnLvy0iwwKbgcKs32VZCCDvAd-8sxeVTb_airU14z1HgRopBhAg5tmaXSi42SJpd0d4OC4knbvrq_zJx-z5lwktYYks9cSSorloQtlQgK2oGDSRE6wAjEFgwEuH0GrFF8h4P_xcM-uq_cIe_ZLlZ3LWzyxigBGDGgFwwzdXgi87gOKCTD7h31-cFKFwdsAx2kXmrC4YKKqbBuLkJYf8JyTU0BaLAJVgcevHsSgdc76lF9GHENOf2iZbnRpGm5pQed6ppf1OeklJM_UB4QfnCcF17ptLT16KzfBcNFrpyYDK_JK91oTfmHUk1jzUwLAzmO-ePYnntPjn3uihYF3QoN3TgEb7LPVS8ZlQgEPgyPxij9HVsXbR3eyppnda2bs1XpxnA"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Onur OLUR — Google Places",
+        "place_id": "ChIJeZ7Wuri5yhQRMVSj6zngVdg",
+        "photo_name": "places/ChIJeZ7Wuri5yhQRMVSj6zngVdg/photos/Aa-ngMZcZF9_Prjn-t86cWmUy15aYPUrAgaNAYXQlNPBfluSBXhDF0U0FhR0B7k6CiArmQXiF0S_1ETyYFE3qoPJ66UFhPvHrZBwwuH-Ee9gAvI2QEWthbJTQMBLuTDKDowbzgk6Uv37eVh6vkPwRsnLvgrhgimfLA2Gc1e7S6vDVSRJXwx7o2aqeOQIPUKnYvkDBAaseY8rrd-YjYGtLDS5LroOeGGSfLr1WHc55gCUdiPYys4dCLxzfQgsa32bEJiBSym_CblOpSgY2_KvVC7lTTtLyu90PIDChP6k4X_Kq9ySIa42USrkMClgYN16frwrNZUtg9zhYASAGsJVLt9LEOz6NGDg9mx9y2SmGi2-Bmhso5KTqhQux_J8WJZg2UMfJM56BNB0ZxeqJn7RqXboS9tATNE"
+      }
+    ],
+    "google_place_id": "ChIJeZ7Wuri5yhQRMVSj6zngVdg"
   },
   {
     "id": "fatih-belediyesi-yedikule-hisari",
@@ -500,7 +752,8 @@
         "place_id": "ChIJOwEC0r27yhQRZvkxBnAI5eo",
         "photo_name": "places/ChIJOwEC0r27yhQRZvkxBnAI5eo/photos/Aa-ngMbxgkY9i0Hx4rG7z-sI4_gqr-G9MSVsyTDvUk22ELjIU9FY6EUCT5c5G2EwCDPN23leK-WShC-XJI97oGZxoUxpQsjBOt-WhHZP9clwloUrd5rIbF-ad3f-6-V-TATvrH8d3HHmc1WXNqjHbi4UQ5mSgl-X3hzmAzZRD5ARspC_4zz0EXUbOugtOlhxDlzy54YQ7hYOuBkWk37_4sPOaMqsB09di3s96jnWHE8RxzzNMK3KzKqnxPwyWEzmZ-GTQH_f5fw4OuhPRLkgW_lKYivX_HBUUOnF8xwuyFAyY64fN8eu3G62wce_4zFmBkygLF3b90BJ1U7WBWS98zTz6AOcGS7LDMFAY3iSphQE3B475knBU7J_qzXa2JEP1kbLvozDiFKMvmXxehtPcpMVbhZXgBTz-G4"
       }
-    ]
+    ],
+    "google_place_id": "ChIJOwEC0r27yhQRZvkxBnAI5eo"
   },
   {
     "id": "orme-dikilitas",
@@ -526,7 +779,8 @@
         "place_id": "ChIJ84H26Ze5yhQRWMlKCOO1Suw",
         "photo_name": "places/ChIJ84H26Ze5yhQRWMlKCOO1Suw/photos/Aa-ngMYCUrBWLlRIK4zQ9p0fnERAF4AtFY8LZRFHsRzKUBeoY46BkMcHpmSwiloPQSxSNv9-COQmpoNzYT1NG05IEh9mmsvBv0V6GiF8Ko4D-g5FEfB_DW5dAy_mr0KBiNsUFzYNpn2xVKZHw9wrFH7z_KJerHzrVQM-NIkA0O156c3r3TmroMEIHcn_6tAd8NUvMxblUyAkj_CNT8B_L0HuqpCfoLVv4AQZ12Mx1CHqU4CUsmsTAGSGQhvQ0zn3v3iqY1pyoUB5Ka11S8QDKn5kq0G09rSKAl5KKWORRfMF_BRN8sdAigLC8Zdg12ERVrsXkBTWCYXmcHldPwRDB1UhJsJCqdlwXIgMrlqEMp-8ulE1Sy6s-n-h0M6IQA7pHyjaBvkHNv8ms0oALe0FvOQbhZRVLJQ"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ84H26Ze5yhQRWMlKCOO1Suw"
   },
   {
     "id": "the-blue-mosque",
@@ -537,7 +791,23 @@
     "address": "Cankurtaran, At Meydanı Cd No:7, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 123021,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Muhammed Raşid Serin — Google Places",
+        "place_id": "ChIJ4fRwZb25yhQRpHwVijb3LeU",
+        "photo_name": "places/ChIJ4fRwZb25yhQRpHwVijb3LeU/photos/Aa-ngMbYjlWSIjcV1691-NOholQZ78CDgXhipLl7j6t1GHhFrt1YrQpxu5za6z-u6tDQMkCG4AgY7cCWgnstqE5aoeyqsVBFcbfbjM3J17z1ZP_xu2d49d2oLO6Vy9HoQGjY5esWA_jkCXdldsBWzGbT_iePF1i-AT3ntPehFxciGJeTP-URTMByQ3ZAhRrMG-dG2CxZb6lR7UIGKMk9p34VB6U8eYeEwuoimdBPAJIAkMlR4ZhZdRIwv9LcdkOw4UejkPC3YfaHlMxIhNwT5_JWImGrGm4zR-KxpTqGn7Cj_0W1Hd8K_oAwNiV5-wfnJNI92z3OPV2BaAnVlI8GOn0th8ZU1apdLqozR52iXoz2jqmiJL9JyffgeRH2UJJQPxmoQ_vAU6UD2Bfvq4mhL3ptdICF4j_XnNM"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Henry Lee — Google Places",
+        "place_id": "ChIJ4fRwZb25yhQRpHwVijb3LeU",
+        "photo_name": "places/ChIJ4fRwZb25yhQRpHwVijb3LeU/photos/Aa-ngMYbTitoQtRNYvg-mkJpG_f8Z3ySAw1Ip3_0sOGFNTFz59Wui8TDr44XAWthzCh_JVIjOub3ADvZgnXV4ZRCUvaoOqViIVgqtXqy7GbHFCGql0HCCgiLVrxyZWDFhRdDBUFaVPYbQzlcmrmLUnd5tPqOD7Ng1aoY9gX002z8WcZl8oGcDUa8p3kWW9Z9gevL7tL01ZLukqM_3DFwfNIiYCJF3zl0kWs0EkA3v9bhJjMt87bvSzy6jznCRJJfHI0ovId1QbJm-42rrD0sSx1wrsBEskc8n5COmPgCRfgWzvm8HaUdaHjkX3ua3Uxc4yUQ8tvzKl4ZQGB1r3t5qFZ2FCV2SvR23YURLCXwjH21RCQSugXfOiCEy21HsYX5J6BwG2wRD1z8nQeApmwocd8GtwXoNss"
+      }
+    ],
+    "google_place_id": "ChIJ4fRwZb25yhQRpHwVijb3LeU"
   },
   {
     "id": "obelisk-of-theodosius",
@@ -548,7 +818,23 @@
     "address": "Sultanahmet, Binbirdirek, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 3099,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Mehmet Çakmak — Google Places",
+        "place_id": "ChIJ84H26Ze5yhQRjKZ02z8gU84",
+        "photo_name": "places/ChIJ84H26Ze5yhQRjKZ02z8gU84/photos/Aa-ngMa5pJfRV1tU4_-iCWMCWv6vQFL25nU02waQsMTnL9SxhJsOzw91b4uyxruJSBNCG9IhruvKKyaaaDpuBDwla91Pf1dUOLINxdvsM3ONa4fTPmRXEeKlcdvI1ZOVhVn27wVJzuBTi-xiOT5QL50-q8Y0Omt5WOqvxi5cIvkTQYrUF9k02H6MzWE5JCDRvk8Ra7raIj1OsGr0Z8HPNI0qZfPHB3bmlrboJHGHH5zWespUlnwYXV0HvK0n8IiIK7hq0aizw-zncrNNLeRqu-hYJ_confv7dcm4bG4MlwZcHP0POeCJPKTIhCkCHjwz7xM96vY1FUd4paenX9TJjsjrwzXOBwORzXiZ5jHODCWeuZUcsGgJ5SsMNSfaaUjGocpw0gaGg0C0IRXY5mEogoY_7rICBjKnO6U"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: BOLAT Bolat — Google Places",
+        "place_id": "ChIJ84H26Ze5yhQRjKZ02z8gU84",
+        "photo_name": "places/ChIJ84H26Ze5yhQRjKZ02z8gU84/photos/Aa-ngMZEuU0NwUdVv5yfElOB_p4cbYoRIRaQeSHoUmBmX4c3KMT_2sxtzTC3mT5Z0qvVuUF79jPB-ilwCdmUluWVoTrxJRh_-Gjpg8uU_4svq_iwGtZqlSUjNBaIm4CQ7hgCySC6s-LZ4ssa1MlMzurInvM3GjnYEowy7RLjG4_Iaf7ADdUIAGMJjOUsYu83jRc0rxmh5wXKBZJrsq8LxLHUGsEqWrO2C3d-4yMwwpr0CKzLDpMpqFDZvSvKIBmbMbENdaAzuJ7HVqM-MTFKT4lMSdI579nIQwc08hCrRw43hgvz3R4Kcy-Ua54tdnWBZijo46h5fDvBurBJ8GglTKJf6xteGbuBG6vz2UAAY6PrU03GX00LVuT-5xvHfR1aESMybHSaDdKpaDU5eeRKUiusuoxCbA"
+      }
+    ],
+    "google_place_id": "ChIJ84H26Ze5yhQRjKZ02z8gU84"
   },
   {
     "id": "rumeli-fortress",
@@ -559,7 +845,23 @@
     "address": "Rumeli Hisarı, Yahya Kemal Cd. No: 42, 34470 Sarıyer/İstanbul, Türkiye",
     "rating": 4.5,
     "reviewCount": 14542,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Paul Ciprian — Google Places",
+        "place_id": "ChIJ-X6_lwLKyhQR-sYaKaSqV0Y",
+        "photo_name": "places/ChIJ-X6_lwLKyhQR-sYaKaSqV0Y/photos/Aa-ngMbCp4kU7S7fR1N4sYi2-AidJRE_29BEFO9LVBNyEw1LLmGcJxbZIO02Ys6LXBFyETvgwdPlnkrLMKf_2UZh4KBcJsylHOOssT3JlHMX7UeqZVZYgmNMp6q1bVDpsoADpxszvdWGI6VHEbqZELgWD8F3BnmUL0EnktBzjtTAraMoKFvcFw5yUK9naYsKY3xgFS3Vy2NC3oGEWQz5gkMp5ptBgfDWjWz6piWsyoZC719AIequ9pKTiSRtjirZ3S6DVOnqZm9xgdvM3rRmWHFCFaahb9xEmcPMZXXb5LlTSi6XxDzQJZAnaL9JYJaB_eExaIGUv7SGyHaMPmaVdlyr7j8a1U_zbftYPFHY9zkg9P9TZmAL85VJP83-x6ESOAwmIqocx6yVokBpcRjrtXKCDWfzgB4"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ahmed Saeed — Google Places",
+        "place_id": "ChIJ-X6_lwLKyhQR-sYaKaSqV0Y",
+        "photo_name": "places/ChIJ-X6_lwLKyhQR-sYaKaSqV0Y/photos/Aa-ngMaX2BD4bAX41d1wTF1aLuvp6HlwHsBNq0DWyFlvPXf9pYfa2OcpEVpaIf3kgbz-h-hisdy4T3_JFHeoKMc6UUKGJ2FO5zqedJ1x_4C0BeYN5Uz1xln_zBi08Gel35c_6x_A55C4jVP2NTFXUkLXZlbkgqx4w9rEnk_i6dxHL4cSTvR_vmgo-aKgYnT_yyruzDfKqR0Ug88WH86NbjDJyiVMiYrjk6PP6qqUGxz-FL85Zlyc5qYOnSD3hFHJjgqBf25S3huilJ0-QGJqa2Yi5JH0sWv1Hj65SJiglFsvwzcWW_7geD-6U8wTGK6R5TksPdK1uF3X3bGIWUWmbx00wuHgyn8idgMQ-129QWi3zTWhzaHMwURN95CifX3n_s8hjbeAfoQFcyV_80zAxrQaeecFOYc"
+      }
+    ],
+    "google_place_id": "ChIJ-X6_lwLKyhQR-sYaKaSqV0Y"
   },
   {
     "id": "historical-old-bazaar",
@@ -585,7 +887,8 @@
         "place_id": "ChIJ0-OiKeO5yhQRmA8IwJIkEp0",
         "photo_name": "places/ChIJ0-OiKeO5yhQRmA8IwJIkEp0/photos/Aa-ngMY-dO8xqXB3ACZ-0G3GxZNdR1iDp6steRKfQ-WSJvgYG1Z2IzyBOCQVMGX8iZhu6VvJuDEagRhxFmMvASP0pCHNGwwMORTuxIHxO65Glh12FEU3M9R5_cyDkNc2fHZbgeJotgMnWWa4bg7kjh8NKOCTxQKfWoT9HevYGITtbdm8Dc1uiLWoQoZl-o8XbzcrLyljqfx-DdUmcT8lLmyTu82EXFAbUPo72kqqpV1qeuhnMRVkbZd0VoRNWVtPOu4yXhIxrJwGx2TAyRYfUXJzbqP9WFJxW2SxLBywi4oLuyg_62gMM_LPFDkXpBsb4bLstmRNagSxC-K51WiJjQiOjLcGPfuh6Ttyxkr1r18Iye0S1H8qiH_zuksl7YdF845ndRb8n9XWHKy7-LWhN43P2di5LLe6"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ0-OiKeO5yhQRmA8IwJIkEp0"
   },
   {
     "id": "the-stone-of-million",
@@ -596,7 +899,23 @@
     "address": "Alemdar, Divanyolu Cd. No:2, 34110 Fatih/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 418,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: jimet jimet (Jimet) — Google Places",
+        "place_id": "ChIJMXqN3L25yhQRVfrLs5F7nrU",
+        "photo_name": "places/ChIJMXqN3L25yhQRVfrLs5F7nrU/photos/Aa-ngMaYhGMnecvnjQvcJomQPZh8Ebnkt_xFTtRkNXz1FY7y0mD-3oWUEdFWRkTmPDn7SnihE7fRtwfeteGDbpD411V2ujNfFwPEOnA3lfCxYFVZLBQsVfQ_sgZdE3cJU82Y8u1Rl3hX9Y6_cM4gE7xoHdPb9wA9acsAvBP59szR30_uTC3YsQF2DMpNQtkBFVyn2UyIMDAREjRdPmZgx8w6mZFpQ9RT-PO-9IpF4XKYRcILGiJf_1bdV31gtG5kIn6q-tKVgJDLehj0o5VQx0PXmhULYseM_zt_4e1tlyU9LWcvCIQiFCgODPH60pfvfTXGvyXAn9IU2aZtAmBTDFho0nOtV-YiZdsvfu6u-MC4fPSn7Vwkl26zYGnIKDhy6m0qby40S17p7LjlxN_RnwiT-6opmUbV"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: krzymat10 Matusiak — Google Places",
+        "place_id": "ChIJMXqN3L25yhQRVfrLs5F7nrU",
+        "photo_name": "places/ChIJMXqN3L25yhQRVfrLs5F7nrU/photos/Aa-ngMZ41iEUTRDyIkGZmnqNVVpUoaieKcaFIGB0_sUmFfRAbvBvYUAdlTrgQ80-2D2f801LqVzk_SL7ksv6hP4FJeNCxxlu02PXSWaYjAxyXjLVj2VXdl6dxjIjV7qYre9TX3hWU8G6TWfd41xB_--J2HJONYOG8y0WwArUrALMSDNQoNLFcZooTPD4kW7uoPFT9K65cTtzocrffGW1sPNAGfVRQrBcpdgmgbEQwNmh96rYKR4na9rpfewGqutMuPETSYrbIFhrfErNzYyUI82eNTnTGBGCfpcaKEkbBtt6H0_N05SggrZTeWEZqhAzJXzYlBLVqSXmZsiOQRbiDcGVcQ6GCVosMssrPq8q73JNWPliQhYciM4RwtAk7KXBhl168rOUQlQYs-c_eY02e_OhllNyQDYGWZw"
+      }
+    ],
+    "google_place_id": "ChIJMXqN3L25yhQRVfrLs5F7nrU"
   },
   {
     "id": "boukoleon-palace",
@@ -622,7 +941,8 @@
         "place_id": "ChIJaQ6cfJi5yhQRtIDiEsCqjvA",
         "photo_name": "places/ChIJaQ6cfJi5yhQRtIDiEsCqjvA/photos/Aa-ngMa6Dw13tpj4adfTc8sezSVIoWXsC09RN2dH0GskwNLa5e_nflRepbcRn3uL7abNAYOof_6jze66ymwZrnGvGPSb7MOqBl508wSCeJUQQeLtzDJrfkUsSSoxlVsXRp0V722TvpcSlqHdcwNJtX6BBagrQPrP5IBop4LByEe2E0FGmakLeexPmd1jytyjKu0PFJJKCBf9WcYpJtDW-sm-oKdy4QUdzvczGjLBGdiIoquel8sLRdlDuWsMH4DOyTuDJxgLrK4YYPJTa2zyh51s0S_LOQ7STBQe3yniUy93Gwr7YecXK4DmTRwaDx4KThnrw7xLmiDLcvZh47NC2HaNpgojMkeD5PRMmr6jFkgnEG1_rgoj_4WxbmcBrMQj7ScUvFLvqn0uJ-yMQYk7GSsaq7MqvZ_Z"
       }
-    ]
+    ],
+    "google_place_id": "ChIJaQ6cfJi5yhQRtIDiEsCqjvA"
   },
   {
     "id": "beylerbeyi-palace",
@@ -648,7 +968,8 @@
         "place_id": "ChIJDwwhAtq3yhQRCucO58KmTqo",
         "photo_name": "places/ChIJDwwhAtq3yhQRCucO58KmTqo/photos/Aa-ngMYwrnL1M9Npdg9Rg2uUBS3AbLt4kYqZgWjsG0fMIngxI2dAm-VhYEdfU2k4VzKpYZGUrjvGU1VJlZqeFfuPWQIMZyz59hywq3p5R_xiGbdsvv9Fpv-wVT0epwCl6TCE1i2URdpRjYZDW5ruVvAMF5txlXgpPtksLPOAVhG3_ijYjodqr-lg3DsfxyMDI5m8d-HKr1NCOXABr2ubPrkNmg18hyDqlTdWneHqanr1DnAzcjwzX7BrpNX8fd7_hRfcBkSUsfkDsApCQWK4Rbr50qIwnirtbYzZ_Q_AoA_O5QuPyylrZjd1Aox90faPnrpSnwZ4YXzYZ8RXgTi7_WTrCUAD_bXGT_AoJ0dN-gEgnnrEPEBF7au-aYpVrXyh3-FFksLO0wfAH4ak2NcHDmhQYYasoBE"
       }
-    ]
+    ],
+    "google_place_id": "ChIJDwwhAtq3yhQRCucO58KmTqo"
   },
   {
     "id": "suleymaniye-mosque",
@@ -674,7 +995,8 @@
         "place_id": "ChIJMRDAOo25yhQR7c9XIQT1zIo",
         "photo_name": "places/ChIJMRDAOo25yhQR7c9XIQT1zIo/photos/Aa-ngMZ979Xwkwq-0rtuSNxLg7iQ2V7bN1cBEABv_e2hcrkavxCREF3qAlEhdJIZ1bFirQ4b9KaPq76oFIloVIrB53I_lGUPpcPshlNiLMweYWAMcmzT4ibqzSb65BTRMjuvreFqisl1jyhVMvqOajDPUQkuJrnBkOfRwX5sjr_Sr7zoxxe0IDv9es37LEajfWedYNeh5TwOT5tBhgISRmlAF_d6xg7p2btWQO3jmyxV5C4epqGG4xqBnin3XaE92rKJEn_hdaMqe0XjT2P0OzywPN5qsCZCEvk5hm2tpx7Jj4n9GcUN419Tc482EegNy12D_v1XyMVDAMe2yeZIoNdShlqGYKxT-wYaRjr-Pq_WfaXRlNLLOqhlXHMLnl43aM52IloA8lTnP8y-YQbh4QlqmZ6s67s"
       }
-    ]
+    ],
+    "google_place_id": "ChIJMRDAOo25yhQR7c9XIQT1zIo"
   },
   {
     "id": "fatih-mosque",
@@ -685,7 +1007,23 @@
     "address": "Ali Kuşçu, Hattat Nafiz Caddesi No:6, 34083 Fatih/İstanbul, Türkiye",
     "rating": 4.8,
     "reviewCount": 39815,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Mohsin Ali — Google Places",
+        "place_id": "ChIJMRAryiG6yhQRY3aGPG10uLw",
+        "photo_name": "places/ChIJMRAryiG6yhQRY3aGPG10uLw/photos/Aa-ngMZUfiLwtzMOST07EBeVPY8K2XlOPHqguMojxnd06Vtc21-yWXKkYkmRucJDoqXu4T1f3Ox-7b1TRAudwkfgD2COU6cl6YVWVsuli1B3sHUqDJcsEH27ptIxDRSicKeFNo1vJE3cmvEf3H1mxUs6Hjt7-XPm55Ijq2fCCxtVXRAlfDog-OOsY41QDLIjkbUMxbJlRPK-lwdEnXXmBPfZL2G8TCcGlFxIYc0dZdOSHeJlnR9LySwaK16uz8H0pTbhZtQasQUTpY8OYpYpgKPe0qPp0uqVqWxujuEn-gcYkewe7afuqgP98MSZaTG-XkbQ8VdKBKU5kSSMCdcvsOaCIpNmVtFTQjLik0axpwfU-uLoEPgjGBs1lp4EFOwpU_OyTgGEGX-fHFpSCHi-2jf0aOPndzw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Meysam Tabrizi — Google Places",
+        "place_id": "ChIJMRAryiG6yhQRY3aGPG10uLw",
+        "photo_name": "places/ChIJMRAryiG6yhQRY3aGPG10uLw/photos/Aa-ngMY04Ywml7BOwGDzp7knjHO90xfBph13Kdy4-YRF_GWToNfq7ebn0LSuMGpBwsJOh3XoZsXq7PA8eREFJHnMV68JAUs4X8cSO4z1mHA-j-WEOEUtS_xT_1IUMgbA7TIOa0fVZeTRU6b_oDs8em76xSxmWgJNAlh6XtqT_5yk5Kr1sj-NKDLKFhlhjWWILRmNhQHTXhhJY2C_deVX2UI37KIbO6u9Bx_emqsamj3IBh811qxhcfguOuptPrg6DEZLmp13yf3LA_BcuoCKHqncZ7-DO-4XHoVgcWAoYYRZy3YG5ZIBoXtWIN8Tnwd4hXbZOepgmVlgQoAhLg6K2ss9pstQxCwc6g4HZR46pPW4X-rhyk5yej2NYfg1QtAI6OUTnPZp9NKJQDh7tusUVjfbTCsBr58"
+      }
+    ],
+    "google_place_id": "ChIJMRAryiG6yhQRY3aGPG10uLw"
   },
   {
     "id": "buyuk-mecidiye-mosque",
@@ -711,7 +1049,8 @@
         "place_id": "ChIJrYco5Mi3yhQRvMivnqLyc_0",
         "photo_name": "places/ChIJrYco5Mi3yhQRvMivnqLyc_0/photos/Aa-ngMa7iruoBoIQHHUN3OrxsA2SBglvzdA-xtdSdFBT0BAeLqGoZHTATQrPrkatPhJZCqr04f7uCdLL78bc6GjRSvdMt2e9QKtd58SNgMBbNoDAhgmzdIze1EvdYdIGsmlja3duSUhp69uqRfu3EKTh9_KA-i_Xhxnj2dgdyNvrY12oZWQXmp67DHpA5wU9ied2-y3TKiYvhPYmQrsYFjopfMpvw6Nk9hAupz6C470pOqVXaoNNUNlilZ2OfbY5B4onKx-Fs5x_zioMO7I99ukEjP3H0agxdEN-dXS4hI6wKgqTwGoBFJblAE1maaw6_c_QThJrYSJq3cHUeThPBb0y8QYCHC78ow0gpM8M_p3MYXrnpT_VBjqNtmLf1tk_GzjiVRjjqC-KJhaRE21SNftAtDq5eMM"
       }
-    ]
+    ],
+    "google_place_id": "ChIJrYco5Mi3yhQRvMivnqLyc_0"
   },
   {
     "id": "yeni-mosque",
@@ -722,7 +1061,23 @@
     "address": "Rüstem Paşa, Yeni Camii Cd. No:3, 34116 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 14013,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Sevinç Ak — Google Places",
+        "place_id": "ChIJjaSroOu5yhQRnCP86smBM2U",
+        "photo_name": "places/ChIJjaSroOu5yhQRnCP86smBM2U/photos/Aa-ngMbQzR-oCe0ykyIR3PnsmMm3OEmd5hc_kz6VsC0lr7BXj31H5YrGu4fs_T0O3esFSayE-0Kw4nBKDYsF2h7gJK1AD7Ger-gfYLLQ4mrynstAQR7Hx85WyELO11NBr3K05UPDaOiZJ33U4p7aqiJf3tMh34vs6OuHCcZGF2FQ1PaTfOmAdGf1I_5l4hwDAm1Bm300vTEI8ZepUCpys9T3eQORkOKw-Iw3NapFlCdCp0GpCb2rAmjii8sbdWYbi1c2jJwLRrmrmU3ZxOLwEjK2VryIyoIdRXff_QiftwIMx5wH1Zdi1ujW9cifI7GMC7wHZC7X2hDC85vtChSgToRc2XZ6bfr4h_da04hgxI9GLxESE5NtuHvtMQnGX3SBOANatiMsqULsAQkr6OJGcV7yNXlbBWA"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: 虎之助パパ — Google Places",
+        "place_id": "ChIJjaSroOu5yhQRnCP86smBM2U",
+        "photo_name": "places/ChIJjaSroOu5yhQRnCP86smBM2U/photos/Aa-ngMbCEyzAtrZUpZ5k2YFYHfl4QtPdGPpphLHBXRi049jE8wlX9mXcM-6J9PFbZJwhoMqzwjaJ8vXx1REOB4al5J5rsRrgWrQsZ0pNZ4TBAOzKQM-aSgjR9728KGaZMK7XfHhRdWyXQkVe-9YtncFJdw8wIJDGo7x3x7O9pf86rLibjrEacczHabf72VLsn6MRdeuY8KQ-b4la0nQj2qlQWqsCq5hhtY0Qj_3Dp-w0MTvEYPP1SFy4eqYjNI__0OYX-DZea_x8F5YeD528GRR-5YbdfvTnZ2FsL13uuVTMsUpTjR2A9wGZRPpPpKBEJyZ9l2Hd6BO1uZDly6j_kxDV5hRiw9NR2bvxwXPZ3ISBO7qZYlRNZK8ExTq-MgovSwXXQX4flhg675XqlRK5USQq9IJVr0aAfPi_bm9H-zmrNfSxfQ"
+      }
+    ],
+    "google_place_id": "ChIJjaSroOu5yhQRnCP86smBM2U"
   },
   {
     "id": "grand-camlica-mosque",
@@ -733,7 +1088,23 @@
     "address": "Ferah, Ferah Yolu Sk. No:6 D:3, 34692 Üsküdar/İstanbul, Türkiye",
     "rating": 4.9,
     "reviewCount": 12977,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: MUAHMMED ABDULLAH — Google Places",
+        "place_id": "ChIJbY6mqC3JyhQR9gNjzJQDB8k",
+        "photo_name": "places/ChIJbY6mqC3JyhQR9gNjzJQDB8k/photos/Aa-ngMa7rBh_l8r2RLzl8m0vFOKpem_g_qbHTNWya1mKiJ9WLVNAcGHff7nfEcMl4g1VaZcJfjtpJpDasYoWt2kvIoUkVO_BsAZJJfb8yles1SCT67E5aCni2KklJfcdVnxczJEX1kPFyUugKvn_4zUV5IwzDa0LnfAcdcxLZXs7uHFBZUj_XMth-kqtiy8wxOTtsCsAhdIqbaQw0AfSn3DOgbRM4Pt9Pr7cd8pvlQEXM8Tc3KDwHuHSrD3Sc5aspTfOQFK3194p3Q20unw1836zQ0hqSc5dG05Z1SgeURlWNO1CBtxf8yUb5bnv1_1TuPyxwUbIlRugbcvEqEKQgmLi0Zl-Iw9miyKb7RyjUnP-qFWEehNvjaxoxFShYfC3mzpkLd1mcUHYYmkD2EZOTHZBP3WBLws"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Meysam Tabrizi — Google Places",
+        "place_id": "ChIJbY6mqC3JyhQR9gNjzJQDB8k",
+        "photo_name": "places/ChIJbY6mqC3JyhQR9gNjzJQDB8k/photos/Aa-ngMY0BEv1VPtun9sZ-OMyIszWCWpyWxaghyFhefNBY8eeEW83VUEichwJeVE0TgtN8v6b93I0MsKJM1CYzg9KHPbXG-y9eUOnit8dY8LwLUWyT_Mk77BYIe2pnLrTszM96Vh6y_JYoSlm7A1CISbKxGT3XOEjmguzawGw9s1iaCo7pbO_vyFLWVDnRB00iH5FgwMpR2OSquireBNpIQkc0dmc2SEuML91lB_o1kZ-gE2FxYhVJjCGsQwq5464R3tM64fWrkW4JcKUmEYDd1ziCtciL0B0Fhj3mtA40J74OpDwpHcijh4J1JzGgn65h9PNpxurro8Qlj0Y1sSrScAKHEgU4Pj_aiDF4AGmrXc6Lczh-PZZjyNzBWLa3q-L-kBZIzd3ktB0Ep8DAgP2RRax53w-ZqOPvEw"
+      }
+    ],
+    "google_place_id": "ChIJbY6mqC3JyhQR9gNjzJQDB8k"
   },
   {
     "id": "eyup-sultan-mosque",
@@ -759,7 +1130,8 @@
         "place_id": "ChIJF_StIdCxyhQRXV-7_f2jows",
         "photo_name": "places/ChIJF_StIdCxyhQRXV-7_f2jows/photos/Aa-ngMbllwa9iqRLDIJrgEVoRQ9VYx8oc6fuGQdgHyTXPis3Gdq4u_pmncaucJ49wok3_XxQJmHvziQgOZ3n0JqoEbFCxd9Mr5ZgKBhFU_2HZy5bLkr4yX7jWYQxSpt2cv3WBLK7dUNFXf2FohZiww-PKe2H7-CXB-9XusN9dd9qW8hY0n5_pHI7t_d4O3emzM-bWH0bRXjwq1SRRi8Gu-PR5OH1HjkNtQyqK7YGsIfEJtxJ4qDSXBYsxtCFKA6t0TWCmsITcW-PG1SdHAMXoL9G5OsEdJOu1LvokOBv55tZAoqkwUOTgTrkoro2c2Q2rqeerx4_u-kxLBlWRvkQLvEWr0lNmPUrFt7-_KexiHTk49_8H4c1VuNGeXd7dZg6dNFIO1euqZ1lJSs2eBGVUI6Thybt2w"
       }
-    ]
+    ],
+    "google_place_id": "ChIJF_StIdCxyhQRXV-7_f2jows"
   },
   {
     "id": "laleli-mosque",
@@ -770,7 +1142,23 @@
     "address": "Kemal Paşa, Ordu Cd., 34134 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 12334,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ron DesJardins — Google Places",
+        "place_id": "ChIJU54Ym4i5yhQROTLrjRg3fLk",
+        "photo_name": "places/ChIJU54Ym4i5yhQROTLrjRg3fLk/photos/Aa-ngMbWjniQDuotXGiC3WWPHL0Qs6mvbEzJna5eNs6qsKdciACUtPW8iOLBDpkNvV2ZCK9gMqG6089xBRQoyaclbZks7VHTV4LUr1F0vO3JoEvZfbAM5CiFTU1k0DqrjzIRRRJplkE05ssW5tXYI3-5Y-OnbcJem3_q6UFvMqZc_9lyTecShmoryMndO0EmGF3bQSut08JE2VZCg8hEonEHXAxFZtDUkeE3n-PJx7wn6EV5cac1ximm86KdFVZR4lzs1DM4qVi1Vby7XUf_9iy-XQ35XTYAyWFa_bQN69Q7evHCJCsRr4U8UD_0x2MbCb5hUhyi90QK6nxegO9jOtZPSo6A5XGQ8PA3z-ZjiUPHWT0PoRU8Ovg3c43ewx15KmWhULPacXtBZGYlXawdRmiaDOSL0YI"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Özgür — Google Places",
+        "place_id": "ChIJU54Ym4i5yhQROTLrjRg3fLk",
+        "photo_name": "places/ChIJU54Ym4i5yhQROTLrjRg3fLk/photos/Aa-ngMZw8--i_2QLhenVBBhgvv7X-qj0TA6dpsd31ZB5s9MkxCmTbY9OhzzmoN0EaOxJ5pZ3cjLF1B3Zyrtp6XZ2oc20wfMaHq25CDH35vYIIxFbsr7Xgzykxk7_Kr3dQcAQRYgr4vn6knuuv94nfSZtzwQrpmgh5TGYgu1haDCE9PoOmpHj56ls2K_pCNAu8wxUSh393iRhtFqFgzWxGjL25kQZqCuHG2DD1eAKmP4OGWyQTn-ytFDzfZvq2c4d1hqKbjN8DTtPwcxK5rImd27jl8PWbJPkYdnHi5RCdG63udoKGk-yxt24tizFDg_bsQerX-uzl7PwpGntDN8Dp3OoFVr1I9LNRN91Y_rxOj--kSVCw_GSA4CxVoeHNvbLnugy07mStE-b3gPAk51x1AVA2_Q-9mNxOYEw3w7f_hDgsOne"
+      }
+    ],
+    "google_place_id": "ChIJU54Ym4i5yhQROTLrjRg3fLk"
   },
   {
     "id": "nuruosmaniye-mosque",
@@ -796,7 +1184,8 @@
         "place_id": "ChIJd2yFq5a5yhQR1x48hrUXuxY",
         "photo_name": "places/ChIJd2yFq5a5yhQR1x48hrUXuxY/photos/Aa-ngMYSbl_QmgmJiNLfw6NzJabOGhCRzKCo85B31pV2PmChCj_JLz4b_l1POOgntFbBXMq8i0wBgXC_8J2f1Q7n2r8exGZp58_P6J5XFL0N-89YfDhkYOqy1YpSC7RFcUEMxNz7-5mZ9InPhkwAVS7ZwEp5a7ZLZ3d6OkQ8yFAl9MluuijJKtYQk4Ft9kGtFRLkrACIG0Nc_rW6yJ4zYalt-eY62uEzz_2vxiAT3u1SMSij_244MJ5XO8nUecGGjiGj8Z_jzjA54IhUeBsYWUkWZxBWsKjiRKoiIoIuY8vWNPOwBox1rVGhnHKfAIypPIJXjdAOixNUCHgl8GNIyCgAv2c66cX82oJ1BfsFAf05VbOGsicQkp7SC2bwVhfd-ZgK1DdybeFEEoUJ54ydYPWPtB-2jbWDW3w"
       }
-    ]
+    ],
+    "google_place_id": "ChIJd2yFq5a5yhQR1x48hrUXuxY"
   },
   {
     "id": "rustem-pasha-mosque",
@@ -807,7 +1196,23 @@
     "address": "Rüstem Paşa, Hasırcılar Cd. No:62, 34116 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 7465,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Çiğdem Işli — Google Places",
+        "place_id": "ChIJqUoa9ey5yhQRdUxypVCNHQY",
+        "photo_name": "places/ChIJqUoa9ey5yhQRdUxypVCNHQY/photos/Aa-ngMZIg_AHkZ_SeOFPVsOE0xYfnexWpQbGi0uGKADJiO_LQSapzZVnpEL5tfe52ZeidRvc1F3g6kRXzPK2qRDelnmCC2NCK6D6mjug1Gi4uQDPxbQ0rTIjC1a0DdzVSaQ61Zeyq5KcMt4_tfJvTy5GV3PpVoqaO_Hu1haQQ72Rwvf_Hk47KgRZGgiLDGz6BKrjUVm2D0BRHTvr5shbEBbHDw4hmH70pPk7YuTsJF0ZTQTniulAVYeA31b3C3bzys-0piWy1RFLmc_tuanbRMA5AmFVTkNzrWZ5c-oH6wAuaeuPmBszaIunT5lQJARtf4NC5w5s5czOhg-IVSQDg3p94OYAEyhg1LnrQSkPil1wd_QKyJH5O3xN3BzGjlLgUrMnOVlxS7sWVfzdIb_RxqskKwh_0mw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ayhan Güldağları — Google Places",
+        "place_id": "ChIJqUoa9ey5yhQRdUxypVCNHQY",
+        "photo_name": "places/ChIJqUoa9ey5yhQRdUxypVCNHQY/photos/Aa-ngMbWXSbW4TBkOI4jgu-eT3JcAiHiEpFPpHYreLOHV4eIpUvQJiEd8bgM8lXRKFeAAXU28qz50-YpAZQuUU_JJRozpDjmpL8mWSZr-RUizKgzLaYxGR0bhocVDCNxv_zxsTiwbRtfodK8_uoNjtRWFgcH3GbkENVuNibli1e6LZOjYjtaWxhBfy7QUv3ixuLd2bSiansIz-CkYFy-Xwk0Ye1Tw3R7QCgeDyYgh9O9Z7B6tTM71_Q-FPyS9Kj1VhWoaC98Z2lsY-R41bZoBS4sD6J7xpNaF67xeSKLtyngu0c3yHMhzYlSzqredjEt9skkmzJt5DE0PNPnbo9WzbW5OEgTK3bKIj22Gfzpu0_1lHJmagsyd7DXPmytMsJ63GGrvJkbC9o7he5cDjPfYM3izn0h3Q"
+      }
+    ],
+    "google_place_id": "ChIJqUoa9ey5yhQRdUxypVCNHQY"
   },
   {
     "id": "mihrimah-sultan-mosque",
@@ -833,7 +1238,8 @@
         "place_id": "ChIJY9-K2ha6yhQRD9YdRfzm9zA",
         "photo_name": "places/ChIJY9-K2ha6yhQRD9YdRfzm9zA/photos/Aa-ngMa9WpwMBhks2kuZ7ey-OQad4zcUSjAwQKTShqWGvAFBO2S6Yfs-whbbVgQfTTRGjA5Je0UGygI6KLjHvvneX-CWNvX6Xm9GbxQSgplwwR2oCOd7MkX9aQFBL1yoDNHmbHWBtUqEO5S_uckmluTZIfsqLdZOSLgvlfhm1dIj4rOaQqmMLFST_KrGKU1H9yLGhfRDGr_jsxY_N5qQuLghGKp-ustaSTE7C73RxwcAq1qCRhrHWEFLN_nzTwufrKNgr4gdmGYr27GUC9tNGfoSFH7UrunYlfyACHbsSrAmw5-y7HJYose6nwkXikgcdRWju6Is1raqsXFazBD4OkJlgd5XTEL4NU_C6DhHJgG7JwKfpFt4jXKjHu4TlemFSYeGzpztHq8_YNDk5BxyAt7KyAlZvq6nXBQYZfMfMN7GouXERg"
       }
-    ]
+    ],
+    "google_place_id": "ChIJY9-K2ha6yhQRD9YdRfzm9zA"
   },
   {
     "id": "beyazit-mosque",
@@ -844,7 +1250,23 @@
     "address": "Beyazıt, Yeniçeriler Cd., 34126 Fatih/İstanbul, Türkiye",
     "rating": 4.8,
     "reviewCount": 7445,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Larisa Emelyanenko — Google Places",
+        "place_id": "ChIJoZIy15G5yhQR-hbrXFBPicU",
+        "photo_name": "places/ChIJoZIy15G5yhQR-hbrXFBPicU/photos/Aa-ngMb5Dzz8z6UsKKSXpq1oDYbOLYwhm0zlkvbQXXRq2a9kNGDNg1KgQZmHYgc7qh_upNac-MD_OX-kokdfeyekqnSESSJyz1CiyWmOPNhiWnlKqbWBPdVbtLVbvNshmV7sVxhDYVZIfM2NO-RLyFJF6OD1L4TKDIC0O7osLe2qWzW_ATHo57o3cp09fETtMT6opwDWvbQauSWDqrTrhc0bZIh1p90btrSkTlfaivzfJAbFdbYv5E9Uu4AU7qxkA0AG-pheCU43YYYfiX--Pgr5vVAWVtfpICperbTKgdvVKgIvugzRLNUrmwM9Y12YWuBEgO1q9VZsgtWCH75hc1D16cur709j8rx0n1MeEumOrKmzw07ZnHJiYopsXJXzgGwdu_6m1pw5adHxFP09VgKFqc0MEGQ"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Stefan Ciobu — Google Places",
+        "place_id": "ChIJoZIy15G5yhQR-hbrXFBPicU",
+        "photo_name": "places/ChIJoZIy15G5yhQR-hbrXFBPicU/photos/Aa-ngMbtla9l4QGQ1io_fgzWKOyzHEu7P-UBfY5c_7nW875WQUcGPejn7aE5EzTPAeTgxoPL6ysDan3HW_cSE_4Akh1mfBJ3142ZcVCFVD2wmlPicQaBuNNin5C3E94nlkX-BfdGnXuBPcHimcx6Gjjj_rnVnXDuWbqsF2JddsIA7tgY-uLE6zKMJ3pvIWW867JcHf4iQdLBYiiPvMv-ty3rZt5Z1zo3EEN12tA50HoYHKvQ3zIJpVkT3LHBcXPmZeksgIhHyP4zphL6yMY4be3svr4N9gGCDpa3uYVkePTa-gBUWW3NAuYR2ntf_7Ggo0rYP5SiCE_KyYkvZ4IsU7Mbz7nLkfaGxOzBpfSXYgaKDHHVrSePd9cvc4GGsbD4lDNjNiaoc-TAir3T6EjJwrRh_WoOFob7l7AoUhrsjqs1FNG4Mw"
+      }
+    ],
+    "google_place_id": "ChIJoZIy15G5yhQR-hbrXFBPicU"
   },
   {
     "id": "sakirin-mosque",
@@ -855,7 +1277,23 @@
     "address": "Barbaros, Nuhkuyusu Cd No:2, 34662 Üsküdar/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 11442,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ali KILIÇ — Google Places",
+        "place_id": "ChIJE0xawBi4yhQR0lZk-ENMTko",
+        "photo_name": "places/ChIJE0xawBi4yhQR0lZk-ENMTko/photos/Aa-ngMYJnNPh5xLwTEVRSnm7apdWeySJehkzH7Oji2UDml43CYnh901BiO1VqSjiFlUbKicN1iC4_vt1mf4B1l6CGhV9CQ63B-mRlBnjJ2hIzreRStH5kfM4DehdzBFg0Mss30CTXXlNPGSlSXYY-EGj8p4567ab8Kn7_ml6RM4irNeVRklkYKrTQkh_21HXfpoTsfALWqgHPMMSmThZ0cLpzl7-FgBRQGcsKCMoId8tIwCfP6cwOFbjWKxETuV7I1RKo5QhkAu6KLvqvV1jbPSEkPi-HvMdZ9vB2Jsf5kBMqCpBQfZAS0iegq-y-jWBjDsqFByLglo1nKcPARXfJ7bSu-fBsQgMTw9lNm3LKlKFkvYUMv_873Ufo3qE0dqLXWhUxqoH57-SUxMuS_wFJ1ZFOvLxbFoKDpc"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ramazan Deniz — Google Places",
+        "place_id": "ChIJE0xawBi4yhQR0lZk-ENMTko",
+        "photo_name": "places/ChIJE0xawBi4yhQR0lZk-ENMTko/photos/Aa-ngMYpOgpTWtfmtnpzePPGXicmPb3Wke-IKzOtS3GEQ7XCrOh6eCYl0fTbt7WKfefA26iSdO-dq5pJ8qN79TVAANOIW5pGtqE3JezwgANKPXvZwrPGBw4HIiEqdo5k7Uvx75MJDcyJfDLV01uCWvJTeWDEWXlXj0qH9IPp7Gotv1QanHA-Q2t4UC-xPzIzd9Dkqy7ObNi_Wrch9mO3OFf3PTZIt8ggBeKMAWYe-PqPh__T8zOXRjphWb683-CW-sCAs52aqOLO6l0r5q7ltE1QbPGKbYnanto-Xy9bJJKl8mtFl9bDqNBJtKmkkBC7eao4ITdxbEAHdPrK8IvQR8lsafzLINeoYHC-iMo--ULJ3ayYk_n_v1sqv9RQUpb0zAOyfStSOtQt1wZPYUNyio98R3sEeck"
+      }
+    ],
+    "google_place_id": "ChIJE0xawBi4yhQR0lZk-ENMTko"
   },
   {
     "id": "kariye-mosque",
@@ -866,7 +1304,23 @@
     "address": "Derviş Ali, Kariye Camii Sok. No:18, 34087 Fatih/İstanbul, Türkiye",
     "rating": 4.5,
     "reviewCount": 12366,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Berrak Aygün — Google Places",
+        "place_id": "ChIJ2cMuRRC6yhQRDNb0n0-3SXA",
+        "photo_name": "places/ChIJ2cMuRRC6yhQRDNb0n0-3SXA/photos/Aa-ngMZ8G2ho_5R4RhHISaKCvMtMPbClbcv3RNR4mp5VYR1N4usb9aydAkgSLkR5oAUcygfAEY0znfV4vF8BnXzqlZAyMv7rYK-ZRRzUDI6Bba9B_uAvEr71fqWxsOQFlLMXr3oTTuEDXXY0nFzQlwKdxPykhPZ8qSNcrFUnEms_nkMAo26L_i_-aKr7196-xgWZ5LjZk19ftFuDgcqMBn8HrnrPUWc-YC9GTuA4WtclFLMTh4xBry_k6op2ijDhpDViS082zbB4CDxAZn5IB9HkV1oABOS3hWhAKAUbtgSExM3dQpdJiQD8xu33-dqMJn3Xuv-kUFrWbdJs5nZEi7Bod7Fnm6c1_2d6h40mtPRmN_EgQK3LFitKDyWcOIJXJPnPdRxVOFm5KXNz1lVMcJ9He21ej24"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Jorge Lomas Fernandez — Google Places",
+        "place_id": "ChIJ2cMuRRC6yhQRDNb0n0-3SXA",
+        "photo_name": "places/ChIJ2cMuRRC6yhQRDNb0n0-3SXA/photos/Aa-ngMacFGPSMQjZPbsYNFhJ53237QTdRPmz8xO9k7ym0WxPEgttnDER0hF9frl7M61YLiYD_5AIo-x-4WF4Cj4Yjh341UAqbRayc1jeXKdpzLNDXMhfyQm3IK8fSWYy3pATQBYWPvPbiYcU-S2y3K6sOcv8DczUNHa6FwYK9pdnX5EwgJQyQK6qN4KnZ3bijny1uwrfkFsDnf46cyk4mfrrnHIvB9a1dbRnhk1XQbIw_BMhOZcC7AhPVmvj0qieLDhgFxpCe3RRCQvlQ0NvtLTGvolHRO9Qtt503GOz6mVjrHo5xGip1_wx4G3XZENgnuK0ZXYHvPhiEWPophsAK2stIU6iDa3Jg7GtGZ90CEnp3VZWxj_CwG-QhE3dnnoOa6tu7YQdoxBIdvexRAhvUupUJFPRZHMq"
+      }
+    ],
+    "google_place_id": "ChIJ2cMuRRC6yhQRDNb0n0-3SXA"
   },
   {
     "id": "taksim-mosque",
@@ -877,7 +1331,23 @@
     "address": "Kocatepe Mah. Tarlabaşı Bulvarı, Kocatepe, Taksim Cd. No: 1, 34437 Beyoğlu/İstanbul, Türkiye",
     "rating": 4.8,
     "reviewCount": 4912,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Sameer Ahmad — Google Places",
+        "place_id": "ChIJZdDkTWS3yhQRd27JRKoaOD8",
+        "photo_name": "places/ChIJZdDkTWS3yhQRd27JRKoaOD8/photos/Aa-ngMaSpUePZ8y2xe8TwzS469KoHFZoU7-qanMXgsuLxpovQtTs1ebsxAmGlUsXQ-atpFytR9obY-K2_k6aezHGdiTBqMBogpV3R8KIlP30ng8Mm5TIy4W_yEalsPVU3CRmBlHUQ3NZN9h4LK_eseXlPTPhVulvotHI-gXW69fq99kvL2-_DJXP8nAqQZLJWEceRgZHJsfnwOMXV7jSwKb_V-ME388ExOs54VB0CPHD8OqomRPnrz9Uk_d5Cb5uU6iQnyfeb_wy6dqdPROgBBGw8Zo_QjxUVeEeWbOchvRcOg6TIDc0tPwhiXLTZnXkStE2d1OSKuGUqTDc4hwK4d2H71upaFPXqu4BY-BA6RU0qIW_hZgMr6vAka-kw4EIccVbFz8q7NQjNsrRukhUDlf29coKGBJHcrb043tHO2mGvqRpqg"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Jado Omari — Google Places",
+        "place_id": "ChIJZdDkTWS3yhQRd27JRKoaOD8",
+        "photo_name": "places/ChIJZdDkTWS3yhQRd27JRKoaOD8/photos/Aa-ngMblcFjHnNHbL6v3788RyLECYnCl5y4rkPZPhxUxCzCPitGkjLQVLNhmDzxS5xiKO-7pA3JJOAznFwX1pWMmW-fydSbo0C9fh5AgDeK8hdfbwsvxCCUMBQwLYxX2efxPAlpP385scZzKpUq0j1qSv1efnw3lH5ndnIfn5gXY1zjTe1qp-EEEG_YzoTHi6f5PzuteWx5iQzWzxX09EAkNIXkjba66_l2ZGMQwyRbovbyw-GR24o_41FoHtdZSe_3cFhTe5I2iqwcg7QUvbzPwYdFAaOfXMtHGRRNT6yOSi8yDhs8dvUyOjkvuKOXc4303b6Szz6OGdYjN3VEzZH3Twg4gjW5vOOKVLMEjLvqBfYji7N0E4UntzTkrYTL-WGQ30q3iGFd3EcGzDXWO1NW7YNoI4zoLnBo"
+      }
+    ],
+    "google_place_id": "ChIJZdDkTWS3yhQRd27JRKoaOD8"
   },
   {
     "id": "pertevniyal-valide-sultan-mosque",
@@ -903,7 +1373,8 @@
         "place_id": "ChIJLVdAAyi6yhQRN8-1RnV25pQ",
         "photo_name": "places/ChIJLVdAAyi6yhQRN8-1RnV25pQ/photos/Aa-ngMY9uuKEn1THAwp2TcXDfzax3lFL--c3iYa4C2Ua4I2MWcv8nZhkADkrQYWQTTZq-ENy31fzybZn3tKw9P7mwegept3DU8dkJls9bLaen_HPpoohXlEal6l1iegRrUSvlJRZhvwyo97J_5iAWJw8Hre4w5yqeqkYPmNE9hxgVMYGDX6RbdgDt90A4_5zEIbFJUYw1tjAS72qJ410i18bERlKasfAfkZCP9oZ7WHuI03IZbviXzN5GlxtGzUocWL8goHG8OeiHjQy0Zk_wQLhmxAKV0CFvZLxAh6lENg1XoehHJ0XkZbLXMreKsIAPPPfFTXuWc0dY_GJUhpLieBhN4ih6yJ4i-ir_JPyFyN81Ti2qlt0e04rCcy2MSpy9Zej4Qnuq1kyT7MYcl3nUt3UqS-kQRtxNV8"
       }
-    ]
+    ],
+    "google_place_id": "ChIJLVdAAyi6yhQRN8-1RnV25pQ"
   },
   {
     "id": "dolmabahce-mosque",
@@ -929,7 +1400,8 @@
         "place_id": "ChIJF8FWaHe3yhQRLDKda85HDrw",
         "photo_name": "places/ChIJF8FWaHe3yhQRLDKda85HDrw/photos/Aa-ngMZV0mab2hO6NhdIQhPQX5PfIKcXQCrEToVI-zMirUUPxnXlz7Yt_DP7a9ZDP0Y72kB4NfN3Vc0P1WhKd2hwnc1wKyx1c-suVKgGUO_78v2ZmqiClKQoj_Xo5vp0f3U14ZatyVlXZJ4eDMSq7px_ktsIsYtyrbmumHeeoq0TDrwSX5D4PHfZS7v9vRrZTL5xOnFXQFgV4hpwctylZeYpOoDhYn4aHDxBe6AIOjmdAMzoymJ9lBT2bYpg9R4YdzmNP3EYKWpO26L0FhF6GJXsxoXJavcuVCtMxkJhIJlOBXHbX1nbirKzbG31iWygZAIJ4RzE1xagatYZOoE9XYr1WNB-XtVrS9vevGEdBQtRdH3xowfsqxATiQ-rvonfUSnEXE3bIIu-RdUKW2Z8P94kZhqD7bdixFw"
       }
-    ]
+    ],
+    "google_place_id": "ChIJF8FWaHe3yhQRLDKda85HDrw"
   },
   {
     "id": "sokollu-mehmed-pasha-mosque",
@@ -955,7 +1427,8 @@
         "place_id": "ChIJ61TSxJm5yhQRur68GmtFOJk",
         "photo_name": "places/ChIJ61TSxJm5yhQRur68GmtFOJk/photos/Aa-ngMYbETg4abjoJ2WS4mJpgPzVwjOmSL58PWl06fwbbJ1eh54bGiAfeTM25jk6xO76O2kuPoO6y8v8fT8XqSKnNzLwMHvXV9wfygMZgseMdEhM-Ar3LAsgw5tTYErt5s69fK5mwphVIl5MBqswO3Ui-UOsDFui0OGk6l2QO-yqa2U2Q25E0knJXum-Bq9av44skxbuAE0QplvmWjNXQRHT-Xy1xf6I65XL8UKlOnj_gALgp_CchS_XLHSnblHSBykFwSzmzU9pjqxuJDArnE_aaGNR0zOSuL8HfodkIhKdd_zDceOL6G0RZ3I3Jbt3W3rHuU4_6NjquyhFtCNn-HEHiy8MPn6oHRaMwoGk4R__2gq1DzBola1GrZJYjvT1txLnlz4am6NZWfAscjemK1Xh1mqsg-M"
       }
-    ]
+    ],
+    "google_place_id": "ChIJ61TSxJm5yhQRur68GmtFOJk"
   },
   {
     "id": "yildiz-palace",
@@ -966,7 +1439,23 @@
     "address": "Yıldız, Yıldız Şale Köşkü, 34349 Beşiktaş/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 5173,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Muhammed Candoğan — Google Places",
+        "place_id": "ChIJX-tbEr23yhQRacyeXms-83o",
+        "photo_name": "places/ChIJX-tbEr23yhQRacyeXms-83o/photos/Aa-ngMb7f2UW0R6c1owxRlme1rXdisvCy_6EG63mUWqxFX50BNpn0b8or-1gkbQhrhAggPdU8tO4kQdvypWg_032ZlaZzfv2_7nao-kAHo3cbHfMvGhdLgFi8BRjhqa81nzH1DCE_2HPCWWXl2ROP4qOGAwo8kMhL8EzxX3V_bTpRhLcYKzaXF5dbtlmd_Ac-kpWEJnII87qFlxvrqhzXVINGxhOlaJnbysvSaKj3YFB60Aa5VKpB-6RhN8OMfQZ9n-I3Gq4tC7uCVaxtWw1jFIEM4xrIScYFJNCVDzOwQdGaTeRGtU9mFahjcVcnL-mus-wJnSEECUoDd9oD7_pR8ChlAjYtoArGt3dKH-8CEU2gBCM5IpIhD2SOo-fMh9O9Xj2rKT5G4HwLL9M8R4mbrLT46IBXDs2ZVEATpPJhuI11_5D"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ferhat Safran — Google Places",
+        "place_id": "ChIJX-tbEr23yhQRacyeXms-83o",
+        "photo_name": "places/ChIJX-tbEr23yhQRacyeXms-83o/photos/Aa-ngMY-g8xiBDS9k_9w16GD8MlMRMr8H4UTRq9YhcQqHdww6xy09TUgFn7kOrGZvW6_zXQvFf9jJ2aGuujLlwa-Rean2rnOWW5eejqk-6eAmcs5KBWiw3WbRzw4h1HLBVAHwc1IB-o8x0WF_8ACMXQcC12EpyZW1A6ApquU8JWCVU8MeIAuXiyE_eHsFj_zSre2GbDx4586_IxwTvMaKm216ijXCwasgs-j7swc-1gL47ne6rVmb2uqcIilm8fo5jqvxnjU6689TUf-n8Pcp7vg2Q5ZtsncZkHCZxLZ1jZZdq9IxPQIbBs62PzcJnXG1mV9ZmAWPxiA9yPzAZtg1FtDPoaUiboC3JvTwidCo7oRe42gc4vwfXtCgoKBKat7KjiAhwVN5r9AQ0vlAdBnJme-785S9rXPi0U"
+      }
+    ],
+    "google_place_id": "ChIJX-tbEr23yhQRacyeXms-83o"
   },
   {
     "id": "kucuksu-pavilion",
@@ -977,7 +1466,23 @@
     "address": "Göksu, Küçüksu Cd., 34810 Beykoz/İstanbul, Türkiye",
     "rating": 4.6,
     "reviewCount": 8170,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Küçüksu Kasrı (Milli Saraylar) — Google Places",
+        "place_id": "ChIJLy6DP_TJyhQRR1WjKa8tM94",
+        "photo_name": "places/ChIJLy6DP_TJyhQRR1WjKa8tM94/photos/Aa-ngMbqtPYk6zP0nGCzs00LIrWDLF_DjHp1EoY-u_XlS9K3eSeIGaFa7elnXHa7Nmana0kSimxzCJFLktohUd_fEZfntZ9HZMyIOn_RyyqdooaRFKhtXq67HWA0k1YtSF3dN2gzxqWygN8nxwD5IVfbqm_qB-geDJKkutqwHt9nunhVBN7nw6oiSKCWK1J14EidCE6GX5qSsWloGCb38GINZ01i2q-paMp4eYzxGcRx9enJNAPLJoUwY1e24iq4RKQ5XFj5Ni3Tt87yK2CjuGBLO5tMq7olHRu8PyXOIuJzcdwTiiosD3LQypTNEDU_GlzJOidB9PbkAyU6NBFkLVVmDkqbQK9Aot_XXWGila6_N-DIAk7rzdM4aMqS5aiNj7A1_wnkS19Z311UCuFM51oOHYWpkWHhsgk"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Tevfik ÖZER — Google Places",
+        "place_id": "ChIJLy6DP_TJyhQRR1WjKa8tM94",
+        "photo_name": "places/ChIJLy6DP_TJyhQRR1WjKa8tM94/photos/Aa-ngMYnSdeDiGNFi9A_sBOYCtzsNuhpTj2FEjLG0O26pfMG94rSP9Id1i8emrhDHglYBG7xcX0f5eHjaR2mYMdtvbOqmaBl4zGMkECODuFP_nd0mrN4tjYnL2zJe7qru-4-FzGFG0tdeG8cRXG_tkCcYJanrngkRvSOt21frFt2oG15Kd9t1Zv569UH1Lbnt0O-fStZp7XosQ_bmi8y5JkkjAe2OMJ5vySIQ8knQgoWy7YRe5CzWC8l15Ib9lKFmnsZ7qDqCca8ToETkJadFBHn2yMN7yX_mepAdRKVP0ZDjwchm6ly8jsJnYgqr91gP0Gzf78ysOEPA_9RjxrMtaid_gTITjkgLMukyPwIAkSKI4BMxA5_K3cNXT9-KX3xuBpDAxQJzAueVO6qP9X8z3CrxKGoSzU"
+      }
+    ],
+    "google_place_id": "ChIJLy6DP_TJyhQRR1WjKa8tM94"
   },
   {
     "id": "ihlamur-kasri",
@@ -1003,7 +1508,8 @@
         "place_id": "ChIJx22VoKe3yhQR2NW897PLIDo",
         "photo_name": "places/ChIJx22VoKe3yhQR2NW897PLIDo/photos/Aa-ngMYaHjnGbGvjfoxRH75NnwN2TpzHE2YkqIIywvrgKP-2XEfOgc2O4epVDIYj1_Ns1FwYca7fJb5uMw2ajQFLLJxJbQCCse3iLzSCiu5WvCsMjHdThzQMyuvHSNl2-LZxlgzZUOY3TfUV81NFEawuYH10U6am34n4HyXry7JvB3BaR7s28_JXzBsc1HY8gkRC7xPPBa5TiJFrY2OrNrpWUM352oFNymJXb8jHV3WwkMtYJSk2JedPwIf_wZo4XOlaKAjDgASKf7mWclEcWw84ChO-3QnWFWmNZ5hN-PcLSb9Pd52K1B4TQcTqGno73GBMPOl3Uut4c1Ul_sDyiEdyagLPcbFeStHpVPXeg-ACMsHnr4BuWeVStr6TbotYWQ4xsE2fZDpZMmnSJNTEcu-x7rJRN7Iq"
       }
-    ]
+    ],
+    "google_place_id": "ChIJx22VoKe3yhQR2NW897PLIDo"
   },
   {
     "id": "beykoz-mecidiye-pavilion-national-palaces",
@@ -1014,7 +1520,23 @@
     "address": "Yalıköy, Beykoz Kasrı, 34820 Beykoz/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 2797,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Beykoz Mecidiye Kasrı (Milli Saraylar) — Google Places",
+        "place_id": "ChIJLeHIT9vKyhQR4wd9XDSWGlE",
+        "photo_name": "places/ChIJLeHIT9vKyhQR4wd9XDSWGlE/photos/Aa-ngMbXEVCJVyamL5ED3mW55nMT1dxdInrVgxQcvTO1xPpbZMmOCVRjk0d9yxKGWbVW5z_mZ-noY-B-dmFpeWQ_RRrAS4EXDSxqMHLHEzVROQ2YgKAwDgfFLBHaUcMHve18RIKT1MeOAErMgOCt_v4N_KDWUc6A3muiujqgS7vSddGjhmgdyBJGOmn-VpuSOk-avlo7Y54pKi9Osixo8OR4LrKbXozit-BR3zTMM1Vok6qgA-JxIT_qhUI-ZYo4vjfrkrr_iZhRS6Fx1HjNSl4SB6S4WmuVvKAkg8TKnERyRSZxfE5cLQeL7VnNUFt3ooTMw-VzxMBDimWpmo4g33A3c07EbiHoiEPCR2Y38SO6hTOeSxIJmQHmL1maYG7VU7YTLeAaILPKURW9WXWNgieyY5eU9DIr"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Özgür — Google Places",
+        "place_id": "ChIJLeHIT9vKyhQR4wd9XDSWGlE",
+        "photo_name": "places/ChIJLeHIT9vKyhQR4wd9XDSWGlE/photos/Aa-ngMYiBI8y2ap_SFpSRACEH43OSD3-ufZ0EgCScrQPO_yhqOGI7l_S_v7g-XJUqMt0fIy7kVoi9qkF1NA7Ataiw55syUby-NIAYxaULP61wRanoAdWV89OfEO5QX_LfTtU3T87ZcwwmqKITqruU6RALUzpLarhDciBY8izZVylBbGnhWbnD1PhCfkcXabfHzuHaLn4YORtXQpCi1utfA2j0yDPrhrC5YHCDroiLPSgEzYnwdVdOYtqGNmTJPB0redLeYRsxYwzpok2DIFr-Wj24iyu8YPsQcxjjC23gqcwyaDLglVewGSNTRFwD4dZE2AT833FC3QFqbsRV8sifOSMolU0uOWxvQm2xMvRyhIaEb-po_-I5Mt8o_YVnvkmrf_Aa1nPsNN2WglwW6NpnVCvpPAREUKcYxM4-_5ayvGCncQqwQ"
+      }
+    ],
+    "google_place_id": "ChIJLeHIT9vKyhQR4wd9XDSWGlE"
   },
   {
     "id": "aynalikavak-pavilion",
@@ -1040,7 +1562,8 @@
         "place_id": "ChIJK401fFW3yhQRmn7nub7KCU8",
         "photo_name": "places/ChIJK401fFW3yhQRmn7nub7KCU8/photos/Aa-ngMaTVQjvzYjm_HSVHY-xhDfo0tS6VIjo68dCODtPTNwWW97s8lb_6Ejknx9GmlHem_do6MAAwFbzW7RNdlmS_gggmL2XlERaoYY96ulAAGWOKyDQab7msVDh68xOqvPGMqn2OFWHIxI0VBMSYGPwnS8D54GSFGo2ZofEBdQLhWu-tpFfki2EiEb3sq_rtPABPWhfOe86j7Rjn4LpooplgGxS7tT4lwT1c2_LxMDyKC2snaf04I1J3uDh-NFYRNqOWbjQNhzPfMlkn4JFr97G3qvPmX3CCIniOG51Ev9ypjAptZYkXZkiFoxKVgDDfvraZFtnHoy9deo6eBm7q3Xgdd40Mcbm_3orX2Zf7jAx5vnYMA1xhMlJqptu7pllrLEO7OImjxd-1eNUHxo5u5j75S-fiqg"
       }
-    ]
+    ],
+    "google_place_id": "ChIJK401fFW3yhQRmn7nub7KCU8"
   },
   {
     "id": "bulgur-palace",
@@ -1066,7 +1589,8 @@
         "place_id": "ChIJb-nvtC26yhQRUH8veDHdwcE",
         "photo_name": "places/ChIJb-nvtC26yhQRUH8veDHdwcE/photos/Aa-ngMYyqi6KywXApIRZ3a8biT3195-31AahrhlleHI99Uf727gYNIaz7dLNNl5xCN-znfJrzVgJT5TQmosDtRD6_dagKpoXCETAoB37ijfVd-SI6vaKTM7Swp7VpnMVIye1cwyWn3ReUi5I52H19A4NpNLaLC_f0penUNj-E-oINFZ45x4LcsuN5cn3Ux6_ZGXfGv31d7Ml2dERr1hzUB6Fd0_NezHC0SzYZn54RHSRize1tKL_IXny5tieyUZrfDEFm_GanKJjAmvV6b7_pASemoNTArfF807PuNg7xFsmTvG3T2YgIV0rClygMfGco59fB33iKZITozGiOY9wW7hhAPUiNLSQ_8ni7O5F4d03V7cqEK2eqs3c2WZQdlSWPmhBwKxQkRxnBfa9zBffIGs1yTA83JY"
       }
-    ]
+    ],
+    "google_place_id": "ChIJb-nvtC26yhQRUH8veDHdwcE"
   },
   {
     "id": "palace-of-the-porphyrogenitus",
@@ -1077,7 +1601,23 @@
     "address": "Ayvansaray, 34087 Fatih/İstanbul, Türkiye",
     "rating": 4.4,
     "reviewCount": 3033,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Hakan Görkey — Google Places",
+        "place_id": "ChIJodEEkw-6yhQR-IPvd8VgGiA",
+        "photo_name": "places/ChIJodEEkw-6yhQR-IPvd8VgGiA/photos/Aa-ngMYt-Fwuyt5gVzxg1UJfdk1N2nV1GCOTRPiS_roAvTzOQsHIGbcFRUChSPXxLhgb1hs6aT7GELmTgazDOVgYlkZ0wVuCNwjqg8XHgbNi5Bb_sGsgjmxoAdNz03Lb781br3JO_i40Q-cM6BiVrjVD1Dt7895OzdqK1d1z6h_1mP_2ac5dmfBTSVC6LQ6NWXqPTveyWFskM8iWPen3t86IVz3-U_xX_XdddwBfxC0v77kZMcySccyYcToz6N3UhcxvXyx3xeaESax8nA8mK8COIxpPkznZxYDXBuR6X0VKmpzQVpviUO0ETEsebwU-xa2cb65QtIyZrLFFPNu1HtFtSSSW1u3xnVwP0ZdKVTGYt9-7tTWrZ43PNuBMpWlKCvzJBOLIRASFuxlcBNkWaXjA2PGBEEJCcs8"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Stuart McCunn — Google Places",
+        "place_id": "ChIJodEEkw-6yhQR-IPvd8VgGiA",
+        "photo_name": "places/ChIJodEEkw-6yhQR-IPvd8VgGiA/photos/Aa-ngMa9fmfcg4uXXlFyi6AUMnOGY3BlorDQSteST-_1V_yUqtwVuXpqqhtduu-19DO4WZUeCagKMv355aFdJDn7qmfCg98S-bdoeyzYgtwYIzxkZfE3WXjiD6yc4eXap5q3LTaj79fS4eZda5wbYMHPToYDDDfxiGSa-cKdGcE8fHI3Qtd83OzNsrKzLFZcmlBnCHSRrcNGO45HDLJsDHNySpYnxhC7MNeDXn9nZytCnsFL_Zn9tl_HCwceQwcmeqnutURs4LaTRe_L_I8YjiLdVgyUTnhr0iHaULvyGfsAwxojXD1bdbqM3PqSL0ZnNKxaxqHLujNRberAsdWBllv3qjgXzsz3BRn6tE2T-rJctXKHjK4KIsT2uGMcqZLBIcPoB3ynKh9iPanaHEp_tkyNDv0EwKzd"
+      }
+    ],
+    "google_place_id": "ChIJodEEkw-6yhQR-IPvd8VgGiA"
   },
   {
     "id": "karakoy-palace",
@@ -1103,7 +1643,8 @@
         "place_id": "ChIJbx0JEOi5yhQR76GX_KMzR40",
         "photo_name": "places/ChIJbx0JEOi5yhQR76GX_KMzR40/photos/Aa-ngMb6_CUvdx--W46__CD1DrUlj-odTi9x9cUzrZhi_c5kqVl0Ru7w4gcMNIOm6j25-LIjdacz_jZqdyViN8oCn7aKvx2h2cLB0j3xIfwKPQTMFDydKCtJtnt2RqSF1mp2ivt4cqyplLBU0H_JmL6AP98zZP4VFiPR671sPMbsHNw_pLvuiJy7MCWpCVLN9qOMZcWwO9yxnMGNiMkFIpKL0hvSY3QYBAgVkZZtzOiU4Tvyo2DjKmNFBKqSJWvAVOtZC71C9flSxn_7TWu8qU6TmCNRlawsihiF0JMkoGfYuV9Kv_uZdhG5ZQKSUy6HoOLrgjcxRoqL-nmWnwAsWNMhdL4ViTXbJTGszBRnTd6a5N5MA4zaxiGw3tfGfzw28vRjzU9mCYpHjT6sts6yKg-ZYN_TdxJ2XPXVt9SSMHR--i0EsA"
       }
-    ]
+    ],
+    "google_place_id": "ChIJbx0JEOi5yhQR76GX_KMzR40"
   },
   {
     "id": "topkapi-palace-harem-units",
@@ -1129,7 +1670,8 @@
         "place_id": "ChIJSzG-8QK5yhQRiXOlS5uSceA",
         "photo_name": "places/ChIJSzG-8QK5yhQRiXOlS5uSceA/photos/Aa-ngMYxrx4rCmDlhrsJwsYtf_pVk5KUH-XTcJfcsVesvSaawyT2ePNA-OwJ5qnNH4ZNMOHT9uJQlHnX-VMl62414xC1l1RdlC0Agl8T_48CA9n-Z2X7UE6O1f3iQZ0c-IMhe211W7pnKOaSwBrxM88FPFqu_P-Ukqdjno0Klwlpj3TZVPnmonn-XFejRKYyJcoygqukzhyXofERO8-d0i3WoRzt8uydkRpjx-fWl02qinyNs5_OUVqBb30V9Wp0YCMew_wFRgzQXlfeGAr5_-B3zZni-EFccEioQrppm4AYfUEOnCt5Whya0X7Icuwl3QVzJKEjBnd7sEvoMBZAEO4WRWWm0h0GtCYhWWgN-VamOT7uy6Du_AF7zdP4k6iUFotRLGBphWTkNmAiDrpZEQmyOqhIMk7AEXEco-dcu-9QfxEuNA"
       }
-    ]
+    ],
+    "google_place_id": "ChIJSzG-8QK5yhQRiXOlS5uSceA"
   },
   {
     "id": "ibrahim-pasha-palace",
@@ -1155,7 +1697,8 @@
         "place_id": "ChIJGV7kxpe5yhQRzBRjvr8YUR4",
         "photo_name": "places/ChIJGV7kxpe5yhQRzBRjvr8YUR4/photos/Aa-ngMa5k5sqV49WwDAEeHJmf9P9XKLNqnYYJykmruXpGTWm1MaZP1sS6X1Eg5oLGazhLgxvPHeMOChRPTQUjeewBk5ccCtPWTeAcWeWeCHESrlGHtyq-LFbX9ZazENFDyhb7TSCMGsTtSEHSP-4LHJuC9qF-oukBK6DEvF7AIti__Nnmzi4IhQitEYk5oxZT6vW3IOnFr5cZQD87g2M05yfKbWuaqyTGFsPjLhgpgVIA6EJR05AFDoh43oNnUHFKeGUqdBaQdCBhud2WPLa-Kwc7sBtAnMy23ll72SZaDg9FlhNAleFVs9bKc-8Ycx8CwjVqMqCXfMIUKSjC-o-PCyJRqL0YuyXhcONJw8xtVc_hTvbPAIby74qAe7Jx_nbZpTvqPK-5-ocr2HrHzbX-J3nQSrxii4Hz0th0_sCsrEyGQAx"
       }
-    ]
+    ],
+    "google_place_id": "ChIJGV7kxpe5yhQRzBRjvr8YUR4"
   },
   {
     "id": "dolmabahce-clock-tower",
@@ -1166,7 +1709,23 @@
     "address": "Vişnezade, Meclis-i Mebusan Cd. 38 A, 34357 Beşiktaş/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 8680,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Paşa — Google Places",
+        "place_id": "ChIJI6JBbXe3yhQRSEetebnYay4",
+        "photo_name": "places/ChIJI6JBbXe3yhQRSEetebnYay4/photos/Aa-ngMZG0e-CPIDK0gT6w8OYu5u-heBcKoXxNw9Nxo53XqUyhMKTBtG0YozYB7zWuIIdPncDLi7-xINhsQ4SDKCs4ibV13hHOuC1K09AcoP-wiOu58oBkvJ76lecD9Av9rqhAT_pXiAs-NhY3NFVTmtPx7QKF8NJPv5iXrg44A8ZrR0FYzu2_DFvDzSsAmcu_yBq0SdKmWAH8BNHiorO8AOWXTyTXr7lSYXhMBBVqgyyezeV1OySTHQzgz7KPFRJyDG1l-ifBqLtVro8MjpAyk5G2sSN37D3ei4Inr0wU7fxh2xm56eiPpBTWqXRr_exghl-cuEwSmKd6xQaHWLblo6epAawz90whU2RqDF8i_Ou5ovliW9HmQ315eCEtjHldaprfFxDY9wOqPjD_57BGDUMlStiMuY1oytEnBvOFEPekt-t"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: HOON KIM — Google Places",
+        "place_id": "ChIJI6JBbXe3yhQRSEetebnYay4",
+        "photo_name": "places/ChIJI6JBbXe3yhQRSEetebnYay4/photos/Aa-ngMbIZlOq3h7B20OTI1pNmgqV-NVIWLjXx0jMR9fgP9aU1a-ulY1xROmnPdH8zRBbsCDElJvGyZfcrTknXeCezKpfaKH4tjmTU2_PZJH9Dkna8zhbUPE5M_v2UtDRTxgS036Hd7RK_PHK1pkGIhYXdf_liSS3i8yB3PO2iLYK8-8uvoFndPrHpbsdHiFNm7yKtaI_SzQcfU8ek7lPlPvcl0QmLLB7xUedjZEpmrKyr0W2aEyzDlRa6Gu-ZyE9A_wpEpDesZGShLwuKICJ9Pt5HEQSNSNMEzz3qz9YUFYm1AO4v2ZxhD6kPGkGf1DRHiUs_09ZCkVgbNxlEMUGTx6LQVS04ZHueJGpGlvhVMwoBsKlfOJChrt8c4ksxBPCSogLv8kgc7ValyCWOc5UihnMtdOsws1ElJg"
+      }
+    ],
+    "google_place_id": "ChIJI6JBbXe3yhQRSEetebnYay4"
   },
   {
     "id": "topkapi-sarayi",
@@ -1192,7 +1751,8 @@
         "place_id": "ChIJM_ilr7i5yhQRAFMBw0MZqhU",
         "photo_name": "places/ChIJM_ilr7i5yhQRAFMBw0MZqhU/photos/Aa-ngMZdyXZ6LqIELOKr_XEqtqGjTyCrZVTLvKDSnpAWl4UhYoDzzCYII687LEcuX7Lpdq4-EZC0-Ae6G5aS_QZrGHgeRhau5UGsq6WUpA0civo65rBySbGs1ecnL-ztg3upGchzkVxAWmRk5gbFATBp7lvY1jKt2lPWNds0xhOtY48x4HLj5lGoQhi3IECI0RmujQJp1CpY4QDNQ0tOSxbYue6HoE6C1DUXLY6NxNpaJbixDInn9tUqfbbsKJxqi54op-Wkkj9AiJdXpqdWXsWbl1dEeWzzw05RG4AyH5gwfIx_V-hKbFt-rLcko-pylZqrOa5vo7SFj5WNZ7YbFr-vinsB4H88y5aUC1a9CYLwVwTTU9RdbYQh_opIYVaDYd0nRcjVFMtO49HtqGifuYzqyPdz3Qo"
       }
-    ]
+    ],
+    "google_place_id": "ChIJoYxhKAC5yhQRStEJVj8qphY"
   },
   {
     "id": "topkapi-palace-kitchens",
@@ -1203,6 +1763,22 @@
     "address": "Cankurtaran, Topkapı Sarayı No:22, 34122 Fatih/İstanbul, Türkiye",
     "rating": 4.7,
     "reviewCount": 528,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Umit Ozbay — Google Places",
+        "place_id": "ChIJWzrgz-C5yhQRg1iYJ0MZNeo",
+        "photo_name": "places/ChIJWzrgz-C5yhQRg1iYJ0MZNeo/photos/Aa-ngMZlOWH_CgjT3VuPZ88kEu3gBPad_RDMtHKe9hwUGDsRPA4V4SiCRA0CvjB3uYfjVjXj6mnSKWAAnikD2c2WWUMKp22ScUWIxsfXAj1WguFk0ntJGQhGe41bz0tLmXX4FnUpeluK4-UCD7k3UDinsfr6TmoHtMDFOkCC25AZez5fQMsjK7BW5Ek7caanJr92JYcac1DeRXRDnJ6umbrMrvfocStApZfJZpCettNEgSroHkzPREMeKRuLe3JSO0Da23zn-JNum3byJLS98U6awjzdttYPNWy-rGkHUjvXqWnw1k38oes7pnmf3gpkhQ4RHViSzoMs6Sbgtukbgn5i9k9AaaqqDvt--YIYPne3pEMyL8KGWprUB9XO-pjPv41FrP2Z2Vqj0xnZ5XbCTjPJFyK7M6lQo9_dl3ZJ--Krjfavig"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Bilal Sarwar — Google Places",
+        "place_id": "ChIJWzrgz-C5yhQRg1iYJ0MZNeo",
+        "photo_name": "places/ChIJWzrgz-C5yhQRg1iYJ0MZNeo/photos/Aa-ngMbeI92fewmR_UaLyNXcIgsDegaaOCNSN5cJk48fgqWo5ExtUlgA8W0pCe3c0MyhbHaiJpe5FIf0IfZDnw-IiKgWB1ZcFirN6Tdpc9QcrJ9cY2qYWQo6GJXqwjyHJJUZ_9uB_Nw9WPCrqRk0CX5p1KLr09AmTtcPIL3km4vI0SXhcw2Op9ODWpN1Dh4lnjdYJT2NVaByPElPt5yboyampcO-4Olld5kJxe0HFoqp-WwPtXU-YZd4nkpKNGugzv3L-vm3kCa1PPi4ySj89jlFg_nhRbg3V2pG76qj6b_bto0IEzmhwcrf810bpXJhndTCYxK1f-NW-spzbgz_yY3n_PIkh166y5hp11hmZxuDMOcQOkPUMKzJS6vEQIy2Gzku_vRtmSACVzbcPHCqlE7VCRK8nwSjusI"
+      }
+    ],
+    "google_place_id": "ChIJWzrgz-C5yhQRg1iYJ0MZNeo"
   }
 ]

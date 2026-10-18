@@ -131,6 +131,11 @@ def main() -> None:
                     "rating": p.get("rating"),
                     "reviewCount": p.get("userRatingCount"),
                     "photos": [],
+                    # Google'in kendi place id'si - fetch_google_places_photos.py
+                    # bunu dogrudan Place Details ile cekip isim-benzerligi
+                    # (dil farkindan dolayi hatali reddedilebilen) eslestirmesini
+                    # atlayabilsin diye saklanir.
+                    "google_place_id": p.get("id"),
                 }
             )
             existing_ids.add(venue_id)

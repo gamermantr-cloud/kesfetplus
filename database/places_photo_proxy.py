@@ -57,7 +57,7 @@ from functools import lru_cache
 import requests
 
 _SEED_DIR = os.path.join(os.path.dirname(__file__), "seed")
-_SEED_FILES = ("places.json", "gurme.json", "hotels.json", "sahne.json")
+_SEED_FILES = ("places.json", "gurme.json", "hotels.json", "sahne.json", "kultur.json")
 
 _PHOTO_MEDIA_BASE_URL = "https://places.googleapis.com/v1"
 _REQUEST_TIMEOUT_SECONDS = 10

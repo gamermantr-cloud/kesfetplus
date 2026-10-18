@@ -29,6 +29,12 @@ export const RATING_CRITERIA = {
     { id: 'fiyat_performans', label: 'Fiyat/performans' },
     { id: 'erisilebilirlik', label: 'Erişilebilirlik' },
   ],
+  kultur: [
+    { id: 'tarihi_deger', label: 'Tarihi/kültürel değer' },
+    { id: 'temizlik', label: 'Temizlik' },
+    { id: 'fiyat_performans', label: 'Fiyat/performans' },
+    { id: 'erisilebilirlik', label: 'Erişilebilirlik' },
+  ],
 }
 
 export function criteriaFor(venue) {

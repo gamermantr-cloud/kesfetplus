@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BedDouble, ChevronLeft, Croissant, Search, Theater, Trees, Utensils, Wine } from 'lucide-react'
+import { BedDouble, ChevronLeft, Croissant, Landmark, Search, Theater, Trees, Utensils, Wine } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -18,6 +18,7 @@ const CATEGORIES = [
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
   { id: 'sahne', label: 'Konser ve Tiyatro', icon: Theater, match: (v) => v.kind === 'sahne' || v.cross_categories?.includes('sahne') },
+  { id: 'kultur', label: 'Kültür ve Tarih', icon: Landmark, match: (v) => v.kind === 'kultur' },
 ]
 
 // Card backgrounds cycle through design-token gradients; used as a placeholder/fallback

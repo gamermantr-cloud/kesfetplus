@@ -1,4 +1,4 @@
-import { BedDouble, Coffee, Trees, UtensilsCrossed, Wine } from 'lucide-react'
+import { BedDouble, Coffee, Landmark, Theater, Trees, UtensilsCrossed, Wine } from 'lucide-react'
 
 /**
  * Picks a lucide icon representative of a venue's category. Used as the
@@ -8,6 +8,8 @@ import { BedDouble, Coffee, Trees, UtensilsCrossed, Wine } from 'lucide-react'
  */
 export function getVenueIcon(venue) {
   if (venue.kind === 'hotel') return BedDouble
+  if (venue.kind === 'sahne') return Theater
+  if (venue.kind === 'kultur') return Landmark
   if (venue.kind === 'gurme') {
     if (venue.category === 'bar' || venue.category === 'meyhane-deniz') return Wine
     if (venue.category === 'kafe-kahve' || venue.category === 'tatli-pastane') return Coffee

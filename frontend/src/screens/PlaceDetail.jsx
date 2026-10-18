@@ -61,6 +61,10 @@ const VENUE_TYPE_LABELS = {
   konser_salonu: 'Konser Salonu',
   tiyatro: 'Tiyatro',
   kulup: 'Kulüp',
+  muze: 'Müze',
+  cami: 'Cami',
+  saray: 'Saray',
+  tarihi_yer: 'Tarihi Yer',
 }
 const GENRE_TAG_LABELS = {
   elektronik: 'Elektronik Müzik',

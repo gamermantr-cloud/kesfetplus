@@ -10,6 +10,7 @@ import {
   CloudSnow,
   Compass,
   Croissant,
+  Landmark,
   MapPin,
   MessageCircle,
   Plus,
@@ -41,6 +42,7 @@ const CATEGORIES = [
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
   { id: 'sahne', label: 'Konser ve Tiyatro', icon: Theater, match: (v) => v.kind === 'sahne' || v.cross_categories?.includes('sahne') },
+  { id: 'kultur', label: 'Kültür ve Tarih', icon: Landmark, match: (v) => v.kind === 'kultur' },
   { id: 'eklenti', label: 'Eklentiler', icon: Plus, match: null },
 ]
 

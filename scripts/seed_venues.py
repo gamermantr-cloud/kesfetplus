@@ -48,6 +48,7 @@ _SEED_FILES = {
     "gurme.json": "gurme",
     "hotels.json": "hotels",
     "sahne.json": "sahne",
+    "kultur.json": "kultur",
 }
 
 

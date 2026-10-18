@@ -654,5 +654,277 @@
     "found_name": "37 SULTAN MÜZİKHOL",
     "similarity": 0.526,
     "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "topkapi-palace-museum",
+    "seed_name": "Topkapi Palace Museum",
+    "found_name": "Topkapı Sarayı Müzesi",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "istanbul-museum-of-modern-art",
+    "seed_name": "Istanbul Museum of Modern Art",
+    "found_name": "İstanbul Modern Sanat Müzesi",
+    "similarity": 0.561,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "the-museum-of-innocence",
+    "seed_name": "The Museum of Innocence",
+    "found_name": "Masumiyet Müzesi",
+    "similarity": 0.205,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "istanbul-museum-of-painting-and-sculpture",
+    "seed_name": "Istanbul Museum of Painting and Sculpture",
+    "found_name": "IRHM (İstanbul Resim ve Heykel Müzesi)",
+    "similarity": 0.354,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "museum-of-illusions-istanbul",
+    "seed_name": "Museum of Illusions Istanbul",
+    "found_name": "İllüzyon Müzesi",
+    "similarity": 0.186,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "turkish-islamic-arts-museum",
+    "seed_name": "Turkish & Islamic Arts Museum",
+    "found_name": "Türk ve İslam Eserleri Müzesi",
+    "similarity": 0.448,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "naval-museum",
+    "seed_name": "Naval Museum",
+    "found_name": "Deniz Müzesi",
+    "similarity": 0.25,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "hagia-sophia-history-and-experience-museum",
+    "seed_name": "Hagia Sophia History and Experience Museum",
+    "found_name": "Ayasofya Tarih ve Deneyim Müzesi",
+    "similarity": 0.324,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "istanbul-museum-of-the-history-of-science-and-technology-in-islam",
+    "seed_name": "Istanbul Museum of the History of Science and Technology in Islam",
+    "found_name": "İslam Bilim ve Teknoloji Tarihi Müzesi",
+    "similarity": 0.33,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "walls-of-constantinople",
+    "seed_name": "Walls of Constantinople",
+    "found_name": "İstanbul Surları",
+    "similarity": 0.256,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "basilica-cistern",
+    "seed_name": "Basilica Cistern",
+    "found_name": "Yerebatan Sarnıcı",
+    "similarity": 0.182,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "hagia-sophia-grand-mosque",
+    "seed_name": "Hagia Sophia Grand Mosque",
+    "found_name": "Ayasofya-i Kebir Cami-i Şerifi",
+    "similarity": 0.182,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "serpent-column",
+    "seed_name": "Serpent Column",
+    "found_name": "Yılanlı Sütun",
+    "similarity": 0.148,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "column-of-constantine",
+    "seed_name": "Column of Constantine",
+    "found_name": "Çemberlitaş Sütunu",
+    "similarity": 0.205,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "fountain-of-sultan-ahmed-iii",
+    "seed_name": "Fountain of Sultan Ahmed III",
+    "found_name": "Sultan III. Ahmet Çeşmesi",
+    "similarity": 0.453,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "the-blue-mosque",
+    "seed_name": "The Blue Mosque",
+    "found_name": "Sultanahmet Camii",
+    "similarity": 0.188,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "obelisk-of-theodosius",
+    "seed_name": "Obelisk of Theodosius",
+    "found_name": "Theodosius Dikilitaşı",
+    "similarity": 0.476,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "rumeli-fortress",
+    "seed_name": "Rumeli Fortress",
+    "found_name": "Rumeli Hisarı",
+    "similarity": 0.571,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "the-stone-of-million",
+    "seed_name": "The Stone of Million",
+    "found_name": "Milyon Taşı",
+    "similarity": 0.323,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "fatih-mosque",
+    "seed_name": "Fatih Mosque",
+    "found_name": "Fatih Camii",
+    "similarity": 0.522,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "yeni-mosque",
+    "seed_name": "Yeni Mosque",
+    "found_name": "Yeni Camii",
+    "similarity": 0.476,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "grand-camlica-mosque",
+    "seed_name": "Grand Çamlıca Mosque",
+    "found_name": "Büyük Çamlıca Camii",
+    "similarity": 0.462,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "laleli-mosque",
+    "seed_name": "Laleli Mosque",
+    "found_name": "Laleli Camii",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "rustem-pasha-mosque",
+    "seed_name": "Rustem Pasha Mosque",
+    "found_name": "Rüstem Paşa Camii",
+    "similarity": 0.556,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "beyazit-mosque",
+    "seed_name": "Beyazit Mosque",
+    "found_name": "Bayezid Camii",
+    "similarity": 0.37,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "sakirin-mosque",
+    "seed_name": "Şakirin Mosque",
+    "found_name": "Şakirin Camii",
+    "similarity": 0.593,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "kariye-mosque",
+    "seed_name": "Kariye Mosque",
+    "found_name": "Kariye Camii",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "taksim-mosque",
+    "seed_name": "Taksim Mosque",
+    "found_name": "Taksim Camii",
+    "similarity": 0.56,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "yildiz-palace",
+    "seed_name": "Yildiz Palace",
+    "found_name": "Yıldız Sarayı",
+    "similarity": 0.538,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "kucuksu-pavilion",
+    "seed_name": "Küçüksu Pavilion",
+    "found_name": "Küçüksu Kasrı (Milli Saraylar)",
+    "similarity": 0.522,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "beykoz-mecidiye-pavilion-national-palaces",
+    "seed_name": "Beykoz Mecidiye Pavilion (National Palaces)",
+    "found_name": "Beykoz Mecidiye Kasrı",
+    "similarity": 0.562,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "palace-of-the-porphyrogenitus",
+    "seed_name": "Palace of the Porphyrogenitus",
+    "found_name": "Tekfur Sarayı Müzesi (Porfirogennetos Sarayı)",
+    "similarity": 0.378,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "dolmabahce-clock-tower",
+    "seed_name": "Dolmabahçe Clock Tower",
+    "found_name": "Dolmabahçe Saat Kulesi",
+    "similarity": 0.591,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "kultur",
+    "id": "topkapi-palace-kitchens",
+    "seed_name": "Topkapi Palace Kitchens",
+    "found_name": "Topkapı Sarayı Mutfağı",
+    "similarity": 0.489,
+    "reason": "low_similarity"
   }
 ]

@@ -17,11 +17,22 @@ export async function getHotels() {
   return res.json()
 }
 
+export async function getSahne() {
+  const res = await fetch('/data/sahne.json')
+  return res.json()
+}
+
 export async function getAllVenues() {
-  const [places, gurme, hotels] = await Promise.all([getPlaces(), getGurme(), getHotels()])
+  const [places, gurme, hotels, sahne] = await Promise.all([
+    getPlaces(),
+    getGurme(),
+    getHotels(),
+    getSahne(),
+  ])
   return [
     ...places.map((p) => ({ ...p, kind: p.kind ?? 'place' })),
     ...gurme,
     ...hotels,
+    ...sahne,
   ]
 }

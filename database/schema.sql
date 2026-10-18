@@ -33,7 +33,7 @@
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS venues (
     id          TEXT PRIMARY KEY,
-    category    TEXT NOT NULL CHECK (category IN ('places', 'gurme', 'hotels')),
+    category    TEXT NOT NULL CHECK (category IN ('places', 'gurme', 'hotels', 'sahne')),
     name        TEXT NOT NULL,
     district    TEXT,
     raw_data    JSONB NOT NULL,

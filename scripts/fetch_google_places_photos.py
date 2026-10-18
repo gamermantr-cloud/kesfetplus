@@ -81,6 +81,7 @@ DATASET_FILES = {
     "places": "places.json",
     "gurme": "gurme.json",
     "hotels": "hotels.json",
+    "sahne": "sahne.json",
 }
 
 DEFAULT_SIMILARITY_THRESHOLD = 0.6
@@ -217,7 +218,7 @@ def collect_candidates(
     datasets: dict[str, list[dict[str, Any]]], progress: dict[str, Any]
 ) -> list[Candidate]:
     candidates: list[Candidate] = []
-    for dataset in ("places", "gurme", "hotels"):
+    for dataset in ("places", "gurme", "hotels", "sahne"):
         for index, entry in enumerate(datasets[dataset]):
             if not needs_photos(entry):
                 continue

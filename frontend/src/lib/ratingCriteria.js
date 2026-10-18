@@ -23,6 +23,12 @@ export const RATING_CRITERIA = {
     { id: 'guvenlik', label: 'Güvenlik' },
     { id: 'erisilebilirlik', label: 'Erişilebilirlik' },
   ],
+  sahne: [
+    { id: 'ses_gorus_kalitesi', label: 'Ses/Görüş kalitesi' },
+    { id: 'atmosfer', label: 'Atmosfer' },
+    { id: 'fiyat_performans', label: 'Fiyat/performans' },
+    { id: 'erisilebilirlik', label: 'Erişilebilirlik' },
+  ],
 }
 
 export function criteriaFor(venue) {

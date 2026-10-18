@@ -53,6 +53,21 @@ import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 const TABS = ['Genel Bakış', 'Anlık Durum', 'Fotoğraflar', 'Yorumlar']
 const STATUS_TAGS = ['Kalabalık', 'Orta', 'Sakin']
 
+// "Konser ve Tiyatro" mekanlarının (kind: 'sahne') türünü/müzik tarzını
+// gösteren rozet etiketleri - venue_type Google Places'ın kendi tipinden
+// türetiliyor, genre_tag elle doldurulana kadar null kalıyor (sahte veri
+// yasak, bkz. CLAUDE.md).
+const VENUE_TYPE_LABELS = {
+  konser_salonu: 'Konser Salonu',
+  tiyatro: 'Tiyatro',
+  kulup: 'Kulüp',
+}
+const GENRE_TAG_LABELS = {
+  elektronik: 'Elektronik Müzik',
+  halk_muzigi: 'Halk Müziği',
+  klasik_orkestra: 'Klasik / Orkestra',
+}
+
 // "Kene Bilgisi" rozeti sadece çim/yeşillik temalı doğa mekanlarında
 // gösterilir - venue.tags üzerinden basit bir kesişim kontrolü (yeni bir
 // veri alanı/dosya YOK, mevcut tags'a göre türetilmiş bir UI kararı,
@@ -633,6 +648,16 @@ export default function PlaceDetail() {
           )}
           {venue.reviewCount ? (
             <span className="text-sm text-taupe">({venue.reviewCount} yorum)</span>
+          ) : null}
+          {VENUE_TYPE_LABELS[venue.venue_type] ? (
+            <span className="rounded-full bg-sand px-2.5 py-0.5 text-xs font-medium text-espresso-soft">
+              {VENUE_TYPE_LABELS[venue.venue_type]}
+            </span>
+          ) : null}
+          {GENRE_TAG_LABELS[venue.genre_tag] ? (
+            <span className="rounded-full bg-sand px-2.5 py-0.5 text-xs font-medium text-espresso-soft">
+              {GENRE_TAG_LABELS[venue.genre_tag]}
+            </span>
           ) : null}
         </div>
         <p className="mt-1 text-sm text-taupe">

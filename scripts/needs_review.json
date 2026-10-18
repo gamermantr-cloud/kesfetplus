@@ -590,5 +590,69 @@
     "found_name": "Sura Luxury Million & Spa Sultanahmet",
     "similarity": 0.246,
     "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "volkswagen-arena",
+    "seed_name": "VOLKSWAGEN ARENA",
+    "found_name": "Volkswagen Arena",
+    "similarity": 0.188,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "hodjapasha",
+    "seed_name": "Hodjapasha",
+    "found_name": "HODJAPASHA",
+    "similarity": 0.1,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "moda-stage-theatre",
+    "seed_name": "Moda Stage Theatre",
+    "found_name": "Moda Sahnesi",
+    "similarity": 0.533,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "craft-theater",
+    "seed_name": "Craft Theater",
+    "found_name": "Craft Yapı Kredi Bomontiada",
+    "similarity": 0.4,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "sureyya-opera-house",
+    "seed_name": "Süreyya Opera House",
+    "found_name": "KADIKÖY BELEDİYESİ SÜREYYA OPERASI",
+    "similarity": 0.113,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "mask-live-music-club",
+    "seed_name": "Mask Live Music Club",
+    "found_name": "Mask Beach",
+    "similarity": 0.467,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "taksim-club-iq",
+    "seed_name": "Taksim Club IQ",
+    "found_name": "CLUB IQ",
+    "similarity": 0.381,
+    "reason": "low_similarity"
+  },
+  {
+    "dataset": "sahne",
+    "id": "37-sultan-music-hall",
+    "seed_name": "37 SULTAN music hall",
+    "found_name": "37 SULTAN MÜZİKHOL",
+    "similarity": 0.526,
+    "reason": "low_similarity"
   }
 ]

@@ -8177,7 +8177,10 @@
     "category": "bar",
     "verified": false,
     "source": "websearch-editorial",
-    "crowdNow": "Veri yok"
+    "crowdNow": "Veri yok",
+    "cross_categories": [
+      "sahne"
+    ]
   },
   {
     "id": "flekk-bar",
@@ -8201,7 +8204,10 @@
     "category": "bar",
     "verified": false,
     "source": "websearch-editorial",
-    "crowdNow": "Veri yok"
+    "crowdNow": "Veri yok",
+    "cross_categories": [
+      "sahne"
+    ]
   },
   {
     "id": "the-barley",
@@ -8297,6 +8303,9 @@
         "place_id": "ChIJb6Ce82O3yhQR_x-Mqsuv0_k",
         "photo_name": "places/ChIJb6Ce82O3yhQR_x-Mqsuv0_k/photos/Aa-ngMaFxIMXUx7DlvnBm-xqMMbuV9wNy6HhU__s6buM6GUsNMOjAIc03gAinigYbQ8KSc2y1V56mP4BD5t4m4gDYWVe5GUiYcNn_Xx7j_S0WoG_xj2ve7y6mKmw0oZKhgmCfnidNjsgznKutczBiKmYwrcuRw9JHFZHAFMjjzG5XtPocJ3cOk6TyDxsYwjoUTIUTDfN2WslAFN9vnusM5bUM99wBgNh4n3q8J-dlw03dpCgMnBZDNLlO3kheDgrN531kPZX_xgIgtRAigr4puvd5qakAWvtXVHJNvYb3wJjkQMEd09eTDiaq_tZ5uM57MCoCDWZKdDkynmWmqOf1plNv0rP-aPmpDfaS2GL_QdAlo0D7kX_SOxIqPZp_Ziu323c4rhmudgMHONTe-S6JpqafmMUh7fA9R7nTMxBnIi4zxufww"
       }
+    ],
+    "cross_categories": [
+      "sahne"
     ]
   },
   {
@@ -8423,6 +8432,9 @@
         "place_id": "ChIJ4TqEhjnIyhQRX1pj6zIO50k",
         "photo_name": "places/ChIJ4TqEhjnIyhQRX1pj6zIO50k/photos/Aa-ngMYSjRASrMtc-AmCZJ8JNOuJ1KwrXD18JhU49m7SabMr801SvqQ5FLVoFkEYyCFCEFcA7BIlmwIxGQdW8Jwx74vttllU0WBI4sTUAc3kJjPv0gjAj8Xc6idVb4Mb99fZwH0YHzTli9xVkqO5pB7BSXknYV86IgxHdVwHN9tjgaH16UkeYL43KNcMPuvYCFoK6noIgQuXc7DnTY6k4F9W5DlhLU9-7puOiWzAUBxsB2yOTiXqYOdvf_TnZLpCcUZn5fSpCt5mRAXZhkihO3rhv60KTO0OlygiEKqPJ3zeYoJuDy6ztJkGAE_7V_CKG_-zudm8CBffuoeUY0Rm52Z3lkKSeOa4LrQuMas9zFcnAEzHLzFmuPZ1xZ9aCVTNqnrJp5NgMpBBiLz8Tjwt8G1kV1OuNA"
       }
+    ],
+    "cross_categories": [
+      "sahne"
     ]
   },
   {
@@ -8592,6 +8604,9 @@
         "place_id": "ChIJLUNL25-3yhQRqtj2BMG0ypM",
         "photo_name": "places/ChIJLUNL25-3yhQRqtj2BMG0ypM/photos/Aa-ngMZUizVJXMLOaH8HHSk2398FY_WbL2_0RPYr0vmvR4vZiw0ioetw4BuvJfnhbUqWIBez2pCkhzRxHT2TV92HRM4BqPZGZ7Ir5TiNlJ-P9LkAV1AMnzVYX40M2oDWlln-OSvng4qsdmsPZk24Nr6caCE-QzRs7u5dWd5d7o4z7Cnm1ShAyUWFFucp_22ZPnLb5dFqN7hQrsvxTRqhJQw6dGIbYuIWTUS40Nmxt8MmPxRfji_yAeQeZyFDFI0FFqfYqfLwM64Rs5cDRVy5o1tQemnvwBOPQ52yj9SahW22R2V8tnhHfpM4DqSJ-s2AxI0nWr7haXg4q_lGIjE9k06REf2GD_haEcAigjIjW7AvzReMTu1YphLLYVOCnrwo-nBGeSa5gEGUwIf9zPtoFnIpdwLP_DU2A3k"
       }
+    ],
+    "cross_categories": [
+      "sahne"
     ]
   },
   {
@@ -9645,6 +9660,9 @@
         "place_id": "ChIJq6oaOuq5yhQRH_sorxWrvsc",
         "photo_name": "places/ChIJq6oaOuq5yhQRH_sorxWrvsc/photos/Aa-ngMYQ9O2dgUCuOe9itqQjVykQXZRDogWkt8B7qMoGNE-2Qp5NEwXYFz9ZRq5QBhOTBEaPr6PB4cBfPVd8BZQCpq_jEo2cJ0qUv79rialxJ5Tcnv_RQ-b7g3yUXsCiaOOxJQIRTGLAk1Lt3eVPEdpfDA1P_rVU5WiRvW2APm7rrKzox4C4v48X5xeBW6PbvdY96BomTYPFL46IgXDe70xDC8weP6vte1vk6v6abyfE_knrUuncpqDbvzzdnWNCcHzuE-VfcCgaxy0LA-ntKbxmju0rfqkrTCZtGPDPw9RIR-QsnLRPU_Wz7tcnLNUfiOBQ4J3QZ9FpM4I4xKnLfkMs8XGfx-GaZkEn49bi7NCtzUZpyRMukDIZvcCI9MFoUNJUva4d-CUe4rH4IPDDhvxkxfR_Fwc"
       }
+    ],
+    "cross_categories": [
+      "sahne"
     ]
   },
   {
@@ -10999,6 +11017,9 @@
         "place_id": "ChIJ0Z2Tw2a4yhQRnRECiWsnY50",
         "photo_name": "places/ChIJ0Z2Tw2a4yhQRnRECiWsnY50/photos/Aa-ngMZm7TUWYjdWwRHCDaqPk4bfWUXjCqNFU0cODzFGIh99dyONtpiqtLNbnTnrfucFmr9wFv0bV2Nousy7nDExAqZlBddNetQZmVGxkzgUa-9XAApcJp4XqlJb0EdazeZeQyB2vbQ4_l4NA0O-MPSazWHsglSoT91bfwz7EHPGnlTtKldvyXGOhA1e26EL2lKRILxjRXLVMOStlt8AUWm-kawhRL-gWNObK73NnrEUrMNPjcH0TnyjhjuO50Qp66j3cUXpCnagBQe2xRD5SHuWj2qT0TYtMURozgp7TpcUdeZkrc6ddNCG3m208XJIvyScs0K4x0MFBpZuG-J1zwcaT0SHc1QjMutQG31MsOpbaAmu0JlCqLfhwFVookWxCj0Usmjzj0AYbQx_6FVhN-bVijnwpw"
       }
+    ],
+    "cross_categories": [
+      "sahne"
     ]
   },
   {

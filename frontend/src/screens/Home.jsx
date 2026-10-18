@@ -16,6 +16,7 @@ import {
   Search,
   Sparkles,
   Sun,
+  Theater,
   Trees,
   User,
   Utensils,
@@ -39,6 +40,7 @@ const CATEGORIES = [
   { id: 'brunch', label: 'Kahvaltı & Brunç', icon: Croissant, match: (v) => v.kind === 'gurme' && v.category === 'kahvalti' },
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
+  { id: 'sahne', label: 'Konser ve Tiyatro', icon: Theater, match: (v) => v.kind === 'sahne' || v.cross_categories?.includes('sahne') },
   { id: 'eklenti', label: 'Eklentiler', icon: Plus, match: null },
 ]
 

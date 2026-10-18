@@ -16,6 +16,7 @@ import Register from './screens/Register.jsx'
 import Splash from './screens/Splash.jsx'
 import Support from './screens/Support.jsx'
 import Terms from './screens/Terms.jsx'
+import { useScrollRestoration } from './lib/useScrollRestoration.js'
 
 // Very light cross-fade between routes (opacity only, no transform - a
 // transform here would change the containing block for any `fixed`-
@@ -24,6 +25,7 @@ import Terms from './screens/Terms.jsx'
 function AnimatedRoutes() {
   const location = useLocation()
   const shouldReduceMotion = useReducedMotion()
+  useScrollRestoration()
 
   return (
     <AnimatePresence mode="wait" initial={false}>

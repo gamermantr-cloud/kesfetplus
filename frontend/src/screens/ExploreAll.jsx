@@ -9,6 +9,7 @@ import VenueThumb from '../components/VenueThumb.jsx'
 import { getPopularityScores } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { rankVenues } from '../lib/search.js'
+import { useRestorableState } from '../lib/useRestorableState.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
 
 const CATEGORIES = [
@@ -36,7 +37,7 @@ export default function ExploreAll() {
   const [venues, setVenues] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
-  const [activeCategory, setActiveCategory] = useState(null)
+  const [activeCategory, setActiveCategory] = useRestorableState('explore-category', null)
   // {} = henüz yüklenmedi ya da istek başarısız oldu - search.js bunu
   // "hiçbir venue için sinyal yok" olarak yorumlar, uydurma bir popülerlik
   // göstermez (bkz. lib/search.js popularityScore).

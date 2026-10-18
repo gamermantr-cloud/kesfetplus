@@ -32,6 +32,7 @@ import { getPopularityScores, getWeather } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
 import { nearestDistrict } from '../lib/districts.js'
 import { rankVenues } from '../lib/search.js'
+import { useRestorableState } from '../lib/useRestorableState.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
 import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 
@@ -78,7 +79,7 @@ export default function Home() {
   const [venues, setVenues] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
-  const [activeCategory, setActiveCategory] = useState(null)
+  const [activeCategory, setActiveCategory] = useRestorableState('home-category', null)
   const [toast, setToast] = useState(null)
   const toastTimer = useRef(null)
   // null = henüz yüklenmedi ya da Open-Meteo'ya ulaşılamadı - asla uydurma

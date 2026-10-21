@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
-  ArrowRight,
   Bell,
   BedDouble,
   Cloud,
@@ -24,6 +23,7 @@ import {
 } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
+import FeaturedShowcase from '../components/FeaturedShowcase.jsx'
 import SubcategoryChips from '../components/SubcategoryChips.jsx'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
@@ -159,7 +159,7 @@ export default function Home() {
 
   const featured = useMemo(() => {
     if (!venues.length) return null
-    return venues.find((v) => v.tags?.includes('manzara')) ?? venues[0]
+    return venues.find((v) => v.id === 'emirgan') ?? venues.find((v) => v.tags?.includes('manzara')) ?? venues[0]
   }, [venues])
 
   const filtered = useMemo(() => {
@@ -276,22 +276,8 @@ export default function Home() {
       )}
 
       <div className="px-5 mt-5">
-        {featured && (
-          <button
-            type="button"
-            onClick={() => navigate(`/place/${featured.id}`)}
-            className={`relative h-48 w-full rounded-3xl overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[0]} p-5 flex flex-col justify-end text-left grain`}
-          >
-            <span className="text-cream/80 text-xs font-medium uppercase tracking-wide">Bu hafta keşfet</span>
-            <h2 className="font-display text-3xl text-cream mt-1 leading-tight">{featured.name}</h2>
-            {featured.area && <p className="text-cream/70 text-sm mt-0.5">{featured.area}</p>}
-            <span
-              aria-hidden="true"
-              className="absolute bottom-5 right-5 w-11 h-11 rounded-full bg-cream flex items-center justify-center shadow-md"
-            >
-              <ArrowRight size={20} className="text-espresso" />
-            </span>
-          </button>
+        {venues.length > 0 && (
+          <FeaturedShowcase venues={venues} onOpen={(venue) => navigate(`/place/${venue.id}`)} />
         )}
       </div>
 

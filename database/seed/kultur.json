@@ -1780,5 +1780,167 @@
       }
     ],
     "google_place_id": "ChIJWzrgz-C5yhQRg1iYJ0MZNeo"
+  },
+  {
+    "id": "molla-zeyrek-mosque",
+    "name": "Molla Zeyrek Mosque",
+    "kind": "kultur",
+    "venue_type": "cami",
+    "area": null,
+    "address": "Zeyrek, İbadethane Sk. No:2, 34083 Fatih/İstanbul, Türkiye",
+    "rating": 4.8,
+    "reviewCount": 3223,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Can S. Arat — Google Places",
+        "place_id": "ChIJrUbzwPS5yhQRCHffo4M7pTA",
+        "photo_name": "places/ChIJrUbzwPS5yhQRCHffo4M7pTA/photos/Aa-ngMZGDobVm6K9O8NpRmRmHoHNjBe1OcDZ9az2TB9UH7yLoHwZd67AqDytjiEGAabDTcPcu7zKD-KAyciUrTxHLOsS3ANBiLqAfO8JG7-yI30jbQXLtPfQmB9lvKXNon5bjFsh_Hn5QbniaITxT4J9122n18Ti5A968cGjXV64r6D80eKv6qxl1TcnbOINgp6H6QxOfcRBF16F1FGapyYj3li8XdRdso1Ob74TGdtL_kuGKJvESJaNmjg-6tqqr1LUju4ifIctY0YY_wbZjzn2KHY0Kr08wIdpWJ50Y-LXRQ_er4vlPg0CPM6pBTZUvbbX_wwo4LwJY5yeTdgu3uZijw6gkJwj2P-OkXib91cMnm-GeoDWp25Fx2r5RxJ2aHJKtYu4se71QvKoXTthlmqM9mQiRzw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ahmet Tüysüz — Google Places",
+        "place_id": "ChIJrUbzwPS5yhQRCHffo4M7pTA",
+        "photo_name": "places/ChIJrUbzwPS5yhQRCHffo4M7pTA/photos/Aa-ngMZyPKVZR-rzoRNK8xcNh4wAZH8r5bWWYZvCZ0WXsIWJWeAICoWNnw7EzzEnUtcG2nyz_4fSZXYeD_lBLM4N6eZUwquUalQnW5b28uiK7zfeZr5DTFo5-Hv6YkSx3KKmYv_tmsHsMMdCC5GlvWZjhAy9aF67MiswZt_V9KUF_gv2Zc9P_0cbScK14iDFuTguZljUu9vSfMf_8mCR8A4FRS9DCP6yXAWiBmzr8oBER9g8ricQ7R7YTk1enfVq67YMbJizEpXa8Es6lrAvZlPW_e1fEsY5pte_FB1HvjVDnQGyxCLn2GHZzuMXAkcqajxZ8vXNThADIQ8FYOE7e82PsbpjeBfFGN0KY0gP7xLG05u3qfuIC1RtMbVOMenRECLcpUDRZQUtK-VCSJDZyE_602C0Cg"
+      }
+    ],
+    "google_place_id": "ChIJrUbzwPS5yhQRCHffo4M7pTA"
+  },
+  {
+    "id": "vehbi-koc-buyukdere-evi",
+    "name": "Vehbi Koç Büyükdere Evi",
+    "kind": "kultur",
+    "venue_type": "muze",
+    "area": null,
+    "address": "Büyükdere, Piyasa Cd. No:109, 34453 Sarıyer/İstanbul, Türkiye",
+    "rating": 4.3,
+    "reviewCount": 1737,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Vehbi Koç Evi — Google Places",
+        "place_id": "ChIJFWCPfQPfn0ARj6bjmW5UEWU",
+        "photo_name": "places/ChIJFWCPfQPfn0ARj6bjmW5UEWU/photos/Aa-ngMbwtHCXTxD2_5QG51XMFzlmoa0qCQ3tjyj0Ttc1u60cR1eyqsqaA5RwIkuWqwC9hPI7TJw1xAIzuDlkMeyysQwe5yZ-g1EZGlet-DK5M7PXlF2wekfFS3rXqeOotYTsKEmAbZn4ZHDDfsKVeFd8ZN9Gf_bEe5o4AAgZHaxvBYkZg0eI0Amx9fmVbOD7zb2lNXOp_phvqOdsxuKUkHzbrAMPcP1INzsCNM3cFQqn9TVhnni1CFxoSHgwTVa2RVqPh2WL7cJMEEvLGK52dqfMUXhI_i2rpHtuZMqW2V8xwfbEwm19XQXRN6B-FVU-dE8NXSwQU0P0uZYAwn66tzW6r0jHoJIZZkrsNdd1lXDkwsfbcxiDs6NLluq6w5ZrfETbQFXOBed_nllPRdThRFlfTUfhew"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: ali — Google Places",
+        "place_id": "ChIJFWCPfQPfn0ARj6bjmW5UEWU",
+        "photo_name": "places/ChIJFWCPfQPfn0ARj6bjmW5UEWU/photos/Aa-ngMYIb5HeuW-GlUcXZPr8-Hn2f-3_y90pFGaDVj0J6mHsq35A2eG_XwtpKw8Re0Og6xWV2EZH2078YRK3Im-udV44njiH0Igu0qMWgGGGXybPTh6igtjZ74xrErzePXNE3tsiY1MBtwMYY_7rakGshQ9CChPE77Ccb3tNUdVGZSPabYabOXGLmFEad7BmcjRkVpA7GxIwQyeOqJrhN9JqXMTLg1h9FjQCR5MVF-0y7HsDZpn_FcU4f23ib48OnCghie3sKUsPku3w8yWr6c6cq0E4uXdXPaOHBSxJDxJjAbI-BzJVZQ4RYyPH-SGQiVVBRcuIkmnb5SUqGCbtK8jsjq4DE-K1vRV0UtXZgxTeSp75W73LsI_MoHJPsUjqDF7ZrrshfMz_b45KpcNOsayVsUTLeUoFWyFpA1NjOnnauoCRfg"
+      }
+    ],
+    "google_place_id": "ChIJFWCPfQPfn0ARj6bjmW5UEWU"
+  },
+  {
+    "id": "yildiz-hamidiye-mosque",
+    "name": "Yıldız Hamidiye Mosque",
+    "kind": "kultur",
+    "venue_type": "cami",
+    "area": null,
+    "address": "Cihannüma, Serencebey Ykş. No:63, 34353 Beşiktaş/İstanbul, Türkiye",
+    "rating": 4.9,
+    "reviewCount": 2484,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: fatih çakır — Google Places",
+        "place_id": "ChIJLUDTRqW3yhQRI-AWcIYXGus",
+        "photo_name": "places/ChIJLUDTRqW3yhQRI-AWcIYXGus/photos/Aa-ngMYlAqFOVoF7-aXtWVRmzbA4D1TasKfaSio5VmpWwGFfzL1Jmby8HGRvj4B3yTtEkh5tOWAIxWVWby1oDdu842vHQgWGK3dT-mqd_aOKw1VvT_cuKfNckAGCnQ0BkdxkxHp8JkfOLzSLkrbueIULv5ZY3nN_J1_TVHunAbIqqxmKNUOwdYY-VGfLruG7YdxNusmdveBe7K8ckkCXOEqArZPq2VFqWuQfm1C3QvXbI7WCWdM_HtXznUGzS4Fex2Jb0Sqb_G-WnhuOhsOfRo3j2elJXuuydWUxlVWQfULVYSR7zD00HASqXeU1TrgkuG1q8D1nqPId6nXFD4gj3bZciuqfFs4oMdfROOpAg3aV9WTHY_sHCMKzDTkoNFZbnzUphlAtpGouwK9G28lx2YvPUxbLYA9KplTTEL4GW7aJwz1LVg"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ahmet Sevilmis — Google Places",
+        "place_id": "ChIJLUDTRqW3yhQRI-AWcIYXGus",
+        "photo_name": "places/ChIJLUDTRqW3yhQRI-AWcIYXGus/photos/Aa-ngMY_yL-gG5uRrUPsYFsOl4UxiCthheCXTulBFMTKdLM_x-BbOwzKYV7n8wD7h7TholKRbjhSvRv5BB8LkqyJRhYgljSQ25iS7y_9abL8HaqD1Hsvjro_8XF7IIURKnKKyq_HXP26YofCiyFHTm-hhepVl20_2GEB-y0vvZtT7fp9Lkl_tzngWvesJKefyLYnED6gqsrgoS3b4f1dI1-C1gryT6ZO1lwRf4gAfddd53WKxyFTS-xMxetMCxxN_Rn5YL3gH1parPdmCg7yy6Bd4AX9-8y3esAksecAFDkXOHj4TvuIIR6elVs-Hx5nYBWGshsTloUzZx3PVxhwJ9GKKiKRhCrjznKkzG4YQD_zk2K5116NO9JXJZcbrxuGKlpZ0FNYOEiqfV8S9yfBCsE9Sh21Kbo"
+      }
+    ],
+    "google_place_id": "ChIJLUDTRqW3yhQRI-AWcIYXGus"
+  },
+  {
+    "id": "yoros-castle",
+    "name": "Yoros Castle",
+    "kind": "kultur",
+    "venue_type": "saray",
+    "area": null,
+    "address": "Anadolu Kavağı, Fener Yolu No:3, 34825 Beykoz/İstanbul, Türkiye",
+    "rating": 4.5,
+    "reviewCount": 4936,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ásdís Inga — Google Places",
+        "place_id": "ChIJ8_qvSavfn0AR5lp-Z5lvgvw",
+        "photo_name": "places/ChIJ8_qvSavfn0AR5lp-Z5lvgvw/photos/Aa-ngMYW7lYpO1NNth2RbNaMiYclct7qm0e4vA6wf59Y1LcDkzzyMDciz8qCqbU3ulAFR2LDcXdt7GIXm074O4Cfecr7x28OVG9GcWyG9SKlbCJ3r6QH2zGZuoaPzblxlkWEcLwdVl_QZajFRTfRVa9Ao-3RQpiq2oPcMEE0D9xEY79wR1nzNzDmWjIdcv9xdhGiMv0Ru7yCoR5lu95siEF6r-vGYRCoNpVDN_bxsKwcK6ibSJsHZiivUPY3nJMWwnQVzimp0uNh3nAUx3ffgz3m42yw4A-vyTuGOgSWU1LmnEpUcs_sMrbpvvGekaaE1j5ch2JcVNez0ECjVoc0vqu48UtNABBJ4SNWEcrabusuyTVjLa7Kts1cCpTkA2iDsSuGRyxMKBxleiGEfruJ7JnEtNGO9TuL6V9LiOO-oOG52CuMQg"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Fuat Karanlik — Google Places",
+        "place_id": "ChIJ8_qvSavfn0AR5lp-Z5lvgvw",
+        "photo_name": "places/ChIJ8_qvSavfn0AR5lp-Z5lvgvw/photos/Aa-ngMZ9Ferwo5ZqprUJYroh9XSLqwTP4RyUt7t60Sc2_-8hH7QcWD9pMOFNmUmf-1LTfAUUHPIJwqqwudcioneVIOIJ5yu7i6oh_zQ5i-jvFNA0bxjjnNBcY_BZnn_1XPyKxUhFVr93RZTTEZAh-3MRXlTWKieD1bcPpXrrG6EUNBrhXSH1jpapECaaWnslr9EIQIE_eY26YpQraALMZ8gKQO8Erpqp-2xNeLD7KxONxW2BlO2CukDNOavZfKiGlFL3dNrZ4VvV89qfgF_N5cz2z7edEOlUmaXOW_MDx_DR4IivnTyiG3EwK8htFgpN2qxEIz8LHJgxp33cO52GbiQK1GGRkfMsKLdn7VqjK6ig3Q-EJzukD9zwDGIRlrPvuH-R9EVKFBmK9PB3Ic3kFEl09rWNsFbt"
+      }
+    ],
+    "google_place_id": "ChIJ8_qvSavfn0AR5lp-Z5lvgvw"
+  },
+  {
+    "id": "arap-camii",
+    "name": "Arap Camii",
+    "kind": "kultur",
+    "venue_type": "cami",
+    "area": null,
+    "address": "Azapkapı, 34420 Beyoğlu/İstanbul, Türkiye",
+    "rating": 4.8,
+    "reviewCount": 3095,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Müfit Aydin — Google Places",
+        "place_id": "ChIJ5azXAua5yhQRbIM6LPlYxXs",
+        "photo_name": "places/ChIJ5azXAua5yhQRbIM6LPlYxXs/photos/Aa-ngMYiTQgXgSlWB9fN0aZL5tfqth4IQefliBFCYE2hxL9SaCCzbrJaVdXf8pizDYXFl_n6RMT1zZc0eLiEuAXGL_RYUeoMbqEYTsURwvReYA9L3yQ1tC29u85JpcrvdeOC3w8fdHkNrVsdtyfdeOCPexiU7pnWeWaDEzwWBiyvy9YT1-0ri1xvdZPTh149vHbNIGsFob46X50Ib95KHKTHu6zZ-Mbdz0fX_90zSk3PmJ0mWAnpskk-aVhWZcbRqCImvWegIsHoEizJKa-dRHbVpxWbp121VMpBQCh1ctSmfDkYLhH2-zNPv8ZCtnKAfeqvDhVZxBKJLhlzaUBiWFEBBMs1SYYcggydxRrwisL9YTi0z5gAw_oSg-d2UHwTeu55hXLTuFxTAti6FEVshUx08WrjmZzQnXM"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Kadriye Kşgz Dmrl — Google Places",
+        "place_id": "ChIJ5azXAua5yhQRbIM6LPlYxXs",
+        "photo_name": "places/ChIJ5azXAua5yhQRbIM6LPlYxXs/photos/Aa-ngMaDRVufXeoIR5lrGsE8G1on-Y6A2-0iL-EFT6UjYQovAydjZ1RCp_gnjaPsTbaXzA4vAuGKqxU-pjT25RTpKljZLdJmSIxM_0KQx70thd7sK2WRSB9Pnv5jwqZcjM4c7hcUfToYt0qr6OEN_gW8GyFazbHdGJjhPTJXDyFajfHawtJx_36Lu_x9U62a7QBDYqEwBSeTyaPPymMwOvLviLAVcJPMkA1BE-AQBkH0Kje-BoLH4KHZyUnhf1O1OxAKLDfaz2deLPzzBS6YCksYHUO8CXNvXLAtBGtn7y5vNCemQm4nGfxr-6267ts2MRbxA2kwk-ZQtmYNZSXSyTpy-d4-YPwvmxlRzKP1G-R_fu5cSWUe1jQP1v_XZnQLo1twI8KlIZ8T3XZ2UTwDWoVoZ2-16EihO1s"
+      }
+    ],
+    "google_place_id": "ChIJ5azXAua5yhQRbIM6LPlYxXs"
+  },
+  {
+    "id": "hagia-irene",
+    "name": "Hagia Irene",
+    "kind": "kultur",
+    "venue_type": "muze",
+    "area": null,
+    "address": "Cankurtaran, Topkapı Sarayı No:1, 34122 Fatih/İstanbul, Türkiye",
+    "rating": 4.1,
+    "reviewCount": 2739,
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Abeer Ajounli — Google Places",
+        "place_id": "ChIJjRi6Krm5yhQR4CnePcY1JP8",
+        "photo_name": "places/ChIJjRi6Krm5yhQR4CnePcY1JP8/photos/Aa-ngMbgCuJIyE9Ow830sCOkbYcs_7v139-JmKsIIyTGt_1AffzMPyt92fCHLqQK1lSRkISbSXorqUlLJAJn5kLRKSW39htLeNwLvwo8HcAzlSwkP_uIcmSjHZfRGRVg1bkIjnx7TW-tQYL4r6k0r3-SZoA5D3LE69zZi-utm5yzZYzvpU9aUfJEbCbNebjAMf6AGyleOaP9_J8HHBhEvpsmpIip-FIFr1rlO7MneSPY1EBxbfrp7spycqiwnw87vSeeLpK9FUI-C8vdi4eCZCFI6yNaeofgUY2RTzltzr5H8rNQO66fOYb_4md_ttl1C3KNdJ2rsIUgVVKc-S83lwWKxuzZhuBde8-Ozen86sdA-QFknTiu32j73--kyjE3wpkLw52iBpaXqqdqtaVhj7sTyYUX6glmY7eVgyQfwOE38Ufhpw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Bartek — Google Places",
+        "place_id": "ChIJjRi6Krm5yhQR4CnePcY1JP8",
+        "photo_name": "places/ChIJjRi6Krm5yhQR4CnePcY1JP8/photos/Aa-ngMZitPlMsgm4QLhtvsoqM0XOy0FEGriDAarsEMsLJVlJxZB3SbAC_mq4JdHcPvS5rUjDuDC_jgsRtHPGGRbYzTH8M3fi09okjZaTHu8l0nnmt_YYVZcGZ8cIjeWfQ82sAM6Ckky8qKxYa9M-TIQjBWhmTB0euH2BsI48iXVwm4h5Y-DeCbcnQxpZileHmQO2l4AmLD8yKjduDWoixjzhl8eDlSw0OOsOVf4tBI_ftWM9X2kaJ_wzG0o3jfkQfBycDe2sJUSjFQbeEtw_CFFKjlDelA7VrSMeSvtnEq-7PdRDQyzv_Ykf7G_LnaRcAX2dnX20LnL5V-3y56gkEFXXvEN_WqBc7hrUlDPjJu_43LTb6lYkFOEyfKbtysqfB4T8cFGyGGnlge1v3aBqVVvwEiWH6B47JDI"
+      }
+    ],
+    "google_place_id": "ChIJjRi6Krm5yhQR4CnePcY1JP8"
   }
 ]

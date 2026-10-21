@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BedDouble, ChevronLeft, Croissant, Landmark, Search, Theater, Trees, Utensils, Wine } from 'lucide-react'
+import { BedDouble, ChevronLeft, Landmark, Search, Theater, Trees, Utensils, Wine } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
+import SubcategoryChips from '../components/SubcategoryChips.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
 import VenueThumb from '../components/VenueThumb.jsx'
 import { getPopularityScores } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
+import { withSubcategory } from '../lib/gurmeSubcategories.js'
 import { rankVenues } from '../lib/search.js'
 import { useRestorableState } from '../lib/useRestorableState.js'
 import { getVenueIcon } from '../lib/venueIcon.js'
@@ -15,7 +17,6 @@ import { getVenueIcon } from '../lib/venueIcon.js'
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
   { id: 'yeme', label: 'Yeme & İçme', icon: Utensils, match: (v) => v.kind === 'gurme' && v.category !== 'bar' },
-  { id: 'brunch', label: 'Kahvaltı & Brunç', icon: Croissant, match: (v) => v.kind === 'gurme' && v.category === 'kahvalti' },
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
   { id: 'sahne', label: 'Konser ve Tiyatro', icon: Theater, match: (v) => v.kind === 'sahne' || v.cross_categories?.includes('sahne') },
@@ -38,6 +39,7 @@ export default function ExploreAll() {
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useRestorableState('explore-category', null)
+  const [activeSubcategory, setActiveSubcategory] = useRestorableState('explore-subcategory', null)
   // {} = henüz yüklenmedi ya da istek başarısız oldu - search.js bunu
   // "hiçbir venue için sinyal yok" olarak yorumlar, uydurma bir popülerlik
   // göstermez (bkz. lib/search.js popularityScore).
@@ -68,8 +70,12 @@ export default function ExploreAll() {
 
   const filtered = useMemo(() => {
     const category = CATEGORIES.find((c) => c.id === activeCategory)
-    return rankVenues(venues, { query, category, popularityScores })
-  }, [venues, activeCategory, query, popularityScores])
+    return rankVenues(venues, {
+      query,
+      category: activeCategory === 'yeme' ? withSubcategory(category, activeSubcategory) : category,
+      popularityScores,
+    })
+  }, [venues, activeCategory, activeSubcategory, query, popularityScores])
 
   return (
     <div className="min-h-screen bg-cream pb-10">
@@ -109,7 +115,10 @@ export default function ExploreAll() {
           return (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(active ? null : cat.id)}
+              onClick={() => {
+                setActiveCategory(active ? null : cat.id)
+                setActiveSubcategory(null)
+              }}
               className={`flex items-center gap-1.5 shrink-0 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                 active ? 'bg-tan text-cream' : 'bg-sand text-espresso-soft'
               }`}
@@ -120,6 +129,9 @@ export default function ExploreAll() {
           )
         })}
       </div>
+      {activeCategory === 'yeme' && (
+        <SubcategoryChips active={activeSubcategory} onChange={setActiveSubcategory} />
+      )}
 
       <div className="grid grid-cols-2 gap-4 px-5 mt-5">
         {loading && <VenueCardSkeleton count={8} />}

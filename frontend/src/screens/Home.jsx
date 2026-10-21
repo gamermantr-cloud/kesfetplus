@@ -9,7 +9,6 @@ import {
   CloudRain,
   CloudSnow,
   Compass,
-  Croissant,
   Landmark,
   MapPin,
   MessageCircle,
@@ -25,11 +24,13 @@ import {
 } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
+import SubcategoryChips from '../components/SubcategoryChips.jsx'
 import Toast from '../components/Toast.jsx'
 import VenueCardSkeleton from '../components/VenueCardSkeleton.jsx'
 import VenueThumb from '../components/VenueThumb.jsx'
 import { getPopularityScores, getWeather } from '../lib/api.js'
 import { getAllVenues } from '../lib/data.js'
+import { withSubcategory } from '../lib/gurmeSubcategories.js'
 import { nearestDistrict } from '../lib/districts.js'
 import { rankVenues } from '../lib/search.js'
 import { useRestorableState } from '../lib/useRestorableState.js'
@@ -39,7 +40,6 @@ import { isOutdoorWeatherSensitive } from '../lib/weather.js'
 const CATEGORIES = [
   { id: 'dogu', label: 'Doğa', icon: Trees, match: (v) => v.kind === 'place' },
   { id: 'yeme', label: 'Yeme & İçme', icon: Utensils, match: (v) => v.kind === 'gurme' && v.category !== 'bar' },
-  { id: 'brunch', label: 'Kahvaltı & Brunç', icon: Croissant, match: (v) => v.kind === 'gurme' && v.category === 'kahvalti' },
   { id: 'otel', label: 'Oteller', icon: BedDouble, match: (v) => v.kind === 'hotel' },
   { id: 'bar', label: 'Barlar', icon: Wine, match: (v) => v.kind === 'gurme' && v.category === 'bar' },
   { id: 'sahne', label: 'Konser ve Tiyatro', icon: Theater, match: (v) => v.kind === 'sahne' || v.cross_categories?.includes('sahne') },
@@ -80,6 +80,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useRestorableState('home-category', null)
+  const [activeSubcategory, setActiveSubcategory] = useRestorableState('home-subcategory', null)
   const [toast, setToast] = useState(null)
   const toastTimer = useRef(null)
   // null = henüz yüklenmedi ya da Open-Meteo'ya ulaşılamadı - asla uydurma
@@ -165,11 +166,11 @@ export default function Home() {
     const category = CATEGORIES.find((c) => c.id === activeCategory)
     return rankVenues(venues, {
       query,
-      category,
+      category: activeCategory === 'yeme' ? withSubcategory(category, activeSubcategory) : category,
       popularityScores,
       excludeId: featured?.id,
     })
-  }, [venues, activeCategory, query, featured, popularityScores])
+  }, [venues, activeCategory, activeSubcategory, query, featured, popularityScores])
 
   function handleQuickCheckin() {
     if (!featured) {
@@ -225,7 +226,10 @@ export default function Home() {
           return (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(active ? null : cat.id)}
+              onClick={() => {
+                setActiveCategory(active ? null : cat.id)
+                setActiveSubcategory(null)
+              }}
               className={`flex items-center gap-1.5 shrink-0 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                 active ? 'bg-tan text-cream' : 'bg-sand text-espresso-soft'
               }`}
@@ -236,6 +240,9 @@ export default function Home() {
           )
         })}
       </div>
+      {activeCategory === 'yeme' && (
+        <SubcategoryChips active={activeSubcategory} onChange={setActiveSubcategory} />
+      )}
 
       {weather && (
         <div className="px-5 mt-4">

@@ -161,7 +161,24 @@
     "address": "Bankalar Cd. No:5, Karaköy, 34421 Beyoğlu/İstanbul",
     "kind": "hotel",
     "priceLevel": 4,
-    "note": "Eski bir banka binasında, Bankalar Caddesi üzerinde butik lüks otel."
+    "note": "Eski bir banka binasında, Bankalar Caddesi üzerinde butik lüks otel.",
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: The House Hotel Karaköy — Google Places",
+        "place_id": "ChIJE9Wc2ee5yhQRl1ClY1kJmIc",
+        "photo_name": "places/ChIJE9Wc2ee5yhQRl1ClY1kJmIc/photos/Aa-ngMb7ZNUItxXzIyTFz2XPYxl0UnFBbEfKSMGsJ31APEoNG3a5bXQI-X06QC9Wwf7B_RYcbDIrNvdxjzxPr7jK_4ZF-nahc7lwYK91J66sGK41Byj5bn9TNywMWzNfBvcgnTHtbeQBCw6SYI_GjTZUjAytasBNyzpKJY86vzybG4mrhrHprzy9FkHRkk_fc2z2maGwvMMt7rEX8RRmAEAs4ZSuRSJ1ucdFlvjhyp7wN1rmuxIMbQazwJnqwz11wSjH9o8ajXOJ8GeDekuPEFzS2JI7FdINYbQdo3ZlmviVvUZ98mtLtGYEMPNjh67eFPzhvZI6a9myQDOsW1Xfx2di77xx82ejUt2sdxfaPZfa4OD_O_hyDnqb8zGaCmt_4O3_M___5zyADVhnPCwDkLuImt3ssw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: The House Hotel Karaköy — Google Places",
+        "place_id": "ChIJE9Wc2ee5yhQRl1ClY1kJmIc",
+        "photo_name": "places/ChIJE9Wc2ee5yhQRl1ClY1kJmIc/photos/Aa-ngMZu1PBga3CRcVaTGTIWiqTNUMpKxtyefpRQVRCg-FcgvMGbQtqQd36UotG9NW34WSUlsFIo0uZHy3kQaSGs6HVjhaftaPusitVHHT4OT-IJXQvRP2TzswYhre0Y-ahQkWEXDaRBiW2P0d2aYDfuwNnjJcGehsZdWT0zduRGU4T1Ii4JxGuWFrNl3NXrLW-xpb4L7SVSCDCW1lxgdlqpF7oo9oaQ8u56B29KqCY2bkaehk93thXvNQQwDtcOi8wR756pnQrG_b5csS96pCQXi6inOOvkhiqHzbYAlMumbkVYrVs4BsoTXtYrVWkdYNGYNddoLT8jAJWDsuHIQW0ttcrKx6i5J3PxfQITS1Ik76Gb967D3cyw1hRhB0HuLWHmrAZskIamArMelixwnU5vx9tFaLd5"
+      }
+    ],
+    "google_place_id": "ChIJE9Wc2ee5yhQRl1ClY1kJmIc"
   },
   {
     "id": "georges-hotel-galata",
@@ -1769,7 +1786,24 @@
     "address": "Ahırkapı Sk. No:24, Sultanahmet, 34122 Fatih/İstanbul",
     "kind": "hotel",
     "priceLevel": 3,
-    "note": "Sultanahmet'in güneyinde, restore edilmiş tarihi binalardan oluşan otel."
+    "note": "Sultanahmet'in güneyinde, restore edilmiş tarihi binalardan oluşan otel.",
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Armada Hotel, Istanbul — Google Places",
+        "place_id": "ChIJ83WmmLy5yhQRfo1ABklEV0s",
+        "photo_name": "places/ChIJ83WmmLy5yhQRfo1ABklEV0s/photos/Aa-ngMZTNvtnqw5uVcwikx0R5eqScaDwq4l5iCkaiDL1donnaU1wHa3OSDYXxE6ZazmYwXH6pwOhyFxOcJ3Uxmi-scMG9DWdNN0MOZiNuzMECjMKUeMlahi19AtQPVePr6RW_yyg1oY8CCRXAbD79LYvjxj1hP6jRB6CUn5QOnvkm7N8bDnR1mfABqN6zUd3QiUxigBEdX46cFB0NIhJVTMhODwEx2N0iiiOArxodLsyYnkverBJmzh2keAoYQfwbOjENVxq39YaSQ0sx3ysPkAnJKpfrsjTCiYCQ807Jhautz_lxpVnDxlyLLBrwvKGppRbuY-SVXfFOrhyXAtw93o0DgbDcc0YTstde5zuSKkN3z3sFsDvM1csi884kwj9gfVjLimcfbvTGpgmB5YW8pQVrhvkA4ycF-WMejvKJoctUFQMtw"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Armada Hotel, Istanbul — Google Places",
+        "place_id": "ChIJ83WmmLy5yhQRfo1ABklEV0s",
+        "photo_name": "places/ChIJ83WmmLy5yhQRfo1ABklEV0s/photos/Aa-ngMa3HM2oc5mQDE6z96DSbsc2VAnMeIX_1ze8OFOvVyRW1FHb8Hid-NHDE4nul8nyHOGWwe3OoPqDpERVc1nVD6NBBloh9qFtUGlG7Q4Al7LXIYD6SqLTi7cBru1GvRtQ-dQUWHdaKaPscNHvFtwHdXVPqq_Roz01_41PAgrFi3t6GeP42QyX4_7z9Q4Ui8Pn6HkePy-Xi0GrNqRkm76V98eXP0CHBSf1w0PCAVZY1Eyxgrv-2FLtFBuKiUd1mzY9vov8KVeJhSNVG2qJ8ZAj9IoL0raKOqncjRSpk6nD12iFuKEBEvLYHNu4BiQt-u8YKB3I0u51oyELdZJlrNjL31dGC_Gw0g5-m7YTDFGfW-fXX2GbEumH4U_ihC2-K7aQgrkstM61IjFFfPtFgMeaH2fr3sYjasWhJt3eqll0xA0bVQ"
+      }
+    ],
+    "google_place_id": "ChIJ83WmmLy5yhQRfo1ABklEV0s"
   },
   {
     "id": "kybele-hotel",
@@ -2102,7 +2136,24 @@
     "address": "Ticarethane Sk. No:15, Sultanahmet, 34110 Fatih/İstanbul",
     "kind": "hotel",
     "priceLevel": 2,
-    "note": "Ayasofya'ya yakın, çatı terasından Sultanahmet manzarası sunan küçük otel."
+    "note": "Ayasofya'ya yakın, çatı terasından Sultanahmet manzarası sunan küçük otel.",
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Nirav Desai — Google Places",
+        "place_id": "ChIJvXw8-L25yhQRhpS75FdUQHc",
+        "photo_name": "places/ChIJvXw8-L25yhQRhpS75FdUQHc/photos/Aa-ngMYlkqRPWf7f36n_EXPHgIu307v1JN88plGOqEWt4vzTvuPSfYxRynA8ca1PPru1v7EBTFww_6fRwDNpsaaFO6Ienz_gTEVxnDzVRxY429fVt_woCL7YwobQwXdIBFKRIxxJXuiYj4vfsYnjS3mjVNqRcCaHs_pIGJWth9CNeyx9RwyoZal84k76xLFPkJYorBRvD_-p49YD7a6Vji6duzQvegtP9XGu5bQVWZ_4W1EHro11vMOB1hrYAgzXm4pSGPrfe65oQz4Cu6HLihNbYnlXIj61mQTX_ssbD-1xYg0nRCsaYhkL8ha6XHwJzuodsxJKJ9cZOuL7Gb9E4sXYLPBojUwzBSp1x1__nP3OKY_XZMJT1GcuIO_0AnLZgft-q2Ik08hLfIGGDpiKoxiZVoSncgY"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ergun Karamahmutoglu — Google Places",
+        "place_id": "ChIJvXw8-L25yhQRhpS75FdUQHc",
+        "photo_name": "places/ChIJvXw8-L25yhQRhpS75FdUQHc/photos/Aa-ngMah1zGJKYTPqoMoPACVtfxChB7vMsoaFbfzmxfsmW13NO9olOZXP7WOlAqQpS7VcUJSLmt-ITm1yvX1s6MnoR3WCQqSp1N_FR8u4L3bXkT5_Na3DD-jxNTvH9QHN_Yt9EPWYMhIbHPcuQ8REYNIF3cjYWUjRG2Z8tfHmJpOAYVrff4mOFYdi-Cd2ukrc1B7kPKWLcuY87nP0z4yA87Mt4-XbMbqQTU81tUAW9PLa7jBfUZPjF4QWneF7O1ad50YZYs3-eYE4fHHTvnpo9ZRThksIYVaKEpHU2mV08HlXwNGunvH7OCUs1jI7QWAyQr1ga8dp4wQSOvEh0N6xdHAQvXECCkDilCXrIwsSgdvwW-ZLvKA7N1IwL3r_Z9CV3iTx0ohcEFQcrr-_GXKlQTdPi_1IA"
+      }
+    ],
+    "google_place_id": "ChIJvXw8-L25yhQRhpS75FdUQHc"
   },
   {
     "id": "kariye-hotel",
@@ -2687,7 +2738,24 @@
     "address": "Kemankeş Cd., Galata Şarap İskelesi Sk. No:10, 34425 Beyoğlu/İstanbul",
     "kind": "hotel",
     "priceLevel": 2,
-    "note": "Karaköy'ün liman sokaklarında, az odalı küçük butik otel."
+    "note": "Karaköy'ün liman sokaklarında, az odalı küçük butik otel.",
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Ken Ekerete — Google Places",
+        "place_id": "ChIJiR3hGd25yhQR-CYFvfk7y_M",
+        "photo_name": "places/ChIJiR3hGd25yhQR-CYFvfk7y_M/photos/Aa-ngMYGfSi9M_JBBteYFwB1g3IZxIgfLV7gBHY7Rd5jEbGqMdu1PlvLhkK2Ql3ANthSSdICcnlzja-SPKyk-Jg9kXzyqMx3zozCkhnU5nez5duK2hRh4kl6-Rre_pyZDP6ipyGIo19LdvOSO2SOfOG9-e2IY-8baPj1HmQQFHVZilkvLRVqTwDU2r4PNuIhn70oue7gm3kk_QJHaecLwMkdjXO1BgFFx0tHHsCaTfTtkX19RWiQQYi2q1KvcpMs1ZNEsAf7Y1wvyMGq0R7ngZLC7YUq-dDD3nGGzINPdvwgB84fVikZbL-pRi0dFl6PNaVFiVh5Y7GVqL8UPcolR5fbd9eUT6s_Gd6UefXdWiuryw3biUVCMk-qQZ2qBoXjAyQpLxGRGVZcxO8bSGX2umSRpcAMgg"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Simisola Marinho — Google Places",
+        "place_id": "ChIJiR3hGd25yhQR-CYFvfk7y_M",
+        "photo_name": "places/ChIJiR3hGd25yhQR-CYFvfk7y_M/photos/Aa-ngMYr25uXEz1aSQ8_L9Us0a3eoyx9NpRNS_3AMU1wWEHYlv7XtqUXXGhLaLslC0fKwRrflMRvRgi-v4ajsG8qN7Z9z5el9h68m6LzZ1S54O8NW00FHSzbJMVOMGfRKBAIwxD3JiVXXVQNgTWXrgYIGmOzRMbktI1aPVY-pD6Tlx03vMsc_06xoQf6fR75hQk9xt1BvA5AplT3FZzznh-dy70qkIiyQ1R9NPORsuF9EnzyTiOdXN1qNDDklgU8FI_-kyQH1DI6htdN6VTF1cUGKus70bg25jpWVgjMdnLnl7hElqGYk_HAMP7OMnEIV1-90CczEUqtvwebZPyEHksPVm08F4_uAMdnBMheY80yaHxx_pvzksUz1uTGiPg2Plxqn8P6ZXRHhiaT68XAod4ec3DXn4s"
+      }
+    ],
+    "google_place_id": "ChIJiR3hGd25yhQR-CYFvfk7y_M"
   },
   {
     "id": "jw-marriott-istanbul-bosphorus",

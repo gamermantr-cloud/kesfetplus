@@ -568,7 +568,23 @@
     "address": "Merkez Mah. Silahşör Cad. Birahane Sok, Yapı Kredi bomontiada, Merkez, Eski Bira Fabrikaları No:1 / C Blok Kat:2, 34381 Şişli/İstanbul, Türkiye",
     "rating": 4.5,
     "reviewCount": 266,
-    "photos": []
+    "photos": [
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Craft Tiyatro — Google Places",
+        "place_id": "ChIJF7_JvXy3yhQRd0bDTml-pXQ",
+        "photo_name": "places/ChIJF7_JvXy3yhQRd0bDTml-pXQ/photos/Aa-ngMaTmJmnVVRQ0Q_uGrMa_XvgoJjMfxkNMklhtJC6-pil1R1P4_qtVcrHzuAviUaCF7-xrZM6vS4E2WQno6z75A_hxaibXrhzUz1yICZzkJiAwYfOmd7pljY3vZg51qsBsq5VTAnZoLUZjVasjfXYJieKR2ajKRuQfg_UQQ1jAPLjAyQPiN3FwR7dMrTiQ4ATup-eD7pxSk3uMUnF_Xw-qM8EgTVVjL7RNhLmcw1kONikBpbvnQ9K8hsGDJSBcOudgUbNMsssooTOEU1TvpBygLFYSQT3o29uQkVhSO0ZJHGCLFuNTax-2Lzw5BY0iRcNB7rSonTia0uHB1fV49J3ldoIXc4AgOYy1y67bLmhylJn5jSjReVyxKwr7sKC_pzAkKTnAa2Jw2b9ifMqgr2Fd6vUNqI"
+      },
+      {
+        "url": null,
+        "source": null,
+        "attribution": "Fotoğraf: Elif Savaş — Google Places",
+        "place_id": "ChIJF7_JvXy3yhQRd0bDTml-pXQ",
+        "photo_name": "places/ChIJF7_JvXy3yhQRd0bDTml-pXQ/photos/Aa-ngMYePS_jcIuWF2BOpO1NvhQOV2iAIPH808O5s4AOm6R9CxEozXluOpb3TsYzIhtm8Q8CYmjjbGwLirDiNPnfEE4ZGeqfNIlIytKLhzyqWprE0RvUkXkvNslyFrkQc6uv9rmePrfRhaHyYw8OLrgvfiOhK5a4dIEhBI4wvIxNm4k-Mn2-yN3uoeea2LPe2xN_ZSgNr4KhXkrkqeuU5grIZ-JdPpu-9qx97tr412OOPzBem0B1_FZq6Ex-fpdaOfcLDKMfgyga-AMaO2WjzZ3XK1p7lcykTLS7-haVNABK7-OmWciEFo1Pw8xAvA9UssiEL0OkGh23vQ5f2M69Nj5vHjTsSSGRgDcg7ktgs0wzoe7O2ET8sbFoCSQsKjCsNrZMkNl7dDNhkW_NJJHR3adfGIN8kuWREMQ"
+      }
+    ],
+    "google_place_id": "ChIJF7_JvXy3yhQRd0bDTml-pXQ"
   },
   {
     "id": "legends-of-istanbul",

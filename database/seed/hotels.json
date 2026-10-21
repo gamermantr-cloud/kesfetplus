@@ -1518,15 +1518,6 @@
     ]
   },
   {
-    "id": "w-istanbul",
-    "name": "W Istanbul",
-    "area": "Akaretler/Beşiktaş",
-    "address": "Süleyman Seba Cd. No:22, Akaretler, 34357 Beşiktaş/İstanbul",
-    "kind": "hotel",
-    "priceLevel": 4,
-    "note": "19. yüzyıldan kalma Akaretler sıra evlerinde konumlanan tasarım odaklı otel."
-  },
-  {
     "id": "les-ottomans",
     "name": "Hotel Les Ottomans",
     "area": "Kuruçeşme/Beşiktaş (Boğaz kıyısı)",
@@ -2277,15 +2268,6 @@
       }
     ],
     "google_place_id": "ChIJvXw8-L25yhQRhpS75FdUQHc"
-  },
-  {
-    "id": "kariye-hotel",
-    "name": "Kariye Hotel",
-    "area": "Edirnekapı/Fatih",
-    "address": "Kariye Camii Sk. No:6, Edirnekapı, 34087 Fatih/İstanbul",
-    "kind": "hotel",
-    "priceLevel": 2,
-    "note": "Kariye (Chora) Müzesi'nin hemen yanında, tarihi surlara yakın küçük otel."
   },
   {
     "id": "anemon-galata-hotel",
@@ -4013,15 +3995,6 @@
         "photo_name": "places/ChIJt0hUj0rIyhQRIlYA0a-Ze84/photos/Aa-ngMaXHDpYAs8qYatPmu89tF2Oqz7olAYCPEar_piCKjjSjWXAeiA09O6L4SyhTAQuUI76kZn5OkAQJk_Mi20gVplYhAyFNkODlbtZWMkRApdCQvQBUBfRFnwSwHZXZ32El2MKKgwjix6OIyeM_IUGrGVU3jRQtVhIq6qMQSwK2tSaY1-GQ1cii3PPW5_uFJn5AUuFDxBuoBgsTBbP27jPNr4K_e6a7CnNxkZ1Se_Rm_9y4KkJa36TbdlFUqBjpbw3BadvoU64jd9HHZINOGuMmjAnLF1naK3FX6FflQ3fQJyLqg2iJ6hGDAeSePIuRFZP0GIX1fWGWf0-nyY3Cn0E0hbK72mNtbqhMOfAFeG2DkjXYV_VRtjiKz6dn5KgRLi_CEqSW4ccAjW6nTGIxtZmZJymb--8"
       }
     ]
-  },
-  {
-    "id": "vogue-hotel-supreme-istanbul",
-    "name": "Vogue Hotel Supreme Istanbul",
-    "area": "Sultanahmet/Fatih",
-    "address": "Alemdar Mah., Yerebatan Cd. No:13-15, 34122 Fatih/İstanbul",
-    "kind": "hotel",
-    "priceLevel": 3,
-    "note": "Ayasofya ve Topkapı Sarayı'na yürüme mesafesinde şehir oteli."
   },
   {
     "id": "elite-world-istanbul-florya",

@@ -8575,33 +8575,6 @@
     "google_place_id": "ChIJI_F9JmC3yhQR6qYAPlamh1E"
   },
   {
-    "id": "alt-caz-club",
-    "name": "Alt Caz Club",
-    "area": "Beyoğlu (Tomtom)",
-    "dish": "Caz, canlı müzik",
-    "note": "Tomtom Mahallesi'nde, çeşitli caz sanatçılarının sahne aldığı bir caz kulübü.",
-    "kind": "gurme",
-    "category": "bar",
-    "verified": false,
-    "source": "websearch-editorial",
-    "crowdNow": "Veri yok",
-    "cross_categories": [
-      "sahne"
-    ]
-  },
-  {
-    "id": "the-barley",
-    "name": "The Barley",
-    "area": "Beyoğlu (Tomtom)",
-    "dish": "Bira, viski",
-    "note": "Yaklaşık 100 bira ve 150 viski çeşidi sunan bir bar; geniş viski seçkisiyle tanınıyor.",
-    "kind": "gurme",
-    "category": "bar",
-    "verified": false,
-    "source": "websearch-editorial",
-    "crowdNow": "Veri yok"
-  },
-  {
     "id": "mitanni-jazz",
     "name": "Mitanni",
     "area": "Beyoğlu",
@@ -11755,19 +11728,6 @@
     ]
   },
   {
-    "id": "north-shield-caddebostan",
-    "name": "The North Shield",
-    "area": "Kadıköy (Caddebostan)",
-    "address": "Bağdat Cd. No:303/1A, B Blok, 34728 Kadıköy/İstanbul",
-    "dish": "Bira, İngiliz pub'ı",
-    "note": "Bağdat Caddesi üzerinde, İngiliz pub konseptiyle bilinen bir zincir barın Caddebostan şubesi.",
-    "kind": "gurme",
-    "category": "bar",
-    "verified": false,
-    "source": "websearch-editorial",
-    "crowdNow": "Veri yok"
-  },
-  {
     "id": "old-english-pub-caddebostan",
     "name": "Old English Pub",
     "area": "Kadıköy (Caddebostan/Suadiye)",
@@ -12021,18 +11981,6 @@
     ]
   },
   {
-    "id": "robins-galata",
-    "name": "Robin's",
-    "area": "Beyoğlu (Galata/Şahkulu)",
-    "kind": "gurme",
-    "category": "bar",
-    "dish": "Rooftop, kokteyl",
-    "note": "Şahkulu'nda çatı katında konumlanan, gündüz sade zemin katıyla akşam manzaralı terasıyla ayrılan bar-restoran.",
-    "source": "websearch-editorial",
-    "verified": false,
-    "crowdNow": "Veri yok"
-  },
-  {
     "id": "andrea-karakoy",
     "name": "Andrea Karaköy",
     "area": "Beyoğlu (Karaköy)",
@@ -12201,18 +12149,6 @@
     ]
   },
   {
-    "id": "backyard-backbar-bebek",
-    "name": "Backyard / Backbar",
-    "area": "Beşiktaş (Bebek)",
-    "kind": "gurme",
-    "category": "bar",
-    "dish": "Kokteyl, gece barı",
-    "note": "Eski Fransız Yetimhanesi bahçesinde gündüz kahvaltı mekanı olan Backyard, gece Backbar adıyla kokteyl ve DJ'li bara dönüşüyor.",
-    "source": "websearch-editorial",
-    "verified": false,
-    "crowdNow": "Veri yok"
-  },
-  {
     "id": "whisper-kitchen-bar",
     "name": "Whisper Kitchen & Bar",
     "area": "Beşiktaş (Arnavutköy)",
@@ -12295,18 +12231,6 @@
         "photo_name": "places/ChIJy2QqHiS2yhQRY4rGt6hewiU/photos/Aa-ngMaXCn4I3q8aSSCzJhdbDWtO91zouY7u1TFBd5DIPQTHziXaHkIR0H5g2Ix4RkuhEvhfn9ZaHy9OxicHxiNMDkT7TbWnuJaipLv0XhkhXp74Kb9dHLc5FkfdimXe_y6JEbJo2wTNuHsELQd_D4uL9Ry1CRfH0ycVLKJUe46FFCx6BJdUf2TjHKT22QPzswhwebRN8XHrP3hPl59ejAhP423a3OWuZ8rtsaSECeIFe28UGm62x4Klk-p-XkbT9r2YMTlZ-g-BVFUMNHlrfdzhbYXJeC5M8TC5Jf2HNwveqR5mcvWPBajgCM6E2-GnRPV18chnZNSnrZmSAGNZeQoUliCoXp72-iDysAr3uCb3vyiP1onlVjNWuG9ZrtGAGPwu8s070pHU_VKP7zgnp9RhY_zG2g"
       }
     ]
-  },
-  {
-    "id": "chicki-boom-etiler",
-    "name": "Chicki Boom",
-    "area": "Beşiktaş (Etiler)",
-    "kind": "gurme",
-    "category": "bar",
-    "dish": "Kokteyl",
-    "note": "Etiler'de özenle dekore edilmiş bir çatı katında yaratıcı kokteylleriyle öne çıkan, Time Out İstanbul'da \"en iyi yeni bar\" seçilen mekan.",
-    "source": "websearch-editorial",
-    "verified": false,
-    "crowdNow": "Veri yok"
   },
   {
     "id": "bosphorus-brewing-company",
@@ -13793,18 +13717,6 @@
         "photo_name": "places/ChIJdfIyWmC3yhQRkQ4_Q0Of4SA/photos/Aa-ngMa2nZa1KRDRsExBy6g-ttq3WqsTSP7jVnGjIUYMuJR-0ifLHMUlg2Isws16eMDc3ZtBzCgAyNboPp3_HDs6hTA4pdfMnXCHrYpvpkI-v2_54-tNY-sgN4juDmbrIVdkXAdcBsTBfxPqBlcoTyWwxR-wIl-vcFQCINKjM_IdB31VTy7GYoWvsMMOgOL328-dkp2EnNCVwfc9oO7N3TIeVcRcSxiWNRu1TelTX-EiL5EVcdQzeNGbzq6c00dj9-uIXcF5J-Lah0Yprpb7vjq5BFXCY9vT1vNSo9gE4NPcc1fOvMdWRUo4uMCfoxnoqii5DElhFVpU9aXfWvY6RA_XER0RXDw_v7mQduISJBKb9Hnx6V9OFhLG6DInombcKcp2wVlVedXmgmgqpx65KNRBt3oHVHonqo0uAnfRXFzQwomxRQ"
       }
     ]
-  },
-  {
-    "id": "kupeste-restaurant-bar",
-    "name": "Küpeşte Restaurant & Bar",
-    "area": "Beyoğlu (Cihangir)",
-    "kind": "gurme",
-    "category": "bar",
-    "dish": "Kokteyl barı",
-    "note": "Cihangir Oteli bünyesinde, kokteyl barı olarak da anılan uluslararası mutfaklı bir mekan.",
-    "source": "websearch-editorial",
-    "verified": false,
-    "crowdNow": "Veri yok"
   },
   {
     "id": "zihni-bar-nisantasi",

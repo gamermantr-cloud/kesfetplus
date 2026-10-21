@@ -324,27 +324,6 @@
     ]
   },
   {
-    "id": "arnavutkoy-bolluca",
-    "name": "Bolluca Korusu",
-    "area": "Arnavutköy",
-    "tags": [
-      "orman",
-      "yürüyüş",
-      "sakin"
-    ],
-    "toilet": false,
-    "parking": true,
-    "water": false,
-    "bbq": false,
-    "stroller": "uygun değil",
-    "childFriendly": 2,
-    "accessibility": "zor",
-    "shade": "yüksek",
-    "crowdToday": "düşük",
-    "verified": true,
-    "note": "Şehir merkezine uzak, sakin ve az bilinen bir orman alanı; doğal patikalar otluk/çalılık kısımlar içeriyor."
-  },
-  {
     "id": "catalca-karacakoy",
     "name": "Karacaköy Kırsalı",
     "area": "Çatalca",
@@ -11505,19 +11484,6 @@
     ]
   },
   {
-    "id": "kinaliada-dusler-sahili",
-    "name": "Düşler Sahili",
-    "area": "Adalar (Kınalıada)",
-    "tags": [
-      "sahil",
-      "sakin",
-      "manzara"
-    ],
-    "note": "Kınalıada'da az bilindiği için sakin kalabilen, adaya özgü manzaraya sahip bir sahil.",
-    "source": "websearch",
-    "verified": false
-  },
-  {
     "id": "silivri-gumusyaka-plaji",
     "name": "Gümüşyaka Plajı",
     "area": "Silivri",
@@ -13533,19 +13499,6 @@
     ]
   },
   {
-    "id": "maltepe-dragos-tepesi",
-    "name": "Dragos Tepesi",
-    "area": "Maltepe",
-    "tags": [
-      "tepe",
-      "manzara",
-      "gün batımı"
-    ],
-    "note": "Adalar manzarası ve gün batımı seyri ile bilinen, Maltepe'nin en yüksek noktalarından biri.",
-    "source": "websearch",
-    "verified": false
-  },
-  {
     "id": "maltepe-basibuyuk-ormani",
     "name": "Başıbüyük Ormanı",
     "area": "Maltepe",
@@ -13885,19 +13838,6 @@
         "photo_name": "places/ChIJnSmvwi2pyhQRd2pBSU-Nacg/photos/Aa-ngMYKGVgks28XxM1npH55SnOHT6v6AeDu0QQhe6V-pb13xvIwwf3nfszzO_tqYK6nl3yCBvu8PX3imAPjfaudVm_6zoZPPozbEQdVDtxMmxqc-yBHYfJEStmt5tIRQLpGLT9yWJI_6Q9h4MduZZ7B3i_PVhEX_qTFqzoh8tgMEGBpxfMFtX99qiNlxLfeJpq_F0GFd-aVhXsAESzg0DKaEq5iK3hkazCbk2cBN6pHV9JyTU5nefgGicx0663q5y37lPbIRq2rvoc7HDkIxovsE51yuL87L84IPmSQnMhRn3oJB2QhwB8RJDkypG_9V5U663CebX2vq0YtGywzA4MKpjpmEQSEMkC_4yYennerqIdW_g62SNZmRhJGUuyCLMfDl7OcN7c674BL96s1P6NEU8H5Jseu90xfR9yw1toohD42"
       }
     ]
-  },
-  {
-    "id": "arnavutkoy-hacimasli-piknik-alani",
-    "name": "Hacımaşlı Piknik Alanı",
-    "area": "Arnavutköy",
-    "tags": [
-      "piknik",
-      "gölet",
-      "doğa yürüyüşü"
-    ],
-    "note": "Arnavutköy merkezine yaklaşık 6 km mesafede, göleti ve doğa yürüyüşü imkânlarıyla bilinen bir mesire yeri.",
-    "source": "websearch",
-    "verified": false
   },
   {
     "id": "ataturk-arboretumu",

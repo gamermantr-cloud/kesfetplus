@@ -17,14 +17,6 @@
   },
   {
     "dataset": "places",
-    "id": "bahcelievler-catalmese-piknik",
-    "seed_name": "Çatalmeşe Piknik Alanı",
-    "found_name": "Belgrad Ormanı Çatalmeşe Mesire Alanı",
-    "similarity": 0.576,
-    "reason": "low_similarity"
-  },
-  {
-    "dataset": "places",
     "id": "maltepe-dragos-tepesi",
     "seed_name": "Dragos Tepesi",
     "found_name": "İBB Dragos Sosyal Tesisi",
@@ -97,34 +89,10 @@
   },
   {
     "dataset": "hotels",
-    "id": "sofa-hotel-istanbul",
-    "seed_name": "The Sofa Hotel Istanbul, Autograph Collection",
-    "found_name": "The Stay Boulevard Nisantasi",
-    "similarity": 0.356,
-    "reason": "low_similarity"
-  },
-  {
-    "dataset": "hotels",
     "id": "w-istanbul",
     "seed_name": "W Istanbul",
     "found_name": "W Studios",
     "similarity": 0.316,
-    "reason": "low_similarity"
-  },
-  {
-    "dataset": "hotels",
-    "id": "house-hotel-bosphorus",
-    "seed_name": "The House Hotel Bosphorus",
-    "found_name": "THE STAY Bosphorus",
-    "similarity": 0.558,
-    "reason": "low_similarity"
-  },
-  {
-    "dataset": "hotels",
-    "id": "house-hotel-nisantasi",
-    "seed_name": "The House Hotel Nişantaşı",
-    "found_name": "The Stay Nisantasi",
-    "similarity": 0.558,
     "reason": "low_similarity"
   },
   {

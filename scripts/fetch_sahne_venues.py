@@ -87,7 +87,9 @@ def load_existing_names() -> list[str]:
 
 def is_duplicate(name: str, existing: list[str]) -> bool:
     n = normalize(name)
-    return any(SequenceMatcher(None, n, e).ratio() >= DUPLICATE_SIMILARITY_THRESHOLD for e in existing)
+    return any(
+        SequenceMatcher(None, n, e).ratio() >= DUPLICATE_SIMILARITY_THRESHOLD for e in existing
+    )
 
 
 def main() -> None:

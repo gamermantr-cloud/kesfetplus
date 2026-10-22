@@ -38,7 +38,24 @@ jobs:
 
   smoke-test:
     runs-on: ubuntu-latest
+    # The backend is PostgreSQL-backed (database/db.py) - every store call
+    # raises DatabaseNotConfiguredError without a real database, so the
+    # smoke test gets a throwaway Postgres service for the job's lifetime.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          # CI-only throwaway password for an ephemeral container - not a secret.
+          POSTGRES_PASSWORD: ci-smoke-test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     env:
+      DATABASE_URL: postgresql://postgres:ci-smoke-test@localhost:5432/postgres
       # Moderation-panel gate (see database/users_store.py) - the smoke test
       # deliberately never exercises /moderation/* endpoints, but the
       # backend reads this at request time regardless, so it's defined
@@ -57,6 +74,12 @@ jobs:
 
       - name: Install backend dependencies
         run: pip install -r api/requirements.txt
+
+      # Same one-liner database/schema.sql's header documents - psycopg is
+      # already installed above, so no extra postgresql-client apt install.
+      - name: Apply database schema
+        run: |
+          python -c "import os, psycopg; psycopg.connect(os.environ['DATABASE_URL'], autocommit=True).execute(open('database/schema.sql', encoding='utf-8').read())"
 
       - name: Start backend (uvicorn, background)
         run: |

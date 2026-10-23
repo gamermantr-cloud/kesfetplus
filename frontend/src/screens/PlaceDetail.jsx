@@ -1038,7 +1038,7 @@ export default function PlaceDetail() {
                         </a>
                       </div>
                       {embed.platform === 'instagram' ? (
-                        <InstagramEmbed html={embed.oembed_html} />
+                        <InstagramEmbed html={embed.oembed_html ?? instagramEmbedHtml(embed.url)} />
                       ) : (
                         <TikTokEmbed html={embed.oembed_html} />
                       )}
@@ -1352,6 +1352,16 @@ function TikTokEmbed({ html }) {
 
   if (!html) return null
   return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+// Kayıtta oembed_html yoksa (toplu eklenen mekanlarda JSON'u şişirmesin diye
+// tutulmuyor) gönderi linkinden Instagram'ın embed.js'inin tanıdığı en sade
+// blockquote'u üret; kod sadece [A-Za-z0-9_-] olabildiği için HTML'e güvenle girer.
+function instagramEmbedHtml(url) {
+  const code = url?.match(/\/p\/([A-Za-z0-9_-]+)/)?.[1]
+  if (!code) return null
+  const permalink = `https://www.instagram.com/p/${code}/`
+  return `<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${permalink}" data-instgrm-version="14" style="background:#FFF;border:0;margin:1px;max-width:658px;min-width:326px;padding:0;width:calc(100% - 2px);"><a href="${permalink}" target="_blank" rel="noopener noreferrer">Instagram'da gör</a></blockquote>`
 }
 
 /**

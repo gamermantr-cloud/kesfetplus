@@ -48,3 +48,11 @@ Amaç: Genel plan yapılırken bu hesapların **İstanbul** paylaşımları tara
 | 28 | @istanbul.etkinlik |
 
 Not: @degerliturizm'den 44 mekan 2026-10-21'de zaten eklendi (gurme).
+
+## 2026-10-23: 28 hesabın taranması ve ekleme
+
+- 27 hesap Chrome'da tek tek tarandı (dogukanhamarattt'tan İstanbul konumlu gönderi çıkmadı). Konum bilgisi İstanbul sınırları içinde olan gönderilerden 1.230 benzersiz mekan çıktı. Bunların 56'sı isimden, 58'i de Google place_id üzerinden zaten uygulamada vardı.
+- Google eşleştirmesi (Text Search, puan istenmeden): 182'sinde isim uymadı, 82'si kapanmış, 6'sı İstanbul dışında çıktı.
+- Puan, yorum ve fotoğraf (Place Details) 800 yer için alındı. Kalan 42 yer Kasım'da ücretsiz kota yenilenince alınacak (`ig28_details.py` kaldığı yerden devam eder).
+- Filtre: açık, puan ≥ 4.3, ≥ 100 yorum, zincir değil, türü uygulamadaki bir kategoriye uyuyor. 315 yer puan/yorum yüzünden, 48 yer de tür uymadığı için (AVM, otel, kitapçı vb.) elendi.
+- Eklenen: 437 mekan (355 yeme-içme, 56 kültür, 26 gezi yeri). Hepsi `verified: false`, `source: google`. Her birinde öneren hesabın gönderisi `embeds` olarak var. JSON'u şişirmemesi için `oembed_html` tutulmuyor; frontend linkten üretiyor.
